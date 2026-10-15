@@ -5,10 +5,11 @@
 //     en tiempo real de Supabase (broadcast). No toca ninguna tabla.
 //   · "local": en la compu, con server.js. Comandos por POST /cmd y SSE /events.
 //
-// EL CÓDIGO DE SALA
-//   Identifica el canal: quien no lo conoce no puede manejar la presentación.
-//   Llega en el link (?sala=…) y queda guardado en ese navegador, así que
-//   después se puede abrir la dirección sin el código. Nunca va en el repo.
+// EL CANAL (SALA)
+//   Con `sala` en config.js el canal es fijo: la pantalla y la botonera se
+//   encuentran solas, sin código, y cualquier link viejo con ?sala=… cae en el
+//   mismo canal. Sin `sala` en config.js vuelve el código de sala: llega en el
+//   link (?sala=…) y queda guardado en ese navegador.
 //
 // QUE NO SE PIERDA NINGÚN TOQUE
 //   Cada comando viaja con un id. La pantalla contesta "ack" con ese id; si el
@@ -19,16 +20,21 @@
   const CFG = window.UBA_CONFIG || {};
   const CLAVE = 'uba-sala';
   const params = new URLSearchParams(location.search);
-  let sala = (params.get('sala') || '').trim();
-  try {
-    if (sala) localStorage.setItem(CLAVE, sala);
-    else sala = (localStorage.getItem(CLAVE) || CFG.sala || '').trim();
-  } catch (e) { }
+  let sala = (CFG.sala || '').trim();
+  if (!sala) {
+    sala = (params.get('sala') || '').trim();
+    try {
+      if (sala) localStorage.setItem(CLAVE, sala);
+      else sala = (localStorage.getItem(CLAVE) || '').trim();
+    } catch (e) { }
+  }
 
-  const hayServidorLocal = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(location.hostname);
+  // Abierta desde server.js (localhost o la IP de la compu) va siempre por el
+  // servidor local: así una prueba en la compu no se mete en el canal publicado.
+  const hayServidorLocal = location.protocol.startsWith('http') && /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(location.hostname);
   const haySupabase = !!(CFG.supabaseUrl && CFG.supabaseKey && window.supabase);
-  const modo = haySupabase && sala ? 'supabase'
-    : (location.protocol.startsWith('http') && hayServidorLocal ? 'local'
+  const modo = hayServidorLocal ? 'local'
+    : (haySupabase && sala ? 'supabase'
       : (haySupabase ? 'sin-sala' : 'ninguno'));
 
   function guardarSala(codigo) {
@@ -97,7 +103,7 @@
       if (rol === 'control') {
         setInterval(() => {
           const viva = Date.now() - ultimaPantalla < 6500;
-          if (listo) avisar(viva, viva ? 'Conectado' : 'Sin pantalla: ¿está abierta con el mismo código?');
+          if (listo) avisar(viva, viva ? 'Conectado' : 'Sin pantalla: ¿está abierta la presentación?');
           if (listo && !viva) enviarCrudo('pedir-estado', {});
         }, 1500);
       }
@@ -122,7 +128,7 @@
         pedirEstado: null,
         // Pantalla: ¿hay un celular conectado a esta sala?
         controlVivo: async () => Date.now() - ultimoControl < 8000,
-        linkControl: async () => location.origin + '/control?sala=' + encodeURIComponent(sala),
+        linkControl: async () => location.origin + '/control' + (CFG.sala ? '' : '?sala=' + encodeURIComponent(sala)),
       };
       return api;
     }

@@ -249,7 +249,7 @@ function pintarChequeo() {
   if (c) {
     ok.videos = c.videos >= c.totalVideos; ok.respuestas = c.respuestas >= c.totalRespuestas; ok.avance = !!c.avance;
     marca('ck-videos', ok.videos ? 'ok' : '', 'Migue: ' + c.videos + ' de ' + c.totalVideos + ' videos');
-    marca('ck-respuestas', ok.respuestas ? 'ok' : (c.codigo === 'mal' ? 'mal' : ''), c.codigo === 'mal' ? 'Respuestas: código de sala no aceptado' : 'Respuestas de Migue: ' + c.respuestas + ' de ' + c.totalRespuestas);
+    marca('ck-respuestas', ok.respuestas ? 'ok' : (c.codigo === 'mal' ? 'mal' : ''), c.codigo === 'mal' ? 'Respuestas: el puente de Migue rechazó la pantalla' : 'Respuestas de Migue: ' + c.respuestas + ' de ' + c.totalRespuestas);
     marca('ck-avance', ok.avance ? 'ok' : 'mal', ok.avance ? 'Datos de CIMBA cargados' : 'Faltan los datos de CIMBA');
   }
   const todo = ok.pantalla && ok.videos && ok.respuestas;

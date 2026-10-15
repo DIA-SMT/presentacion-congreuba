@@ -4,15 +4,20 @@
 // sólo acepta los orígenes del municipio), así que la pantalla le pregunta acá
 // y esta función reenvía la consulta del lado del servidor.
 //
-// Sólo atiende pedidos con el código de sala correcto (variable SALA_CODE en
-// Vercel): sin eso, cualquiera podría usar este puente para escribirle a Migue
-// y comerse el límite de consultas por minuto que tiene el chat.
+// Sólo atiende pedidos que salen de la misma presentación (el navegador manda
+// Origin en cada POST): así otra página no puede usar este puente para
+// escribirle a Migue y comerse el límite de consultas por minuto que tiene el chat.
 const MIGUE_CHAT = 'https://migue.smt.gob.ar/api/chat';
+
+function mismoSitio(req) {
+    const desde = req.headers.origin || req.headers.referer || '';
+    const aca = req.headers['x-forwarded-host'] || req.headers.host || '';
+    try { return !!aca && new URL(desde).host === aca; } catch { return false; }
+}
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido' });
-    const sala = process.env.SALA_CODE;
-    if (!sala || req.headers['x-sala'] !== sala) return res.status(403).json({ error: 'Sala inválida' });
+    if (!mismoSitio(req)) return res.status(403).json({ error: 'Pedido de otro sitio' });
 
     let body = req.body;
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch { body = {}; } }

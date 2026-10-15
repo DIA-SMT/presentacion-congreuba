@@ -37,10 +37,9 @@
     }, 20);
   }
   async function consultar(texto, n, esperaMax) {
-    const sala = (window.Remoto && window.Remoto.sala) || '';
     const ctrl = new AbortController(); const corte = setTimeout(() => ctrl.abort(), esperaMax);
     try {
-      const r = await fetch('api/preguntar', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-sala': sala }, body: JSON.stringify({ mensaje: texto, sessionId: sesion + '-' + n }), signal: ctrl.signal });
+      const r = await fetch('api/preguntar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mensaje: texto, sessionId: sesion + '-' + n }), signal: ctrl.signal });
       const j = await r.json().catch(() => ({}));
       if (r.status === 403) { codigo = 'mal'; const e = new Error('sala'); e.status = 403; throw e; }
       if (!r.ok || !j.respuesta) { const e = new Error(j.error || 'HTTP ' + r.status); e.status = r.status; throw e; }

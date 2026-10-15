@@ -4,13 +4,13 @@ Presentación interactiva del Dr. Marco Rossi (Dirección de IA, Municipalidad d
 
 ## Links
 
-`CODIGO` es el código de sala: está en `.sala-codigo`, en la compu de la Dirección de IA (no se sube a GitHub ni a Vercel). Con él se maneja la presentación.
+Sin código de sala: la pantalla y la botonera se encuentran solas por un canal fijo (`sala` en `config.js`).
 
-- **Pantalla (para la técnica):** https://uba-ia-servicio-publico.vercel.app/?sala=CODIGO
-- **Botonera (tu celular):** https://uba-ia-servicio-publico.vercel.app/control?sala=CODIGO
+- **Pantalla (para la técnica):** https://uba-ia-servicio-publico.vercel.app
+- **Botonera (tu celular):** https://uba-ia-servicio-publico.vercel.app/control
 - Proyecto en Vercel: https://vercel.com/direccionia-5744s-projects/uba-ia-servicio-publico
 
-Los links con `?sala=` no se comparten en público: con ellos se maneja la presentación. La técnica abre el de la pantalla y toca **Comenzar** (un clic: habilita el sonido de Migue y la pantalla completa). Todo lo demás, desde el celular.
+El link de la botonera no se comparte: quien lo abra maneja la presentación. La técnica abre el de la pantalla y toca **Comenzar** (un clic: habilita el sonido de Migue y la pantalla completa). Todo lo demás, desde el celular.
 
 Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La botonera entra por la IP de la compu que muestra la ventana (mismo wifi). "Preguntale a Migue" necesita internet igual.
 
@@ -36,14 +36,14 @@ git commit -m "Qué cambió"
 git push
 ```
 
-Cambiar `version.js` en cada publicación: la botonera avisa si la pantalla quedó abierta con una versión vieja. La variable `SALA_CODE` de Vercel tiene que coincidir con el código de sala (la usa el puente de Migue). Publicar a mano, sin pasar por GitHub, también funciona: `npx vercel deploy --prod --scope direccionia-5744s-projects`.
+Cambiar `version.js` en cada publicación: la botonera avisa si la pantalla quedó abierta con una versión vieja. El puente de Migue (`api/preguntar.js`) sólo atiende pedidos que salen de la misma presentación; la variable `SALA_CODE` de Vercel ya no se usa. Publicar a mano, sin pasar por GitHub, también funciona: `npx vercel deploy --prod --scope direccionia-5744s-projects`.
 
 ## Blindaje
 
 - Si nadie toca Comenzar, la primera orden del celular arranca la presentación (Migue sin sonido, con subtítulo).
 - Ninguna orden con error traba la pantalla: queda registrada y la botonera la muestra en rojo.
 - La pantalla pide no apagarse (Wake Lock) y precarga todas las capturas y el mapa del avance al empezar.
-- Si hay dos pantallas abiertas con el mismo código, la botonera sigue a la última que arrancó y avisa.
+- Si hay dos pantallas abiertas a la vez, la botonera sigue a la última que arrancó y avisa.
 
 ## Cuidado
 
