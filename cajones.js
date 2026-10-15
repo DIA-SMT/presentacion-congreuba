@@ -19,7 +19,7 @@
 
   // Cuánto se queda cada recurso en una vitrina antes de pasar al próximo (ms).
   // El último se queda quieto hasta la próxima placa.
-  const DURA = { web: 8000, scroll: 14000, par: 11000, cel: 8000, kpis: 8000, avance: 23000, vivo: Infinity };
+  const DURA = { ps: 13000, web: 8000, scroll: 14000, par: 11000, cel: 8000, kpis: 8000, avance: 23000, vivo: Infinity };
   const durDe = (r) => (r.tipo === 'web' && r.scroll) || (r.tipo === 'par' && r.web && r.web.scroll) ? DURA.scroll : (DURA[r.tipo] || 9000);
 
   let lista = [], idx = 0, recEl = null, modo = null, clave = null, panelDe = null;
@@ -40,6 +40,31 @@
       <div class="vi-qr"><img src="img/migue/qr-telegram.svg" alt=""><b>@MigueSMT_bot</b><span>Telegram · y en smt.gob.ar</span></div>
     </div>`;
   }
+  // PROBLEMA → SOLUCIÓN: a la izquierda los problemas aparecen de a uno; una flecha;
+  // a la derecha la solución en números grandes (cuentan), anillos de porcentaje
+  // (g: 'dona') o barras de antes y después (g: 'barras', de, a).
+  function numAttr(n) { const m = String(n).match(/^([^\d]*)([\d.]+)(,\d+)?(.*)$/); return m && !m[3] ? ` data-n="${m[2].replace(/\./g, '')}" data-pre="${escH(m[1])}" data-pos="${escH(m[4])}"` : ''; }
+  function grafico(s) {
+    if (s.g === 'dona') {
+      const v = Math.max(0, Math.min(100, parseFloat(String(s.n).replace(',', '.')) || 0)), L = 2 * Math.PI * 52;
+      return `<svg class="ps-dona" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="fondo"/><circle cx="60" cy="60" r="52" class="valor" style="--L:${L.toFixed(1)};--fin:${(L * (1 - v / 100)).toFixed(1)}"/></svg><b${numAttr(s.n)}>${escH(s.n)}</b>`;
+    }
+    if (s.g === 'barras') {
+      const max = Math.max(s.de, s.a) || 1;
+      return `<div class="ps-barras"><div><span>${escH((s.eti || [])[0] || 'Antes')}</span><i style="--w:${(s.de / max * 100).toFixed(0)}%"></i><em>${escH(String(s.de))}</em></div><div><span>${escH((s.eti || [])[1] || 'Ahora')}</span><i class="ahora" style="--w:${(s.a / max * 100).toFixed(0)}%"></i><em>${escH(String(s.a))}</em></div></div><b${numAttr(s.n)}>${escH(s.n)}</b>`;
+    }
+    const na = numAttr(s.n), palabras = !na && String(s.n).length > 6; // "Lenguaje claro": más chico que un número
+    return `<b class="${palabras ? 'txt' : ''}"${na}>${escH(s.n)}</b>`;
+  }
+  function problemaSolucion(r) {
+    const prob = (r.problema || []).map(([ic, t], i) => `<li style="--i:${i}"><i>${escH(ic)}</i><b>${escH(t)}</b></li>`).join('');
+    const sol = (r.solucion || []).map((s, i) => `<div class="ps-n${s.g ? ' con-g' : ''}" style="--i:${i}">${grafico(s)}<span>${escH(s.t)}</span></div>`).join('');
+    return `<div class="ps">
+      <div class="ps-prob"><span class="ceja">El problema</span><ul>${prob}</ul></div>
+      <div class="ps-flecha"><svg viewBox="0 0 80 40"><path d="M4 20 H70 M56 6 L72 20 L56 34"/></svg></div>
+      <div class="ps-sol"><span class="ceja">La solución con IA</span><div class="ps-nums n${(r.solucion || []).length}">${sol}</div>${r.conecta ? `<p class="ps-conecta"><span>Conecta</span>${escH(r.conecta)}</p>` : ''}</div>
+    </div>`;
+  }
   function armar(r) {
     const el = document.createElement('div');
     el.className = 'rec';
@@ -48,6 +73,7 @@
     else if (r.tipo === 'par') { el.classList.add('par'); el.innerHTML = navegador(r.web) + celular(r.cel); }
     else if (r.tipo === 'vivo') { el.classList.add('vivo-rec'); el.innerHTML = tarjetaVivo(); }
     else if (r.tipo === 'avance') { el.classList.add('avance-rec'); el.innerHTML = '<div class="avance-host"></div>'; }
+    else if (r.tipo === 'ps') { el.classList.add('ps-rec'); el.innerHTML = problemaSolucion(r); setTimeout(() => window.efectos.contar(el, 1700), 50); }
     else if (r.tipo === 'kpis') {
       el.classList.add('kpis-rec');
       const num = (n) => { const m = String(n).match(/^([^\d]*)([\d.]+)(,\d+)?(.*)$/); return m && !m[3] ? ` data-n="${m[2].replace(/\./g, '')}" data-pre="${escH(m[1])}" data-pos="${escH(m[4])}"` : ''; };
@@ -97,14 +123,9 @@
     $('.cj-nombre').textContent = p.nombre;
     $('.cj-eje').textContent = p.eje;
     $('.cj-num').textContent = p.num;
-    $('.cj-nombre2').textContent = p.idea || '';
-    const pares = [['Estado', p.estado]].concat((p.cifras || []).slice(0, 3));
-    $('.cj-datos').innerHTML = pares.map(([a, b], i) => {
-      if (i === 0) return `<dt>${escH(a)}</dt><dd class="chico">${escH(b)}</dd>`;
-      const m = String(a).match(/^([^\d]*)([\d.]+)(.*)$/);
-      const dn = m ? ` data-n="${m[2].replace(/\./g, '')}" data-pre="${escH(m[1])}" data-pos="${escH(m[3])}"` : '';
-      return `<dt>${escH(b)}</dt><dd${dn}>${escH(a)}</dd>`;
-    }).join('');
+    // Panel corto: el número del proyecto, su nombre y hasta tres cifras. Nada para leer.
+    $('.cj-nombre2').textContent = p.nombre;
+    $('.cj-datos').innerHTML = (p.cifras || []).slice(0, 3).map(([a, b]) => `<dd${numAttr(a)}>${escH(a)}</dd><dt>${escH(b)}</dt>`).join('');
     window.efectos.contar(cajon.querySelector('.panel'), 350);
   }
   function pintarPie() {

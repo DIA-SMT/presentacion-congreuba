@@ -1,7 +1,7 @@
 // =====================================================================
 // CONTENIDO EDITABLE DE LA PRESENTACIÓN (UBA · 16/10/2026)
 // "La IA como servicio público": las frases de Migue, las preguntas en vivo
-// y los cajones de proyectos. Los textos de las placas están en index.html.
+// y los proyectos. Los textos de las placas están en index.html.
 // Números: los de cada sistema al 14/10/2026 (revisar el día del panel).
 // =====================================================================
 window.CONTENIDO = {
@@ -29,86 +29,116 @@ window.CONTENIDO = {
     '¿Cómo habilito un negocio?',
   ],
 
-  // Los cajones: cada proyecto se abre sobre cualquier placa desde la botonera.
-  // Recursos: 'web' (captura en ventana de navegador; scroll: true la recorre),
-  // 'cel' (captura en un celular), 'par' (navegador + celular), 'vivo'
-  // (Preguntale a Migue), 'avance' (CIMBA, datos/cimba-avance.js) y 'kpis'
-  // (tablero recreado con números que cuentan).
+  // Los proyectos. El orden cuenta la historia: primero lo que usamos adentro,
+  // después lo que llevamos al vecino. Cada uno arranca con 'ps' (problema → solución):
+  //   problema: [ícono, frase corta] · solucion: { n, t, g? } (g: 'dona' | 'barras', de, a)
+  // Otros recursos: 'web' (captura en ventana de navegador; scroll: true la recorre),
+  // 'cel', 'par' (navegador + celular), 'vivo' (Preguntale a Migue), 'avance'
+  // (CIMBA, datos/cimba-avance.js) y 'kpis' (tablero con números que cuentan).
   // En "url" va lo que se lee en la barra del navegador: nunca una dirección de Vercel.
   PROYECTOS: [
+    // ---------------------------------------------------------------- PUERTAS ADENTRO
     {
-      id: 'migue', num: '01', eje: 'Atención ciudadana', nombre: 'Migue',
-      idea: 'Asistente virtual las 24 horas', corta: 'Trámites, turnos, reclamos y cortes, en lenguaje natural.',
-      bajada: 'El asistente virtual de la ciudad: trámites, turnos, reclamos y cortes, las 24 horas, en lenguaje natural.',
+      id: 'notas', num: '01', eje: 'Puertas adentro', nombre: 'Generador de Notas',
+      idea: 'Lenguaje claro, con criterio', corta: 'La IA redacta, la persona firma.',
       estado: 'En funcionamiento',
-      canales: 'Web · Ciudadano Digital · Telegram · WhatsApp',
+      cifras: [['10', 'tipos de nota'], ['100%', 'con firma humana']],
+      recursos: [
+        { tipo: 'ps', titulo: 'El mismo criterio en todas las áreas',
+          problema: [['✍️', 'Cada área escribía a su manera'], ['📄', 'Notas largas y poco claras'], ['🤔', 'Desconfianza en la IA']],
+          solucion: [{ n: '10', t: 'tipos de nota con el mismo criterio' }, { n: 'Lenguaje claro', t: 'para cada repartición' }, { n: 'IA + firma', t: 'la IA redacta, la persona revisa y firma' }],
+          conecta: 'Dictado por voz · padrón de áreas y cargos · pedido, pase, intimación, dictamen' },
+        { tipo: 'web', src: 'img/capturas/generador/formulario.jpg', url: 'Generador de Notas · Dirección de IA', titulo: 'Contalo con tus palabras' },
+      ],
+    },
+    {
+      id: 'capital', num: '02', eje: 'Puertas adentro', nombre: 'Capital Humano',
+      idea: 'El expediente, digital', corta: 'Licencias y bonificaciones sin papel.',
+      estado: 'En desarrollo',
+      cifras: [['−39%', 'pasos en 13 trámites'], ['8.000', 'hojas por año']],
+      recursos: [
+        { tipo: 'ps', titulo: 'Menos papel, menos pasos',
+          problema: [['⏳', '35 días por licencia por examen'], ['📑', '8.000 hojas por año en papel'], ['🔁', '107 pasos en 13 trámites']],
+          solucion: [{ n: '−39%', t: 'pasos en 13 trámites', g: 'barras', de: 107, a: 65 }, { n: '0', t: 'hojas: expediente digital con firma' }, { n: 'IA', t: 'sugiere prioridad y borrador; una persona decide' }],
+          conecta: 'Relevamiento de la Dirección de IA con Capital Humano · 07/10/2026' },
+      ],
+    },
+    // ---------------------------------------------------------------- PARA EL VECINO
+    {
+      id: 'migue', num: '03', eje: 'Atención ciudadana', nombre: 'Migue',
+      idea: 'Asistente virtual las 24 horas', corta: 'En Ciudad Digital, Telegram y WhatsApp.',
+      estado: 'En funcionamiento',
       cifras: [['17.848', 'consultas'], ['91%', 'resueltas'], ['3.797', 'vecinos que vuelven']],
       recursos: [
+        { tipo: 'ps', titulo: 'Una sola puerta para preguntar',
+          problema: [['🏛️', 'Cada trámite, en un área distinta'], ['⏰', 'Ventanilla de 8 a 13'], ['🔎', 'Información dispersa']],
+          solucion: [{ n: '24 h', t: 'en Ciudad Digital, Telegram y WhatsApp' }, { n: '17.848', t: 'consultas respondidas' }, { n: '91%', t: 'resueltas', g: 'dona' }, { n: '99,8%', t: 'llegan por Ciudad Digital', g: 'dona' }],
+          conecta: 'Guía de Trámites · Turnos · Reclamos · Cortes de tránsito · Ciudad Digital (CiDiTuc)' },
+        { tipo: 'web', src: 'img/migue/canal-cidituc.png', url: 'ciudaddigital.smt.gob.ar', titulo: 'La puerta: Ciudad Digital, con Migue adentro' },
         { tipo: 'web', src: 'img/capturas/migue/gobernanza.jpg', url: 'migue.smt.gob.ar · Gobernanza de datos', titulo: 'El cerebro: gobernanza de cada consulta' },
-        { tipo: 'web', src: 'img/capturas/migue/clima.jpg', url: 'migue.smt.gob.ar · Clima ciudadano', titulo: 'El termómetro: el clima de la ciudad, leído por IA' },
-        { tipo: 'web', src: 'img/migue/canal-smt.webp', url: 'smt.gob.ar', titulo: 'En el portal de la ciudad' },
+        { tipo: 'web', src: 'img/capturas/migue/clima.jpg', url: 'migue.smt.gob.ar · Clima ciudadano', titulo: 'El termómetro: el clima, leído por IA' },
         { tipo: 'vivo', titulo: 'Preguntale a Migue, en vivo' },
       ],
     },
     {
-      id: 'cimba', num: '02', eje: 'Obra pública', nombre: 'CIMBA',
-      idea: 'Del reclamo al bache reparado', corta: 'Cada pedido se ubica, se ordena, se arregla y se certifica con foto y GPS.',
-      bajada: 'Del reclamo del vecino al bache reparado: cada pedido se ubica, se ordena, se arregla y se certifica con foto y GPS.',
+      id: 'cimba', num: '04', eje: 'Obra pública', nombre: 'CIMBA',
+      idea: 'Del reclamo al bache reparado', corta: 'Áreas conectadas, cierre del reclamo, trazabilidad.',
       estado: 'En funcionamiento',
-      canales: '147 · Concejo · S.A.T. · Secretarías · Redes · Cuadrillas',
-      cifras: [['4.316', 'baches desde marzo'], ['64.570', 'm² reparados'], ['3.402', 'pedidos de 6 canales']],
+      cifras: [['4.316', 'baches desde marzo'], ['880 t', 'de mezcla trazada'], ['6', 'canales conectados']],
       recursos: [
-        { tipo: 'avance', titulo: 'Avance: así se fue llenando la ciudad' },
+        { tipo: 'ps', titulo: 'Del reclamo disperso al bache trazado',
+          problema: [['📥', 'Reclamos en 6 canales distintos'], ['🗂️', 'Planillas sueltas por área y empresa'], ['❓', 'El vecino no sabía si se arregló'], ['🧾', 'Sin trazabilidad de materiales']],
+          solucion: [{ n: '4.316', t: 'baches con lugar, fecha y empresa' }, { n: '880 t', t: 'de mezcla asfáltica, trazada' }, { n: '1.383', t: 'arreglos con foto antes y después' }, { n: '162', t: 'reclamos de vecinos cerrados' }],
+          conecta: '147 · Concejo · S.A.T. · Secretarías · Redes · 12 empresas · SIGOV · Ciudad Digital — cierre automático del reclamo' },
+        { tipo: 'avance', titulo: 'Así se fue llenando la ciudad' },
         { tipo: 'web', src: 'img/capturas/cimba/mapa.jpg', url: 'cimba.smt.gob.ar/mapa', titulo: 'Lo pedido y lo hecho, en un mapa' },
         { tipo: 'web', src: 'img/capturas/cimba/muro.jpg', url: 'cimba.smt.gob.ar/avance', titulo: 'Cada arreglo, con su foto', scroll: true },
       ],
     },
     {
-      id: 'urbania', num: '03', eje: 'Planeamiento urbano', nombre: 'UrbanIA',
-      idea: 'El nuevo Código, con memoria pública', corta: 'Las audiencias se cruzan con cada norma nueva; el Código se consulta en lenguaje natural.',
-      bajada: 'La reforma del Código de Planeamiento Urbano: lo que dicen los vecinos en las audiencias se cruza con cada norma nueva. La IA orienta; el equipo valida.',
-      estado: 'En uso por el equipo del Código',
-      canales: 'Fábrica de Normas · Audiencias · Consulta al CPU · Foro · Mapa',
-      cifras: [['10', 'audiencias públicas'], ['15', 'normas nuevas en redacción']],
-      recursos: [
-        { tipo: 'web', src: 'img/capturas/urbania/audiencia-cruce.jpg', url: 'urbania.smt.gob.ar/audiencias', titulo: 'Lo que dijo cada vecino, cruzado con cada norma', scroll: true },
-        { tipo: 'web', src: 'img/capturas/urbania/audiencias.jpg', url: 'urbania.smt.gob.ar/audiencias', titulo: 'Memoria pública: diez audiencias' },
-        { tipo: 'web', src: 'img/capturas/urbania/codigo-2026.jpg', url: 'urbania.smt.gob.ar/normas', titulo: 'Fábrica de Normas: cada artículo anclado al Código vigente' },
-        { tipo: 'web', src: 'img/capturas/urbania/consulta-cpu.jpg', url: 'urbania.smt.gob.ar/consulta-cpu', titulo: 'El Código, en lenguaje natural' },
-        { tipo: 'web', src: 'img/capturas/urbania/mapa.jpg', url: 'urbania.smt.gob.ar', titulo: 'Territorio y evidencia' },
-      ],
-    },
-    {
-      id: 'estudia', num: '04', eje: 'Educación', nombre: 'SMT EstudIA',
-      idea: 'La IA arma el borrador, el docente decide', corta: 'Clases y actividades a medida de cada curso, revisadas por el docente.',
-      bajada: 'La plataforma con IA de las escuelas municipales: cada docente prepara clases, actividades y evaluaciones a la medida de su curso. La IA arma el borrador; el docente lo revisa antes de que llegue a sus estudiantes.',
+      id: 'estudia', num: '05', eje: 'Educación', nombre: 'SMT EstudIA',
+      idea: 'La IA arma el borrador, el docente decide', corta: 'Celulares para aprender, con reglas.',
       estado: 'Piloto en 2 escuelas',
-      canales: 'Docentes · Estudiantes · Familias · Dirección',
-      cifras: [],
+      cifras: [['2', 'escuelas piloto'], ['1 min', 'por actividad'], ['50', 'usos de IA por día, con tope']],
       recursos: [
+        { tipo: 'ps', titulo: 'Una escuela que usa la IA con reglas',
+          problema: [['📵', '¿Celulares en el aula: prohibir o usar?'], ['🧑‍🏫', 'Docentes sobrecargados, sin IA segura'], ['🗂️', 'Datos dispersos'], ['🤖', 'Estudiantes usando mal la IA']],
+          solucion: [{ n: '1 min', t: 'para armar una actividad' }, { n: '1', t: 'plataforma: docentes, estudiantes, familias y dirección' }, { n: '50', t: 'usos de IA por día por docente, con tope' }, { n: 'US$ 0,017', t: 'costo de IA del piloto en 30 días' }],
+          conecta: 'La IA arma el borrador · el docente revisa · la IA ayuda a pensar, no hace la tarea' },
         { tipo: 'web', src: 'img/capturas/estudia/crear.jpg', url: 'estudia.smt.gob.ar/crear', titulo: 'El docente elige; la IA arma el borrador' },
-        { tipo: 'par', web: { src: 'img/capturas/estudia/mi-dia.png', url: 'estudia.smt.gob.ar' }, cel: { src: 'img/capturas/estudia/cel-estudiar.png' }, titulo: 'El día del docente y el celular del estudiante' },
-        { tipo: 'web', src: 'img/capturas/estudia/tablero.png', url: 'estudia.smt.gob.ar', titulo: 'La escuela, sin pedir informes' },
+        { tipo: 'par', web: { src: 'img/capturas/estudia/mi-dia.png', url: 'estudia.smt.gob.ar' }, cel: { src: 'img/capturas/estudia/cel-estudiar.png' }, titulo: 'El celular, para aprender' },
         { tipo: 'web', src: 'img/capturas/estudia/consumo-ia.jpg', url: 'estudia.smt.gob.ar/admin/consumo-ia', titulo: 'Cuánto cuesta, a la vista' },
       ],
     },
     {
-      id: 'notas', num: '05', eje: 'Gestión interna', nombre: 'Generador de Notas',
-      idea: 'Lenguaje claro, con criterio', corta: 'Notas administrativas en lenguaje claro para cada repartición: la IA redacta, la persona firma.',
-      bajada: 'Notas, pases, intimaciones y dictámenes en lenguaje claro, con el mismo criterio en todas las reparticiones. La IA redacta el borrador; la persona revisa y firma. Así se gana confianza en la IA desde adentro.',
-      estado: 'En funcionamiento',
-      canales: 'Diez tipos de nota · dictado por voz · padrón de áreas',
-      cifras: [['10', 'tipos de nota'], ['−39%', 'pasos en 13 trámites de Capital Humano']],
+      id: 'urbania', num: '06', eje: 'Planeamiento urbano', nombre: 'UrbanIA',
+      idea: 'El nuevo Código, con memoria pública', corta: 'Cada idea del vecino, cruzada con su norma.',
+      estado: 'En uso por el equipo del Código',
+      cifras: [['10', 'audiencias públicas'], ['15', 'normas nuevas']],
       recursos: [
-        { tipo: 'web', src: 'img/capturas/generador/formulario.jpg', url: 'Generador de Notas · Dirección de IA', titulo: 'Contalo con tus palabras: la nota sale en lenguaje claro' },
+        { tipo: 'ps', titulo: 'Un Código nuevo que escucha',
+          problema: [['📜', 'Un Código de 1998, con texto de 2014'], ['🎙️', 'Horas de audiencias sin sistematizar'], ['🧩', 'Ideas de vecinos sin cruzar con cada norma']],
+          solucion: [{ n: '10', t: 'audiencias públicas analizadas' }, { n: '15', t: 'normas nuevas ancladas al Código vigente' }, { n: 'Minuto a minuto', t: 'cada idea del vecino, cruzada con su norma' }],
+          conecta: 'Fábrica de Normas · Audiencias · Consulta al Código · Foro · Mapa — la IA orienta, el equipo valida' },
+        { tipo: 'web', src: 'img/capturas/urbania/audiencia-cruce.jpg', url: 'urbania.smt.gob.ar/audiencias', titulo: 'Lo que dijo cada vecino, con su norma', scroll: true },
+        { tipo: 'web', src: 'img/capturas/urbania/codigo-2026.jpg', url: 'urbania.smt.gob.ar/normas', titulo: 'Fábrica de Normas' },
+        { tipo: 'web', src: 'img/capturas/urbania/consulta-cpu.jpg', url: 'urbania.smt.gob.ar/consulta-cpu', titulo: 'El Código, en lenguaje natural' },
+      ],
+    },
+    // ---------------------------------------------------------------- CIUDAD ABIERTA (falta confirmar el problema de cada uno)
+    {
+      id: 'espacio', num: '07', eje: 'Espacio público', nombre: 'Applaza',
+      idea: 'Cada plaza, con su evidencia', corta: '218 espacios verdes con ubicación y fotos.',
+      estado: 'En funcionamiento',
+      cifras: [['218', 'espacios verdes'], ['911', 'evidencias'], ['24', 'cooperativas']],
+      recursos: [
+        { tipo: 'kpis', titulo: 'Estado de los espacios verdes', cab: 'Padrón municipal · Estado general', kpis: [['218', 'espacios del padrón'], ['210', 'con ubicación'], ['8', 'pendientes de ubicar'], ['911', 'evidencias cargadas'], ['110,6', 'km recorridos'], ['24', 'cooperativas activas']], nota: 'Applaza · Municipalidad de San Miguel de Tucumán · datos al 14/10/2026' },
       ],
     },
     {
-      id: 'bus', num: '06', eje: 'Turismo', nombre: 'Bus Turístico',
-      idea: 'La ciudad, para quien la visita', corta: 'Reservas, cupos y consultas de turistas con Migue, por WhatsApp y Telegram.',
-      bajada: 'Salidas, cupos y reservas del bus turístico, con Migue respondiendo a turistas y escuelas por WhatsApp y Telegram.',
+      id: 'bus', num: '08', eje: 'Turismo', nombre: 'Bus Turístico',
+      idea: 'La ciudad, para quien la visita', corta: 'Reservas y consultas con Migue.',
       estado: 'En funcionamiento',
-      canales: 'WhatsApp · Telegram · Web',
       cifras: [['488', 'conversaciones'], ['106', 'turistas'], ['74', 'lugares reservados']],
       recursos: [
         { tipo: 'web', src: 'img/capturas/bus/resumen.jpg', url: 'busturistico.smt.gob.ar/admin', titulo: 'Lo que preguntan los turistas' },
@@ -116,22 +146,9 @@ window.CONTENIDO = {
       ],
     },
     {
-      id: 'espacio', num: '07', eje: 'Espacio público', nombre: 'Applaza',
-      idea: 'Cada plaza, con su evidencia', corta: 'Los 218 espacios verdes del padrón, con ubicación, fotos y cooperativa a cargo.',
-      bajada: 'El control de los espacios verdes de la ciudad: cada plaza del padrón municipal, ubicada en el mapa, con su evidencia fotográfica y la cooperativa que la mantiene.',
+      id: 'participa', num: '09', eje: 'Participación', nombre: 'Ciudad abierta',
+      idea: 'Los vecinos proponen y deciden', corta: 'Presupuesto Participativo y ferias online.',
       estado: 'En funcionamiento',
-      canales: 'Padrón municipal · Mapa operativo · Registro de control · Auditoría',
-      cifras: [['218', 'espacios verdes'], ['911', 'evidencias'], ['24', 'cooperativas']],
-      recursos: [
-        { tipo: 'kpis', titulo: 'Estado general de los espacios verdes', cab: 'Padrón municipal · Estado general', kpis: [['218', 'espacios del padrón'], ['210', 'con ubicación'], ['8', 'pendientes de ubicar'], ['911', 'evidencias cargadas'], ['110,6', 'km recorridos'], ['24', 'cooperativas activas']], nota: 'Applaza · Municipalidad de San Miguel de Tucumán · datos al 14/10/2026' },
-      ],
-    },
-    {
-      id: 'participa', num: '08', eje: 'Participación', nombre: 'Ciudad abierta',
-      idea: 'Los vecinos proponen y deciden', corta: 'Presupuesto Participativo en 20 distritos y ferias con vidriera online.',
-      bajada: 'Presupuesto Participativo con los 20 distritos en el mapa, y las ferias municipales con vidriera online para cada emprendedor.',
-      estado: 'En funcionamiento',
-      canales: 'Presupuesto Participativo · Ferias Municipales · Ciudadano Digital',
       cifras: [['20', 'distritos'], ['19', 'proyectos elegidos en 2025']],
       recursos: [
         { tipo: 'par', web: { src: 'img/capturas/presupuesto/escritorio-completa.jpg', url: 'presupuestoparticipativo.smt.gob.ar', scroll: true }, cel: { src: 'img/capturas/presupuesto/celular.jpg' }, titulo: 'Presupuesto Participativo' },

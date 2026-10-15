@@ -310,3 +310,90 @@ body.negro { background: #000 !important; }
 .tarjeta.texto p.capacitacion { font-size: 22px; color: var(--azul2); background: var(--hueso); border-radius: 12px; padding: 12px 18px; }
 .tarjeta.texto p.capacitacion b { font-size: 26px; }
 .slide.vitrina { background: transparent; }
+
+/* =====================================================================
+   PROBLEMA → SOLUCIÓN (recurso 'ps'): poco texto, números y gráficos.
+   Los problemas entran de a uno, la flecha se dibuja y la solución cuenta.
+   ===================================================================== */
+.ps-rec { align-items: stretch; }
+.ps { width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 96px 1.2fr; align-items: stretch; }
+.ps-prob { background: rgba(255,255,255,.88); border-radius: 14px; padding: 44px 40px; display: flex; flex-direction: column; gap: 30px; }
+.ps-prob ul { list-style: none; display: flex; flex-direction: column; gap: 26px; flex: 1; justify-content: center; }
+.ps-prob li { display: flex; align-items: center; gap: 22px; opacity: 0; transform: translateX(-36px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(.35s + var(--i) * .55s); }
+.rec.on .ps-prob li { opacity: 1; transform: none; }
+.ps-prob li i { flex: none; width: 76px; height: 76px; border-radius: 50%; background: var(--hueso); display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 38px; }
+.ps-prob li b { font-size: 30px; line-height: 1.22; font-weight: 600; color: var(--azul2); }
+.ps-flecha { display: flex; align-items: center; justify-content: center; }
+.ps-flecha svg { width: 72px; height: 36px; overflow: visible; }
+.ps-flecha path { fill: none; stroke: var(--azul); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 140; stroke-dashoffset: 140; transition: stroke-dashoffset .8s ease 2.2s; }
+.rec.on .ps-flecha path { stroke-dashoffset: 0; }
+.ps-sol { background: var(--azul); color: var(--blanco); border-radius: 14px; padding: 44px 44px 34px; display: flex; flex-direction: column; gap: 22px; }
+.ps-sol .ceja { color: var(--arena); }
+.ps-nums { flex: 1; display: grid; gap: 22px 28px; align-content: center; }
+.ps-nums.n4 { grid-template-columns: 1fr 1fr; }
+.ps-n { display: flex; flex-direction: column; gap: 6px; opacity: 0; transform: translateY(26px) scale(.96); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(2.6s + var(--i) * .4s); }
+.rec.on .ps-n { opacity: 1; transform: none; }
+.ps-n > b { font-size: 78px; line-height: 1; font-weight: 700; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.ps-nums.n4 .ps-n > b { font-size: 64px; }
+.ps-n > span { font-size: 23px; line-height: 1.3; color: #c8cbe0; }
+.ps-n.con-g { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 22px; align-items: center; }
+.ps-n.con-g > svg, .ps-n.con-g > .ps-barras { grid-row: 1 / 3; }
+.ps-n.con-g > span { grid-column: 2; }
+.ps-dona { width: 116px; height: 116px; transform: rotate(-90deg); }
+.ps-dona circle { fill: none; stroke-width: 13; }
+.ps-dona .fondo { stroke: var(--azul3); }
+.ps-dona .valor { stroke: var(--smt-celeste); stroke-linecap: round; stroke-dasharray: var(--L); stroke-dashoffset: var(--L); transition: stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1) calc(2.9s + var(--i, 0) * .4s); }
+.rec.on .ps-dona .valor { stroke-dashoffset: var(--fin); }
+.ps-barras { width: 250px; display: flex; flex-direction: column; gap: 10px; }
+.ps-barras div { display: grid; grid-template-columns: 70px 1fr 54px; align-items: center; gap: 10px; }
+.ps-barras span { font-size: 16px; color: var(--arena); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.ps-barras i { height: 18px; border-radius: 9px; background: var(--azul3); width: 0; transition: width 1.3s cubic-bezier(.2,.8,.2,1) 3s; }
+.ps-barras i.ahora { background: var(--smt-celeste); transition-delay: 3.5s; }
+.rec.on .ps-barras i { width: var(--w); }
+.ps-barras em { font-style: normal; font-size: 20px; font-weight: 700; }
+.ps-conecta { font-size: 18px; line-height: 1.5; color: #c8cbe0; border-top: 2px solid var(--azul3); padding-top: 16px; opacity: 0; transition: opacity .8s ease 4.2s; }
+.rec.on .ps-conecta { opacity: 1; }
+.ps-conecta span { display: inline-block; margin-right: 12px; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--arena); }
+
+/* Panel del cajón, corto: número arriba, etiqueta abajo. */
+#cajon .panel dd { margin-top: 14px; font-size: 44px; line-height: 1; }
+#cajon .panel dt { margin-top: 4px; font-size: 14px; }
+#cajon .pn-sub { font-size: 30px; }
+.ps-n > b.txt { font-size: 48px; letter-spacing: -1px; line-height: 1.05; }
+
+/* ---------- Reglas: principios en íconos y tres números ---------- */
+.panel.numeros dd, #cajon .panel dd { margin-top: 14px; font-size: 44px; line-height: 1; font-weight: 700; }
+.panel.numeros dt, #cajon .panel dt { margin-top: 4px; font-size: 14px; }
+.principios-grandes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.principios-grandes > div { background: var(--blanco); border-radius: 14px; padding: 26px 14px 22px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.principios-grandes i { font-style: normal; font-size: 52px; line-height: 1; }
+.principios-grandes b { font-size: 21px; line-height: 1.2; }
+.reglas-num { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.reglas-num > div { background: var(--azul); color: var(--blanco); border-radius: 14px; padding: 26px 30px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+.reglas-num b { font-size: 76px; line-height: 1; font-weight: 700; letter-spacing: -2px; }
+.reglas-num span { font-size: 21px; line-height: 1.3; color: #c8cbe0; }
+
+/* ---------- El camino: puertas adentro → para el vecino ---------- */
+.camino { position: absolute; left: 86px; top: 215px; width: 1748px; height: 768px; display: grid; grid-template-columns: 1fr 120px 1.35fr; align-items: stretch; }
+.tramo { border-radius: 18px; padding: 40px 44px; display: flex; flex-direction: column; gap: 26px; }
+.tramo.adentro { background: rgba(255,255,255,.9); }
+.tramo.afuera { background: var(--azul); color: var(--blanco); }
+.tramo-tit { display: flex; align-items: center; gap: 16px; font-size: 34px; font-weight: 700; }
+.tramo-tit span { width: 54px; height: 54px; border-radius: 50%; background: var(--azul); color: var(--blanco); display: flex; align-items: center; justify-content: center; font-size: 28px; flex: none; }
+.tramo.afuera .tramo-tit span { background: var(--blanco); color: var(--azul); }
+.tramo-tit em { font-style: normal; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--arena); margin-left: 6px; }
+.tramo ul { list-style: none; flex: 1; display: flex; flex-direction: column; justify-content: space-around; }
+.tramo li { display: flex; align-items: baseline; gap: 22px; }
+.tramo li b { font-size: 64px; line-height: 1; font-weight: 700; letter-spacing: -2px; min-width: 230px; font-variant-numeric: tabular-nums; }
+.tramo.afuera li b { font-size: 52px; min-width: 210px; }
+.tramo li span { font-size: 24px; color: var(--azul2); }
+.tramo.afuera li span { color: #c8cbe0; }
+.camino-flecha { display: flex; align-items: center; justify-content: center; }
+.camino-flecha svg { width: 84px; height: 42px; overflow: visible; }
+.camino-flecha path { fill: none; stroke: var(--azul); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 140; stroke-dashoffset: 140; transition: stroke-dashoffset .9s ease .9s; }
+.slide.on .camino-flecha path { stroke-dashoffset: 0; }
+
+/* ---------- Conclusión: tres ideas con ícono ---------- */
+.columnas.ideas .col-card > div { justify-content: center; gap: 16px; }
+.columnas.ideas .emoji { font-size: 60px; line-height: 1; }
+.columnas.ideas .col-card > div > b { font-size: 32px; }
