@@ -14,6 +14,7 @@ window.CONTENIDO = {
   FORMATO_MIGUE: 'cuerpo',
   VIDEOS: [
     // ---- Apertura, sobre la portada (MIGUE 1 a 7). Videos: media/apertura1.mp4 … apertura7.mp4
+    // (si falta alguno, esa frase sale en globo; hoy falta el 5: vino repetido el 4).
     { archivo: null, video: 'media/apertura1.mp4', texto: 'No te veo', sub: '¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?',
       marco: 'Migue, pará un segundo. Date vuelta, estás mirando al revés.' },
     { archivo: null, video: 'media/apertura2.mp4', texto: '¿Y toda esta gente?', sub: '¡Ahí tá! ¡Ahora sí! ¡Epa! ¿Y toda esta gente?',
