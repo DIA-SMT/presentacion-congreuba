@@ -60,7 +60,7 @@ window.CONTENIDO = {
         { tipo: 'ps', titulo: 'Menos papel, menos pasos',
           problema: [['⏳', '35 días por licencia por examen'], ['📑', '8.000 hojas por año en papel'], ['🔁', '107 pasos en 13 trámites']],
           solucion: [{ n: '−39%', t: 'pasos en 13 trámites', g: 'barras', de: 107, a: 65 }, { n: '0', t: 'hojas: expediente digital con firma' }, { n: 'IA', t: 'sugiere prioridad y borrador; una persona decide' }],
-          conecta: 'Relevamiento de la Dirección de IA con Capital Humano · 07/10/2026' },
+          fuente: 'Relevamiento de la Dirección de IA con Capital Humano · 07/10/2026' },
       ],
     },
     // ---------------------------------------------------------------- PARA EL VECINO

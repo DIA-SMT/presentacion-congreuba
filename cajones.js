@@ -62,7 +62,7 @@
     return `<div class="ps">
       <div class="ps-prob"><span class="ceja">El problema</span><ul>${prob}</ul></div>
       <div class="ps-flecha"><svg viewBox="0 0 80 40"><path d="M4 20 H70 M56 6 L72 20 L56 34"/></svg></div>
-      <div class="ps-sol"><span class="ceja">La solución con IA</span><div class="ps-nums n${(r.solucion || []).length}">${sol}</div>${r.conecta ? `<p class="ps-conecta"><span>Conecta</span>${escH(r.conecta)}</p>` : ''}</div>
+      <div class="ps-sol"><span class="ceja">La solución con IA</span><div class="ps-nums n${(r.solucion || []).length}">${sol}</div>${r.conecta || r.fuente ? `<p class="ps-conecta"><span>${r.fuente ? 'Fuente' : 'Conecta'}</span>${escH(r.conecta || r.fuente)}</p>` : ''}</div>
     </div>`;
   }
   function armar(r) {
