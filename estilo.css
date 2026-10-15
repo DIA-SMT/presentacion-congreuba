@@ -330,7 +330,8 @@ body.negro { background: #000 !important; }
 .ps-sol { background: var(--azul); color: var(--blanco); border-radius: 14px; padding: 44px 44px 34px; display: flex; flex-direction: column; gap: 22px; }
 .ps-sol .ceja { color: var(--arena); }
 .ps-nums { flex: 1; display: grid; gap: 22px 28px; align-content: center; }
-.ps-nums.n4 { grid-template-columns: 1fr 1fr; }
+.ps-nums.n4, .ps-nums.n5 { grid-template-columns: 1fr 1fr; }
+.ps-nums.n5 .ps-n:last-child { grid-column: 1 / -1; }
 .ps-n { display: flex; flex-direction: column; gap: 6px; opacity: 0; transform: translateY(26px) scale(.96); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(2.6s + var(--i) * .4s); }
 .rec.on .ps-n { opacity: 1; transform: none; }
 .ps-n > b { font-size: 78px; line-height: 1; font-weight: 700; letter-spacing: -2px; font-variant-numeric: tabular-nums; }

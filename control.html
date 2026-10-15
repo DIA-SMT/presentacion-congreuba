@@ -92,8 +92,16 @@ h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: u
 .preguntas button.abierta::after, .preguntas button.abierta.lista::after { content: '✕ tocá para cerrar'; position: absolute; right: 10px; bottom: 4px; font-size: 11px; color: #0d2419; font-weight: 800; }
 .preguntas button.lista::after { content: '✓ lista'; position: absolute; right: 10px; bottom: 4px; font-size: 11px; color: var(--verde); font-weight: 800; }
 .libre { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
-.libre input { font: 600 16px Poppins, sans-serif; padding: 14px; border-radius: 16px; border: 2px solid var(--azul3); background: #0b1130; color: #fff; user-select: text; min-width: 0; }
+.libre textarea { font: 600 16px Poppins, sans-serif; line-height: 1.35; resize: none; overflow: hidden; display: block; padding: 14px; border-radius: 16px; border: 2px solid var(--azul3); background: #0b1130; color: #fff; user-select: text; min-width: 0; }
 .libre button { background: #f5f3ee; color: var(--azul); font-size: 15px; padding: 0 16px; }
+.libre textarea.dictando { border-color: var(--rojo); }
+#voz { height: 68px; background: var(--azul2); border: 2px solid var(--verde); font-size: 18px; }
+#voz small { color: #aab3cc; }
+#voz.oye { background: var(--rojo); border-color: var(--rojo); animation: oye 1.2s ease-in-out infinite; }
+#voz.oye small { color: #fff; }
+@keyframes oye { 50% { box-shadow: 0 0 0 8px rgba(229,72,77,.35); } }
+.voz-ayuda { font-size: 13px; font-weight: 600; color: var(--arena); padding: 0 6px; line-height: 1.35; }
+.voz-ayuda:empty { display: none; }
 #cerrarPregunta { height: 46px; background: transparent; border: 2px solid var(--azul3); font-size: 15px; }
 #cerrarPregunta.on { background: var(--rojo); border-color: var(--rojo); }
 .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
@@ -143,8 +151,10 @@ h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: u
 </div>
 
 <h2>Preguntale a Migue, en vivo</h2>
+<button id="voz"><span id="vozTit">🎤 PREGUNTAR CON LA VOZ</span><small id="vozSub">Tocá, hablá, revisá y mandá</small></button>
+<form class="libre" id="libre"><textarea id="pregLibre" rows="1" placeholder="Escribí o dictá otra pregunta…" autocomplete="off" enterkeyhint="send"></textarea><button type="submit" id="enviarLibre">Preguntar</button></form>
+<p class="voz-ayuda" id="vozAyuda"></p>
 <div class="preguntas" id="preguntas"></div>
-<form class="libre" id="libre"><input id="pregLibre" placeholder="Escribí otra pregunta…" autocomplete="off" enterkeyhint="send"><button type="submit" id="enviarLibre">Preguntar</button></form>
 <button id="cerrarPregunta">Cerrar la respuesta</button>
 
 <h2>Extras para preguntas · cajones</h2>
@@ -238,9 +248,68 @@ $('cajones').querySelectorAll('button').forEach(b => b.addEventListener('click',
 $('preguntas').innerHTML = (C.PREGUNTAS || []).map((p, i) => `<button data-k="pr-${i}" data-n="${i}"></button>`).join('');
 $('preguntas').querySelectorAll('button').forEach(b => { b.textContent = C.PREGUNTAS[+b.dataset.n]; b.addEventListener('click', () => enviar(b, { cmd: 'preguntar', n: +b.dataset.n })); });
 $('libre').addEventListener('submit', (e) => {
-  e.preventDefault(); const t = $('pregLibre').value.trim(); if (!t) return;
-  enviar($('enviarLibre'), { cmd: 'preguntar', texto: t }); $('pregLibre').value = ''; $('pregLibre').blur();
+  e.preventDefault(); if (oido) oido.abort();
+  const t = $('pregLibre').value.trim(); if (!t) return;
+  enviar($('enviarLibre'), { cmd: 'preguntar', texto: t }); campo(''); $('pregLibre').blur();
+  $('enviarLibre').classList.remove('toca'); ayudaVoz('');
 });
+
+// El campo crece con la pregunta (para leerla entera antes de mandarla) y "Enter" la manda.
+function campo(t) { const c = $('pregLibre'); if (t !== undefined) c.value = t; c.style.height = 'auto'; c.style.height = (c.scrollHeight + 4) + 'px'; }
+$('pregLibre').addEventListener('input', () => {
+  const c = $('pregLibre');
+  if (/[\r\n]/.test(c.value)) { c.value = c.value.replace(/[\r\n]+/g, ' ').trim(); campo(); $('libre').requestSubmit(); return; }
+  campo();
+});
+
+// Pregunta con la voz: el celular la pasa a texto (dictado del navegador, en
+// castellano), la deja en el campo para revisarla y "Preguntar" la manda.
+// Si el navegador no dicta, el botón abre el teclado: su micrófono también sirve.
+const Dictado = window.SpeechRecognition || window.webkitSpeechRecognition;
+let oido = null;
+function ayudaVoz(t) { $('vozAyuda').textContent = t || ''; }
+function modoVoz(on) {
+  $('voz').classList.toggle('oye', on); $('pregLibre').classList.toggle('dictando', on);
+  $('vozTit').textContent = on ? '● ESCUCHANDO…' : '🎤 PREGUNTAR CON LA VOZ';
+  $('vozSub').textContent = on ? 'Hablá cerca del celular · tocá para terminar' : 'Tocá, hablá, revisá y mandá';
+}
+// Mayúscula inicial y, si arranca como pregunta, sus signos: así se lee bien en pantalla.
+function prolija(t) {
+  t = String(t || '').replace(/\s+/g, ' ').trim(); if (!t) return t;
+  t = t[0].toUpperCase() + t.slice(1);
+  const esPregunta = /^(qu[eé]|c[oó]mo|d[oó]nde|cu[aá]ndo|cu[aá]l(es)?|qui[eé]n(es)?|cu[aá]nt[oa]s?|por qu[eé]|hay|puedo|se puede|tengo|tienen|existe|sab[eé]s|me pod[eé]s|pod[eé]s)(?=[\s,]|$)/i.test(t);
+  if (esPregunta && !/[¿?]/.test(t)) t = '¿' + t + '?';
+  return t;
+}
+const ERRORES_VOZ = {
+  'not-allowed': 'El celular no dejó usar el micrófono: permitilo para esta página, o usá el micrófono del teclado.',
+  'service-not-allowed': 'El dictado está apagado en este celular: usá el micrófono del teclado.',
+  'no-speech': 'No te escuché. Tocá y hablá de nuevo.',
+  'audio-capture': 'No encuentro el micrófono del celular.',
+  'network': 'Sin internet para dictar: usá el micrófono del teclado.',
+};
+$('voz').addEventListener('click', () => {
+  if (oido) { oido.stop(); return; } // segundo toque: termina y deja el texto
+  if (navigator.vibrate) navigator.vibrate(18);
+  if (!Dictado) { ayudaVoz('Este navegador no dicta: tocá el micrófono del teclado y hablá.'); $('pregLibre').focus(); return; }
+  const r = new Dictado(); oido = r;
+  r.lang = 'es-AR'; r.interimResults = true; r.continuous = false; r.maxAlternatives = 1;
+  r.onresult = (ev) => {
+    let t = ''; for (const x of ev.results) t += x[0].transcript;
+    campo(t.trim());
+  };
+  r.onerror = (ev) => { if (ERRORES_VOZ[ev.error]) ayudaVoz(ERRORES_VOZ[ev.error]); };
+  r.onend = () => {
+    if (oido !== r) return;
+    oido = null; modoVoz(false);
+    const t = prolija($('pregLibre').value); campo(t);
+    if (t) { ayudaVoz('Revisala (podés corregirla) y tocá Preguntar.'); $('enviarLibre').classList.add('toca'); }
+  };
+  campo(''); $('enviarLibre').classList.remove('toca'); ayudaVoz('');
+  try { r.start(); modoVoz(true); }
+  catch (e) { oido = null; modoVoz(false); ayudaVoz('No pude abrir el micrófono: usá el del teclado.'); }
+});
+document.addEventListener('visibilitychange', () => { if (document.hidden && oido) oido.abort(); });
 
 function marca(id, estado, texto) { const li = $(id); li.className = estado; li.querySelector('span').textContent = texto; }
 function pintarChequeo() {

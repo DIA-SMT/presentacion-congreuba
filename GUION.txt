@@ -48,8 +48,8 @@ ANTES DE EMPEZAR
 
  4 · VITRINA PUERTAS ADENTRO
    Generador de Notas: había mucho miedo a la IA; fue la herramienta transversal que
-   abrió puertas (la IA redacta, la persona firma). Después Capital Humano: de 107 a
-   65 pasos, sin papel.
+   abrió puertas (la IA redacta, la persona firma). Después, los tableros de trabajo
+   inteligente: carga de trabajo, efectividad, juego, alertas a tiempo y trazabilidad.
 
  5 · EL CAMINO: PRIMERO ADENTRO
    "Primero la usamos nosotros. Cuando funcionó adentro, la llevamos al vecino, con
@@ -87,6 +87,10 @@ ANTES DE EMPEZAR
 PARA LAS PREGUNTAS DEL PANEL
   "Extras para preguntas · cajones": abrí el proyecto que te pregunten (sobre cualquier
   placa), ◀ ▶ para moverte, "Cerrar cajón" para volver.
+  Pregunta del público a Migue: 🎤 PREGUNTAR CON LA VOZ, que la diga cerca del celular,
+  revisá el texto (se puede corregir) y tocá Preguntar. La primera vez el celular pide
+  permiso para el micrófono: dalo antes de la charla. Si no dicta, el micrófono del
+  teclado también sirve.
 
 SI ALGO FALLA
   - Una frase de Migue de más: ↶ deshacer.

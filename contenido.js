@@ -70,15 +70,14 @@ window.CONTENIDO = {
       ],
     },
     {
-      id: 'capital', num: '02', eje: 'Puertas adentro', nombre: 'Capital Humano',
-      idea: 'El expediente, digital', corta: 'Licencias y bonificaciones sin papel.',
-      estado: 'En desarrollo',
-      cifras: [['−39%', 'pasos en 13 trámites'], ['8.000', 'hojas por año']],
+      id: 'tableros', num: '02', eje: 'Puertas adentro', nombre: 'Tableros de trabajo',
+      idea: 'El trabajo, a la vista', corta: 'Carga, efectividad, alertas y trazabilidad.',
+      estado: 'Puertas adentro',
+      cifras: [['5', 'claves en un tablero']],
       recursos: [
-        { tipo: 'ps', titulo: 'Menos papel, menos pasos',
-          problema: [['⏳', '35 días por licencia por examen'], ['📑', '8.000 hojas por año en papel'], ['🔁', '107 pasos en 13 trámites']],
-          solucion: [{ n: '−39%', t: 'pasos en 13 trámites', g: 'barras', de: 107, a: 65 }, { n: '0', t: 'hojas: expediente digital con firma' }, { n: 'IA', t: 'sugiere prioridad y borrador; una persona decide' }],
-          fuente: 'Relevamiento de la Dirección de IA con Capital Humano · 07/10/2026' },
+        { tipo: 'ps', titulo: 'Tableros de trabajo inteligente',
+          problema: [['⚖️', 'Carga de trabajo despareja'], ['⏰', 'Proyectos que vencen sin aviso'], ['🧩', 'Procesos sin trazabilidad']],
+          solucion: [{ n: 'Carga', t: 'de trabajo a la vista, para sopesarla y repartirla' }, { n: 'Efectividad', t: 'medida en cada tarea' }, { n: 'Juego', t: 'la experiencia del equipo, gamificada' }, { n: 'Alertas', t: 'con tiempo sobre cada proyecto' }, { n: 'Trazabilidad', t: 'de cada proceso de trabajo, de punta a punta' }] },
       ],
     },
     // ---------------------------------------------------------------- PARA EL VECINO

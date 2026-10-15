@@ -20,7 +20,7 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 - **Vitrinas** (`data-vitrina` en la placa): entran solas con la placa y sus recursos pasan solos (duraciones en `cajones.js` → `DURA`); el avance de CIMBA arranca solo. ◀ ▶ en la botonera las pausa; "Que siga sola" las retoma.
 - **Cajones** (extras para preguntas): el mismo contenido de `contenido.js` → `PROYECTOS`, abierto a mano sobre cualquier placa.
 - Migue de cuerpo entero con el verde recortado en vivo (`media/`), frases en `contenido.js` → `VIDEOS`.
-- Botonera (`control.html`): cronómetro, guion, siguiente/anterior, Migue, cajones con sus recursos, Reproducir avance, preguntas a Migue (preparadas o escritas), QR, negro, foco y salto a cualquier placa.
+- Botonera (`control.html`): cronómetro, guion, siguiente/anterior, Migue, cajones con sus recursos, Reproducir avance, preguntas a Migue (preparadas, escritas o dictadas con la voz: el celular la pasa a texto, se revisa y se manda), QR, negro, foco y salto a cualquier placa.
 
 ## Teclado (en la compu de la pantalla)
 
