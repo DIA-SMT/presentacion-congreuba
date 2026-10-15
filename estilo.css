@@ -397,3 +397,4 @@ body.negro { background: #000 !important; }
 .columnas.ideas .col-card > div { justify-content: center; gap: 16px; }
 .columnas.ideas .emoji { font-size: 60px; line-height: 1; }
 .columnas.ideas .col-card > div > b { font-size: 32px; }
+.ps-nums .ps-n > b.txt, .ps-nums.n4 .ps-n > b.txt { font-size: 44px; letter-spacing: -.5px; line-height: 1.08; }

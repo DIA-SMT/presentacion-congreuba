@@ -91,7 +91,7 @@ function irA(n) {
   // Vitrinas: el cajón de la placa anterior se cierra y el de esta entra sin animación (lo tapa la cortina).
   try {
     if (window.cajones && window.cajones.modo()) window.cajones.cerrar({ directo: true });
-    if (p.dataset.vitrina && window.cajones) window.cajones.vitrina(p.dataset.vitrina);
+    if (p.dataset.vitrina && window.cajones) window.cajones.vitrina(p.dataset.vitrina, p.dataset.solo);
   } catch (e) { console.warn('vitrina', e); }
   p.classList.remove('on'); void p.offsetWidth; p.classList.add('on');
   window.efectos.contar(p);

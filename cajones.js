@@ -53,7 +53,7 @@
       const max = Math.max(s.de, s.a) || 1;
       return `<div class="ps-barras"><div><span>${escH((s.eti || [])[0] || 'Antes')}</span><i style="--w:${(s.de / max * 100).toFixed(0)}%"></i><em>${escH(String(s.de))}</em></div><div><span>${escH((s.eti || [])[1] || 'Ahora')}</span><i class="ahora" style="--w:${(s.a / max * 100).toFixed(0)}%"></i><em>${escH(String(s.a))}</em></div></div><b${numAttr(s.n)}>${escH(s.n)}</b>`;
     }
-    const na = numAttr(s.n), palabras = !na && String(s.n).length > 6; // "Lenguaje claro": más chico que un número
+    const na = numAttr(s.n), palabras = !na && String(s.n).length > 3; // "Costos", "Lenguaje claro": más chico que un número
     return `<b class="${palabras ? 'txt' : ''}"${na}>${escH(s.n)}</b>`;
   }
   function problemaSolucion(r) {
@@ -207,10 +207,12 @@
     return true;
   }
   // Vitrina (placa del recorrido): uno o varios proyectos seguidos.
-  function vitrina(ids) {
+  function vitrina(ids, solo) {
     const ps = String(ids).split(',').map(s => buscar(s.trim())).filter(Boolean);
     if (!ps.length) return false;
-    entrar('vitrina', ids, ps.flatMap(p => (p.recursos || []).map(r => ({ p, r }))), true);
+    // solo: 'ps' deja sólo los problema → solución (las capturas quedan para los cajones).
+    const filtro = solo ? (r) => String(solo).split(',').includes(r.tipo) : () => true;
+    entrar('vitrina', ids, ps.flatMap(p => (p.recursos || []).filter(filtro).map(r => ({ p, r }))), true);
     return true;
   }
   function cerrar(opc) {
