@@ -44,6 +44,8 @@ button.toca { animation: late 1.1s ease-in-out infinite; }
 .guion { background: var(--azul2); border-left: 4px solid var(--arena); border-radius: 12px; padding: 8px 12px; font-size: 14px; line-height: 1.35; color: #e8ecf6; }
 .guion b { color: var(--arena); font-size: 11px; letter-spacing: 1.5px; margin-right: 6px; }
 .guion:empty { display: none; }
+.guion.dialogo { background: #f5f3ee; color: var(--azul); border-left-color: var(--amarillo); font-size: 18px; font-weight: 600; }
+.guion.dialogo b { color: #8a6d00; }
 .nav { display: grid; grid-template-columns: 1fr 2.6fr; gap: 8px; height: 84px; }
 .nav button { height: 100%; }
 #anterior { background: var(--azul3); font-size: 20px; }
@@ -275,7 +277,10 @@ function pintar() {
   $('migue').firstChild.textContent = e.hablando ? 'MIGUE HABLANDO' : 'MIGUE HABLA';
   $('migueSub').textContent = e.hablando ? (v[e.actual] || '') : (v[e.proximo] ? (e.proximo + 1) + '. “' + corta(e.fraseProxima, 70) + '”' : 'No quedan frases');
   // Guion
-  const gu = $('guion'); gu.innerHTML = ''; if (e.guion) { const b = document.createElement('b'); b.textContent = 'VOS'; gu.append(b, document.createTextNode(e.guion)); }
+  // En el diálogo de apertura: tu próxima línea, después de la frase de Migue.
+  const gu = $('guion'); gu.innerHTML = ''; gu.classList.toggle('dialogo', !!e.marco);
+  if (e.marco) { const b = document.createElement('b'); b.textContent = e.hablando ? 'DESPUÉS DECÍS' : 'DECÍS'; gu.append(b, document.createTextNode('«' + e.marco + '»')); }
+  else if (e.guion) { const b = document.createElement('b'); b.textContent = 'VOS'; gu.append(b, document.createTextNode(e.guion)); }
   // Lo que viene y la vitrina en pantalla.
   $('sigue').textContent = e.siguiente ? 'Sigue: ' + corta(e.siguiente, 38) : '';
   const cj = e.cajon || {};

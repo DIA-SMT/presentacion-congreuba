@@ -1,7 +1,10 @@
 GUION DE PRÁCTICA · LA IA COMO SERVICIO PÚBLICO (UBA, 16/10/2026, 11:45)
 =========================================================================
-Tiempo: 8 a 10 minutos. El cronómetro de la botonera se pone ámbar a los 8 y rojo a los 10.
-Vos sólo tocás SIGUIENTE. Las vitrinas de los proyectos pasan solas: vos contás.
+Tiempo: 10 minutos. Apertura con Migue ~1:20 · cómo empezó y reglas ~1:40 · seis vitrinas
+~45 s cada una (Ciudad abierta se puede acortar con SIGUIENTE) · cierre ~0:40.
+El cronómetro de la botonera se pone ámbar a los 8 y rojo a los 10.
+Vos sólo tocás SIGUIENTE (y MIGUE HABLA en la apertura). Las vitrinas pasan solas, en crescendo:
+puertas adentro → el camino → Ciudad abierta → UrbanIA → Migue → CIMBA → EstudIA.
 
 LINKS (sin código: canal fijo en config.js)
   Pantalla (técnica): https://uba-ia-servicio-publico.vercel.app
@@ -15,52 +18,71 @@ ANTES DE EMPEZAR
   - Debajo de SIGUIENTE dice qué viene. En las vitrinas, una franja dice qué se ve y
     en cuántos segundos pasa solo. ◀ ▶ lo frena para explicar; "Que siga sola" lo retoma.
 
- 1 · PORTADA · La IA como servicio público                               (0:00–0:40)
-   MIGUE 1 (globo): "¡Buenas! Vengo desde Tucumán. Atiendo las 24 horas… y sin turno."
-   Saludo de la Intendenta Rossana Chahla. Único municipio de la mesa.
+ 1 · PORTADA + DIÁLOGO CON MIGUE
+   Tocá MIGUE HABLA: la portada queda en penumbra y Migue aparece grande. Cuando
+   termina cada frase, la botonera te muestra tu línea («DECÍS …»). Decila y tocá
+   MIGUE HABLA otra vez. Son 7 frases de Migue:
+     1 ¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?
+       VOS: Migue, pará un segundo. Date vuelta, estás mirando al revés.
+     2 ¡Ahí tá! ¡Ahora sí! ¡Epa! ¿Y toda esta gente?
+       VOS: Estamos en la Facultad de Derecho de la UBA, Migue. ¿No te acordás…?
+     3 ¡Ah, cierto! … ¡No has parado un segundo, chango!
+       VOS: Bueno, entonces ya sabés de qué vamos a hablar.
+     4 ¡Claro! De cómo estamos usando IA para ayudar a los vecinos…
+       VOS: Exactamente.
+     5 Pero esperá… ¿el que va a hablar sos vos?
+       VOS: Bueno, presentate vos entonces.
+     6 ¡Mucho gusto, gente! Soy Migue… ¡Y ahora también me hacen viajar por trabajo!
+       VOS: Bueno, Migue, dejame contarles cómo empezó todo.
+     7 ¡Dale, Marco! Pero acordate que tenemos diez minutos. ¡No te me embalés!
+       → SIGUIENTE.
 
- 2 · PRIMERO, LAS REGLAS                                                  (0:40–1:40)
+ 2 · CÓMO EMPEZÓ (línea de tiempo)
+   Junio 2025 nace la Dirección de IA → capacitación → diciembre, las reglas →
+   puertas adentro → para el vecino → hoy: Migue, CIMBA, EstudIA.
+
+ 3 · PRIMERO, LAS REGLAS
    Decreto 0596/INT/2025: cinco principios, cero datos personales en herramientas
    públicas, capacitación constante (34 gerentes de datos, 71 egresados).
    "La decisión final, la firma, la responsabilidad, es y será siempre humana."
 
- 3 · EL CAMINO: PRIMERO ADENTRO                                           (1:40–2:10)
-   "Primero la usamos nosotros. Cuando funcionó adentro, la llevamos al vecino, con
-   Ciudad Digital como puerta: 160.000 vecinos."
-
- 4 · VITRINA PUERTAS ADENTRO                                              (2:10–3:00)
+ 4 · VITRINA PUERTAS ADENTRO
    Generador de Notas: había mucho miedo a la IA; fue la herramienta transversal que
    abrió puertas (la IA redacta, la persona firma). Después Capital Humano: de 107 a
    65 pasos, sin papel.
 
- 5 · VITRINA MIGUE + CIUDAD DIGITAL                                       (3:00–4:10)
-   MIGUE 2 y MIGUE 3 cuando quieras. Problema → solución: 24 h, 17.848 consultas, 91%.
-   Después: Ciudad Digital, el cerebro, el termómetro y la tarjeta para preguntar en
-   vivo (tocá la pregunta; otro toque la cierra).
+ 5 · EL CAMINO: PRIMERO ADENTRO
+   "Primero la usamos nosotros. Cuando funcionó adentro, la llevamos al vecino, con
+   Ciudad Digital como puerta: 160.000 vecinos."
 
- 6 · VITRINA CIMBA                                                        (4:10–5:10)
-   Reclamos dispersos, duplicados, mal clasificados → cierre en un clic, 4.316 baches,
-   880 t de mezcla trazada. Después el avance arranca solo (18 segundos).
-
- 7 · VITRINA ESTUDIA                                                      (5:10–5:55)
-   ¿Celulares sí o no?, docentes sobrecargados, datos dispersos, mal uso de la IA →
-   1 minuto por actividad, una plataforma, IA con tope y costo a la vista.
-
- 8 · VITRINA URBANIA                                                      (5:55–6:40)
-   Código de 1998 y audiencias sin sistematizar → cada idea del vecino cruzada con su
-   norma, minuto a minuto; los técnicos cerca de la redacción.
-
- 9 · VITRINA CIUDAD ABIERTA (sólo problema → solución, pasan solas)        (6:40–7:50)
+ 6 · VITRINA CIUDAD ABIERTA (sólo problema → solución, pasan solas)
    Applaza (del Excel a certificar con un clic) → Bus Turístico (del Google Form a
    reservas inteligentes) → Presupuesto Participativo (la IA te ayuda a armar el
    proyecto) → FerIA (foto, costos y marketplace).
 
-10 · CONCLUSIÓN                                                           (7:50–8:30)
+ 7 · VITRINA URBANIA
+   Código de 1998 y audiencias sin sistematizar → cada idea del vecino cruzada con su
+   norma, minuto a minuto; los técnicos cerca de la redacción.
+
+ 8 · VITRINA MIGUE + CIUDAD DIGITAL
+   MIGUE 8 y MIGUE 9 cuando quieras. Problema → solución: 24 h, 17.848 consultas, 91%.
+   Después: Ciudad Digital, el cerebro, el termómetro y la tarjeta para preguntar en
+   vivo (tocá la pregunta; otro toque la cierra).
+
+ 9 · VITRINA CIMBA
+   Reclamos dispersos, duplicados, mal clasificados → cierre en un clic, 4.316 baches,
+   880 t de mezcla trazada. Después el avance arranca solo (18 segundos).
+
+10 · VITRINA ESTUDIA
+   ¿Celulares sí o no?, docentes sobrecargados, datos dispersos, mal uso de la IA →
+   1 minuto por actividad, una plataforma, IA con tope y costo a la vista.
+
+11 · CONCLUSIÓN
    Reglas primero, adentro primero, el vecino en el centro. La IA interpreta; las
    personas deciden.
 
-11 · GRACIAS (queda proyectada)
-   MIGUE 4: "¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad."
+12 · GRACIAS (queda proyectada)
+   MIGUE 10: "¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad."
 
 PARA LAS PREGUNTAS DEL PANEL
   "Extras para preguntas · cajones": abrí el proyecto que te pregunten (sobre cualquier

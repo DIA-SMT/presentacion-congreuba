@@ -91,6 +91,7 @@ function irA(n) {
   // Vitrinas: el cajón de la placa anterior se cierra y el de esta entra sin animación (lo tapa la cortina).
   try {
     if (window.cajones && window.cajones.modo()) window.cajones.cerrar({ directo: true });
+    if (enDialogo) terminarDialogo();
     if (p.dataset.vitrina && window.cajones) window.cajones.vitrina(p.dataset.vitrina, p.dataset.solo);
   } catch (e) { console.warn('vitrina', e); }
   p.classList.remove('on'); void p.offsetWidth; p.classList.add('on');
@@ -99,12 +100,26 @@ function irA(n) {
   mostrarGlobo(p);
   informar();
 }
+// DIÁLOGO DE APERTURA (placa con data-dialogo): desde la primera frase de Migue la
+// placa queda en penumbra, Migue más grande e iluminado, y no se va entre frase y
+// frase. Al pasar de placa vuelve todo a la normalidad.
+let enDialogo = false;
+function empezarDialogo() {
+  enDialogo = true;
+  document.getElementById('migue').classList.add('dialogo'); stage.classList.add('dialogo');
+  window.efectos && window.efectos.foco(true);
+}
+function terminarDialogo() {
+  enDialogo = false;
+  document.getElementById('migue').classList.remove('dialogo'); stage.classList.remove('dialogo');
+  window.efectos && window.efectos.foco(false);
+}
 // Dónde está Migue: el lado de la placa, o a la derecha si habla en una placa sin él.
 let ladoMigue = 'der', cambioLado = null, salidaMigue = null;
 function lugarMigue() {
   const cont = document.getElementById('migue'), p = placas[actual];
   const tapado = document.getElementById('cajon').classList.contains('ver');
-  const quiere = tapado && !migue.hablando ? 'no' : (p.dataset.migue && p.dataset.migue !== 'no' ? p.dataset.migue : (migue.hablando || window.vivoAbierto && window.vivoAbierto() ? 'der' : 'no'));
+  const quiere = enDialogo ? 'der' : tapado && !migue.hablando ? 'no' : (p.dataset.migue && p.dataset.migue !== 'no' ? p.dataset.migue : (migue.hablando || window.vivoAbierto && window.vivoAbierto() ? 'der' : 'no'));
   clearTimeout(cambioLado);
   const fuera = cont.classList.contains('fuera');
   if (migue.hablando && !fuera) return;
@@ -175,7 +190,15 @@ const migue = (() => {
     loopActual = sig; loops[sig].v.currentTime = 0; loops[sig].v.play().catch(() => { });
   }));
 
-  const clips = VIDEOS.map(c => c.archivo ? { v: crearVideo(c.archivo, true), t: textura(), geo: BUSTO ? GEO.busto : GEO.habla, op: 0 } : { v: null, op: 0 });
+  // "archivo": video seguro. "video": el que todavía se está grabando; si el archivo
+  // existe se usa solo, y si no carga, la frase sale con el globo.
+  const clips = VIDEOS.map(c => {
+    const src = c.archivo || c.video;
+    if (!src) return { v: null, op: 0 };
+    const clip = { v: crearVideo(src, true), t: textura(), geo: BUSTO ? GEO.busto : GEO.habla, op: 0 };
+    if (!c.archivo) clip.v.addEventListener('error', () => { clip.v = null; }, { once: true });
+    return clip;
+  });
   let clipActual = -1, proximo = 0, idleOp = 1, finGlobo = null, sinVideo = false;
   const api = { hablando: false, proximo: () => proximo, actual: () => clipActual };
 
@@ -209,6 +232,7 @@ const migue = (() => {
   };
 
   api.decir = async (i) => {
+    if (placas[actual] && placas[actual].dataset.dialogo !== undefined && !enDialogo) empezarDialogo();
     await desbloqueo;
     if (i == null) i = proximo;
     if (i < 0 || i >= clips.length) return;
@@ -278,7 +302,7 @@ const migue = (() => {
     const v = item.v; if (!v || v.readyState < 2 || item.op <= 0.001) return;
     const g = item.geo, X = x => x / LW * 2 - 1, Y = y => 1 - y / LH * 2;
     let x0, x1, y0, y1, u0, u1, v0, v1;
-    if (g.busto) {
+    if (g.busto || (v.videoWidth && Math.abs(v.videoWidth - v.videoHeight) < 8)) {
       x0 = (LW - LADO_BUSTO) / 2; x1 = x0 + LADO_BUSTO; y1 = LH; y0 = LH - LADO_BUSTO;
       u0 = 0; u1 = 1; v0 = 0; v1 = 1;
     } else {
@@ -316,6 +340,7 @@ const migue = (() => {
     requestAnimationFrame(cuadro);
   }
   requestAnimationFrame(cuadro);
+  api.marco = () => (clipActual >= 0 && VIDEOS[clipActual] && VIDEOS[clipActual].marco) || '';
   api.debug = () => ({ ctx: ctx && ctx.state, loops: loops.map(l => l.v.readyState), clips: clips.map(c => c.v ? [c.v.paused, c.v.readyState] : 'globo') });
   api.listos = () => ({ listos: loops.filter(l => l.v.readyState >= 3).length + clips.filter(c => !c.v || c.v.readyState >= 3).length, total: loops.length + clips.length });
   return api;

@@ -7,11 +7,28 @@
 window.CONTENIDO = {
 
   // Lo que dice Migue, en orden: cada toque de "MIGUE HABLA" dice el próximo.
-  // Con archivo: null lo dice con un globo de texto (hasta que haya video).
-  // Videos de cuerpo entero sobre verde, 896×1024 (los del lanzamiento de Migue).
+  // Con archivo: null lo dice con un globo de texto (hasta que esté el video).
+  // Videos sobre verde: de cuerpo entero (896×1024, los del lanzamiento) o de medio
+  // cuerpo (cuadrados, 960×960, como los de EstudIA): el formato se detecta solo.
+  // "marco": lo que decís vos después de esa frase; sale en el celular.
   FORMATO_MIGUE: 'cuerpo',
   VIDEOS: [
-    { archivo: null, texto: 'Saludo al panel', sub: '¡Buenas! Vengo desde Tucumán. Atiendo las 24 horas… y sin turno.' },
+    // ---- Apertura, sobre la portada (MIGUE 1 a 7). Videos: media/apertura1.mp4 … apertura7.mp4
+    { archivo: null, video: 'media/apertura1.mp4', texto: 'No te veo', sub: '¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?',
+      marco: 'Migue, pará un segundo. Date vuelta, estás mirando al revés.' },
+    { archivo: null, video: 'media/apertura2.mp4', texto: '¿Y toda esta gente?', sub: '¡Ahí tá! ¡Ahora sí! ¡Epa! ¿Y toda esta gente?',
+      marco: 'Estamos en la Facultad de Derecho de la UBA, Migue. ¿No te acordás que veníamos a dar una conferencia?' },
+    { archivo: null, video: 'media/apertura3.mp4', texto: 'No has parado, chango', sub: '¡Ah, cierto! ¡Si me venís hablando de eso desde Tucumán! En el avión, en el aeropuerto… ¡No has parado un segundo, chango!',
+      marco: 'Bueno, entonces ya sabés de qué vamos a hablar.' },
+    { archivo: null, video: 'media/apertura4.mp4', texto: 'IA para los vecinos', sub: '¡Claro! De cómo estamos usando inteligencia artificial para ayudar a los vecinos de San Miguel de Tucumán.',
+      marco: 'Exactamente.' },
+    { archivo: null, video: 'media/apertura5.mp4', texto: '¿Y el que habla sos vos?', sub: 'Pero esperá… ¿Me trajiste hasta Buenos Aires para hablar de inteligencia artificial y el que va a hablar sos vos?',
+      marco: 'Bueno, presentate vos entonces.' },
+    { archivo: null, video: 'media/apertura6.mp4', texto: 'Mucho gusto, gente', sub: '¡Mucho gusto, gente! Soy Migue, el asistente de inteligencia artificial de San Miguel de Tucumán. Atiendo a los vecinos las 24 horas, respondo consultas, ayudo con los trámites… ¡Y ahora también me hacen viajar por trabajo!',
+      marco: 'Bueno, Migue, dejame contarles cómo empezó todo.' },
+    { archivo: null, video: 'media/apertura7.mp4', texto: 'No te me embalés', sub: '¡Dale, Marco! Pero acordate que tenemos diez minutos. ¡No te me embalés!',
+      marco: '(SIGUIENTE) Cómo empezó todo…' },
+    // ---- Vitrina Migue (MIGUE 8 y 9) y cierre (MIGUE 10)
     { archivo: 'media/migue2.mp4', texto: 'Vos me contás qué te pasa', sub: 'Vos me contás qué te pasa. Yo intento entender qué necesitás.' },
     { archivo: 'media/migue4.mp4', texto: 'Entiendo, organizo, busco y ayudo', sub: 'Yo entiendo, organizo, busco… y ayudo.' },
     { archivo: 'media/migue14.mp4', texto: '¡Gracias! Nos vemos en la ciudad', sub: '¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad.' },

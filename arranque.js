@@ -179,6 +179,8 @@ function informar() {
     hablando: migue.hablando, proximo: migue.proximo(), actual: migue.actual(),
     oculto: document.getElementById('migue').classList.contains('oculto'),
     videos: VIDEOS.map(x => x.texto),
+    // En el diálogo: lo que te toca decir a vos después de la última frase de Migue.
+    marco: enDialogo ? migue.marco() : '',
     fraseProxima: (() => { const x = VIDEOS[migue.proximo()]; return x ? (x.sub || x.texto) : ''; })(),
     tocaMigue: tocaMigue(),
     proyectos: window.cajones.lista(),

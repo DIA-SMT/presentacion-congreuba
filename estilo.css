@@ -398,3 +398,25 @@ body.negro { background: #000 !important; }
 .columnas.ideas .emoji { font-size: 60px; line-height: 1; }
 .columnas.ideas .col-card > div > b { font-size: 32px; }
 .ps-nums .ps-n > b.txt, .ps-nums.n4 .ps-n > b.txt { font-size: 44px; letter-spacing: -.5px; line-height: 1.08; }
+
+/* ---------- Cómo empezó: línea de tiempo con hitos que aparecen de a uno ---------- */
+.linea-tiempo { position: absolute; left: 86px; top: 250px; width: 1748px; height: 700px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+.lt-eje { position: absolute; left: 6%; top: 74px; height: 6px; width: 0; border-radius: 3px; background: var(--azul); transition: width 2.6s cubic-bezier(.4,0,.2,1) .25s; }
+.slide.on .lt-eje { width: 88%; }
+.hito { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d); }
+.slide.on .hito { opacity: 1; transform: none; }
+.h-ic { width: 150px; height: 150px; border-radius: 50%; background: var(--blanco); box-shadow: 0 0 0 8px var(--hueso), 0 18px 40px rgba(17,26,59,.15); display: flex; align-items: center; justify-content: center; font-size: 70px; line-height: 1; }
+.hito.fuerte .h-ic { background: var(--azul); box-shadow: 0 0 0 8px var(--arena), 0 18px 40px rgba(17,26,59,.3); }
+.h-fecha { margin-top: 18px; font-size: 32px; line-height: 1.1; font-weight: 700; color: var(--azul); }
+.h-tit { font-size: 27px; line-height: 1.2; font-weight: 600; color: var(--azul2); }
+.hito small { font-size: 19px; line-height: 1.35; color: var(--gris); font-weight: 600; }
+.hito.fuerte .h-fecha { font-size: 40px; }
+.hito.fuerte .h-tit { color: var(--azul); font-weight: 700; }
+/* Línea de tiempo centrada en la placa, más grande. */
+.linea-tiempo { top: 300px; height: 640px; }
+.lt-eje { top: 92px; }
+.h-ic { width: 184px; height: 184px; font-size: 86px; }
+.h-fecha { font-size: 36px; }
+.h-tit { font-size: 30px; }
+.hito small { font-size: 21px; }
+.hito.fuerte .h-fecha { font-size: 46px; }
