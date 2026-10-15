@@ -28,11 +28,15 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 
 ## Publicar cambios
 
+El proyecto de Vercel está conectado a este repositorio: **cada push a `main` se publica solo** en https://uba-ia-servicio-publico.vercel.app (tarda menos de un minuto). Otras ramas generan una vista previa aparte, sin tocar la publicada.
+
 ```bash
-npx vercel deploy --prod --scope direccionia-5744s-projects
+git add -A
+git commit -m "Qué cambió"
+git push
 ```
 
-Cambiar `version.js` en cada publicación: la botonera avisa si la pantalla quedó abierta con una versión vieja. La variable `SALA_CODE` de Vercel tiene que coincidir con el código de sala (la usa el puente de Migue).
+Cambiar `version.js` en cada publicación: la botonera avisa si la pantalla quedó abierta con una versión vieja. La variable `SALA_CODE` de Vercel tiene que coincidir con el código de sala (la usa el puente de Migue). Publicar a mano, sin pasar por GitHub, también funciona: `npx vercel deploy --prod --scope direccionia-5744s-projects`.
 
 ## Blindaje
 
