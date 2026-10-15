@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La IA como servicio público · San Miguel de Tucumán</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="config.js"></script>
+<script src="version.js"></script>
+<script src="contenido.js"></script>
+<script src="franja.js"></script>
+<script src="remoto.js"></script>
+<link rel="stylesheet" href="estilo.css">
+<link rel="stylesheet" href="efectos.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- =====================================================================
+     LAS PLACAS, con la grilla del template del congreso.
+       data-guion  → ayuda memoria en el celular (una línea).
+       data-notas  → el texto completo; "MIGUE n" marca dónde va la frase n.
+       data-migue  → dónde está Migue: der o no (si habla en una placa sin
+                     él, aparece a la derecha y después se va).
+     ===================================================================== -->
+
+<!-- ===================== 1. PORTADA ===================== -->
+<section class="slide portada" data-migue="no"
+  data-guion="Saludo de la Intendenta Rossana Chahla. Único municipio de la mesa: el Estado más cercano al vecino, desde el NOA. (MIGUE 1 saluda)"
+  data-notas="MIGUE 1 · Buenos días. Traigo el saludo de la Intendenta de San Miguel de Tucumán, la Dra. Rossana Chahla. En esta mesa somos el único gobierno municipal: el Estado que el vecino tiene a la vuelta de la esquina. Y venimos del Norte Grande.">
+  <div class="capa-logos a fade" data-logos></div>
+  <div class="portada-centro">
+    <p class="p-evento a" style="--d:.2s">Celebrando Magnífica Humanitas · Panel: IA Federal, innovación desde los territorios</p>
+    <h1 class="p-titulo a" style="--d:.35s">La IA como servicio público</h1>
+    <p class="p-sub a" style="--d:.45s">Desde el Estado más cercano al vecino: la experiencia de San Miguel de Tucumán</p>
+    <p class="p-orador a" style="--d:.55s">Dr. Marco Rossi · <em>Director de Inteligencia Artificial</em></p>
+    <p class="p-inst a" style="--d:.65s">Municipalidad de San Miguel de Tucumán · en representación de la Intendenta, Dra. Rossana Chahla</p>
+    <p class="p-fecha a" style="--d:.8s">Viernes 16 de octubre · Facultad de Derecho, UBA</p>
+    <img class="p-logo a" style="--d:.95s" src="img/logos/logo-horizontal-color.png" alt="Ciudad de San Miguel de Tucumán">
+  </div>
+</section>
+
+<!-- ===================== 2. CONTEXTO ===================== -->
+<section class="slide" data-migue="no"
+  data-guion="Lo primero fue regular su uso: Decreto 0596/INT/2025, Guía Práctica y Ética. Principios, normas y capacitación constante. Y una Dirección de IA propia."
+  data-notas="Antes de usar la IA, la regulamos. La Intendenta firmó en diciembre de 2025 el Decreto 0596, con una Guía Práctica y Ética de Uso de IA para toda la gestión: supervisión humana, equidad, privacidad, transparencia y rendición de cuentas. Prohíbe cargar datos personales en herramientas públicas y pone como base la capacitación constante. La frase que lo resume: la decisión final, la firma y la responsabilidad son siempre humanas. Para sostenerlo, creamos una Dirección de Inteligencia Artificial bajo la órbita directa de la Intendencia.">
+  <div class="titular a fade"><h1>Sección 1</h1><span class="pill">Contexto</span><span class="subt">Primero, las reglas</span></div>
+  <aside class="panel a izq" style="--d:.1s">
+    <p class="pn-tit">Sección</p>
+    <p class="pn-gigante">01</p>
+    <p class="pn-sub">Contexto</p>
+    <hr>
+    <dl>
+      <dt>Palabra clave</dt><dd>Reglas claras</dd>
+      <dt>Enfoque</dt><dd class="chico">Capacitación constante</dd><dd class="desc">“El principal mecanismo de gobernanza”.</dd>
+    </dl>
+  </aside>
+  <div class="derecha">
+    <div class="barra-tit a" style="--d:.2s">Lo primero que hicimos fue regular su uso</div>
+    <div class="tarjeta texto a" style="--d:.35s">
+      <p><b>Decreto 0596/INT/2025</b>, del 10 de diciembre de 2025: Guía Práctica y Ética de Uso de IA para toda la gestión municipal.</p>
+      <ul class="principios"><li>Supervisión humana</li><li>Equidad</li><li>Privacidad</li><li>Transparencia</li><li>Rendición de cuentas</li></ul>
+      <p>Prohíbe cargar datos personales en herramientas públicas y le da a la <b>Dirección de Inteligencia Artificial</b> el rol de capacitar, acompañar y aprobar cada herramienta.</p>
+      <p class="capacitacion"><b data-n="34">34</b> gerentes de datos en 46 direcciones · <b data-n="71">71</b> egresados de diplomados · indicadores municipales de 50 a <b data-n="800" data-pre="+">+800</b></p>
+    </div>
+    <div class="tarjeta pestana a" style="--d:.55s"><i>!</i><div><span class="ceja">Guía Práctica y Ética de Uso de IA</span><p>“La decisión final, la firma, la responsabilidad, es y será siempre humana.”</p></div></div>
+  </div>
+</section>
+
+<!-- ===================== (oculta) TRES FRENTES ===================== -->
+<section class="slide" data-oculta data-migue="no"
+  data-guion="Tres frentes, un criterio: para el vecino, para el equipo municipal y para que dure. La IA interpreta, los sistemas ejecutan, las personas deciden."
+  data-notas="Trabajamos en tres frentes. Para el vecino: respuestas cuando las necesita. Para el equipo municipal: menos papel y más tiempo para lo importante. Y para que dure: capacitación y datos propios. Con un criterio que repetimos en cada herramienta: la IA interpreta, los sistemas ejecutan y las personas deciden.">
+  <div class="titular a fade"><h1>Cómo trabajamos</h1><span class="pill">Tres frentes</span><span class="subt">La IA interpreta, los sistemas ejecutan, <b>las personas deciden</b></span></div>
+  <div class="columnas tres">
+    <article class="col-card a" style="--d:.15s">
+      <header>Para el vecino</header>
+      <div><span class="ceja">Eje 1</span><b>Respuestas cuando las necesita</b><p>Atención las 24 horas, trámites en lenguaje simple y participación en las decisiones del barrio.</p>
+        <ul class="hitos"><li>Migue, asistente virtual</li><li>Ciudadano Digital</li><li>Presupuesto Participativo</li></ul></div>
+    </article>
+    <article class="col-card a" style="--d:.3s">
+      <header>Para el equipo municipal</header>
+      <div><span class="ceja">Eje 2</span><b>Menos papel, más tiempo para lo importante</b><p>Obra pública, espacios verdes y Capital Humano, con trazabilidad de punta a punta.</p>
+        <ul class="hitos"><li>CIMBA, obra vial</li><li>Applaza, espacios verdes</li><li>Expediente digital de Capital Humano</li></ul></div>
+    </article>
+    <article class="col-card a" style="--d:.45s">
+      <header>Capacitación constante</header>
+      <div><span class="ceja">Eje 3</span><b>Para que dure: personas que saben usarla</b>
+        <ul class="mini-cifras">
+          <li><b data-n="34">34</b><span>gerentes de datos en 46 direcciones</span></li>
+          <li><b data-n="800" data-pre="+">+800</b><span>indicadores municipales (eran 50)</span></li>
+          <li><b data-n="71">71</b><span>egresados de diplomados</span></li>
+        </ul></div>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== 4. LOS PROYECTOS ===================== -->
+<section class="slide" data-migue="no" data-escena="proyectos"
+  data-guion="Ocho servicios públicos con IA, hechos en el municipio y con las mismas reglas. Ahora los recorremos: SIGUIENTE y cada vitrina pasa sola."
+  data-notas="Estos son servicios públicos que ya funcionan, todos desarrollados en el municipio y bajo las mismas reglas. Ahora los recorremos uno por uno: cada vitrina pasa sola, vos contás.">
+  <div class="titular a fade"><h1>Lo que ya funciona</h1><span class="pill">Servicios</span><span class="subt">Ocho servicios públicos con IA, hechos en el municipio</span></div>
+  <div class="proyectos" id="proyectos"></div>
+</section>
+
+
+<!-- ===================== VITRINAS: cada una entra sola con la placa y sus recursos pasan solos ===================== -->
+<section class="slide vitrina" data-vitrina="migue" data-migue="no" data-titulo="Vitrina · Migue"
+  data-guion="Migue: el vecino no piensa en organigramas. 17.848 consultas, 91% resueltas. Pasa solo: cerebro (gobernanza) y termómetro (clima). Al final, pregunta en vivo si hay tiempo. (MIGUE 2 y 3)"
+  data-notas="MIGUE 2 · MIGUE 3 · El vecino no piensa en organigramas: pregunta por su problema. Migue entiende lenguaje natural y busca en fuentes oficiales. 17.848 consultas, 91% resueltas, casi cuatro mil vecinos que vuelven. Y lo gobernamos con datos: su cerebro es la gobernanza de cada consulta; su termómetro, el clima ciudadano leído por IA. (Al final queda la tarjeta para preguntarle en vivo: botón de la pregunta en la botonera.)"></section>
+
+<section class="slide vitrina" data-vitrina="cimba" data-migue="no" data-titulo="Vitrina · CIMBA"
+  data-guion="CIMBA: del reclamo al bache reparado. El avance arranca solo: seis meses en 18 segundos, 4.316 baches. Después el mapa y el muro de fotos."
+  data-notas="Obra pública. Cada pedido del vecino, venga del 147, del Concejo o de las redes, se ubica, se ordena, se arregla y se certifica con foto y GPS. Miren cómo se fue llenando la ciudad: 4.316 baches desde marzo, 64.570 metros cuadrados, cada uno con su lugar y su fecha."></section>
+
+<section class="slide vitrina" data-vitrina="urbania" data-migue="no" data-titulo="Vitrina · UrbanIA"
+  data-guion="UrbanIA: el nuevo Código de Planeamiento con memoria pública. Lo que dijo cada vecino en las audiencias, cruzado con cada norma nueva. La IA orienta; el equipo valida."
+  data-notas="Estamos reformando el Código de Planeamiento Urbano. Cada audiencia pública queda registrada, y la IA cruza lo que dijo cada vecino con cada norma nueva: a favor, en contra, pide cambios, con la cita exacta y el minuto del audio. Y el Código vigente se puede consultar en lenguaje natural. La IA orienta; el equipo valida."></section>
+
+<section class="slide vitrina" data-vitrina="estudia" data-migue="no" data-titulo="Vitrina · EstudIA"
+  data-guion="EstudIA: la IA arma el borrador, el docente decide. Clases y actividades a la medida de cada curso. Piloto en 2 escuelas."
+  data-notas="En las escuelas municipales, cada docente prepara su clase, su actividad o su evaluación a la medida de su curso. La IA arma el borrador; el docente lo revisa antes de que llegue a sus estudiantes. Y la escuela sabe cuánto cuesta cada uso de IA."></section>
+
+<section class="slide vitrina" data-vitrina="notas" data-migue="no" data-titulo="Vitrina · Generador de Notas"
+  data-guion="Generador de Notas: lenguaje claro y el mismo criterio en todas las áreas. La IA redacta, la persona firma: así se gana confianza en la IA desde adentro."
+  data-notas="Adentro del municipio, la confianza en la IA se gana con algo concreto: notas, pases y dictámenes en lenguaje claro, con el mismo criterio en cada repartición. La IA redacta el borrador; la persona revisa y firma."></section>
+
+<section class="slide vitrina" data-vitrina="espacio,bus,participa" data-migue="no" data-titulo="Vitrina · Ciudad abierta"
+  data-guion="Ciudad abierta: Applaza (218 plazas con su evidencia), Bus Turístico con Migue, Presupuesto Participativo y Ferias. Pasa sola."
+  data-notas="Y la ciudad abierta: cada plaza del padrón con su evidencia fotográfica y la cooperativa a cargo; el bus turístico con Migue respondiendo a turistas y escuelas; el presupuesto participativo en veinte distritos; y las ferias con vidriera online."></section>
+
+<!-- ===================== (oculta) CASO: MIGUE — reemplazada por la vitrina ===================== -->
+<section class="slide" data-oculta data-migue="der"
+  data-guion="Caso Migue: el vecino no piensa en organigramas. 17.848 consultas, 91% resueltas, 3.797 vecinos que vuelven. (MIGUE 2 y 3; cajón 1: preguntale en vivo, por ejemplo si regulamos la IA)"
+  data-notas="MIGUE 2 · MIGUE 3 · El vecino no piensa en organigramas: pregunta por su problema. Por eso hicimos Migue, un asistente propio que entiende lenguaje natural, busca en fuentes oficiales —la guía de trámites, los turnos, los reclamos, los cortes— y responde por la web, el Ciudadano Digital, Telegram y WhatsApp. Lleva 17.848 consultas, resuelve 9 de cada 10 y casi cuatro mil vecinos ya volvieron a consultarlo. Y lo gobernamos con datos: un panel con su corazón, su cerebro y su termómetro.">
+  <div class="titular a fade"><h1>Caso</h1><span class="pill">Experiencia</span></div>
+  <aside class="panel a izq" style="--d:.1s">
+    <p class="pn-tit">Caso de estudio</p>
+    <p class="pn-sub">San Miguel de Tucumán</p>
+    <p class="pn-gigante chico" data-n="17848">17.848</p>
+    <p class="pn-desc">consultas respondidas</p>
+    <hr>
+    <dl>
+      <dt>Resolución</dt><dd><span data-n="91" data-pos="%">91%</span></dd>
+      <dt>Alcance</dt><dd><span data-n="3797">3.797</span> vecinos que vuelven</dd><dd class="desc">Web, Ciudadano Digital, Telegram y WhatsApp</dd>
+    </dl>
+  </aside>
+  <div class="derecha">
+    <div class="barra-tit a" style="--d:.2s">Migue: la IA como servicio público</div>
+    <div class="tarjeta lista a" style="--d:.35s">
+      <p><b>El desafío:</b> el vecino no piensa en organigramas, pregunta por su problema. Y la ventanilla cierra a las 13.</p>
+      <p><b>Lo que hicimos:</b> un asistente propio que entiende lenguaje natural y busca en fuentes oficiales: trámites, turnos, reclamos y cortes.</p>
+      <p><b>Cómo lo gobernamos:</b> un panel con su corazón (consultas por minuto), su cerebro (gobernanza de datos) y su termómetro (el clima ciudadano).</p>
+    </div>
+    <div class="tarjeta pestana testimonio a" style="--d:.55s"><i></i><div><span class="ceja">Testimonio</span><p>“Vos me contás qué te pasa. Yo intento entender qué necesitás.”</p><cite>Migue · asistente virtual de la ciudad</cite></div></div>
+  </div>
+</section>
+
+<!-- ===================== (oculta) LOS NÚMEROS — están en cada vitrina ===================== -->
+<section class="slide" data-oculta data-migue="no"
+  data-guion="Medimos para decidir: 4.316 baches con ubicación y fecha, 17.848 consultas a Migue, 911 evidencias en plazas, −39% de pasos en Capital Humano."
+  data-notas="Medimos para decidir. CIMBA: 4.316 baches reparados desde marzo, 64.570 metros cuadrados, cada uno con ubicación y fecha. Migue: 17.848 consultas, 91% resueltas. Applaza: 911 evidencias en los 218 espacios verdes del padrón. Y en Capital Humano, 13 trámites pasan de 107 a 65 pasos.">
+  <div class="titular a fade"><h1>Datos</h1><span class="pill">Evidencia</span></div>
+  <aside class="panel a izq" style="--d:.1s">
+    <p class="pn-tit">Dato clave</p>
+    <p class="pn-gigante chico" data-n="4316">4.316</p>
+    <p class="pn-desc">baches reparados desde marzo, con ubicación y fecha</p>
+    <hr>
+    <dl>
+      <dt>Fuente</dt><dd>CIMBA, 14/10/2026</dd>
+      <dt>Otro dato</dt><dd><span data-n="64570">64.570</span> m²</dd><dd class="desc">de calzada reparada, medidos uno por uno</dd>
+    </dl>
+  </aside>
+  <div class="derecha">
+    <div class="barra-tit a" style="--d:.2s">Cada herramienta deja datos que vuelven a la gestión</div>
+    <div class="tarjeta cifras3 a" style="--d:.35s">
+      <div><span class="ceja">Atención ciudadana</span><b data-n="17848">17.848</b><p>consultas a Migue, 91% resueltas</p><small>Panel de Migue · 14/10/2026</small></div>
+      <div><span class="ceja">Espacio público</span><b data-n="911">911</b><p>evidencias en los 218 espacios verdes del padrón</p><small>Applaza · 14/10/2026</small></div>
+      <div><span class="ceja">Gestión interna</span><b data-n="39" data-pre="−" data-pos="%">−39%</b><p>pasos en 13 trámites de Capital Humano (de 107 a 65)</p><small>Relevamiento DIA · 07/10/2026</small></div>
+    </div>
+    <div class="tarjeta pestana a" style="--d:.6s"><i>!</i><div><span class="ceja">Conclusión</span><p>No medimos para mostrar: medimos para decidir dónde va la próxima cuadrilla, la próxima respuesta, el próximo trámite.</p></div></div>
+  </div>
+</section>
+
+<!-- ===================== 7. ANTES / AHORA ===================== -->
+<section class="slide" data-migue="no" data-escena="giro"
+  data-guion="Antes / ahora: ventanilla → 24 h; reclamo perdido → bache con foto; expediente en papel → digital; aula repartida → una plataforma."
+  data-notas="Dejá que aparezca cada 'ahora'. Antes, preguntar era ir a la ventanilla; ahora Migue responde a toda hora. Antes, el reclamo se perdía entre planillas; ahora cada pedido llega al bache tapado con foto. Antes, una licencia tardaba 35 días en papel; ahora el expediente es digital y una persona firma. Antes, lo que pasaba en el aula quedaba repartido; ahora hay una sola plataforma.">
+  <div class="titular a fade"><h1>Comparación</h1><span class="pill">Dos miradas</span><span class="subt">Lo que cambió para el vecino y para el Estado</span></div>
+  <div class="columnas dos comparacion">
+    <article class="col-card antes a" style="--d:.15s">
+      <header>Antes</header>
+      <ol>
+        <li><span class="ceja">Atención</span><b>Preguntar era ir a la ventanilla, de 8 a 13.</b></li>
+        <li><span class="ceja">Obra pública</span><b>El reclamo se perdía entre planillas y llamados.</b></li>
+        <li><span class="ceja">Gestión interna</span><b>Cada área escribía a su manera; 35 días por licencia.</b></li>
+        <li><span class="ceja">Escuela</span><b>Lo del aula, repartido en cuadernos y grupos de WhatsApp.</b></li>
+      </ol>
+    </article>
+    <article class="col-card ahora a" style="--d:.3s">
+      <header>Ahora</header>
+      <ol>
+        <li style="--d:1.0s"><span class="ceja">Atención</span><b>Migue responde a cualquier hora, en lenguaje simple.</b></li>
+        <li style="--d:1.8s"><span class="ceja">Obra pública</span><b>Cada pedido llega al bache tapado, con foto y GPS.</b></li>
+        <li style="--d:2.6s"><span class="ceja">Gestión interna</span><b>Notas en lenguaje claro: la IA redacta, una persona firma.</b></li>
+        <li style="--d:3.4s"><span class="ceja">Escuela</span><b>Una sola plataforma: cada uno ve lo suyo.</b></li>
+      </ol>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== 8. CONCLUSIÓN ===================== -->
+<section class="slide" data-migue="no"
+  data-guion="La IA como servicio público: primero las reglas, herramientas propias y capacitación constante. La decisión siempre es humana."
+  data-notas="Lo que nos llevamos: la IA, en un municipio, es un servicio público más, y como todo servicio público tiene reglas, responsables y vecinos a los que rendirles cuentas. Primero las reglas, con el decreto. Después las herramientas, propias y medibles. Y siempre la capacitación constante de nuestra gente. La IA interpreta; las personas deciden.">
+  <div class="titular a fade"><h1>Conclusión</h1><span class="pill">Cierre</span><span class="subt">Lo que nos llevamos</span></div>
+  <div class="banner a" style="--d:.15s">
+    <header>Mensaje final</header>
+    <div><b>La IA como servicio público: con reglas, con responsables y cerca del vecino.</b><p data-cita>Con la dignidad de cada vecino como medida de cada herramienta.</p></div>
+  </div>
+  <div class="columnas tres ideas">
+    <article class="col-card a" style="--d:.4s"><header>Idea 1</header><div><span class="ceja">Primero, las reglas</span><b>Un decreto antes que una herramienta</b><p>Principios, prohibiciones claras y supervisión humana.</p></div></article>
+    <article class="col-card a" style="--d:.55s"><header>Idea 2</header><div><span class="ceja">Herramientas propias</span><b>Servicios que se miden</b><p>Hechos en el municipio, con datos que vuelven a la gestión.</p></div></article>
+    <article class="col-card a" style="--d:.7s"><header>Idea 3</header><div><span class="ceja">Capacitación constante</span><b>La IA interpreta, las personas deciden</b><p>Siempre hay alguien que revisa y firma.</p></div></article>
+  </div>
+</section>
+
+<!-- ===================== 9. GRACIAS ===================== -->
+<section class="slide portada gracias" data-migue="no"
+  data-guion="Gracias. (MIGUE 4 se despide) Queda proyectada."
+  data-notas="MIGUE 4 · Muchas gracias. (Queda proyectada mientras sigue el panel.)">
+  <div class="capa-logos a fade" data-logos></div>
+  <div class="portada-centro">
+    <p class="p-evento a" style="--d:.2s">Celebrando Magnífica Humanitas · Panel: IA Federal, innovación desde los territorios</p>
+    <h1 class="p-titulo a" style="--d:.35s">¡Muchas gracias por su atención!</h1>
+    <p class="p-orador a" style="--d:.55s">Dr. Marco Rossi · <em>Director de Inteligencia Artificial</em></p>
+    <p class="p-inst a" style="--d:.65s">Municipalidad de San Miguel de Tucumán</p>
+    <p class="p-fecha a" style="--d:.8s">Viernes 16 de octubre · Facultad de Derecho, UBA</p>
+    <img class="p-logo a" style="--d:.95s" src="img/logos/logo-horizontal-color.png" alt="Ciudad de San Miguel de Tucumán">
+  </div>
+</section>
+
+<!-- ===================== CAPAS (fuera de las placas) ===================== -->
+<div id="velo"></div>
+<div id="luz"></div>
+
+<!-- El cajón de cada proyecto: misma grilla que las placas (panel lateral + escena). -->
+<div id="cajon" aria-hidden="true">
+  <div class="titular"><h1 class="cj-nombre"></h1><span class="pill cj-eje"></span><span class="subt cj-rec"></span></div>
+  <aside class="panel">
+    <p class="pn-tit">Proyecto</p>
+    <p class="pn-gigante cj-num"></p>
+    <p class="pn-sub cj-nombre2"></p>
+    <hr>
+    <dl class="cj-datos"></dl>
+    <div class="cj-puntos"></div>
+  </aside>
+  <div class="cj-escena"></div>
+</div>
+
+<!-- Preguntale a Migue: la respuesta real del chat de Migue, escrita en vivo. -->
+<div id="vivo">
+  <div class="cab-vivo"><span class="envivo"><i></i>En vivo</span><span>Preguntale a Migue</span><span class="sub">Respuesta real del asistente de la ciudad</span></div>
+  <div class="hilo"></div>
+</div>
+
+<!-- QR gigante: para que la sala le escriba a Migue. -->
+<div id="qrs">
+  <p class="ceja">Probalo ahora</p>
+  <h2>Escribile a Migue.</h2>
+  <div class="fila">
+    <div class="qr"><img src="img/migue/qr-telegram.svg" alt="Código QR al bot de Telegram"><b>@MigueSMT_bot</b><span>En Telegram</span></div>
+    <div class="qr"><img src="img/migue/qr-smt.svg" alt="Código QR a smt.gob.ar"><b>smt.gob.ar</b><span>Botón de Migue, abajo a la derecha</span></div>
+  </div>
+</div>
+
+<div id="subtitulo"></div>
+<div id="globo"></div>
+<div id="migue" class="fuera">
+  <div id="disco"></div>
+  <div id="piso"></div>
+  <canvas id="lienzo"></canvas>
+  <div id="habla"><img src="img/migue/migue-cara.png" alt=""><span>Migue</span><span class="barras"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+</div>
+
+<div id="cortina" aria-hidden="true"><i></i></div>
+<div id="negro"></div>
+
+<div id="ayuda">
+  <b>→ · Espacio · AvPág</b> placa siguiente · <b>← · RePág</b> anterior<br>
+  <b>Enter · M</b> Migue habla · <b>N</b> la anterior · <b>C</b> se calla · <b>Z</b> deshace<br>
+  <b>1 … 6</b> abre el cajón de ese proyecto · <b>Esc</b> lo cierra · <b>[ ]</b> recurso anterior / siguiente<br>
+  <b>P</b> reproduce el avance de CIMBA · <b>K</b> pregunta a Migue en vivo · <b>X</b> la cierra<br>
+  <b>Q</b> QR de Migue · <b>L</b> foco en Migue · <b>H</b> oculta a Migue · <b>F</b> pantalla completa · <b>?</b> ayuda
+</div>
+
+<div id="inicio">
+  <div class="ini-izq">
+    <img class="ini-logo" src="img/logos/logo-horizontal-color.png" alt="">
+    <p class="ini-tit">La IA como servicio público</p>
+    <p class="ini-sub">Celebrando Magnífica Humanitas · Facultad de Derecho, UBA</p>
+    <button class="ini-boton" type="button">Comenzar</button>
+    <small>Un clic para empezar (habilita el sonido y la pantalla completa) · Q: QR para vincular el celular</small>
+  </div>
+  <div class="ini-der" id="vinculo" hidden>
+    <p class="ini-tit2">Botonera del celular</p>
+    <div class="ini-qr" id="vinculoQr"></div>
+    <p class="ini-estado" id="vinculoEstado"><i></i><span>Conectando…</span></p>
+    <form class="ini-sala" id="vinculoForm" hidden>
+      <label for="vinculoCodigo">Falta el código de sala</label>
+      <input id="vinculoCodigo" placeholder="código…" autocomplete="off" spellcheck="false">
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<script src="lib/qrcode.js"></script>
+<script src="efectos.js"></script>
+<script src="presentacion.js"></script>
+<script src="cajones.js"></script>
+<script src="vivo.js"></script>
+<script src="datos/cimba-avance.js"></script>
+<script src="avance.js"></script>
+<script src="arranque.js"></script>
+</body>
+</html>

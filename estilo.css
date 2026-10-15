@@ -1,0 +1,312 @@
+/* =====================================================================
+   ESTÉTICA DEL CONGRESO: la grilla y la paleta del template "Celebrando
+   Magnífica Humanitas" (assets/template/README.md), en un escenario de
+   1920×1080. Azul #111A3B, blanco y gris cálido #8A8270; Poppins; fondo
+   plata con el globo. El logo de la Ciudad va en sus colores propios.
+   ===================================================================== */
+@font-face { font-family: 'Poppins'; font-weight: 400; src: url(fonts/Poppins-Regular.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 400; font-style: italic; src: url(assets/template/fonts/Poppins-Italic.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 500; src: url(fonts/Poppins-Medium.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 600; src: url(fonts/Poppins-SemiBold.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 700; src: url(fonts/Poppins-Bold.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 700; font-style: italic; src: url(assets/template/fonts/Poppins-BoldItalic.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 800; src: url(fonts/Poppins-ExtraBold.ttf); }
+@font-face { font-family: 'Now'; font-weight: 400; src: url(assets/template/fonts/Now-Regular.otf) format('opentype'); }
+
+:root {
+  --azul: #111a3b; --azul2: #2e344b; --azul3: #3a4366;
+  --gris: #8a8270; --arena: #c9c4b8; --hueso: #e9e7e3; --borde: #e4e3e1;
+  --blanco: #ffffff; --suave: #5b616b; --logos: #293140;
+  /* Del logo de la ciudad: solo para detalles chicos (estado, Migue). */
+  --smt-azul: #0066ff; --smt-celeste: #2eb1ff; --smt-amarillo: #f4dc00;
+  --verde: #2f9e6e; --rojo: #d6453d;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { background: #cfcac2; font-family: 'Poppins', Arial, sans-serif; color: var(--azul); cursor: none; }
+body.cursor { cursor: default; }
+body.negro { background: #000 !important; }
+
+/* Escenario de 1080 de alto que se estira a lo ancho (16:9 a 2:1). Las placas
+   miden siempre 1920 y quedan centradas; el fondo llena todo. */
+#stage { --extra: 0px; position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; overflow: hidden;
+  background: var(--hueso) url(assets/template/bg.jpg) right center / auto 100% no-repeat; }
+#stage::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #d8d2c7, #e6e1d8 40%, rgba(230,225,216,0) 70%); z-index: -1; }
+
+/* ---------- Placas ---------- */
+.slide { position: absolute; top: 0; bottom: 0; left: calc(var(--extra) / 2); width: 1920px; opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility 0s linear .7s; }
+.slide.on { opacity: 1; visibility: visible; transition: opacity .7s ease; }
+.slide[data-oculta] { display: none; }
+
+/* Encabezado del congreso y logo de la ciudad (los agrega presentacion.js). */
+.encab { position: absolute; left: 86px; top: 59px; font-size: 22px; line-height: 26px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--azul); }
+.logo-sup { position: absolute; right: 86px; top: 34px; height: 62px; }
+
+/* Título en mayúsculas + píldora + subtítulo. */
+.titular { position: absolute; left: 86px; top: 111px; height: 72px; display: flex; align-items: center; gap: 34px; white-space: nowrap; }
+.titular h1 { font-size: 60px; line-height: 72px; font-weight: 700; text-transform: uppercase; letter-spacing: -.5px; }
+.pill { min-width: 300px; height: 50px; border-radius: 25px; background: var(--azul); color: var(--blanco); font-size: 20px; font-weight: 700; letter-spacing: 3.6px; text-transform: uppercase; display: inline-flex; align-items: center; justify-content: center; padding: 0 30px; }
+.subt { font-size: 25px; color: var(--azul); }
+.subt b { font-weight: 700; }
+.ceja { display: block; font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); }
+
+/* ---------- Familia "panel lateral" ---------- */
+.panel { position: absolute; left: 86px; top: 195px; width: 375px; height: 788px; border-radius: 14px; background: var(--azul); color: var(--blanco); display: flex; flex-direction: column; align-items: center; padding: 70px 36px 44px; text-align: center; }
+.pn-tit { font-size: 44px; line-height: 1.15; font-weight: 700; text-transform: uppercase; }
+.pn-gigante { font-size: 160px; line-height: 1.1; font-weight: 700; letter-spacing: -4px; font-variant-numeric: tabular-nums; }
+.pn-gigante.chico { font-size: 112px; letter-spacing: -3px; margin-top: 14px; }
+.pn-sub { font-size: 34px; line-height: 1.2; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
+.pn-desc { font-size: 24px; line-height: 1.35; margin-top: 6px; }
+.panel hr { width: 304px; height: 2px; border: 0; background: var(--azul3); margin: auto 0 26px; flex: none; }
+.panel dl { align-self: stretch; text-align: left; display: flex; flex-direction: column; }
+.panel dt { font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--arena); margin-top: 16px; }
+.panel dt:first-child { margin-top: 0; }
+.panel dd { font-size: 32px; line-height: 1.25; font-weight: 700; }
+.panel dd.chico { font-size: 26px; }
+.panel dd.desc { font-size: 19px; font-weight: 400; line-height: 1.35; margin-top: 2px; }
+
+.derecha { position: absolute; left: 495px; top: 195px; width: 1317px; height: 788px; display: flex; flex-direction: column; gap: 22px; }
+.slide[data-migue="der"] .derecha { width: 935px; }
+.barra-tit { flex: none; min-height: 150px; border-radius: 14px; background: var(--azul); color: var(--blanco); display: flex; align-items: center; padding: 20px 44px; font-size: 38px; line-height: 1.2; font-weight: 700; }
+.tarjeta { background: var(--blanco); border-radius: 14px; padding: 34px 44px; }
+.tarjeta.texto { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+.tarjeta.texto p, .tarjeta.lista p { font-size: 28px; line-height: 1.45; color: var(--azul2); }
+.tarjeta b { color: var(--azul); font-weight: 700; }
+.tarjeta.lista { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+.tarjeta.lista p { font-size: 26px; }
+/* Pestaña de acento "?" / "!": franja azul a la izquierda de la tarjeta. */
+.pestana { display: flex; padding: 0; overflow: hidden; min-height: 200px; }
+.pestana > i { flex: none; width: 60px; background: var(--azul); color: var(--blanco); font-style: normal; font-size: 40px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.pestana > div { padding: 30px 40px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+.pestana p { font-size: 30px; line-height: 1.35; font-weight: 700; color: var(--azul); }
+.testimonio p { font-style: italic; font-size: 32px; }
+.testimonio cite { font-style: normal; font-size: 22px; color: var(--azul2); }
+.cifras3 { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; padding: 30px 0; }
+.cifras3 > div { padding: 6px 36px; display: flex; flex-direction: column; gap: 6px; border-left: 2px solid var(--borde); }
+.cifras3 > div:first-child { border-left: 0; }
+.cifras3 b { font-size: 78px; line-height: 1.05; font-weight: 700; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.cifras3 p { font-size: 23px; line-height: 1.35; color: var(--azul2); }
+.cifras3 small { margin-top: auto; font-size: 15px; color: var(--gris); }
+
+/* ---------- Familia "cards": tarjetas con encabezado azul ---------- */
+.columnas { position: absolute; left: 86px; top: 220px; width: 1748px; height: 740px; display: grid; gap: 34px; }
+.columnas.tres { grid-template-columns: repeat(3, 1fr); }
+.columnas.dos { grid-template-columns: repeat(2, 1fr); gap: 38px; }
+.col-card { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+.col-card > header { flex: none; height: 96px; background: var(--azul); color: var(--blanco); font-size: 36px; font-weight: 700; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
+.col-card > div { flex: 1; padding: 40px 40px 34px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+.col-card > div > b { font-size: 33px; line-height: 1.25; }
+.col-card > div > p { font-size: 24px; line-height: 1.45; color: var(--azul2); }
+.col-card .ceja { letter-spacing: 2px; }
+.hitos { list-style: none; margin-top: auto; display: flex; flex-direction: column; gap: 10px; align-self: stretch; }
+.hitos li { font-size: 21px; font-weight: 600; color: var(--azul); background: var(--hueso); border-radius: 12px; padding: 10px 16px; }
+.mini-cifras { list-style: none; display: flex; flex-direction: column; gap: 18px; margin-top: 18px; align-self: stretch; text-align: left; }
+.mini-cifras li { display: flex; align-items: center; gap: 20px; }
+.mini-cifras b { font-size: 60px; line-height: 1; font-weight: 700; min-width: 170px; text-align: right; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.mini-cifras span { font-size: 22px; line-height: 1.3; color: var(--azul2); }
+
+/* Proyectos: 3×2 tarjetas (placa 4). */
+.proyectos { position: absolute; left: 86px; top: 215px; width: 1748px; height: 768px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 30px 30px; }
+.proy { position: relative; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease; }
+.proy > header { flex: none; height: 74px; background: var(--azul); color: var(--blanco); display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 30px; font-weight: 700; }
+.proy > header em { font-style: normal; font-size: 20px; letter-spacing: 2px; color: var(--arena); }
+.proy > div { flex: 1; padding: 22px 30px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+.proy .ceja { font-size: 14px; color: var(--azul); letter-spacing: 1.7px; }
+.proy b { font-size: 25px; line-height: 1.25; }
+.proy p { font-size: 19px; line-height: 1.4; color: var(--azul2); }
+.proy .p-estado { margin-top: auto; display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; color: var(--gris); letter-spacing: .5px; }
+.proy .p-estado i { width: 11px; height: 11px; border-radius: 50%; background: var(--verde); box-shadow: 0 0 0 5px rgba(47,158,110,.16); }
+.proy .p-estado.piloto i { background: #d9a400; box-shadow: 0 0 0 5px rgba(217,164,0,.2); }
+.proy.elegido { transform: scale(1.04); box-shadow: 0 28px 70px rgba(17,26,59,.3); z-index: 2; }
+.proy.visto > header::after { content: '✓'; font-size: 22px; color: var(--arena); }
+
+/* Comparación: el "ahora" aparece de a uno. */
+.comparacion ol { list-style: none; flex: 1; display: flex; flex-direction: column; }
+.comparacion li { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 0 44px; border-top: 1.5px solid var(--borde); }
+.comparacion li:first-child { border-top: 0; }
+.comparacion li b { font-size: 30px; line-height: 1.3; }
+.comparacion .antes li b { color: var(--suave); font-weight: 600; }
+.comparacion .antes > header { background: var(--azul3); }
+.comparacion .ahora li { opacity: 0; transform: translateX(-40px); }
+.slide.on .comparacion .ahora li { animation: entraAhora .8s cubic-bezier(.2,.8,.2,1) var(--d) both; }
+@keyframes entraAhora { 0% { opacity: 0; transform: translateX(-40px); background: var(--hueso); } 60% { background: var(--hueso); } 100% { opacity: 1; transform: none; background: transparent; } }
+
+/* Conclusión: banner + tres ideas. */
+.banner { position: absolute; left: 86px; top: 215px; width: 1748px; height: 320px; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+.banner > header { flex: none; height: 80px; background: var(--azul); color: var(--blanco); font-size: 30px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.banner > div { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 0 80px; }
+.banner b { font-size: 46px; line-height: 1.2; }
+.banner p { font-size: 25px; color: var(--azul2); }
+.columnas.ideas { top: 570px; height: 390px; }
+.columnas.ideas .col-card > header { height: 80px; font-size: 30px; }
+.columnas.ideas .col-card > div { padding: 30px 30px; }
+
+/* ---------- Portada y gracias ---------- */
+.capa-logos { position: absolute; inset: 0; pointer-events: none; }
+.capa-logos img { position: absolute; object-fit: contain; }
+.capa-logos .rot { position: absolute; font-family: 'Now', 'Montserrat', sans-serif; color: var(--logos); white-space: nowrap; }
+.capa-logos .filete { position: absolute; height: 1px; background: var(--suave); }
+.portada-centro { position: absolute; left: 110px; right: 110px; top: 392px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+.p-evento { font-size: 22px; line-height: 26px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+.p-titulo { font-size: 77px; line-height: 88px; font-weight: 700; text-transform: uppercase; margin-top: 12px; }
+.p-orador { font-size: 44px; line-height: 56px; margin-top: 18px; }
+.p-orador em { font-style: italic; }
+.p-inst { font-size: 24px; color: var(--azul2); }
+.p-fecha { font-size: 21px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--azul2); margin-top: 6px; }
+.p-logo { height: 74px; margin-top: 14px; }
+.gracias .p-titulo { font-size: 72px; }
+
+/* ---------- Entradas animadas (al entrar a la placa) ---------- */
+.a { opacity: 0; }
+.on .a { animation: subir .8s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, 0s); }
+.on .a.izq { animation-name: izq; }
+.on .a.fade { animation-name: fade; animation-duration: 1.1s; }
+@keyframes subir { from { opacity: 0; transform: translateY(44px); } to { opacity: 1; transform: none; } }
+@keyframes izq { from { opacity: 0; transform: translateX(-70px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* =====================================================================
+   CAJÓN DE PROYECTO: se abre sobre cualquier placa, con la misma grilla
+   (panel lateral + escena). Crece en círculo desde la tarjeta del proyecto.
+   ===================================================================== */
+#cajon { position: absolute; inset: 0; z-index: 4; background: var(--hueso) url(assets/template/bg.jpg) right center / auto 100% no-repeat;
+  clip-path: circle(0% at var(--cx, 50%) var(--cy, 50%)); visibility: hidden; transition: clip-path .9s cubic-bezier(.7,0,.2,1), visibility 0s linear .9s; }
+#cajon::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #d8d2c7, #e6e1d8 40%, rgba(230,225,216,0) 70%); }
+#cajon.ver { clip-path: circle(150% at var(--cx, 50%) var(--cy, 50%)); visibility: visible; transition: clip-path .9s cubic-bezier(.7,0,.2,1); }
+#cajon > * { margin-left: calc(var(--extra) / 2); }
+#cajon .titular, #cajon .panel, #cajon .encab, #cajon .logo-sup { z-index: 1; }
+#cajon .cj-eje { min-width: 0; }
+#cajon .subt { color: var(--gris); font-weight: 600; }
+.cj-puntos { display: flex; gap: 10px; margin-top: 24px; align-self: flex-start; }
+.cj-puntos i { width: 30px; height: 8px; border-radius: 4px; background: var(--azul3); transition: background .3s ease, width .3s ease; }
+.cj-puntos i.on { background: var(--arena); width: 60px; }
+.cj-escena { position: absolute; left: 495px; top: 195px; width: 1317px; height: 788px; }
+
+/* Recursos dentro del cajón: entran y salen deslizando. */
+.rec { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateX(90px) scale(.98); transition: opacity .6s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+.rec.on { opacity: 1; transform: none; }
+.rec.sale { opacity: 0; transform: translateX(-90px) scale(.98); }
+.rec.sin-rec p { font-size: 30px; color: var(--gris); font-weight: 600; }
+
+/* Ventana de navegador. */
+.navegador { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 34px 80px rgba(17,26,59,.25), 0 0 0 1.5px var(--borde); display: flex; flex-direction: column; }
+.navegador .barra { height: 44px; flex: none; background: #f1efeb; display: flex; align-items: center; gap: 9px; padding: 0 18px; }
+.navegador .barra i { width: 12px; height: 12px; border-radius: 50%; background: #d8d3ca; }
+.navegador .barra span { margin-left: 16px; flex: 1; max-width: 620px; height: 28px; border-radius: 14px; background: #fff; font-size: 15px; color: var(--suave); display: flex; align-items: center; padding: 0 16px; gap: 8px; }
+.navegador .vista { position: relative; overflow: hidden; }
+.navegador .vista img { display: block; width: 100%; height: auto; }
+.vista.recorre img { animation: recorrer var(--t, 22s) ease-in-out 1s infinite alternate; }
+@keyframes recorrer { from { transform: translateY(0); } to { transform: translateY(var(--hasta, -50%)); } }
+.vista.zoom img { animation: acercar 18s ease-in-out .8s infinite alternate; transform-origin: var(--zx, 50%) var(--zy, 40%); }
+@keyframes acercar { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+/* Celular. */
+.celular { flex: none; width: 340px; aspect-ratio: 9 / 19.5; background: #0f1220; border-radius: 52px; padding: 12px; box-shadow: 0 34px 80px rgba(17,26,59,.32); position: relative; }
+.celular::before { content: ''; position: absolute; left: 50%; top: 22px; width: 96px; height: 26px; border-radius: 14px; background: #0f1220; transform: translateX(-50%); z-index: 2; }
+.celular .vista { width: 100%; height: 100%; border-radius: 42px; overflow: hidden; background: #fff; }
+.celular .vista img { display: block; width: 100%; height: auto; }
+.rec.par .celular { position: absolute; right: 10px; bottom: -6px; width: 300px; z-index: 2; }
+.rec.par .navegador { margin-right: 200px; }
+
+/* Preguntale a Migue: tarjeta del cajón. */
+.vivo-intro { width: 100%; height: 100%; display: grid; grid-template-columns: 1.4fr 1fr; gap: 26px; }
+.vivo-intro .vi-preg { background: var(--blanco); border-radius: 14px; padding: 40px 44px; display: flex; flex-direction: column; gap: 18px; }
+.vivo-intro .vi-preg b { font-size: 36px; line-height: 1.2; }
+.vivo-intro .vi-preg p { font-size: 24px; color: var(--azul2); line-height: 1.45; }
+.vivo-intro ol { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 10px; counter-reset: q; }
+.vivo-intro ol li { counter-increment: q; font-size: 24px; font-weight: 600; background: var(--hueso); border-radius: 14px; padding: 16px 22px 16px 70px; position: relative; line-height: 1.3; }
+.vivo-intro ol li::before { content: counter(q); position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: var(--azul); color: #fff; font-size: 19px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.vivo-intro .vi-qr { background: var(--azul); color: var(--blanco); border-radius: 14px; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; }
+.vivo-intro .vi-qr img { width: 300px; height: 300px; background: #fff; border-radius: 22px; padding: 18px; }
+.vivo-intro .vi-qr b { font-size: 34px; }
+.vivo-intro .vi-qr span { font-size: 21px; color: var(--arena); }
+
+/* ---------- Pantalla de inicio ---------- */
+#inicio { position: absolute; inset: 0; z-index: 20; background: var(--hueso) url(assets/template/bg.jpg) right center / auto 100% no-repeat; display: flex; align-items: center; justify-content: center; gap: 120px; }
+#inicio .ini-izq { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
+#inicio .ini-logo { height: 110px; }
+#inicio .ini-tit { font-size: 72px; font-weight: 700; text-transform: uppercase; line-height: 1.1; }
+#inicio .ini-sub { font-size: 22px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gris); }
+#inicio .ini-boton { margin-top: 24px; font: 700 32px Poppins, sans-serif; letter-spacing: 3px; text-transform: uppercase; color: var(--blanco); background: var(--azul); border: 0; border-radius: 999px; padding: 22px 80px; cursor: pointer; animation: invitar 2.2s ease-in-out infinite; }
+@keyframes invitar { 50% { transform: scale(1.04); box-shadow: 0 20px 50px rgba(17,26,59,.3); } }
+#inicio small { position: absolute; left: 0; right: 0; bottom: 36px; text-align: center; font-size: 18px; color: var(--suave); }
+#inicio .ini-der[hidden] { display: none; }
+#inicio .ini-der { width: 420px; background: var(--blanco); border-radius: 24px; padding: 36px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+#inicio .ini-tit2 { font-size: 28px; font-weight: 700; }
+#inicio .ini-qr { width: 300px; height: 300px; background: #fff; border-radius: 22px; padding: 16px; display: flex; align-items: center; justify-content: center; }
+#inicio .ini-qr svg { width: 100%; height: 100%; }
+#inicio .ini-estado { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 600; text-align: center; }
+#inicio .ini-estado i { width: 16px; height: 16px; border-radius: 50%; background: var(--rojo); flex: none; }
+#inicio .ini-estado.ok i { background: var(--verde); box-shadow: 0 0 0 6px rgba(47,158,110,.25); }
+#inicio .ini-sala { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+#inicio .ini-sala[hidden] { display: none; }
+#inicio .ini-sala label { font-size: 22px; font-weight: 700; text-align: center; }
+#inicio .ini-sala input { font: 600 26px Poppins, sans-serif; padding: 14px 18px; border-radius: 16px; border: 2px solid var(--arena); text-align: center; }
+#inicio .ini-sala button { font: 700 24px Poppins, sans-serif; padding: 14px; border-radius: 16px; border: 0; background: var(--azul); color: #fff; cursor: pointer; }
+
+/* ---------- Ayuda (tecla ?) ---------- */
+#ayuda { position: absolute; left: 40px; bottom: 40px; z-index: 19; background: rgba(17,26,59,.95); color: #fff; border-radius: 20px; padding: 26px 34px; font-size: 21px; line-height: 1.7; display: none; }
+#ayuda.ver { display: block; }
+#ayuda b { color: var(--arena); }
+
+/* =====================================================================
+   CIMBA · AVANCE (avance.js): mapa + riel con contador, m² y barras.
+   ===================================================================== */
+.avance-rec { align-items: stretch; }
+.avance-host { width: 100%; height: 100%; }
+.avance { width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 400px; gap: 22px; }
+.av-mapa { position: relative; border-radius: 14px; overflow: hidden; background: #eef0f2; box-shadow: 0 0 0 1.5px var(--borde); }
+.av-gl, .av-plano { position: absolute; inset: 0; width: 100%; height: 100%; }
+.av-fecha { position: absolute; left: 24px; top: 22px; background: rgba(255,255,255,.94); border-radius: 14px; padding: 12px 20px; display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(17,26,59,.12); }
+.av-fecha span { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); }
+.av-fecha b { font-size: 34px; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.av-boton { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--azul); color: #fff; border-radius: 999px; padding: 18px 40px 18px 30px; font-size: 26px; font-weight: 700; display: flex; align-items: center; gap: 16px; box-shadow: 0 20px 50px rgba(17,26,59,.35); transition: opacity .4s ease, transform .4s ease; }
+.av-boton i { font-style: normal; width: 50px; height: 50px; border-radius: 50%; background: #fff; color: var(--azul); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.avance.empezo .av-boton { opacity: 0; transform: translate(-50%, -50%) scale(.8); pointer-events: none; }
+.av-riel { background: var(--blanco); border-radius: 14px; padding: 30px 30px 22px; display: flex; flex-direction: column; gap: 6px; }
+.av-total { display: flex; align-items: baseline; gap: 12px; margin-top: 6px; }
+.av-total b { font-size: 96px; line-height: 1; font-weight: 700; letter-spacing: -3px; font-variant-numeric: tabular-nums; }
+.av-total span { font-size: 28px; font-weight: 600; color: var(--azul2); }
+.av-m2 { font-size: 24px; color: var(--azul2); }
+.av-m2 b { color: var(--smt-azul); font-variant-numeric: tabular-nums; }
+.av-ritmo { margin-top: 20px; }
+.av-barras { width: 100%; height: 120px; }
+.av-empresas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.av-empresas span { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; background: var(--hueso); border-radius: 999px; padding: 4px 12px 4px 8px; opacity: .45; transition: opacity .3s ease; }
+.av-empresas span.activa { opacity: 1; }
+.av-empresas i { width: 11px; height: 11px; border-radius: 50%; }
+.av-empresas em { font-style: normal; color: var(--gris); font-variant-numeric: tabular-nums; }
+.av-fuente { margin-top: auto; font-size: 14px; color: var(--gris); }
+.av-falta { width: 100%; height: 100%; background: var(--blanco); border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.av-falta b { font-size: 40px; } .av-falta p { font-size: 24px; color: var(--gris); }
+
+/* ---------- Ajustes: servicio público, decreto y 8 servicios ---------- */
+.p-sub { font-size: 28px; line-height: 1.3; color: var(--azul2); font-weight: 500; margin-top: -4px; }
+.principios { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+.principios li { font-size: 21px; font-weight: 700; color: var(--azul); background: var(--hueso); border-radius: 999px; padding: 8px 18px; }
+.tarjeta.texto { gap: 18px; }
+.tarjeta.texto p { font-size: 26px; }
+.proyectos { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.proy > header { height: 66px; font-size: 26px; }
+.proy > div { padding: 20px 22px 18px; gap: 8px; }
+.proy b { font-size: 24px; }
+.proy p { font-size: 19px; }
+
+/* Tablero recreado (recurso 'kpis'): números que cuentan, en tarjetas. */
+.kpis { width: 100%; height: 100%; background: var(--blanco); border-radius: 14px; padding: 44px 50px; display: flex; flex-direction: column; gap: 26px; }
+.kpis .k-cab { display: flex; align-items: baseline; justify-content: space-between; }
+.kpis .k-cab b { font-size: 40px; }
+.kpis .k-grilla { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 22px; }
+.kpis .k { background: var(--hueso); border-radius: 18px; padding: 30px 34px; display: flex; flex-direction: column; justify-content: center; gap: 6px; opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.rec.on .kpis .k { opacity: 1; transform: none; }
+.kpis .k b { font-size: 84px; line-height: 1; font-weight: 700; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.kpis .k span { font-size: 24px; color: var(--azul2); }
+.kpis .k:nth-child(4) { background: var(--azul); color: #fff; } .kpis .k:nth-child(4) span { color: var(--arena); }
+.kpis .k-nota { font-size: 16px; color: var(--gris); }
+
+/* ---------- Vitrinas y robustez ---------- */
+#cajon.directo { transition: none !important; }
+.navegador.sin-imagen .vista { min-height: 300px; background: var(--hueso); }
+.tarjeta.texto p.capacitacion { font-size: 22px; color: var(--azul2); background: var(--hueso); border-radius: 12px; padding: 12px 18px; }
+.tarjeta.texto p.capacitacion b { font-size: 26px; }
+.slide.vitrina { background: transparent; }

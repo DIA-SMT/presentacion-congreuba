@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#111a3b">
+<title>Botonera · Panel UBA</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="version.js"></script>
+<script src="contenido.js"></script>
+<script src="remoto.js"></script>
+<style>
+@font-face { font-family: 'Poppins'; font-weight: 400; src: url(fonts/Poppins-Regular.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 600; src: url(fonts/Poppins-SemiBold.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 800; src: url(fonts/Poppins-ExtraBold.ttf); }
+:root { --azul: #111a3b; --azul2: #1c2650; --azul3: #2a3566; --gris: #8a8270; --arena: #c9c4b8; --verde: #3ecf8e; --rojo: #e5484d; --amarillo: #f4dc00; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { background: var(--azul); color: #fff; font-family: 'Poppins', system-ui, sans-serif; user-select: none; touch-action: manipulation; }
+body { padding: calc(8px + env(safe-area-inset-top)) 12px calc(20px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 10px; }
+button { font-family: inherit; border: 0; color: inherit; border-radius: 20px; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; transition: transform .08s ease, filter .15s ease, box-shadow .2s ease; position: relative; overflow: hidden; padding: 8px 10px; line-height: 1.15; text-align: center; min-width: 0; }
+button:active { transform: scale(.97); filter: brightness(1.25); }
+button small { font-size: 13px; font-weight: 600; opacity: .85; max-width: 96%; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+button.enviando { box-shadow: inset 0 0 0 4px rgba(255,255,255,.55); }
+button.llego { box-shadow: inset 0 0 0 5px var(--verde); }
+button.fallo { box-shadow: inset 0 0 0 5px var(--rojo); animation: temblar .35s ease; }
+button.toca { animation: late 1.1s ease-in-out infinite; }
+@keyframes late { 50% { box-shadow: 0 0 0 6px rgba(244,220,0,.55), inset 0 0 0 4px rgba(255,255,255,.7); } }
+@keyframes temblar { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+/* Arriba, siempre a la vista: estado, cronómetro, guion y los botones grandes. */
+.fijo { position: sticky; top: 0; z-index: 5; background: var(--azul); display: flex; flex-direction: column; gap: 8px; padding: 4px 0 8px; }
+.estado { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #aab3cc; min-height: 34px; border-radius: 14px; padding: 0 4px; }
+.estado .titulo { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #dfe4f2; }
+.estado b { color: #fff; font-size: 16px; }
+.punto { width: 12px; height: 12px; border-radius: 50%; background: var(--rojo); flex: none; }
+.punto.ok { background: var(--verde); }
+.estado.alerta { background: var(--rojo); color: #fff; padding: 8px 12px; min-height: 52px; }
+.estado.alerta .titulo { color: #fff; white-space: normal; font-weight: 800; }
+.estado.alerta .punto { background: #fff; animation: titilar 1s infinite; }
+@keyframes titilar { 50% { opacity: .3; } }
+.reloj { font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; background: var(--azul2); border-radius: 10px; padding: 4px 10px; color: #fff; }
+.reloj.ojo { background: #b7791f; } .reloj.ya { background: var(--rojo); }
+.guion { background: var(--azul2); border-left: 4px solid var(--arena); border-radius: 12px; padding: 8px 12px; font-size: 14px; line-height: 1.35; color: #e8ecf6; }
+.guion b { color: var(--arena); font-size: 11px; letter-spacing: 1.5px; margin-right: 6px; }
+.guion:empty { display: none; }
+.nav { display: grid; grid-template-columns: 1fr 2.6fr; gap: 8px; height: 84px; }
+.nav button { height: 100%; }
+#anterior { background: var(--azul3); font-size: 20px; }
+#siguiente { background: #f5f3ee; color: var(--azul); font-size: 30px; }
+.migue { display: grid; grid-template-columns: 2.3fr 1fr 1fr; gap: 8px; height: 70px; }
+#atras small { font-size: 11px; }
+.migue button { height: 100%; }
+#migue { background: var(--amarillo); color: #222; font-size: 20px; }
+#migue.suena { background: var(--verde); }
+#migue small { font-style: italic; font-size: 12px; }
+.gris { background: var(--azul3); font-size: 15px; }
+
+/* Secciones de abajo. */
+h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--arena); margin: 10px 2px -2px; }
+.cajones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cajones button { height: 66px; background: var(--azul2); border: 2px solid var(--azul3); font-size: 15px; }
+.cajones button em { font-style: normal; font-size: 11px; color: var(--arena); letter-spacing: 1px; }
+.cajones button.on { background: var(--verde); border-color: var(--verde); color: #0d2419; }
+.cajones button.on em { color: #0d2419; }
+.cajones button.visto::after { content: '✓'; position: absolute; right: 8px; top: 4px; font-size: 13px; color: var(--arena); }
+.recursos { display: none; grid-template-columns: 1fr 2.2fr 1fr; gap: 8px; }
+.recursos.ver { display: grid; }
+.recursos button { height: 58px; background: var(--azul3); font-size: 18px; }
+.recursos .rec-tit { background: var(--azul2); border-radius: 16px; display: flex; flex-direction: column; justify-content: center; padding: 6px 10px; font-size: 13px; font-weight: 600; color: #dfe4f2; line-height: 1.25; text-align: center; }
+.recursos .rec-tit b { font-size: 11px; color: var(--arena); letter-spacing: 1px; }
+#cerrarCajon { grid-column: 1 / -1; height: 46px; background: transparent; border: 2px solid var(--azul3); font-size: 15px; }
+.vitrina { display: none; grid-template-columns: 1fr 52px 52px; grid-template-rows: auto 44px; gap: 6px 8px; background: var(--azul2); border: 2px solid var(--arena); border-radius: 18px; padding: 8px; }
+.vitrina.ver { display: grid; }
+.vt-txt { grid-column: 1 / 2; grid-row: 1 / 2; display: flex; flex-direction: column; justify-content: center; font-size: 13px; line-height: 1.25; color: #dfe4f2; min-width: 0; }
+.vt-txt b { font-size: 11px; letter-spacing: 1.5px; color: var(--arena); text-transform: uppercase; }
+.vt-txt span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#vtAnt, #vtSig { grid-row: 1 / 2; height: 46px; background: var(--azul3); font-size: 18px; }
+#vtSeguir, #vtRepro { grid-row: 2 / 3; height: 44px; font-size: 14px; background: var(--azul3); }
+#vtSeguir { grid-column: 1 / 2; } #vtRepro { grid-column: 2 / 4; background: var(--verde); color: #0d2419; }
+#vtSeguir.oculto, #vtRepro.oculto { visibility: hidden; }
+#siguiente small { font-size: 12px; color: var(--azul3); font-weight: 600; letter-spacing: .3px; }
+.error { display: none; background: var(--rojo); border-radius: 12px; padding: 8px 12px; font-size: 13px; font-weight: 600; }
+.error.ver { display: block; }
+#reproducir { display: none; height: 64px; background: var(--verde); color: #0d2419; font-size: 20px; }
+#reproducir.ver { display: flex; }
+.preguntas { display: flex; flex-direction: column; gap: 8px; }
+.preguntas button { background: var(--azul2); border: 2px solid var(--azul3); font-size: 14px; font-weight: 600; min-height: 54px; text-align: left; align-items: flex-start; padding: 8px 14px; }
+.preguntas button.lista::after { content: '✓ lista'; position: absolute; right: 10px; bottom: 4px; font-size: 11px; color: var(--verde); font-weight: 800; }
+.libre { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.libre input { font: 600 16px Poppins, sans-serif; padding: 14px; border-radius: 16px; border: 2px solid var(--azul3); background: #0b1130; color: #fff; user-select: text; min-width: 0; }
+.libre button { background: #f5f3ee; color: var(--azul); font-size: 15px; padding: 0 16px; }
+#cerrarPregunta { height: 46px; background: transparent; border: 2px solid var(--azul3); font-size: 15px; }
+#cerrarPregunta.on { background: var(--rojo); border-color: var(--rojo); }
+.extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.extras button { height: 56px; background: var(--azul2); border: 2px solid var(--azul3); font-size: 15px; }
+.extras button.on { background: var(--verde); border-color: var(--verde); color: #0d2419; }
+.placas { display: flex; flex-direction: column; gap: 6px; }
+.placas button { background: var(--azul2); font-size: 14px; font-weight: 600; text-align: left; align-items: flex-start; padding: 12px 14px; border-radius: 14px; }
+.placas button.on { background: #f5f3ee; color: var(--azul); }
+
+/* Chequeo antes de empezar. */
+#chequeo { background: var(--azul2); border: 2px solid var(--azul3); border-radius: 20px; padding: 14px 16px; display: none; flex-direction: column; gap: 8px; }
+#chequeo.ver { display: flex; }
+#chequeo li { list-style: none; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: #dfe4f2; }
+#chequeo li i { width: 20px; height: 20px; border-radius: 50%; flex: none; background: #56627a; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 13px; color: var(--azul); font-weight: 800; }
+#chequeo li.ok i { background: var(--verde); } #chequeo li.ok i::after { content: "✓"; }
+#chequeo li.mal i { background: var(--rojo); color: #fff; } #chequeo li.mal i::after { content: "!"; }
+#chequeo .listo { font-size: 15px; font-weight: 800; border-radius: 12px; padding: 10px 12px; background: var(--azul3); text-align: center; }
+#chequeo .listo.si { background: var(--verde); color: #0d2419; }
+
+#sala { position: fixed; inset: 0; z-index: 9; background: var(--azul); display: none; flex-direction: column; justify-content: center; gap: 16px; padding: 28px; }
+#sala.ver { display: flex; }
+#sala h1 { font-size: 26px; font-weight: 800; }
+#sala p { font-size: 16px; color: #aab3cc; line-height: 1.45; }
+#sala input { font: 600 22px Poppins, sans-serif; padding: 16px 18px; border-radius: 16px; border: 2px solid var(--azul3); background: #0b1130; color: #fff; user-select: text; }
+#sala button { background: #f5f3ee; color: var(--azul); font-size: 20px; padding: 18px; }
+</style>
+</head>
+<body>
+
+<div class="fijo">
+  <div class="estado" id="estado"><span class="punto" id="punto"></span><span class="titulo" id="titulo">Conectando…</span><span class="reloj" id="reloj">0:00</span><b id="num">–</b></div>
+  <div class="guion" id="guion"></div>
+  <div class="nav"><button id="anterior">◀</button><button id="siguiente">SIGUIENTE ▶<small id="sigue"></small></button></div>
+  <div class="vitrina" id="vitrina"><div class="vt-txt"><b id="vtNombre"></b><span id="vtRec"></span></div><button id="vtAnt">◀</button><button id="vtSig">▶</button><button id="vtSeguir">Que siga sola</button><button id="vtRepro">↻ Avance</button></div>
+  <div class="error" id="error"></div>
+  <div class="migue"><button id="migue">MIGUE HABLA<small id="migueSub">Próxima frase</small></button><button class="gris" id="callar">Callar</button><button class="gris" id="atras">↶<small>deshacer</small></button></div>
+</div>
+
+<div id="chequeo">
+  <ul>
+    <li id="ck-pantalla"><i></i><span>Pantalla conectada</span></li>
+    <li id="ck-videos"><i></i><span>Migue</span></li>
+    <li id="ck-respuestas"><i></i><span>Respuestas de Migue</span></li>
+    <li id="ck-avance"><i></i><span>Datos de CIMBA</span></li>
+  </ul>
+  <p class="listo" id="ck-listo">Revisando…</p>
+</div>
+
+<h2>Preguntale a Migue, en vivo</h2>
+<div class="preguntas" id="preguntas"></div>
+<form class="libre" id="libre"><input id="pregLibre" placeholder="Escribí otra pregunta…" autocomplete="off" enterkeyhint="send"><button type="submit" id="enviarLibre">Preguntar</button></form>
+<button id="cerrarPregunta">Cerrar la respuesta</button>
+
+<h2>Extras para preguntas · cajones</h2>
+<div class="cajones" id="cajones"></div>
+<div class="recursos" id="recursos">
+  <button id="recAnt">◀</button>
+  <div class="rec-tit"><b id="recNum"></b><span id="recTit"></span></div>
+  <button id="recSig">▶</button>
+  <button id="cerrarCajon">Cerrar cajón ✕</button>
+</div>
+<button id="reproducir">▶ REPRODUCIR AVANCE</button>
+
+
+<h2>Extras</h2>
+<div class="extras">
+  <button id="qr">QR<small>Migue</small></button>
+  <button id="negro">Negro<small>pantalla</small></button>
+  <button id="foco">Foco<small>en Migue</small></button>
+</div>
+
+<h2>Ir a la placa</h2>
+<div class="placas" id="placas"></div>
+
+<form id="sala">
+  <h1>Falta el código de sala</h1>
+  <p>Escaneá el QR de la pantalla de inicio de la presentación (tecla Q), o escribí el código. Queda guardado en este celular.</p>
+  <input id="salaCodigo" placeholder="código…" autocomplete="off" spellcheck="false" autocapitalize="off">
+  <button type="submit">Conectar</button>
+</form>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const C = window.CONTENIDO;
+let ultimo = null, conectado = false, textoConexion = 'Conectando…';
+// Si hay más de una pantalla abierta con este código, se sigue a la que arrancó última (la del salón).
+const pantallas = {};
+function recibir(e) {
+  pantallas[e.pantalla || 'una'] = { e, t: Date.now() };
+  const vivas = Object.values(pantallas).filter(x => Date.now() - x.t < 6000);
+  vivas.sort((a, b) => (b.e.empezado - a.e.empezado) || ((b.e.desde || 0) - (a.e.desde || 0)) || (b.t - a.t));
+  ultimo = (vivas[0] || { e }).e;
+  ultimo.otras = vivas.length - 1;
+}
+
+const remoto = window.Remoto.iniciar({
+  rol: 'control',
+  alRecibirEstado: (e) => { recibir(e); pintar(); },
+  alCambiarConexion: (ok, txt) => { conectado = ok; textoConexion = txt; pintar(); },
+});
+if (remoto.modo === 'sin-sala') {
+  $('sala').classList.add('ver');
+  $('sala').addEventListener('submit', (e) => { e.preventDefault(); const v = $('salaCodigo').value.trim(); if (v) remoto.guardarSala(v); });
+}
+
+// Un toque = una orden, confirmada por la pantalla (borde verde; rojo si no llegó).
+// Se ignoran los toques repetidos muy seguidos.
+const ultimoToque = {};
+function enviar(b, cmd) {
+  const id = b.id || b.dataset.k; const ahora = Date.now();
+  if (ahora - (ultimoToque[id] || 0) < 600) return; ultimoToque[id] = ahora;
+  if (navigator.vibrate) navigator.vibrate(18);
+  b.classList.remove('llego', 'fallo'); b.classList.add('enviando');
+  remoto.enviarComando(cmd, (ok) => {
+    b.classList.remove('enviando'); b.classList.add(ok ? 'llego' : 'fallo');
+    if (!ok && navigator.vibrate) navigator.vibrate([80, 60, 80]);
+    setTimeout(() => b.classList.remove('llego', 'fallo'), ok ? 450 : 1600);
+  });
+}
+function boton(id, armar) { const b = $(id); b.addEventListener('click', () => enviar(b, armar())); }
+boton('siguiente', () => ({ cmd: 'siguiente' }));
+boton('anterior', () => ({ cmd: 'anterior' }));
+boton('migue', () => ({ cmd: 'migue' }));
+boton('callar', () => ({ cmd: 'callar' }));
+boton('atras', () => ({ cmd: 'migue-atras' }));
+boton('recAnt', () => ({ cmd: 'recurso', d: -1 }));
+boton('recSig', () => ({ cmd: 'recurso', d: 1 }));
+boton('cerrarCajon', () => ({ cmd: 'cajon-cerrar' }));
+boton('reproducir', () => ({ cmd: 'reproducir' }));
+boton('vtAnt', () => ({ cmd: 'recurso', d: -1 }));
+boton('vtSig', () => ({ cmd: 'recurso', d: 1 }));
+boton('vtSeguir', () => ({ cmd: 'seguir' }));
+boton('vtRepro', () => ({ cmd: 'reproducir' }));
+boton('cerrarPregunta', () => ({ cmd: 'cerrar-pregunta' }));
+boton('qr', () => ({ cmd: 'qr', on: !$('qr').classList.contains('on') }));
+boton('negro', () => ({ cmd: 'negro', on: !$('negro').classList.contains('on') }));
+boton('foco', () => ({ cmd: 'foco', on: !$('foco').classList.contains('on') }));
+
+// Los cajones y las preguntas salen de contenido.js (los mismos que la pantalla).
+$('cajones').innerHTML = C.PROYECTOS.map(p => `<button data-k="cj-${p.id}" data-id="${p.id}"><em>${p.num}</em>${p.nombre}</button>`).join('');
+$('cajones').querySelectorAll('button').forEach(b => b.addEventListener('click', () => enviar(b, { cmd: 'cajon', proyecto: b.dataset.id })));
+$('preguntas').innerHTML = (C.PREGUNTAS || []).map((p, i) => `<button data-k="pr-${i}" data-n="${i}"></button>`).join('');
+$('preguntas').querySelectorAll('button').forEach(b => { b.textContent = C.PREGUNTAS[+b.dataset.n]; b.addEventListener('click', () => enviar(b, { cmd: 'preguntar', n: +b.dataset.n })); });
+$('libre').addEventListener('submit', (e) => {
+  e.preventDefault(); const t = $('pregLibre').value.trim(); if (!t) return;
+  enviar($('enviarLibre'), { cmd: 'preguntar', texto: t }); $('pregLibre').value = ''; $('pregLibre').blur();
+});
+
+function marca(id, estado, texto) { const li = $(id); li.className = estado; li.querySelector('span').textContent = texto; }
+function pintarChequeo() {
+  const e = ultimo, c = (e && e.chequeo) || null;
+  const antes = !e || e.empezado === false;
+  $('chequeo').classList.toggle('ver', antes && remoto.modo !== 'sin-sala');
+  if (!antes) return;
+  const ok = { pantalla: conectado && !!e, videos: false, respuestas: false, avance: false };
+  marca('ck-pantalla', ok.pantalla ? 'ok' : 'mal', ok.pantalla ? 'Pantalla conectada' : 'Sin pantalla: abrila con el mismo código');
+  if (c) {
+    ok.videos = c.videos >= c.totalVideos; ok.respuestas = c.respuestas >= c.totalRespuestas; ok.avance = !!c.avance;
+    marca('ck-videos', ok.videos ? 'ok' : '', 'Migue: ' + c.videos + ' de ' + c.totalVideos + ' videos');
+    marca('ck-respuestas', ok.respuestas ? 'ok' : (c.codigo === 'mal' ? 'mal' : ''), c.codigo === 'mal' ? 'Respuestas: código de sala no aceptado' : 'Respuestas de Migue: ' + c.respuestas + ' de ' + c.totalRespuestas);
+    marca('ck-avance', ok.avance ? 'ok' : 'mal', ok.avance ? 'Datos de CIMBA cargados' : 'Faltan los datos de CIMBA');
+  }
+  const todo = ok.pantalla && ok.videos && ok.respuestas;
+  $('ck-listo').classList.toggle('si', todo);
+  $('ck-listo').textContent = todo ? 'Todo listo. Que toquen "Comenzar" en la pantalla grande.' : 'Todavía no: esperá a que esté en verde.';
+}
+function pintar() {
+  pintarChequeo();
+  const e = ultimo;
+  const sinEmpezar = conectado && e && e.empezado === false;
+  const vieja = conectado && e && e.version !== window.UBA_VERSION;
+  $('estado').classList.toggle('alerta', !conectado || vieja);
+  $('punto').classList.toggle('ok', conectado && !sinEmpezar);
+  $('titulo').textContent = !conectado ? textoConexion : vieja ? 'Versión distinta: recargá la pantalla y esta botonera' : sinEmpezar ? 'Esperando "Comenzar" en la pantalla' : ((e && e.titulo) || 'Conectado');
+  if (!e) return;
+  $('num').textContent = `${e.placa}/${e.total}`;
+  // Migue
+  const v = e.videos || [];
+  $('migue').classList.toggle('suena', !!e.hablando);
+  $('migue').classList.toggle('toca', !!e.tocaMigue);
+  $('migue').firstChild.textContent = e.hablando ? 'MIGUE HABLANDO' : 'MIGUE HABLA';
+  $('migueSub').textContent = e.hablando ? (v[e.actual] || '') : (v[e.proximo] ? (e.proximo + 1) + '. “' + corta(e.fraseProxima, 70) + '”' : 'No quedan frases');
+  // Guion
+  const gu = $('guion'); gu.innerHTML = ''; if (e.guion) { const b = document.createElement('b'); b.textContent = 'VOS'; gu.append(b, document.createTextNode(e.guion)); }
+  // Lo que viene y la vitrina en pantalla.
+  $('sigue').textContent = e.siguiente ? 'Sigue: ' + corta(e.siguiente, 38) : '';
+  const cj = e.cajon || {};
+  const enVitrina = cj.modo === 'vitrina';
+  $('vitrina').classList.toggle('ver', enVitrina);
+  if (enVitrina) {
+    $('vtNombre').textContent = (cj.nombre || '') + ' · ' + (cj.idx + 1) + ' de ' + cj.total;
+    $('vtRec').textContent = (cj.recurso || '') + (cj.auto ? ' · pasa sola en ' + cj.restante + ' s' : cj.pausado ? ' · en pausa' : (cj.idx + 1 === cj.total ? ' · última' : ''));
+    $('vtSeguir').classList.toggle('oculto', !cj.pausado);
+    $('vtRepro').classList.toggle('oculto', cj.tipo !== 'avance');
+    $('vtRepro').textContent = e.avance && e.avance.corriendo ? '⏵ Avance…' : '↻ Avance';
+  }
+  const er = e.error, errorReciente = !!(er && Date.now() - er.t < 15000);
+  $('error').classList.toggle('ver', e.otras > 0 || errorReciente);
+  if (e.otras > 0) $('error').textContent = 'Hay ' + (e.otras + 1) + ' pantallas abiertas con este código: todas obedecen. Cerrá las que no sean la del salón.';
+  else if (errorReciente) $('error').textContent = 'La pantalla no pudo hacer: ' + er.cmd + ' (' + corta(er.msg, 60) + ')';
+  // Cajones (extras)
+  $('cajones').querySelectorAll('button').forEach(b => { b.classList.toggle('on', cj.modo === 'cajon' && cj.abierto === b.dataset.id); b.classList.toggle('visto', (cj.vistos || []).includes(b.dataset.id)); });
+  $('recursos').classList.toggle('ver', cj.modo === 'cajon');
+  $('recNum').textContent = cj.abierto ? (cj.nombre + ' · ' + (cj.total ? (cj.idx + 1) + ' de ' + cj.total : 'sin recursos')).toUpperCase() : '';
+  $('recTit').textContent = cj.recurso || '';
+  $('reproducir').classList.toggle('ver', cj.modo === 'cajon' && cj.tipo === 'avance');
+  $('reproducir').textContent = e.avance && e.avance.corriendo ? '⏵ REPRODUCIENDO…' : '▶ REPRODUCIR AVANCE';
+  // Preguntas
+  (e.preguntas || []).forEach((p, i) => { const b = $('preguntas').children[i]; if (b) b.classList.toggle('lista', !!p.lista); });
+  $('cerrarPregunta').classList.toggle('on', !!e.vivo);
+  $('cerrarPregunta').textContent = e.vivo === 'pensando' ? 'Migue está pensando… (cerrar)' : e.vivo ? 'Cerrar la respuesta' : 'Cerrar la respuesta';
+  // Extras
+  const ef = e.efectos || {};
+  ['qr', 'negro', 'foco'].forEach(k => $(k).classList.toggle('on', !!ef[k]));
+  // Placas
+  const pl = $('placas');
+  if (pl.children.length !== (e.placas || []).length) {
+    pl.innerHTML = '';
+    (e.placas || []).forEach((t, i) => { const b = document.createElement('button'); b.dataset.k = 'pl-' + i; b.textContent = t; b.addEventListener('click', () => enviar(b, { cmd: 'ir', n: i })); pl.appendChild(b); });
+  }
+  [...pl.children].forEach((b, i) => b.classList.toggle('on', i === e.placa - 1));
+}
+function corta(t, n) { t = String(t || ''); return t.length > n ? t.slice(0, n - 1) + '…' : t; }
+
+// Cronómetro de la charla: desde "Comenzar". Ámbar a los 8 minutos, rojo a los 10.
+setInterval(() => {
+  const d = ultimo && ultimo.empezado && ultimo.desde ? Math.max(0, Date.now() - ultimo.desde) : 0;
+  const s = Math.floor(d / 1000);
+  $('reloj').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  $('reloj').classList.toggle('ojo', s >= 480 && s < 600); $('reloj').classList.toggle('ya', s >= 600);
+}, 500);
+
+// Que la pantalla del celular no se apague en medio de la charla.
+let candado = null;
+async function despierto() { try { if ('wakeLock' in navigator && !candado) { candado = await navigator.wakeLock.request('screen'); candado.addEventListener('release', () => { candado = null; }); } } catch (e) { } }
+despierto(); document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') despierto(); });
+document.addEventListener('click', despierto, { once: true });
+</script>
+</body>
+</html>

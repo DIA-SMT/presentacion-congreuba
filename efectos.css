@@ -1,0 +1,84 @@
+/* =====================================================================
+   Migue, recursos en vivo y transiciones. Se disparan desde el celular
+   (control.html) o el teclado.
+   ===================================================================== */
+
+/* ---------- Migue, suelto al costado (video con el verde recortado) ---------- */
+#migue { position: absolute; z-index: 6; left: calc(1450px + var(--extra)); top: 420px; width: 440px; height: 640px; pointer-events: none; transition: opacity .5s ease, transform .5s ease; }
+#migue.oculto { opacity: 0; transform: translateY(40px); }
+#migue.fuera { opacity: 0; transform: translateY(75%); transition: opacity .4s ease, transform .45s cubic-bezier(.5,0,.8,.4); }
+#migue.izq { left: 40px; }
+#disco { position: absolute; left: 10px; top: 120px; width: 420px; height: 420px; border-radius: 50%; background: rgba(255,255,255,.75); box-shadow: 0 0 0 14px rgba(255,255,255,.28); transition: background .6s ease, transform .12s linear; }
+#piso { position: absolute; left: 90px; top: 578px; width: 260px; height: 36px; border-radius: 50%; background: radial-gradient(closest-side, rgba(17,26,59,.28), rgba(17,26,59,0)); }
+#lienzo { position: absolute; left: 0; top: 0; width: 440px; height: 640px; }
+#habla { position: absolute; left: 50%; top: -30px; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; background: var(--azul); color: var(--blanco); border-radius: 999px; padding: 6px 22px 6px 8px; font-size: 22px; font-weight: 600; opacity: 0; transition: opacity .3s ease; white-space: nowrap; }
+#habla img { width: 40px; height: 40px; border-radius: 50%; background: var(--smt-amarillo); object-fit: cover; }
+#habla .barras { display: flex; gap: 4px; align-items: center; height: 26px; }
+#habla .barras i { display: block; width: 5px; height: 6px; border-radius: 3px; background: var(--arena); }
+#migue.hablando #habla { opacity: 1; }
+#migue.hablando.sin-video #lienzo { animation: decir .5s ease-in-out infinite alternate; transform-origin: 50% 93%; }
+@keyframes decir { from { transform: none; } to { transform: translateY(-5px) rotate(.6deg); } }
+/* Le toca hablar: tres puntitos al lado de Migue. */
+#migue::after { content: '• • •'; position: absolute; left: 30px; top: 60px; font-size: 30px; letter-spacing: 2px; color: var(--azul); background: #fff; border-radius: 22px 22px 22px 6px; padding: 2px 16px 8px; box-shadow: 0 8px 24px rgba(17,26,59,.15); opacity: 0; transition: opacity .3s ease; }
+#migue.quiere-hablar::after { opacity: 1; animation: latido 1.2s ease-in-out infinite; }
+@keyframes latido { 50% { transform: scale(1.08); } }
+
+/* Globo de diálogo de Migue. */
+#globo { position: absolute; z-index: 6; left: calc(1430px + var(--extra)); width: max-content; max-width: 460px; bottom: 640px; background: var(--blanco); color: var(--azul); border-radius: 36px 36px 8px 36px; padding: 26px 32px; font-size: 31px; font-weight: 600; line-height: 1.3; box-shadow: 0 14px 40px rgba(17,26,59,.18); opacity: 0; transform: translateY(20px) scale(.9); transform-origin: 80% 100%; transition: opacity .35s ease, transform .35s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+#globo.ver { opacity: 1; transform: none; }
+#globo.dice { bottom: 700px; }
+#stage.migue-izq #globo { left: 300px; border-radius: 36px 36px 36px 8px; }
+
+/* ---------- Subtítulos de Migue ---------- */
+#subtitulo { position: absolute; z-index: 7; left: calc(128px + var(--extra) / 3); width: 1272px; bottom: 56px; text-align: center; pointer-events: none; opacity: 0; transform: translateY(16px); transition: opacity .3s ease, transform .3s ease; font-size: 40px; line-height: 1.3; font-weight: 700; color: #fff; }
+#subtitulo.ver { opacity: 1; transform: none; }
+#subtitulo span { background: rgba(17,26,59,.9); padding: 6px 24px; border-radius: 16px; line-height: 1.55; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+/* ---------- Foco en Migue ---------- */
+#velo { position: absolute; inset: 0; z-index: 5; background: rgba(17,26,59,.55); opacity: 0; pointer-events: none; transition: opacity .5s ease; }
+#stage.foco #velo, #stage.envivo #velo { opacity: 1; }
+#luz { position: absolute; z-index: 5; left: calc(1180px + var(--extra)); top: 250px; width: 980px; height: 980px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(255,255,255,.5) 0%, rgba(255,255,255,.16) 38%, rgba(255,255,255,0) 62%); opacity: 0; transform: scale(.85); transition: opacity .6s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+#stage.foco #luz { opacity: 1; transform: none; }
+
+/* ---------- Preguntale a Migue, en vivo ---------- */
+#vivo { position: absolute; z-index: 6; left: calc(110px + var(--extra) / 3); top: 120px; width: 1250px; bottom: 110px; background: rgba(255,255,255,.96); border-radius: 36px; box-shadow: 0 40px 100px rgba(17,26,59,.3); display: flex; flex-direction: column; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(40px) scale(.97); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1), visibility 0s linear .6s; }
+#vivo.ver { opacity: 1; visibility: visible; transform: none; transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
+#vivo .cab-vivo { display: flex; align-items: center; gap: 22px; padding: 26px 40px; background: var(--azul); color: var(--blanco); font-size: 30px; font-weight: 700; }
+#vivo .envivo { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; background: var(--rojo); border-radius: 999px; padding: 6px 16px; }
+#vivo .envivo i { width: 12px; height: 12px; border-radius: 50%; background: #fff; animation: titilar 1s infinite; }
+@keyframes titilar { 50% { opacity: .3; } }
+#vivo .sub { margin-left: auto; font-size: 19px; font-weight: 500; color: var(--arena); }
+#vivo .hilo { flex: 1; overflow: hidden; padding: 40px 50px; display: flex; flex-direction: column; gap: 30px; }
+#vivo .preg { align-self: flex-end; max-width: 80%; background: var(--azul); color: #fff; font-size: 34px; font-weight: 600; line-height: 1.3; border-radius: 34px 34px 8px 34px; padding: 22px 32px; }
+#vivo .resp { display: flex; gap: 22px; align-items: flex-start; }
+#vivo .resp img { width: 76px; height: 76px; border-radius: 50%; background: var(--smt-amarillo); flex: none; object-fit: cover; }
+#vivo .resp .txt { background: var(--hueso); border-radius: 8px 34px 34px 34px; padding: 24px 32px; font-size: 29px; line-height: 1.42; color: var(--azul); max-width: 960px; }
+#vivo .resp .txt.chica { font-size: 23px; }
+#vivo .pensando { display: flex; gap: 10px; padding: 8px 0; }
+#vivo .pensando i { width: 14px; height: 14px; border-radius: 50%; background: var(--gris); animation: saltito 1s ease-in-out infinite; }
+#vivo .pensando i:nth-child(2) { animation-delay: .15s; } #vivo .pensando i:nth-child(3) { animation-delay: .3s; }
+@keyframes saltito { 50% { transform: translateY(-10px); opacity: .5; } }
+
+/* ---------- QR gigante ---------- */
+#qrs { position: absolute; inset: 0; z-index: 8; background: var(--azul); color: #fff; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 36px; padding: 0 0 0 calc(160px + var(--extra) / 3); opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility 0s linear .5s; }
+#qrs.ver { opacity: 1; visibility: visible; transition: opacity .5s ease; }
+#qrs .ceja { color: var(--arena); }
+#qrs h2 { font-size: 92px; line-height: 1.05; font-weight: 800; letter-spacing: -2px; }
+#qrs .fila { display: flex; gap: 48px; }
+#qrs .qr { background: #fff; color: var(--azul); border-radius: 40px; padding: 36px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 500px; }
+#qrs .qr img { width: 380px; height: 380px; }
+#qrs .qr b { font-size: 38px; font-weight: 800; }
+#qrs .qr span { font-size: 24px; color: var(--suave); }
+
+/* ---------- Pantalla negra ---------- */
+#negro { position: absolute; inset: 0; background: #000; opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility 0s linear .6s; z-index: 18; }
+#negro.ver { opacity: 1; visibility: visible; transition: opacity .6s ease; }
+
+/* ---------- Cortina entre placas: un paño azul con la trama de puntos del globo ---------- */
+#cortina { position: absolute; inset: 0; z-index: 9; pointer-events: none; visibility: hidden; overflow: hidden; }
+#cortina i { position: absolute; top: -10%; bottom: -10%; left: 0; width: 140%;
+  background: radial-gradient(circle, rgba(201,196,184,.55) 2.2px, transparent 2.6px) 0 0 / 26px 26px, linear-gradient(90deg, rgba(17,26,59,0) 0%, var(--azul) 18%, var(--azul) 82%, rgba(17,26,59,0) 100%);
+  transform: translateX(-110%) skewX(-12deg); }
+#cortina.va { visibility: visible; }
+#cortina.va i { animation: cortinear 1.15s cubic-bezier(.7,0,.25,1) forwards; }
+@keyframes cortinear { from { transform: translateX(-110%) skewX(-12deg); } to { transform: translateX(110%) skewX(-12deg); } }

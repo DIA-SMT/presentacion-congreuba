@@ -1,0 +1,17 @@
+server.js
+INICIAR.bat
+.env*
+.vercel
+.gitignore
+GUION.txt
+README.md
+assets/template/*.json
+assets/template/*.md
+assets/template/template-preview.html
+assets/template/logos/_src
+media/migue11.mp4
+media/migue12.mp4
+media/migue13.mp4
+img/capturas/cidituc
+node_modules
+.sala-codigo
