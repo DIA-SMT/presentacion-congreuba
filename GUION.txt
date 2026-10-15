@@ -3,9 +3,9 @@ GUION DE PRÁCTICA · LA IA COMO SERVICIO PÚBLICO (UBA, 16/10/2026, 11:45)
 Tiempo: 8 a 10 minutos. El cronómetro de la botonera se pone ámbar a los 8 y rojo a los 10.
 Vos sólo tocás SIGUIENTE. Las vitrinas de los proyectos pasan solas: vos contás.
 
-LINKS (CODIGO = el código de sala, en .sala-codigo; nunca en el repo)
-  Pantalla (técnica): https://uba-ia-servicio-publico.vercel.app/?sala=CODIGO
-  Botonera (tu cel):  https://uba-ia-servicio-publico.vercel.app/control?sala=CODIGO
+LINKS (sin código: canal fijo en config.js)
+  Pantalla (técnica): https://uba-ia-servicio-publico.vercel.app
+  Botonera (tu cel):  https://uba-ia-servicio-publico.vercel.app/control   (no se comparte)
 
 ANTES DE EMPEZAR
   - Ideal: la técnica toca COMENZAR (así Migue tiene sonido). Si se olvida, tu primer
