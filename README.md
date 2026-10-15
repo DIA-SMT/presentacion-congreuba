@@ -16,7 +16,7 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 
 ## Qué hay
 
-- 12 placas en el recorrido (`index.html`): portada con los logos de la organización, el decreto 0596/INT/2025, los ocho servicios, **seis vitrinas** (Migue, CIMBA, UrbanIA, EstudIA, Generador de Notas, Ciudad abierta), antes/ahora, conclusión y gracias. Tres placas quedan en el archivo con `data-oculta` (tres frentes, caso Migue, datos).
+- 11 placas en el recorrido (`index.html`): portada, primero las reglas (decreto 0596), el camino (puertas adentro → para el vecino, por Ciudad Digital), **seis vitrinas** que arrancan con su problema → solución (Puertas adentro, Migue, CIMBA, EstudIA, UrbanIA, Ciudad abierta), conclusión y gracias. Quedan en el archivo con `data-oculta`: tres frentes, caso Migue, datos y antes/ahora.
 - **Vitrinas** (`data-vitrina` en la placa): entran solas con la placa y sus recursos pasan solos (duraciones en `cajones.js` → `DURA`); el avance de CIMBA arranca solo. ◀ ▶ en la botonera las pausa; "Que siga sola" las retoma.
 - **Cajones** (extras para preguntas): el mismo contenido de `contenido.js` → `PROYECTOS`, abierto a mano sobre cualquier placa.
 - Migue de cuerpo entero con el verde recortado en vivo (`media/`), frases en `contenido.js` → `VIDEOS`.

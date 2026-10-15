@@ -19,50 +19,48 @@ ANTES DE EMPEZAR
    MIGUE 1 (globo): "¡Buenas! Vengo desde Tucumán. Atiendo las 24 horas… y sin turno."
    Saludo de la Intendenta Rossana Chahla. Único municipio de la mesa.
 
- 2 · PRIMERO, LAS REGLAS                                                  (0:40–1:50)
-   Decreto 0596/INT/2025 (10/12/2025), Guía Práctica y Ética. Principios, prohibición de
-   datos personales en herramientas públicas, capacitación constante (34 gerentes de
-   datos, 71 egresados). "La decisión final, la firma, la responsabilidad, es y será
-   siempre humana."
+ 2 · PRIMERO, LAS REGLAS                                                  (0:40–1:40)
+   Decreto 0596/INT/2025: cinco principios, cero datos personales en herramientas
+   públicas, capacitación constante (34 gerentes de datos, 71 egresados).
+   "La decisión final, la firma, la responsabilidad, es y será siempre humana."
 
- 3 · OCHO SERVICIOS                                                      (1:50–2:15)
-   "Ocho servicios públicos con IA, hechos en el municipio. Los recorremos."
+ 3 · EL CAMINO: PRIMERO ADENTRO                                           (1:40–2:10)
+   "Primero la usamos nosotros. Cuando funcionó adentro, la llevamos al vecino, con
+   Ciudad Digital como puerta: 160.000 vecinos."
 
- 4 · VITRINA MIGUE (atención ciudadana)                                  (2:15–3:30)
-   MIGUE 2 y MIGUE 3 cuando quieras.
-   Pasa solo: el cerebro (gobernanza) → el termómetro (clima ciudadano) → el portal →
-   queda la tarjeta "Le preguntamos a Migue". Si hay tiempo: botón "¿Hay algún corte de
-   tránsito hoy?" (responde con los cortes del día). Para cerrar, tocá la misma pregunta
-   otra vez: la vitrina sigue donde estaba (mientras Migue responde, se queda quieta).
+ 4 · VITRINA PUERTAS ADENTRO                                              (2:10–3:00)
+   Generador de Notas: había mucho miedo a la IA; fue la herramienta transversal que
+   abrió puertas (la IA redacta, la persona firma). Después Capital Humano: de 107 a
+   65 pasos, sin papel.
 
- 5 · VITRINA CIMBA (obra pública)                                        (3:30–4:20)
-   El avance arranca solo: seis meses en 18 segundos, 4.316 baches. Después pasa al mapa
-   y al muro de fotos. "↻ Avance" en la franja lo repite.
+ 5 · VITRINA MIGUE + CIUDAD DIGITAL                                       (3:00–4:10)
+   MIGUE 2 y MIGUE 3 cuando quieras. Problema → solución: 24 h, 17.848 consultas, 91%.
+   Después: Ciudad Digital, el cerebro, el termómetro y la tarjeta para preguntar en
+   vivo (tocá la pregunta; otro toque la cierra).
 
- 6 · VITRINA URBANIA (planeamiento urbano)                               (4:20–5:05)
-   Lo que dijo cada vecino en las audiencias, cruzado con cada norma del nuevo Código
-   (se recorre solo). Después: audiencias, Fábrica de Normas, Consulta al CPU, mapa.
+ 6 · VITRINA CIMBA                                                        (4:10–5:10)
+   Reclamos dispersos, duplicados, mal clasificados → cierre en un clic, 4.316 baches,
+   880 t de mezcla trazada. Después el avance arranca solo (18 segundos).
 
- 7 · VITRINA ESTUDIA (educación)                                         (5:05–5:40)
-   "La IA arma el borrador; el docente lo revisa antes de que llegue a sus estudiantes."
+ 7 · VITRINA ESTUDIA                                                      (5:10–5:55)
+   ¿Celulares sí o no?, docentes sobrecargados, datos dispersos, mal uso de la IA →
+   1 minuto por actividad, una plataforma, IA con tope y costo a la vista.
 
- 8 · VITRINA GENERADOR DE NOTAS (gestión interna)                        (5:40–6:15)
-   Lenguaje claro y mismo criterio en todas las áreas: la confianza en la IA se gana
-   desde adentro. La IA redacta, la persona firma.
+ 8 · VITRINA URBANIA                                                      (5:55–6:40)
+   Código de 1998 y audiencias sin sistematizar → cada idea del vecino cruzada con su
+   norma, minuto a minuto; los técnicos cerca de la redacción.
 
- 9 · VITRINA CIUDAD ABIERTA                                              (6:15–7:05)
-   Applaza (218 plazas, 911 evidencias, 24 cooperativas) → Bus Turístico → Presupuesto
-   Participativo → Ferias. Pasa solo.
+ 9 · VITRINA CIUDAD ABIERTA (sólo problema → solución, pasan solas)        (6:40–7:50)
+   Applaza (del Excel a certificar con un clic) → Bus Turístico (del Google Form a
+   reservas inteligentes) → Presupuesto Participativo (la IA te ayuda a armar el
+   proyecto) → FerIA (foto, costos y marketplace).
 
-10 · ANTES Y AHORA                                                       (7:05–7:35)
-   Dejá que aparezca cada "Ahora".
+10 · CONCLUSIÓN                                                           (7:50–8:30)
+   Reglas primero, adentro primero, el vecino en el centro. La IA interpreta; las
+   personas deciden.
 
-11 · CONCLUSIÓN                                                          (7:35–8:20)
-   La IA como servicio público: con reglas, con responsables y cerca del vecino.
-
-12 · GRACIAS (queda proyectada)
+11 · GRACIAS (queda proyectada)
    MIGUE 4: "¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad."
-   QR (Extras) para que la sala le escriba a Migue por Telegram.
 
 PARA LAS PREGUNTAS DEL PANEL
   "Extras para preguntas · cajones": abrí el proyecto que te pregunten (sobre cualquier
