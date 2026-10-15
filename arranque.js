@@ -184,7 +184,7 @@ function informar() {
     proyectos: window.cajones.lista(),
     cajon: window.cajones.estado(),
     avance: window.avance.estado(),
-    vivo: window.vivo.estado(), preguntas: window.vivo.preguntas(),
+    vivo: window.vivo.estado(), preguntas: window.vivo.preguntas(), preguntaAbierta: window.vivo.abierta(),
     efectos: window.efectos.estado(),
     chequeo: { imagenes: precarga.listas, totalImagenes: precarga.total, videos: m.listos, totalVideos: m.total, respuestas: v.listas, totalRespuestas: v.total, codigo: v.codigo, avance: window.avance.estado().datos },
     version: window.UBA_VERSION || 'vieja',

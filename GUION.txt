@@ -32,7 +32,8 @@ ANTES DE EMPEZAR
    MIGUE 2 y MIGUE 3 cuando quieras.
    Pasa solo: el cerebro (gobernanza) → el termómetro (clima ciudadano) → el portal →
    queda la tarjeta "Le preguntamos a Migue". Si hay tiempo: botón "¿Hay algún corte de
-   tránsito hoy?" (responde con los cortes del día) y después "Cerrar la respuesta".
+   tránsito hoy?" (responde con los cortes del día). Para cerrar, tocá la misma pregunta
+   otra vez: la vitrina sigue donde estaba (mientras Migue responde, se queda quieta).
 
  5 · VITRINA CIMBA (obra pública)                                        (3:30–4:20)
    El avance arranca solo: seis meses en 18 segundos, 4.316 baches. Después pasa al mapa
@@ -69,7 +70,8 @@ PARA LAS PREGUNTAS DEL PANEL
 
 SI ALGO FALLA
   - Una frase de Migue de más: ↶ deshacer.
-  - Migue no responde en vivo: a los ~40 s sale una respuesta de cortesía; cerrala.
+  - Migue no responde en vivo: a los ~40 s sale una respuesta de cortesía; tocá la
+    misma pregunta otra vez para cerrarla.
   - Aviso rojo "La pantalla no pudo hacer…": seguí con SIGUIENTE, la presentación no se traba.
   - Aviso "Versión distinta": recargar pantalla y botonera.
   - Pantalla negra: Extras → Negro. Saltar a una placa: "Ir a la placa", al final.

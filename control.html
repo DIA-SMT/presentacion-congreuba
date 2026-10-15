@@ -86,6 +86,8 @@ h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: u
 #reproducir.ver { display: flex; }
 .preguntas { display: flex; flex-direction: column; gap: 8px; }
 .preguntas button { background: var(--azul2); border: 2px solid var(--azul3); font-size: 14px; font-weight: 600; min-height: 54px; text-align: left; align-items: flex-start; padding: 8px 14px; }
+.preguntas button.abierta { background: var(--verde); border-color: var(--verde); color: #0d2419; }
+.preguntas button.abierta::after, .preguntas button.abierta.lista::after { content: '✕ tocá para cerrar'; position: absolute; right: 10px; bottom: 4px; font-size: 11px; color: #0d2419; font-weight: 800; }
 .preguntas button.lista::after { content: '✓ lista'; position: absolute; right: 10px; bottom: 4px; font-size: 11px; color: var(--verde); font-weight: 800; }
 .libre { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
 .libre input { font: 600 16px Poppins, sans-serif; padding: 14px; border-radius: 16px; border: 2px solid var(--azul3); background: #0b1130; color: #fff; user-select: text; min-width: 0; }
@@ -298,7 +300,8 @@ function pintar() {
   $('reproducir').classList.toggle('ver', cj.modo === 'cajon' && cj.tipo === 'avance');
   $('reproducir').textContent = e.avance && e.avance.corriendo ? '⏵ REPRODUCIENDO…' : '▶ REPRODUCIR AVANCE';
   // Preguntas
-  (e.preguntas || []).forEach((p, i) => { const b = $('preguntas').children[i]; if (b) b.classList.toggle('lista', !!p.lista); });
+  // La pregunta cuya respuesta está en pantalla queda marcada: otro toque la cierra.
+  (e.preguntas || []).forEach((p, i) => { const b = $('preguntas').children[i]; if (b) { b.classList.toggle('lista', !!p.lista); b.classList.toggle('abierta', p.texto === e.preguntaAbierta); } });
   $('cerrarPregunta').classList.toggle('on', !!e.vivo);
   $('cerrarPregunta').textContent = e.vivo === 'pensando' ? 'Migue está pensando… (cerrar)' : e.vivo ? 'Cerrar la respuesta' : 'Cerrar la respuesta';
   // Extras

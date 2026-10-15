@@ -73,6 +73,7 @@
   function mostrar(texto) {
     clearInterval(tipeo);
     vivoEl.classList.add('ver'); stage.classList.add('envivo');
+    window.cajones && window.cajones.congelar(true); // la vitrina de abajo espera quieta
     hilo.innerHTML = `<div class="preg">${escapar(texto)}</div><div class="resp"><img src="img/migue/migue-cara.png" alt=""><div class="txt"><div class="pensando"><i></i><i></i><i></i></div></div></div>`;
     window.lugarMigue && window.lugarMigue();
     return hilo.querySelector('.resp .txt');
@@ -85,6 +86,8 @@
   async function preguntar(texto) {
     texto = String(texto || '').trim().slice(0, 400);
     if (!texto) return;
+    // La misma pregunta otra vez, con su respuesta en pantalla: se cierra y se sigue donde estaba.
+    if (vivoEl.classList.contains('ver') && texto === ultimaPregunta) { cerrar(); return; }
     ultimaPregunta = texto;
     const txt = mostrar(texto);
     estadoVivo = 'pensando'; avisar();
@@ -98,12 +101,17 @@
   }
   function preguntarN(n) { const t = PREGUNTAS[n]; if (t) { proxima = n + 1; preguntar(t); } }
   function preguntarSiguiente() { preguntarN(proxima % PREGUNTAS.length); }
-  function cerrar() { clearInterval(tipeo); vivoEl.classList.remove('ver'); stage.classList.remove('envivo'); estadoVivo = null; avisar(); window.lugarMigue && window.lugarMigue(); }
+  function cerrar() {
+    clearInterval(tipeo); vivoEl.classList.remove('ver'); stage.classList.remove('envivo'); estadoVivo = null;
+    window.cajones && window.cajones.congelar(false); // la vitrina sigue desde donde quedó
+    avisar(); window.lugarMigue && window.lugarMigue();
+  }
   function avisar() { window.informar && window.informar(); }
   window.vivoAbierto = () => vivoEl.classList.contains('ver');
   window.vivo = {
     preguntar, preguntarN, preguntarSiguiente, cerrar, precargar,
     estado: () => estadoVivo,
+    abierta: () => (vivoEl.classList.contains('ver') ? ultimaPregunta : null),
     preguntas: () => PREGUNTAS.map(p => ({ texto: p, lista: guardadas.has(p) })),
     proxima: () => PREGUNTAS[proxima % PREGUNTAS.length],
     chequeo: () => ({ codigo, listas: PREGUNTAS.filter(p => guardadas.has(p)).length, total: PREGUNTAS.length }),

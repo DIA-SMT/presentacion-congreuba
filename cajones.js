@@ -114,12 +114,19 @@
   }
 
   // ---------------------------------------------------------------- mostrar
-  function programar() {
+  // congelado: mientras Migue responde en vivo, la vitrina espera; al cerrar sigue con
+  // el tiempo que le quedaba a ese recurso (resto).
+  let congelado = false, resto = 0;
+  function programar(dur) {
     clearTimeout(timer); finAuto = 0;
-    if (modo !== 'vitrina' || pausado || idx >= lista.length - 1) return;
-    const d = durDe(lista[idx].r); if (!isFinite(d)) return;
+    if (modo !== 'vitrina' || pausado || congelado || idx >= lista.length - 1) return;
+    const d = dur || durDe(lista[idx].r); if (!isFinite(d)) return;
     finAuto = Date.now() + d;
-    timer = setTimeout(() => { if (modo === 'vitrina' && !pausado) mostrar(idx + 1); }, d);
+    timer = setTimeout(() => { if (modo === 'vitrina' && !pausado && !congelado) mostrar(idx + 1); }, d);
+  }
+  function congelar(on) {
+    if (on && !congelado) { congelado = true; resto = finAuto ? Math.max(2000, finAuto - Date.now()) : 0; clearTimeout(timer); finAuto = 0; }
+    else if (!on && congelado) { congelado = false; programar(resto || undefined); resto = 0; }
   }
   function mostrar(n) {
     if (!modo) return;
@@ -157,6 +164,7 @@
   }
   function limpiar() {
     clearTimeout(timer); finAuto = 0; pausado = false;
+    congelado = !!(window.vivoAbierto && window.vivoAbierto()); resto = 0;
     if (recEl) { try { recEl._salir && recEl._salir(); } catch (e) { } }
     escena.innerHTML = ''; recEl = null; panelDe = null;
   }
@@ -208,6 +216,7 @@
     recurso: (d) => { if (modo) { pausado = true; mostrar(idx + (d || 1)); } },
     irRecurso: (n) => { if (modo) { pausado = true; mostrar(n | 0); } },
     seguir: () => { if (modo) { pausado = false; programar(); window.informar && window.informar(); } },
+    congelar,
     abiertoId: () => modo ? clave : null,
     modo: () => modo,
     tipoActual: () => lista[idx] && lista[idx].r.tipo,
