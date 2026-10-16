@@ -46,7 +46,9 @@ ANTES DE EMPEZAR
    públicas, capacitación constante (34 gerentes de datos, 71 egresados).
    "La decisión final, la firma, la responsabilidad, es y será siempre humana."
 
- 4 · VITRINA PUERTAS ADENTRO
+ (Cómo empezó se recorre sola en ~15 s: hablá encima, sin tocar nada.)
+
+ 4 · VITRINA HERRAMIENTAS INTERNAS
    Generador de Notas: había mucho miedo a la IA; fue la herramienta transversal que
    abrió puertas (la IA redacta, la persona firma). Después, los tableros de trabajo
    inteligente: carga de trabajo, efectividad, juego, alertas a tiempo y trazabilidad.

@@ -57,7 +57,7 @@ window.CONTENIDO = {
   PROYECTOS: [
     // ---------------------------------------------------------------- PUERTAS ADENTRO
     {
-      id: 'notas', num: '01', eje: 'Puertas adentro', nombre: 'Generador de Notas',
+      id: 'notas', num: '01', eje: 'Herramientas internas', nombre: 'Generador de Notas',
       idea: 'La herramienta que abrió la puerta', corta: 'Transversal: le sacó el miedo a la IA.',
       estado: 'En funcionamiento',
       cifras: [['10', 'tipos de nota'], ['100%', 'con firma humana']],
@@ -79,7 +79,7 @@ window.CONTENIDO = {
       ],
     },
     {
-      id: 'tableros', num: '02', eje: 'Puertas adentro', nombre: 'Tableros de trabajo',
+      id: 'tableros', num: '02', eje: 'Herramientas internas', nombre: 'Tableros de trabajo',
       idea: 'El trabajo, a la vista', corta: 'Carga, efectividad, alertas y trazabilidad.',
       estado: 'Puertas adentro',
       cifras: [['5', 'claves en un tablero']],

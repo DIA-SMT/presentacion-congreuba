@@ -69,6 +69,8 @@ h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: u
 .cajones button em { font-style: normal; font-size: 11px; color: var(--arena); letter-spacing: 1px; }
 .cajones button.on { background: var(--verde); border-color: var(--verde); color: #0d2419; }
 .cajones button.on em { color: #0d2419; }
+.cajones button.envitrina { border-color: var(--amarillo); }
+.cajones button.envitrina::before { content: '● EN PANTALLA'; position: absolute; left: 8px; top: 4px; font-size: 9px; letter-spacing: .5px; color: var(--amarillo); }
 .cajones button.visto::after { content: '✓'; position: absolute; right: 8px; top: 4px; font-size: 13px; color: var(--arena); }
 .recursos { display: none; grid-template-columns: 1fr 2.2fr 1fr; gap: 8px; }
 .recursos.ver { display: grid; }
@@ -376,7 +378,8 @@ function pintar() {
   if (e.otras > 0) $('error').textContent = 'Hay ' + (e.otras + 1) + ' pantallas abiertas con este código: todas obedecen. Cerrá las que no sean la del salón.';
   else if (errorReciente) $('error').textContent = 'La pantalla no pudo hacer: ' + er.cmd + ' (' + corta(er.msg, 60) + ')';
   // Cajones (extras)
-  $('cajones').querySelectorAll('button').forEach(b => { b.classList.toggle('on', cj.modo === 'cajon' && cj.abierto === b.dataset.id); b.classList.toggle('visto', (cj.vistos || []).includes(b.dataset.id)); });
+  const enPantalla = cj.modo === 'vitrina' ? (C.PROYECTOS.find(p => p.nombre === cj.nombre) || {}).id : null;
+  $('cajones').querySelectorAll('button').forEach(b => { b.classList.toggle('envitrina', b.dataset.id === enPantalla); b.classList.toggle('on', cj.modo === 'cajon' && cj.abierto === b.dataset.id); b.classList.toggle('visto', (cj.vistos || []).includes(b.dataset.id)); });
   $('recursos').classList.toggle('ver', cj.modo === 'cajon');
   $('recNum').textContent = cj.abierto ? (cj.nombre + ' · ' + (cj.total ? (cj.idx + 1) + ' de ' + cj.total : 'sin recursos')).toUpperCase() : '';
   $('recTit').textContent = cj.recurso || '';
