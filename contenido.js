@@ -66,7 +66,16 @@ window.CONTENIDO = {
           problema: [['😟', 'Miedo a usar la IA'], ['✍️', 'Cada área escribía a su manera'], ['📄', 'Notas largas y poco claras']],
           solucion: [{ n: 'Transversal', t: 'la primera herramienta para todas las áreas' }, { n: '10', t: 'tipos de nota, en lenguaje claro y con el mismo criterio' }, { n: 'IA + firma', t: 'la IA redacta, la persona revisa y firma' }],
           conecta: 'Dictado por voz · padrón de áreas y cargos · pedido, pase, intimación, dictamen' },
-        { tipo: 'web', src: 'img/capturas/generador/formulario.jpg', url: 'Generador de Notas · Dirección de IA', titulo: 'Contalo con tus palabras' },
+        { tipo: 'nota', titulo: 'Una nota, en segundos', url: 'Generador de Notas · Dirección de IA',
+          dictado: 'Necesito pedirle a Obras Públicas que arreglen la luminaria de la plaza Belgrano: los vecinos dicen que de noche queda a oscuras.',
+          tipoNota: 'Pedido', para: 'Secretario · Secretaría de Obras Públicas', firma: 'Directora · Dirección de IA',
+          nota: {
+            numero: 'NOTA N.º 214/DIA/2026',
+            ref: 'Ref.: Reparación de luminaria en plaza Belgrano',
+            destino: ['Al Señor Secretario de Obras Públicas', 'S / D'],
+            cuerpo: ['Me dirijo a usted para pedirle la reparación de la luminaria de la plaza Belgrano.', 'Los vecinos nos informan que, de noche, el lugar queda a oscuras.', 'Le pedimos que una cuadrilla lo revise esta semana y nos informe la fecha de la reparación.'],
+            cierre: 'Lo saludo atentamente.',
+          } },
       ],
     },
     {
@@ -155,7 +164,7 @@ window.CONTENIDO = {
           problema: [['📊', 'Una persona controlaba todo en un Excel'], ['🌳', 'Poda, mantenimiento y limpieza de 24 cooperativas'], ['🔍', 'Sin forma de comparar cómo estaba y cómo quedó']],
           solucion: [{ n: '1 clic', t: 'para certificar el servicio' }, { n: '218', t: 'espacios verdes georreferenciados' }, { n: '911', t: 'evidencias con sus metadatos' }, { n: '24', t: 'cooperativas bajo control' }],
           conecta: 'Georreferencia · metadatos de cada foto · comparación de estados · certificado de servicios' },
-        { tipo: 'kpis', titulo: 'Estado de los espacios verdes', cab: 'Padrón municipal · Estado general', kpis: [['218', 'espacios del padrón'], ['210', 'con ubicación'], ['8', 'pendientes de ubicar'], ['911', 'evidencias cargadas'], ['110,6', 'km recorridos'], ['24', 'cooperativas activas']], nota: 'Applaza · Municipalidad de San Miguel de Tucumán · datos al 14/10/2026' },
+        { tipo: 'kpis', enVitrina: true, titulo: 'Estado de los espacios verdes', cab: 'Padrón municipal · Estado general', kpis: [['218', 'espacios del padrón'], ['210', 'con ubicación'], ['8', 'pendientes de ubicar'], ['911', 'evidencias cargadas'], ['110,6', 'km recorridos'], ['24', 'cooperativas activas']], nota: 'Applaza · Municipalidad de San Miguel de Tucumán · datos al 14/10/2026' },
       ],
     },
     {
@@ -182,7 +191,7 @@ window.CONTENIDO = {
           problema: [['📝', 'Armar un proyecto para el barrio es difícil'], ['❓', 'Dudas sobre cómo participar'], ['♿', 'Barreras de accesibilidad']],
           solucion: [{ n: 'IA', t: 'te ayuda a armar el proyecto para tu barrio' }, { n: '20', t: 'distritos, un proyecto elegido por cada uno' }, { n: 'Migue', t: 'integrado para consultas y accesibilidad' }],
           conecta: 'Ideas · votación con Ciudad Digital · mapa de los 20 distritos · seguimiento de cada obra' },
-        { tipo: 'par', web: { src: 'img/capturas/presupuesto/escritorio-completa.jpg', url: 'presupuestoparticipativo.smt.gob.ar', scroll: true }, cel: { src: 'img/capturas/presupuesto/celular.jpg' }, titulo: 'Presupuesto Participativo' },
+        { tipo: 'par', enVitrina: true, web: { src: 'img/capturas/presupuesto/escritorio-completa.jpg', url: 'presupuestoparticipativo.smt.gob.ar', scroll: true }, cel: { src: 'img/capturas/presupuesto/celular.jpg' }, titulo: 'Presupuesto Participativo' },
       ],
     },
     {

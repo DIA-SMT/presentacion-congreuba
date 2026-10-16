@@ -19,7 +19,7 @@
 
   // Cuánto se queda cada recurso en una vitrina antes de pasar al próximo (ms).
   // El último se queda quieto hasta la próxima placa.
-  const DURA = { ps: 13000, web: 8000, scroll: 14000, par: 11000, cel: 8000, kpis: 8000, avance: 23000, vivo: Infinity };
+  const DURA = { nota: 18000, ps: 13000, web: 8000, scroll: 14000, par: 11000, cel: 8000, kpis: 8000, avance: 23000, vivo: Infinity };
   const durDe = (r) => (r.tipo === 'web' && r.scroll) || (r.tipo === 'par' && r.web && r.web.scroll) ? DURA.scroll : (DURA[r.tipo] || 9000);
 
   let lista = [], idx = 0, recEl = null, modo = null, clave = null, panelDe = null;
@@ -65,6 +65,61 @@
       <div class="ps-sol"><span class="ceja">La solución con IA</span><div class="ps-nums n${(r.solucion || []).length}">${sol}</div>${r.conecta || r.fuente ? `<p class="ps-conecta"><span>${r.fuente ? 'Fuente' : 'Conecta'}</span>${escH(r.conecta || r.fuente)}</p>` : ''}</div>
     </div>`;
   }
+  // Generador de Notas, en vivo: se dicta el pedido, la IA completa el formulario y
+  // la nota se escribe sola. Ejemplo armado con el formato real del sistema.
+  function notaGenerada(r) {
+    const chips = ['Pedido', 'Intimación', 'Pase', 'Informe', 'Notificación', 'Dictamen'];
+    return `<div class="gn-ventana"><div class="barra"><i></i><i></i><i></i><span>${escH(r.url || '')}</span></div>
+      <div class="gn">
+        <div class="gn-cab"><b>Generador de Notas</b><span>Redacción administrativa asistida por IA</span><em>Dirección de IA</em></div>
+        <div class="gn-cuerpo">
+          <div class="gn-form">
+            <div class="gn-pasos"><span class="gn-p1 on"><i>1</i>Datos de la nota</span><span class="gn-p2"><i>2</i>Nota redactada</span></div>
+            <div class="gn-dicta"><i class="gn-mic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i><div><b>Contalo con tus palabras</b><p class="gn-dictado"></p></div></div>
+            <div class="gn-caja"><small>Tipo de nota</small><div class="gn-chips">${chips.map(c => `<span data-c="${escH(c)}">${escH(c)}</span>`).join('')}</div></div>
+            <div class="gn-fila">
+              <div class="gn-caja"><small>Destinatario</small><p class="gn-campo gn-para"></p></div>
+              <div class="gn-caja"><small>Quién firma</small><p class="gn-campo gn-firma"></p></div>
+            </div>
+            <div class="gn-boton">✨ Redactar nota →</div>
+          </div>
+          <div class="gn-hoja"><div class="gn-vacia">La nota aparece acá</div><div class="gn-texto"></div>
+            <div class="gn-sello"><b>La IA redacta</b><span>la persona revisa y firma</span></div></div>
+        </div>
+      </div></div>`;
+  }
+  function animarNota(el, r) {
+    const q = (s) => el.querySelector(s), vivo = () => el.isConnected;
+    const esperar = (ms) => new Promise(ok => setTimeout(ok, ms));
+    const tipear = async (nodo, texto, ms) => { for (let i = 1; i <= texto.length; i++) { if (!vivo()) return; nodo.textContent = texto.slice(0, i); await esperar(ms); } };
+    const n = r.nota || {};
+    const fecha = 'San Miguel de Tucumán, ' + new Date().toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+    (async () => {
+      await esperar(500); if (!vivo()) return;
+      q('.gn-dicta').classList.add('oye');
+      await tipear(q('.gn-dictado'), r.dictado || '', 26);
+      if (!vivo()) return;
+      q('.gn-dicta').classList.remove('oye'); await esperar(300);
+      const chip = [...el.querySelectorAll('.gn-chips span')].find(x => x.dataset.c === (r.tipoNota || 'Pedido'));
+      if (chip) chip.classList.add('on'); await esperar(380);
+      q('.gn-para').textContent = r.para || ''; q('.gn-para').classList.add('lleno'); await esperar(380);
+      q('.gn-firma').textContent = r.firma || ''; q('.gn-firma').classList.add('lleno'); await esperar(450);
+      q('.gn-boton').classList.add('listo'); await esperar(650); if (!vivo()) return;
+      q('.gn-boton').classList.add('pulsa'); q('.gn-p2').classList.add('on');
+      q('.gn-hoja').classList.add('redacta'); q('.gn-vacia').textContent = '✨ Redactando…';
+      await esperar(900); if (!vivo()) return;
+      q('.gn-hoja').classList.remove('redacta'); q('.gn-hoja').classList.add('escrita');
+      const t = q('.gn-texto');
+      const linea = (cls) => { const p = document.createElement('p'); p.className = cls; t.appendChild(p); return p; };
+      await tipear(linea('gn-fecha'), fecha, 7);
+      await tipear(linea('gn-num'), n.numero || '', 7);
+      await tipear(linea('gn-ref'), n.ref || '', 9);
+      for (const d of (n.destino || [])) await tipear(linea('gn-dest'), d, 9);
+      for (const c of (n.cuerpo || [])) await tipear(linea('gn-parr'), c, 13);
+      await tipear(linea('gn-cierre'), n.cierre || '', 13);
+      if (vivo()) q('.gn-sello').classList.add('ver');
+    })();
+  }
   function armar(r) {
     const el = document.createElement('div');
     el.className = 'rec';
@@ -73,6 +128,7 @@
     else if (r.tipo === 'par') { el.classList.add('par'); el.innerHTML = navegador(r.web) + celular(r.cel); }
     else if (r.tipo === 'vivo') { el.classList.add('vivo-rec'); el.innerHTML = tarjetaVivo(); }
     else if (r.tipo === 'avance') { el.classList.add('avance-rec'); el.innerHTML = '<div class="avance-host"></div>'; }
+    else if (r.tipo === 'nota') { el.classList.add('nota-rec'); el.innerHTML = notaGenerada(r); animarNota(el, r); }
     else if (r.tipo === 'ps') { el.classList.add('ps-rec'); el.innerHTML = problemaSolucion(r); setTimeout(() => window.efectos.contar(el, 1700), 50); }
     else if (r.tipo === 'kpis') {
       el.classList.add('kpis-rec');
@@ -211,7 +267,7 @@
     const ps = String(ids).split(',').map(s => buscar(s.trim())).filter(Boolean);
     if (!ps.length) return false;
     // solo: 'ps' deja sólo los problema → solución (las capturas quedan para los cajones).
-    const filtro = solo ? (r) => String(solo).split(',').includes(r.tipo) : () => true;
+    const filtro = solo ? (r) => String(solo).split(',').includes(r.tipo) || r.enVitrina : () => true; // enVitrina: el sistema, también en la vitrina
     entrar('vitrina', ids, ps.flatMap(p => (p.recursos || []).filter(filtro).map(r => ({ p, r }))), true);
     return true;
   }
