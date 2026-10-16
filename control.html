@@ -134,6 +134,25 @@ h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: u
 #sala input { font: 600 22px Poppins, sans-serif; padding: 16px 18px; border-radius: 16px; border: 2px solid var(--azul3); background: #0b1130; color: #fff; user-select: text; }
 #sala button { background: #f5f3ee; color: var(--azul); font-size: 20px; padding: 18px; }
 
+/* Lo que se ve en la pantalla grande y lo que viene (miniaturas). */
+.vista { display: none; grid-template-columns: 1.45fr 1fr; gap: 8px; align-items: start; }
+.vista.ver { display: grid; }
+.v-ahora, .v-img { position: relative; border-radius: 12px; overflow: hidden; background: var(--azul2); aspect-ratio: 16 / 9; cursor: zoom-in; }
+.v-ahora { box-shadow: 0 0 0 3px var(--verde); }
+.vista img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .2s; }
+.v-et { position: absolute; left: 6px; top: 6px; font-size: 10px; font-weight: 800; letter-spacing: .8px; background: rgba(17,26,59,.88); color: #fff; border-radius: 6px; padding: 2px 6px; }
+.v-ahora .v-et { background: var(--verde); color: #0d2419; }
+.v-pie { position: absolute; right: 6px; bottom: 6px; font-size: 10px; font-weight: 800; background: rgba(17,26,59,.88); color: #fff; border-radius: 6px; padding: 2px 6px; }
+.v-pie:empty { display: none; }
+.v-sig { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.v-sig b { font-size: 12px; line-height: 1.25; color: #dfe4f2; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.v-sig.fin .v-img { opacity: .35; }
+#lupa { position: fixed; inset: 0; z-index: 8; background: rgba(5,8,20,.94); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 12px; }
+#lupa.ver { display: flex; }
+#lupa img { width: 100%; max-width: 1280px; border-radius: 10px; box-shadow: 0 0 0 3px var(--verde); }
+#lupa p { color: #aab3cc; font-size: 14px; font-weight: 600; text-align: center; }
+#lupa p:first-of-type { color: #fff; font-size: 16px; }
+
 /* ---------- Responsive ---------- */
 html { -webkit-text-size-adjust: 100%; }
 .abajo { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
@@ -154,7 +173,7 @@ html { -webkit-text-size-adjust: 100%; }
 @media (max-width: 699px) and (max-height: 760px) {
   .nav { height: 68px; } .migue { height: 58px; }
   #siguiente { font-size: 26px; }
-  .guion:not(:empty):not(.entero) { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; padding-bottom: 0; border-bottom: 8px solid transparent; }
+  .guion:not(:empty):not(.entero) { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; padding-bottom: 0; border-bottom: 8px solid transparent; }
   .guion.dialogo:not(.entero) { -webkit-line-clamp: 4; font-size: 16px; }
   #migue small { -webkit-line-clamp: 1; }
 }
@@ -183,6 +202,8 @@ html { -webkit-text-size-adjust: 100%; }
   .nav { height: 60px; } #siguiente { font-size: 22px; } #siguiente small { font-size: 11px; }
   .migue { height: 52px; } #migue { font-size: 16px; } #migue small { display: none; }
   .vitrina { padding: 6px; } #vtAnt, #vtSig { height: 40px; }
+  .vista { grid-template-columns: 170px 1fr; }
+  .v-sig { flex-direction: row; align-items: flex-start; } .v-sig .v-img { width: 110px; flex: none; }
 }
 </style>
 </head>
@@ -190,6 +211,10 @@ html { -webkit-text-size-adjust: 100%; }
 
 <div class="fijo">
   <div class="estado" id="estado"><span class="punto" id="punto"></span><span class="titulo" id="titulo">Conectando…</span><span class="senal" id="senal"></span><span class="reloj" id="reloj">0:00</span><b id="num">–</b></div>
+  <div class="vista" id="vista">
+    <div class="v-ahora" id="vAhoraCaja"><img id="vAhora" alt=""><span class="v-et">● EN PANTALLA</span><span class="v-pie" id="vAhoraPie"></span></div>
+    <div class="v-sig" id="vSigCaja"><div class="v-img"><img id="vSig" alt=""><span class="v-et">SIGUE ▶</span></div><b id="vSigTit"></b></div>
+  </div>
   <div class="guion" id="guion"></div>
   <div class="nav"><button id="anterior">◀</button><button id="siguiente">SIGUIENTE ▶<small id="sigue"></small></button></div>
   <div class="vitrina" id="vitrina"><div class="vt-txt"><b id="vtNombre"></b><span id="vtRec"></span></div><button id="vtAnt">◀</button><button id="vtSig">▶</button><button id="vtSeguir">Que siga sola</button><button id="vtRepro">↻ Avance</button></div>
@@ -238,6 +263,8 @@ html { -webkit-text-size-adjust: 100%; }
 <div class="placas" id="placas"></div>
 
 </div><!-- /abajo -->
+
+<div id="lupa"><img id="lupaImg" alt=""><p id="lupaTit"></p><p>Tocá para cerrar</p></div>
 
 <form id="sala">
   <h1>Falta el código de sala</h1>
@@ -406,6 +433,7 @@ function pintar() {
   $('titulo').textContent = !conectado ? textoConexion : vieja ? 'Versión distinta: recargá la pantalla y esta botonera' : sinEmpezar ? 'Esperando "Comenzar" en la pantalla' : ((e && e.titulo) || 'Conectado');
   if (!e) return;
   $('num').textContent = `${e.placa}/${e.total}`;
+  pintarVista(e);
   // Migue
   const v = e.videos || [];
   $('migue').classList.toggle('suena', !!e.hablando);
@@ -457,6 +485,32 @@ function pintar() {
   }
   [...pl.children].forEach((b, i) => b.classList.toggle('on', i === e.placa - 1));
 }
+// Miniaturas: img/mini/mNN-K.jpg (NN = placa; K = recurso de la vitrina, 1 en las demás).
+const dos = (n) => String(n).padStart(2, '0');
+function ponerImg(img, src) {
+  if (img.dataset.src === src) return;
+  img.dataset.src = src; img.style.opacity = 0;
+  img.onload = () => { img.style.opacity = 1; }; img.onerror = () => { img.style.opacity = 0; };
+  if (src) img.src = src; else img.removeAttribute('src');
+}
+function pintarVista(e) {
+  if (!e.placa || !e.total) return;
+  const cj = e.cajon || {};
+  const enVitrina = cj.modo === 'vitrina';
+  ponerImg($('vAhora'), 'img/mini/m' + dos(e.placa) + '-' + (enVitrina ? (cj.idx || 0) + 1 : 1) + '.jpg');
+  $('vAhoraPie').textContent = enVitrina ? (cj.idx + 1) + ' de ' + cj.total : cj.modo === 'cajon' ? 'cajón abierto encima' : '';
+  const hay = e.placa < e.total;
+  $('vSigCaja').classList.toggle('fin', !hay);
+  ponerImg($('vSig'), hay ? 'img/mini/m' + dos(e.placa + 1) + '-1.jpg' : 'img/mini/m' + dos(e.placa) + '-1.jpg');
+  $('vSigTit').textContent = hay ? (e.placa + 1) + '. ' + (e.siguiente || '') : 'Es la última placa';
+  $('vista').classList.add('ver');
+}
+// Tocar una miniatura la abre grande; otro toque la cierra.
+function lupa(img, tit) { if (!img.dataset.src) return; $('lupaImg').src = img.dataset.src; $('lupaTit').textContent = tit; $('lupa').classList.add('ver'); }
+$('vAhoraCaja').addEventListener('click', () => lupa($('vAhora'), 'En pantalla: ' + $('titulo').textContent));
+$('vSigCaja').addEventListener('click', () => lupa($('vSig'), 'Sigue: ' + $('vSigTit').textContent));
+$('lupa').addEventListener('click', () => $('lupa').classList.remove('ver'));
+
 function corta(t, n) { t = String(t || ''); return t.length > n ? t.slice(0, n - 1) + '…' : t; }
 
 // Cronómetro de la charla: desde "Comenzar". Ámbar a los 8 minutos, rojo a los 10.

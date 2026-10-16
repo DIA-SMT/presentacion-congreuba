@@ -36,6 +36,8 @@ git commit -m "Qué cambió"
 git push
 ```
 
+Botonera: arriba muestra la miniatura de lo que está EN PANTALLA (en las vitrinas, el recurso actual) y de la placa que SIGUE; tocándolas se ven grandes. Las miniaturas están en `img/mini/` (mNN-K.jpg): si cambia una placa, hay que regenerarlas.
+
 Conexión botonera ↔ pantalla: cada toque sale por el WebSocket y además por HTTPS (el que llegue primero; el otro se descarta), latido cada 5 s, reconexión limpia y automática, y la botonera muestra la demora (● ms) junto al reloj. Botón verde = confirmado; amarillo = salió por HTTPS sin confirmación; rojo = no salió. Supabase y MapLibre están dentro del proyecto (`lib/`), sin depender de un CDN. Para probar sin tocar el canal del salón: `/?canal=prueba` y `/control?canal=prueba`.
 
 Cambiar `version.js` en cada publicación: la botonera avisa si la pantalla quedó abierta con una versión vieja. El puente de Migue (`api/preguntar.js`) sólo atiende pedidos que salen de la misma presentación; la variable `SALA_CODE` de Vercel ya no se usa. Publicar a mano, sin pasar por GitHub, también funciona: `npx vercel deploy --prod --scope direccionia-5744s-projects`.
