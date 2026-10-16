@@ -86,6 +86,9 @@ ANTES DE EMPEZAR
 12 · GRACIAS (queda proyectada)
    MIGUE 10: "¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad."
 
+LAS VITRINAS VAN EN LOOP: al terminar el último recurso vuelven al primero, hasta que
+tocás SIGUIENTE. ◀ ▶ las frena en ese recurso; "Que siga sola" las vuelve a soltar.
+
 PARA LAS PREGUNTAS DEL PANEL
   "Extras para preguntas · cajones": abrí el proyecto que te pregunten (sobre cualquier
   placa), ◀ ▶ para moverte, "Cerrar cajón" para volver.

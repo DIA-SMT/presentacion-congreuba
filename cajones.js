@@ -19,7 +19,7 @@
 
   // Cuánto se queda cada recurso en una vitrina antes de pasar al próximo (ms).
   // El último se queda quieto hasta la próxima placa.
-  const DURA = { nota: 18000, ps: 13000, web: 8000, scroll: 14000, par: 11000, cel: 8000, kpis: 8000, avance: 23000, vivo: Infinity };
+  const DURA = { evidencias: 12000, nota: 18000, ps: 13000, web: 8000, scroll: 14000, par: 11000, cel: 8000, kpis: 8000, avance: 23000, vivo: Infinity };
   const durDe = (r) => (r.tipo === 'web' && r.scroll) || (r.tipo === 'par' && r.web && r.web.scroll) ? DURA.scroll : (DURA[r.tipo] || 9000);
 
   let lista = [], idx = 0, recEl = null, modo = null, clave = null, panelDe = null;
@@ -120,6 +120,18 @@
       if (vivo()) q('.gn-sello').classList.add('ver');
     })();
   }
+  // Applaza: las últimas evidencias, como se ven en la Auditoría del sistema.
+  function evidencias(r) {
+    const tarjetas = (r.fotos || []).map(([src, ctl, nom, meta], i) => `<div class="ev-t" style="--i:${i}">
+        <div class="ev-img"><img src="${escH(src)}" alt=""></div>
+        <div class="ev-txt"><span class="ev-ctl">${escH(ctl)}</span><b>${escH(nom)}</b><small>${escH(meta)}</small></div></div>`).join('');
+    return `<div class="ev-ventana"><div class="barra"><i></i><i></i><i></i><span>${escH(r.url || '')}</span></div>
+      <div class="ev">
+        <div class="ev-cab"><div><b>Evidencias recientes</b><span>Últimas fotos cargadas por supervisores o equipos de campo</span></div><em>Auditoría municipal</em></div>
+        <div class="ev-fecha"><span>${escH(r.fecha || '')}</span><em>${(r.fotos || []).length} fotos · con ubicación, fecha y hora</em></div>
+        <div class="ev-grilla">${tarjetas}</div>
+      </div></div>`;
+  }
   function armar(r) {
     const el = document.createElement('div');
     el.className = 'rec';
@@ -128,6 +140,7 @@
     else if (r.tipo === 'par') { el.classList.add('par'); el.innerHTML = navegador(r.web) + celular(r.cel); }
     else if (r.tipo === 'vivo') { el.classList.add('vivo-rec'); el.innerHTML = tarjetaVivo(); }
     else if (r.tipo === 'avance') { el.classList.add('avance-rec'); el.innerHTML = '<div class="avance-host"></div>'; }
+    else if (r.tipo === 'evidencias') { el.classList.add('ev-rec'); el.innerHTML = evidencias(r); }
     else if (r.tipo === 'nota') { el.classList.add('nota-rec'); el.innerHTML = notaGenerada(r); animarNota(el, r); }
     else if (r.tipo === 'ps') { el.classList.add('ps-rec'); el.innerHTML = problemaSolucion(r); setTimeout(() => window.efectos.contar(el, 1700), 50); }
     else if (r.tipo === 'kpis') {
@@ -196,10 +209,12 @@
   let congelado = false, resto = 0;
   function programar(dur) {
     clearTimeout(timer); finAuto = 0;
-    if (modo !== 'vitrina' || pausado || congelado || idx >= lista.length - 1) return;
-    const d = dur || durDe(lista[idx].r); if (!isFinite(d)) return;
+    // En loop: después del último vuelve al primero, hasta que pases de placa. La tarjeta
+    // 'vivo' también pasa (15 s); mientras Migue responde en pantalla, la vitrina espera.
+    if (modo !== 'vitrina' || pausado || congelado || lista.length < 2) return;
+    let d = dur || durDe(lista[idx].r); if (!isFinite(d)) d = 15000;
     finAuto = Date.now() + d;
-    timer = setTimeout(() => { if (modo === 'vitrina' && !pausado && !congelado) mostrar(idx + 1); }, d);
+    timer = setTimeout(() => { if (modo === 'vitrina' && !pausado && !congelado) mostrar((idx + 1) % lista.length); }, d);
   }
   function congelar(on) {
     if (on && !congelado) { congelado = true; resto = finAuto ? Math.max(2000, finAuto - Date.now()) : 0; clearTimeout(timer); finAuto = 0; }
@@ -310,6 +325,6 @@
     }),
     lista: () => C.PROYECTOS.map(p => ({ id: p.id, num: p.num, nombre: p.nombre, eje: p.eje })),
     // Todas las imágenes de los recursos, para precargarlas al empezar.
-    imagenes: () => C.PROYECTOS.flatMap(p => (p.recursos || []).flatMap(r => [r.src, r.web && r.web.src, r.cel && r.cel.src])).filter(Boolean),
+    imagenes: () => C.PROYECTOS.flatMap(p => (p.recursos || []).flatMap(r => [r.src, r.web && r.web.src, r.cel && r.cel.src, ...(r.fotos || []).map(f => f[0])])).filter(Boolean),
   };
 })();
