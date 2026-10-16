@@ -21,7 +21,7 @@ ANTES DE EMPEZAR
  1 · PORTADA + DIÁLOGO CON MIGUE
    Tocá MIGUE HABLA: la portada queda en penumbra y Migue aparece grande. Cuando
    termina cada frase, la botonera te muestra tu línea («DECÍS …»). Decila y tocá
-   MIGUE HABLA otra vez. Son 7 frases de Migue:
+   MIGUE HABLA otra vez. Son 6 frases de Migue:
      1 ¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?
        VOS: Migue, pará un segundo. Date vuelta, estás mirando al revés.
      2 ¡Ahí tá! ¡Ahora sí! ¡Epa! ¿Y toda esta gente?
@@ -29,12 +29,10 @@ ANTES DE EMPEZAR
      3 ¡Ah, cierto! … ¡No has parado un segundo, chango!
        VOS: Bueno, entonces ya sabés de qué vamos a hablar.
      4 ¡Claro! De cómo estamos usando IA para ayudar a los vecinos…
-       VOS: Exactamente.
-     5 Pero esperá… ¿el que va a hablar sos vos?
-       VOS: Bueno, presentate vos entonces.
-     6 ¡Mucho gusto, gente! Soy Migue… ¡Y ahora también me hacen viajar por trabajo!
+       VOS: Exactamente. Bueno, presentate vos, Migue.
+     5 ¡Mucho gusto, gente! Soy Migue… ¡Y ahora también me hacen viajar por trabajo!
        VOS: Bueno, Migue, dejame contarles cómo empezó todo.
-     7 ¡Dale, Marco! Pero acordate que tenemos diez minutos. ¡No te me embalés!
+     6 ¡Dale, Marco! Pero acordate que tenemos diez minutos. ¡No te me embalés!
        → SIGUIENTE.
 
  2 · CÓMO EMPEZÓ (línea de tiempo)
@@ -67,7 +65,7 @@ ANTES DE EMPEZAR
    norma, minuto a minuto; los técnicos cerca de la redacción.
 
  8 · VITRINA MIGUE + CIUDAD DIGITAL
-   MIGUE 8 y MIGUE 9 cuando quieras. Problema → solución: 24 h, 17.848 consultas, 91%.
+   MIGUE 7 y MIGUE 8 cuando quieras. Problema → solución: 24 h, 17.848 consultas, 91%.
    Después: Ciudad Digital, el cerebro, el termómetro y la tarjeta para preguntar en
    vivo (tocá la pregunta; otro toque la cierra).
 
@@ -84,7 +82,7 @@ ANTES DE EMPEZAR
    personas deciden.
 
 12 · GRACIAS (queda proyectada)
-   MIGUE 10: "¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad."
+   MIGUE 9: "¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad."
 
 LAS VITRINAS VAN EN LOOP: al terminar el último recurso vuelven al primero, hasta que
 tocás SIGUIENTE. ◀ ▶ las frena en ese recurso; "Que siga sola" las vuelve a soltar.
