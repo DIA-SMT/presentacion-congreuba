@@ -55,27 +55,27 @@ ANTES DE EMPEZAR
    "Primero la usamos nosotros. Cuando funcionó adentro, la llevamos al vecino, con
    Ciudad Digital como puerta: 160.000 vecinos."
 
- 6 · VITRINA CIUDAD ABIERTA (sólo problema → solución, pasan solas)
-   Applaza (del Excel a certificar con un clic) → Bus Turístico (del Google Form a
-   reservas inteligentes) → Presupuesto Participativo (la IA te ayuda a armar el
-   proyecto) → FerIA (foto, costos y marketplace).
-
- 7 · VITRINA URBANIA
-   Código de 1998 y audiencias sin sistematizar → cada idea del vecino cruzada con su
-   norma, minuto a minuto; los técnicos cerca de la redacción.
-
- 8 · VITRINA MIGUE + CIUDAD DIGITAL
+ 6 · VITRINA CIUDAD DIGITAL + MIGUE
    MIGUE 7 y MIGUE 8 cuando quieras. Problema → solución: 24 h, 17.848 consultas, 91%.
    Después: Ciudad Digital, el cerebro, el termómetro y la tarjeta para preguntar en
    vivo (tocá la pregunta; otro toque la cierra).
 
- 9 · VITRINA CIMBA
+ 7 · VITRINA CIMBA
    Reclamos dispersos, duplicados, mal clasificados → cierre en un clic, 4.316 baches,
    880 t de mezcla trazada. Después el avance arranca solo (18 segundos).
 
-10 · VITRINA ESTUDIA
+ 8 · VITRINA ESTUDIA
    ¿Celulares sí o no?, docentes sobrecargados, datos dispersos, mal uso de la IA →
    1 minuto por actividad, una plataforma, IA con tope y costo a la vista.
+
+ 9 · VITRINA URBANIA + PRESUPUESTO PARTICIPATIVO (la voz del vecino)
+   UrbanIA: Código de 1998 y audiencias sin sistematizar → cada idea del vecino cruzada
+   con su norma, minuto a minuto. Presupuesto: la IA te ayuda a armar el proyecto para
+   tu barrio, con Migue integrado.
+
+10 · VITRINA CIUDAD ABIERTA (sólo problema → solución, más las evidencias de Applaza)
+   Applaza (del Excel a certificar con un clic) → Bus Turístico (del Google Form a
+   reservas inteligentes) → FerIA (foto, costos y marketplace).
 
 11 · CONCLUSIÓN
    Reglas primero, adentro primero, el vecino en el centro. La IA interpreta; las

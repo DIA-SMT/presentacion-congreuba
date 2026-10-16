@@ -92,6 +92,7 @@ function irA(n) {
   try {
     if (window.cajones && window.cajones.modo()) window.cajones.cerrar({ directo: true });
     if (enDialogo) terminarDialogo();
+    migueRetirado = false;
     if (p.dataset.vitrina && window.cajones) window.cajones.vitrina(p.dataset.vitrina, p.dataset.solo);
   } catch (e) { console.warn('vitrina', e); }
   p.classList.remove('on'); void p.offsetWidth; p.classList.add('on');
@@ -104,6 +105,8 @@ function irA(n) {
 // placa queda en penumbra, Migue más grande e iluminado, y no se va entre frase y
 // frase. Al pasar de placa vuelve todo a la normalidad.
 let enDialogo = false;
+// Deshacer saca a Migue de la pantalla hasta que vuelva a hablar o se pase de placa.
+let migueRetirado = false;
 function empezarDialogo() {
   enDialogo = true;
   document.getElementById('migue').classList.add('dialogo'); stage.classList.add('dialogo');
@@ -119,7 +122,7 @@ let ladoMigue = 'der', cambioLado = null, salidaMigue = null;
 function lugarMigue() {
   const cont = document.getElementById('migue'), p = placas[actual];
   const tapado = document.getElementById('cajon').classList.contains('ver');
-  const quiere = enDialogo ? 'der' : tapado && !migue.hablando ? 'no' : (p.dataset.migue && p.dataset.migue !== 'no' ? p.dataset.migue : (migue.hablando || window.vivoAbierto && window.vivoAbierto() ? 'der' : 'no'));
+  const quiere = migueRetirado && !migue.hablando ? 'no' : enDialogo ? 'der' : tapado && !migue.hablando ? 'no' : (p.dataset.migue && p.dataset.migue !== 'no' ? p.dataset.migue : (migue.hablando || window.vivoAbierto && window.vivoAbierto() ? 'der' : 'no'));
   clearTimeout(cambioLado);
   const fuera = cont.classList.contains('fuera');
   if (migue.hablando && !fuera) return;
@@ -232,6 +235,7 @@ const migue = (() => {
   };
 
   api.decir = async (i) => {
+    migueRetirado = false;
     if (placas[actual] && placas[actual].dataset.dialogo !== undefined && !enDialogo) empezarDialogo();
     await desbloqueo;
     if (i == null) i = proximo;
@@ -285,9 +289,15 @@ const migue = (() => {
   api.repetir = () => { if (clipActual >= 0) api.decir(clipActual); };
   api.anterior = () => { const base = clipActual >= 0 ? clipActual : proximo; if (base - 1 >= 0) api.decir(base - 1); };
   api.reiniciar = () => { proximo = 0; informar(); };
+  // Deshacer: calla, vuelve una frase atrás y Migue sale de la pantalla (también del
+  // diálogo de la apertura). MIGUE HABLA lo vuelve a traer con esa misma frase.
   api.atras = () => {
     if (api.hablando && clipActual >= 0) { const i = clipActual; api.callar(true); proximo = i; }
     else proximo = Math.max(0, proximo - 1);
+    clearTimeout(salidaMigue);
+    migueRetirado = true;
+    if (enDialogo) terminarDialogo();
+    lugarMigue();
     informar();
   };
   api.alternar = () => { cont.classList.toggle('oculto'); if (cont.classList.contains('oculto')) api.callar(); informar(); };
