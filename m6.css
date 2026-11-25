@@ -189,6 +189,27 @@
 .m6-check b { font-size: 29px; line-height: 1.2; font-weight: 800; }
 .m6-check span { font-size: 20px; line-height: 1.35; color: var(--azul2); }
 
+/* ---------- Lo que ya funciona: mapa de los desarrollos ---------- */
+.m6-mapa { display: grid; grid-template-columns: 340px 1fr; gap: 34px; }
+.m6-mapa-grupo { display: grid; grid-template-rows: auto 1fr 1fr; gap: 16px; min-height: 0; }
+.m6-mapa-grupo.vecino { grid-template-rows: auto 1fr; }
+.m6-mapa-grupo > h3 { display: flex; align-items: center; gap: 14px; height: 40px; font-size: 22px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--azul); }
+.m6-mapa-grupo > h3 span { width: 40px; height: 40px; border-radius: 50%; background: var(--azul); color: var(--blanco); display: grid; place-items: center; font-size: 19px; letter-spacing: 0; }
+.m6-mapa-grilla { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 16px; min-height: 0; }
+.m6-dev { position: relative; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; padding: 22px 24px 18px; display: flex; flex-direction: column; gap: 4px; min-height: 0; overflow: hidden; }
+.m6-dev > i { font-style: normal; font-size: 40px; line-height: 1; margin-bottom: 10px; }
+.m6-dev > b { font-size: 28px; line-height: 1.1; font-weight: 800; color: var(--azul); }
+.m6-dev > small { font-size: 14px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--gris); }
+.m6-dev > p { font-size: 19px; line-height: 1.38; color: var(--azul2); margin-top: 6px; }
+.m6-dev > strong { margin-top: auto; padding-top: 12px; border-top: 1.5px solid var(--borde); font-size: 36px; line-height: 1.1; font-weight: 800; color: var(--azul); display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.m6-dev > strong em { font-style: normal; font-size: 17px; font-weight: 600; color: var(--suave); }
+.m6-dev > strong.palabra { font-size: 29px; }
+.m6-dev.vivo { border: 2px solid var(--azul); box-shadow: 0 12px 30px rgba(17,26,59,.14); }
+.m6-dev-vivo { position: absolute; right: 16px; top: 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--blanco); background: var(--azul); border-radius: 999px; padding: 6px 12px 6px 10px; }
+.m6-dev-vivo i { width: 10px; height: 10px; border-radius: 50%; background: var(--m6-rojo); }
+.on .m6-dev-vivo i { animation: m6-rec-chico 1.6s ease-out infinite; }
+@keyframes m6-rec-chico { 0% { box-shadow: 0 0 0 0 rgba(214,69,61,.8); } 70% { box-shadow: 0 0 0 9px rgba(214,69,61,0); } 100% { box-shadow: 0 0 0 0 rgba(214,69,61,0); } }
+
 /* ---------- Pase a demo en vivo ---------- */
 .m6-demo { display: grid; grid-template-columns: 900px 1fr; gap: 34px; height: 768px; }
 .m6-demo-tapa { background: var(--azul); color: var(--blanco); border-radius: 22px; padding: 60px 64px; display: flex; flex-direction: column; justify-content: center; gap: 22px; position: relative; overflow: hidden; }

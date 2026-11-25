@@ -69,14 +69,16 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
 (async function () {
   const C = window.CONTENIDO, V = C.VIDEOS, S = C.SISTEMAS || [];
   const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // Antes de los bloques, "Lo que ya funciona" (separador con data-bloque="0").
+  const PRIMERO = { t: 'Lo que ya funciona: los desarrollos, Migue y CIMBA en vivo', min: 25, desde: '0:07' };
   const BLOQUES = [
-    { t: 'De la IA individual a la institucional', min: 15, desde: '0:08' },
-    { t: 'Las capas: licencias, datos e IA soberana', min: 20, desde: '0:23' },
-    { t: 'Del piloto a la producción', min: 20, desde: '0:43' },
-    { t: 'La economía de los agentes', min: 15, desde: '1:03' },
-    { t: 'Gobernanza del agente', min: 15, desde: '1:18' },
-    { t: 'El costo que la factura no muestra', min: 10, desde: '1:33' },
-    { t: 'Hoja de ruta para Chaco', min: 12, desde: '1:43' },
+    { t: 'De la IA individual a la institucional', min: 10, desde: '0:32' },
+    { t: 'Las capas: licencias, datos e IA soberana', min: 15, desde: '0:42' },
+    { t: 'Del piloto a la producción', min: 8, desde: '0:57' },
+    { t: 'La economía de los agentes', min: 12, desde: '1:05' },
+    { t: 'Gobernanza del agente', min: 15, desde: '1:17' },
+    { t: 'El costo que la factura no muestra', min: 8, desde: '1:32' },
+    { t: 'Hoja de ruta para Chaco', min: 12, desde: '1:40' },
   ];
   const html = await (await fetch('index.html', { cache: 'no-store' })).text();
   const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -105,9 +107,10 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     <div><span class="ceja">Botonera (tu celular, no se comparte)</span><b>https://presentacion.srv1915283.hstgr.cloud<wbr>/control</b></div></div></div>`;
 
   out += `<h2>El recorrido: 2 horas, ${placas.length} placas</h2><table><tr><th>Hora</th><th>Bloque</th><th>Min</th></tr>
-    <tr><td class="hora">0:00</td><td>Apertura con Migue, el plan y cómo empezó</td><td>8</td></tr>
+    <tr><td class="hora">0:00</td><td>Apertura con Migue, el plan y cómo empezó</td><td>7</td></tr>
+    <tr><td class="hora">${PRIMERO.desde}</td><td><b>Primero</b> · ${esc(PRIMERO.t)}</td><td>${PRIMERO.min}</td></tr>
     ${BLOQUES.map((b, i) => `<tr><td class="hora">${b.desde}</td><td><b>Bloque ${i + 1}</b> · ${esc(b.t)}</td><td>${b.min}</td></tr>`).join('')}
-    <tr><td class="hora">1:55</td><td>Un caso (Migue), conclusión, preguntas y gracias</td><td>resto</td></tr></table>
+    <tr><td class="hora">1:52</td><td>Un caso (Migue), conclusión, preguntas y gracias</td><td>resto</td></tr></table>
     <p class="pie">Los minutos no aparecen en pantalla: son sólo para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.</p>`;
 
   out += `<h2>Antes de empezar</h2><ul class="lista">
@@ -133,8 +136,8 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     const n = i + 1;
     if (p.classList.contains('m6-sep')) {
       bloque = +p.dataset.bloque;
-      const b = BLOQUES[bloque - 1];
-      out += `<div class="bloque"><span class="ceja">Bloque ${bloque} de 7 · desde ${b.desde} · ${b.min} min</span><h2>${esc(b.t)}</h2><p>${esc((p.querySelector('.m6-sep-txt p') || {}).textContent || '')}</p></div>`;
+      const b = bloque ? BLOQUES[bloque - 1] : PRIMERO;
+      out += `<div class="bloque"><span class="ceja">${bloque ? `Bloque ${bloque} de 7` : 'Primero, antes de los bloques'} · desde ${b.desde} · ${b.min} min</span><h2>${esc(b.t)}</h2><p>${esc((p.querySelector('.m6-sep-txt p') || {}).textContent || '')}</p></div>`;
     } else if (i === 0) {
       out += `<div class="salto"></div><h2>Placa por placa</h2>`;
     }

@@ -26,13 +26,16 @@
   });
 
   // Encabezado de cada placa: en qué bloque estamos (hasta la conclusión).
-  let bloque = 0, fin = false;
+  // El separador con data-bloque="0" abre "Lo que ya funciona", antes del bloque 1.
+  let bloque = -1, fin = false;
   document.querySelectorAll('#stage > .slide:not([data-oculta])').forEach((s) => {
     if (s.dataset.fin !== undefined) fin = true;
     if (s.classList.contains('m6-sep')) bloque = +s.dataset.bloque;
     const enc = s.querySelector('.encab');
     if (!enc) return;
-    enc.textContent = bloque && !fin ? `Módulo 6 · Bloque ${bloque} · ${BLOQUES[bloque - 1]}` : 'Gobernar con IA · Módulo 6 · Dr. Marco Rossi';
+    enc.textContent = fin || bloque < 0 ? 'Gobernar con IA · Módulo 6 · Dr. Marco Rossi'
+      : bloque === 0 ? 'Módulo 6 · Primero · Lo que ya funciona'
+      : `Módulo 6 · Bloque ${bloque} · ${BLOQUES[bloque - 1]}`;
   });
 
   // Logo del Gobierno del Chaco: si está el archivo en img/logos, reemplaza la marca de texto.

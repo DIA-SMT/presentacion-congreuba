@@ -22,17 +22,17 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 
 ## Qué hay
 
-- 45 placas en 7 bloques (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan, cómo empezó, y por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
-  1. De la IA individual a la institucional: pregunta a la sala, cuatro niveles, chat frente a agente, vitrina Herramientas internas.
-  2. Las capas: cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue (datos conectados), vitrina de Migue, IA soberana (matriz 2×2).
-  3. Del piloto a la producción: embudo y seis causas, el camino, checklist, vitrina y **demo en vivo** de CIMBA, vitrinas UrbanIA + Presupuesto y Ciudad abierta.
-  4. La economía de los agentes: tokens, el multiplicador del agente, costo efectivo, vitrina y demo de EstudIA, cinco reglas para presupuestar.
+- 49 placas (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan y cómo empezó. Después, **Primero · Lo que ya funciona** (separador `data-bloque="0"`): el mapa de los diez desarrollos (`.m6-mapa`) y sus vitrinas, con **Migue y CIMBA en vivo** y EstudIA opcional, para que cuando se hable de capas, datos y costos el público ya sepa de qué sistema se habla (desde el 25/11/2026; la versión anterior quedó en la etiqueta `chaco-antes-de-desarrollos`). Después, por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
+  1. De la IA individual a la institucional: pregunta a la sala, cuatro niveles, chat frente a agente.
+  2. Las capas: cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue (datos conectados), IA soberana (matriz 2×2).
+  3. Del piloto a la producción: embudo y seis causas, el camino, checklist.
+  4. La economía de los agentes: tokens, el multiplicador del agente, costo efectivo, cinco reglas para presupuestar (con EstudIA).
   5. Gobernanza del agente: decreto 0596, semáforo de permisos, trazabilidad (CIMBA real), el tablero de Migue y el tablero en vivo.
   6. El costo que la factura no muestra: sedentarismo cognitivo y cuatro prácticas.
   7. Hoja de ruta para Chaco: cinco fases con criterio de paso, y qué hace la provincia y qué cada municipio.
   Cierre: conclusión, preguntas (QR de Migue) y gracias.
 - El encabezado de cada placa dice en qué bloque estás (lo arma `m6.js`).
-- **Migue co-conduce**: está parado en cada separador y abre el bloque con una frase (MIGUE 7…15; con globo hasta que se graben los videos `media/m6-*.mp4`), y la placa 43 recorre los siete bloques en su caso.
+- **Migue co-conduce**: está parado en cada separador y abre la sección con una frase (MIGUE 7 presenta los desarrollos, 10…16 abren los bloques; con globo hasta que se graben los videos `media/m6-*.mp4`), y la placa 46 recorre los siete bloques en su caso.
 - **Guion imprimible**: `guion.html` arma el guion placa por placa leyendo la presentación (miniatura, línea de la botonera, notas, frases de Migue y demos). `.\herramientas\guion-pdf.ps1` lo imprime a `guion-modulo6.pdf` (A4) con Edge.
 - **Sistemas en vivo, dentro de la presentación** (`#web`, en `m6.js`): un navegador con pestañas que muestra el sistema real. En las placas "EN VIVO" (`data-web="cimba|estudia|migue"`) el primer SIGUIENTE lo abre y el siguiente lo cierra y avanza; la botonera tiene un botón por sistema (lista `SISTEMAS` en `contenido.js`). Se precarga una placa antes y conserva la sesión.
 - Capturas reales en las placas de trazabilidad (CIMBA, control de lo cargado), presupuesto (EstudIA, Laboratorio IA) y el tablero de Migue.
