@@ -130,6 +130,8 @@
     }
     // Al llegar a una placa: se cierra el navegador y se precarga el sistema de esta placa o de la que sigue.
     function placa(p) {
+      // En los separadores Migue co-conduce desde la izquierda: su globo va arriba de él, sin tapar el título.
+      document.getElementById('stage').classList.toggle('m6-en-sep', !!(p && p.classList.contains('m6-sep')));
       if (abierto) cerrar();
       if (captura || !p) return;
       p._webVisto = false;

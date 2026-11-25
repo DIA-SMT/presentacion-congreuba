@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guion · Módulo 6 · Gobernar la IA agéntica en el Estado</title>
+<!-- Guion imprimible (A4) armado desde la presentación misma: lee index.html y
+     contenido.js, así que siempre coincide con las placas. Para el PDF:
+     .\herramientas\guion-pdf.ps1 (Edge sin ventana → guion-modulo6.pdf). -->
+<script src="contenido.js"></script>
+<style>
+@font-face { font-family: 'Poppins'; font-weight: 400; src: url(fonts/Poppins-Regular.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 500; src: url(fonts/Poppins-Medium.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 600; src: url(fonts/Poppins-SemiBold.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 700; src: url(fonts/Poppins-Bold.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 800; src: url(fonts/Poppins-ExtraBold.ttf); }
+@page { size: A4; margin: 14mm 14mm 16mm; }
+:root { --azul: #111a3b; --azul2: #2e344b; --gris: #8a8270; --arena: #c9c4b8; --hueso: #f1efeb; --borde: #e4e3e1; --celeste: #2eb1ff; --rojo: #d6453d; --verde: #2f9e6e; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: 'Poppins', Arial, sans-serif; color: var(--azul); font-size: 10pt; line-height: 1.45; background: #fff; }
+.hoja { max-width: 182mm; margin: 0 auto; }
+@media screen { body { background: #d9d6d0; padding: 24px 0; } .hoja { background: #fff; padding: 14mm; box-shadow: 0 10px 40px rgba(0,0,0,.15); } }
+h1 { font-size: 26pt; line-height: 1.1; font-weight: 800; letter-spacing: -.5px; }
+h2 { font-size: 14pt; font-weight: 800; margin: 18px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--azul); }
+h3 { font-size: 11pt; font-weight: 700; margin: 12px 0 4px; }
+p { margin: 4px 0; }
+.ceja { font-size: 7.5pt; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--gris); }
+.tapa { padding: 6mm 0 4mm; border-bottom: 4px solid var(--azul); margin-bottom: 8px; }
+.tapa .sub { font-size: 12pt; font-weight: 600; color: var(--azul2); margin-top: 6px; }
+.tapa .quien { margin-top: 10px; font-size: 10pt; }
+.links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.links div { background: var(--hueso); border-radius: 8px; padding: 8px 10px; }
+.links b { display: block; font-size: 9.5pt; word-break: break-all; }
+table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 9pt; }
+th, td { text-align: left; padding: 5px 7px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+th { font-size: 7.5pt; letter-spacing: 1px; text-transform: uppercase; color: var(--gris); border-bottom: 1.5px solid var(--azul); }
+td.hora { white-space: nowrap; font-weight: 700; width: 48px; }
+td.num { white-space: nowrap; font-weight: 700; width: 40px; }
+ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
+.migue-frase { display: flex; gap: 8px; align-items: flex-start; }
+.migue-frase img { width: 22px; height: 22px; border-radius: 50%; flex: none; margin-top: 1px; }
+.salto { break-before: page; }
+.bloque { break-before: page; background: var(--azul); color: #fff; border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; }
+.bloque .ceja { color: var(--arena); }
+.bloque h2 { color: #fff; border-color: rgba(255,255,255,.35); margin: 4px 0 6px; font-size: 16pt; }
+.bloque p { color: #dfe3f0; font-style: italic; }
+.placa { display: grid; grid-template-columns: 58mm 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--borde); break-inside: avoid; }
+.placa .mini { width: 58mm; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; border: 1px solid var(--borde); background: var(--hueso); }
+.placa .cab { display: flex; align-items: baseline; gap: 8px; }
+.placa .n { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 22px; border-radius: 11px; background: var(--azul); color: #fff; font-size: 9pt; font-weight: 700; padding: 0 7px; }
+.placa .tit { font-size: 11pt; font-weight: 700; line-height: 1.25; }
+.placa .linea { font-size: 8.5pt; color: var(--azul2); background: var(--hueso); border-left: 3px solid var(--arena); border-radius: 4px; padding: 4px 8px; margin: 5px 0; }
+.placa .dice { font-size: 9.5pt; }
+.placa .migue { margin-top: 6px; background: #fff7cc; border-left: 3px solid #e6b400; border-radius: 4px; padding: 5px 8px; font-size: 9pt; }
+.placa .migue b { font-size: 7.5pt; letter-spacing: 1px; text-transform: uppercase; }
+.placa .dialogo { margin-top: 6px; font-size: 9pt; }
+.placa .dialogo div { padding: 3px 0; border-bottom: 1px dashed var(--borde); }
+.placa .dialogo .m { color: #7a5c00; } .placa .dialogo .v { font-weight: 700; }
+.placa .vivo { margin-top: 6px; background: #fdecea; border-left: 3px solid var(--rojo); border-radius: 4px; padding: 5px 8px; font-size: 9pt; }
+.placa .vivo b { color: var(--rojo); font-size: 7.5pt; letter-spacing: 1px; text-transform: uppercase; }
+.placa .recursos { margin-top: 5px; font-size: 8.5pt; color: var(--azul2); }
+.pie { margin-top: 14px; font-size: 8pt; color: var(--gris); }
+</style>
+</head>
+<body>
+<div class="hoja" id="hoja"><p>Armando el guion…</p></div>
+<script>
+(async function () {
+  const C = window.CONTENIDO, V = C.VIDEOS, S = C.SISTEMAS || [];
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const BLOQUES = [
+    { t: 'De la IA individual a la institucional', min: 15, desde: '0:08' },
+    { t: 'Las capas: licencias, datos e IA soberana', min: 20, desde: '0:23' },
+    { t: 'Del piloto a la producción', min: 20, desde: '0:43' },
+    { t: 'La economía de los agentes', min: 15, desde: '1:03' },
+    { t: 'Gobernanza del agente', min: 15, desde: '1:18' },
+    { t: 'El costo que la factura no muestra', min: 10, desde: '1:33' },
+    { t: 'Hoja de ruta para Chaco', min: 12, desde: '1:43' },
+  ];
+  const html = await (await fetch('index.html', { cache: 'no-store' })).text();
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const placas = [...doc.querySelectorAll('#stage > section.slide:not([data-oculta])')];
+  const tit = q => {
+    if (q.dataset.titulo) return q.dataset.titulo;
+    const h = q.querySelector('.titular h1, .p-titulo'), b = q.querySelector('.barra-tit, .subt');
+    return ((h ? h.textContent : '') + (b ? ' · ' + b.textContent : '')).replace(/\s+/g, ' ').trim();
+  };
+  const frases = s => (s.match(/MIGUE (\d+)/g) || []).map(x => +x.split(' ')[1]);
+  const limpiar = s => String(s || '').replace(/MIGUE \d+\s*·\s*/g, '').trim();
+  const dos = n => String(n).padStart(2, '0');
+  const migueLinea = n => V[n - 1] ? (V[n - 1].sub || V[n - 1].texto) : '';
+  // Dónde va cada frase de Migue.
+  const dondeFrase = {};
+  placas.forEach((p, i) => frases(p.dataset.notas || '').forEach(n => { dondeFrase[n] = i + 1; }));
+
+  let out = '';
+  // ---------------- Tapa y resumen
+  out += `<div class="tapa"><span class="ceja">Guion del expositor · IA para Gobiernos Locales · IALAB UBA</span>
+    <h1>Gobernar la IA agéntica en el Estado</h1>
+    <p class="sub">Módulo 6 · De la IA individual a la IA institucional</p>
+    <p class="quien">Dr. Marco Rossi · Director de Inteligencia Artificial, Municipalidad de San Miguel de Tucumán<br>
+    «Gobernar con IA» · capacitación para los 70 municipios del Chaco · 25 y 26 de noviembre de 2026 · Presidencia Roque Sáenz Peña</p>
+    <div class="links"><div><span class="ceja">Pantalla (para la técnica)</span><b>https://presentacion.195-35-42-168.sslip.io</b></div>
+    <div><span class="ceja">Botonera (tu celular, no se comparte)</span><b>https://presentacion.195-35-42-168.sslip.io/control</b></div></div></div>`;
+
+  out += `<h2>El recorrido: 2 horas, ${placas.length} placas</h2><table><tr><th>Hora</th><th>Bloque</th><th>Min</th></tr>
+    <tr><td class="hora">0:00</td><td>Apertura con Migue, el plan y cómo empezó</td><td>8</td></tr>
+    ${BLOQUES.map((b, i) => `<tr><td class="hora">${b.desde}</td><td><b>Bloque ${i + 1}</b> · ${esc(b.t)}</td><td>${b.min}</td></tr>`).join('')}
+    <tr><td class="hora">1:55</td><td>Un caso (Migue), conclusión, preguntas y gracias</td><td>resto</td></tr></table>
+    <p class="pie">Los minutos no aparecen en pantalla: son sólo para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.</p>`;
+
+  out += `<h2>Antes de empezar</h2><ul class="lista">
+    <li>Pantalla: abrí la presentación y tocá <b>COMENZAR</b> (así Migue tiene sonido). Botonera: todo en verde.</li>
+    <li>Misma compu y mismo navegador para la prueba y para la charla (sin incógnito).</li>
+    <li><b>Iniciá sesión una vez desde la presentación</b> en CIMBA (placa ${placas.findIndex(p => p.dataset.web === 'cimba') + 1}) y EstudIA (placa ${placas.findIndex(p => p.dataset.web === 'estudia') + 1}) al llegar. <b>El tablero de Migue, en la pausa o justo antes del bloque 5</b>: su sesión vence y no se renueva sola.</li>
+    <li>Antes de proyectar una demo, que no quede abierta ninguna pantalla con nombres, teléfonos o direcciones de vecinos.</li></ul>`;
+
+  out += `<h2>Migue co-conduce: sus ${V.length} frases</h2>
+    <p>Cada vez que en la placa le toca hablar, la botonera hace latir <b>MIGUE HABLA</b>. Las frases salen en orden; las nuevas del módulo salen con globo de texto (si se graba el video con su nombre, se usa solo).</p>
+    <table><tr><th>N.º</th><th>Placa</th><th>Migue dice</th></tr>
+    ${V.map((v, i) => `<tr><td class="num">${i + 1}</td><td class="num">${dondeFrase[i + 1] || '—'}</td><td>${esc(v.sub || v.texto)}${v.archivo || (v.video && !/m6-/.test(v.video)) ? '' : ' <span class="ceja">· globo</span>'}</td></tr>`).join('')}</table>`;
+
+  out += `<h2>Sistemas en vivo, dentro de la presentación</h2><ul class="lista">
+    <li>En las placas <b>EN VIVO</b>, el primer SIGUIENTE abre el sistema real; otro SIGUIENTE lo cierra y avanza; ANTERIOR, ✕ o Esc lo cierra.</li>
+    <li>Adentro se navega con el <b>mouse</b>. Mientras el cursor está adentro, el teclado y el clicker le hablan al sistema: para seguir, el celular o el ✕.</li>
+    <li>La botonera tiene "Sistemas en vivo" para abrir cualquiera en cualquier momento: ${S.map(s => esc(s.nombre)).join(' · ')}.</li>
+    <li>Si uno no carga: ↻ (o Recargar en la botonera), o ↗ para abrirlo en una ventana; si no, la vitrina de ese sistema tiene las capturas.</li></ul>`;
+
+  // ---------------- Placa por placa
+  let bloque = 0;
+  placas.forEach((p, i) => {
+    const n = i + 1;
+    if (p.classList.contains('m6-sep')) {
+      bloque = +p.dataset.bloque;
+      const b = BLOQUES[bloque - 1];
+      out += `<div class="bloque"><span class="ceja">Bloque ${bloque} de 7 · desde ${b.desde} · ${b.min} min</span><h2>${esc(b.t)}</h2><p>${esc((p.querySelector('.m6-sep-txt p') || {}).textContent || '')}</p></div>`;
+    } else if (i === 0) {
+      out += `<div class="salto"></div><h2>Placa por placa</h2>`;
+    }
+    const notas = p.dataset.notas || '', fr = frases(notas);
+    let extra = '';
+    if (p.dataset.dialogo !== undefined) {
+      extra += `<div class="dialogo">${fr.map(k => `<div><span class="m">Migue (${k}): «${esc(migueLinea(k))}»</span><br><span class="v">Vos: ${esc((V[k - 1] || {}).marco || '')}</span></div>`).join('')}</div>`;
+    } else if (fr.length) {
+      extra += fr.map(k => `<div class="migue"><b>Migue habla (${k})</b> · «${esc(migueLinea(k))}»</div>`).join('');
+    }
+    if (p.dataset.web) {
+      const s = S.find(x => x.id === p.dataset.web) || {};
+      extra += `<div class="vivo"><b>En vivo · ${esc(s.nombre || p.dataset.web)}</b> · SIGUIENTE lo abre dentro de la presentación (${esc(s.dominio || String(s.url || '').replace(/^https?:\/\//, '').replace(/\/$/, ''))}); otro SIGUIENTE lo cierra y avanza.</div>`;
+    }
+    if (p.dataset.vitrina) {
+      const recs = p.dataset.vitrina.split(',').map(id => (C.PROYECTOS.find(x => x.id === id) || {})).filter(x => x.nombre)
+        .map(x => `${x.nombre}: ${x.recursos.filter(r => p.dataset.solo !== 'ps' || r.tipo === 'ps' || r.enVitrina).map(r => r.titulo).join(' → ')}`);
+      extra += `<div class="recursos"><b>Vitrina:</b> ${esc(recs.join(' · '))}</div>`;
+    }
+    out += `<div class="placa"><img class="mini" src="img/mini/m${dos(n)}-1.jpg" alt="">
+      <div><div class="cab"><span class="n">${n}</span><span class="tit">${esc(tit(p))}</span></div>
+      ${p.dataset.guion && !p.dataset.dialogo ? `<div class="linea">${esc(p.dataset.guion)}</div>` : ''}
+      <p class="dice">${esc(limpiar(notas))}</p>${extra}</div></div>`;
+  });
+
+  out += `<h2 class="salto">Si algo falla</h2><ul class="lista">
+    <li>Una frase de Migue de más: ↶ deshacer. Migue no responde en vivo: a los ~40 s sale una respuesta de cortesía.</li>
+    <li>Un sistema en vivo no carga: ↻, ↗ (ventana aparte) o seguí con la vitrina de ese sistema.</li>
+    <li>Aviso rojo "La pantalla no pudo hacer…": seguí con SIGUIENTE, no se traba. "Versión distinta": recargar pantalla y botonera.</li>
+    <li>Pantalla negra: Extras → Negro. Saltar a una placa: "Ir a la placa", al final de la botonera.</li></ul>
+    <p class="pie">Guion generado desde la presentación (versión ${esc(window.UBA_VERSION || '')}). Cifras de los sistemas al 14/10/2026; el multiplicador de tokens y la cascada de costos son ilustrativos.</p>`;
+  document.getElementById('hoja').innerHTML = out;
+  // Esperar las miniaturas antes de imprimir.
+  await Promise.all([...document.images].map(im => im.complete ? 0 : new Promise(ok => { im.onload = im.onerror = ok; })));
+  document.body.dataset.listo = '1';
+})();
+</script>
+<script src="version.js"></script>
+</body>
+</html>

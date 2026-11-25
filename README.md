@@ -29,6 +29,8 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
   7. Hoja de ruta para Chaco: cinco fases con criterio de paso, y qué hace la provincia y qué cada municipio.
   Cierre: conclusión, preguntas (QR de Migue) y gracias.
 - El encabezado de cada placa dice en qué bloque estás (lo arma `m6.js`).
+- **Migue co-conduce**: está parado en cada separador y abre el bloque con una frase (MIGUE 7…15; con globo hasta que se graben los videos `media/m6-*.mp4`), y la placa 43 recorre los siete bloques en su caso.
+- **Guion imprimible**: `guion.html` arma el guion placa por placa leyendo la presentación (miniatura, línea de la botonera, notas, frases de Migue y demos). `.\herramientas\guion-pdf.ps1` lo imprime a `guion-modulo6.pdf` (A4) con Edge.
 - **Sistemas en vivo, dentro de la presentación** (`#web`, en `m6.js`): un navegador con pestañas que muestra el sistema real. En las placas "EN VIVO" (`data-web="cimba|estudia|migue"`) el primer SIGUIENTE lo abre y el siguiente lo cierra y avanza; la botonera tiene un botón por sistema (lista `SISTEMAS` en `contenido.js`). Se precarga una placa antes y conserva la sesión.
 - Capturas reales en las placas de trazabilidad (CIMBA, control de lo cargado), presupuesto (EstudIA, Laboratorio IA) y el tablero de Migue.
 - Logo del Gobierno del Chaco: si existe `img/logos/gobierno-chaco.png` (o `.svg`), reemplaza solo a la marca de texto en portada y cierre.

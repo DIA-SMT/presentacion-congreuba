@@ -445,6 +445,20 @@
 .web-afuera button { margin-top: 8px; height: 66px; border: 0; border-radius: 33px; padding: 0 40px; background: var(--azul); color: var(--blanco); font: 700 24px Poppins, sans-serif; cursor: pointer; }
 .web-afuera small { font-size: 17px; color: var(--suave); }
 
+/* ---------- Migue co-conduce: en los separadores está parado a la izquierda ---------- */
+.m6-sep[data-migue="izq"] .m6-sep-num { left: auto; right: 40px; top: 96px; -webkit-text-stroke: 3px rgba(201,196,184,.3); }
+.m6-sep[data-migue="izq"] .m6-sep-txt { left: 560px; right: 160px; }
+.m6-sep[data-migue="izq"] .m6-riel { left: 560px; }
+#stage.m6-en-sep #globo { left: 40px; right: auto; top: 130px; bottom: auto; max-width: 480px; font-size: 26px; border-radius: 30px 30px 30px 8px; }
+
+/* ---------- Un caso, siete bloques: Migue (con Migue a la derecha) ---------- */
+.m6-caso { width: 1330px; display: flex; flex-direction: column; gap: 12px; }
+.m6-caso-item { flex: 1; display: grid; grid-template-columns: 90px 340px 1fr; align-items: center; background: var(--blanco); border-radius: 14px; overflow: hidden; }
+.m6-caso-item em { height: 100%; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 36px; font-weight: 800; color: var(--blanco); background: var(--azul); }
+.m6-caso-item b { padding: 0 28px; font-size: 28px; line-height: 1.15; font-weight: 800; }
+.m6-caso-item span { padding-right: 28px; font-size: 21px; line-height: 1.35; color: var(--azul2); }
+.m6-caso-item strong { font-weight: 800; color: var(--azul); }
+
 /* Modo captura (miniaturas de la botonera): todo quieto y en su estado final. */
 body.captura *, body.captura *::before, body.captura *::after { animation: none !important; transition: none !important; }
 body.captura .a { opacity: 1 !important; }

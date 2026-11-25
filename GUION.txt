@@ -1,7 +1,7 @@
 GUION DE PRÁCTICA · MÓDULO 6 · GOBERNAR LA IA AGÉNTICA EN EL ESTADO
 "Gobernar con IA" · 70 municipios del Chaco · IALAB UBA · Presidencia Roque Sáenz Peña
 =====================================================================================
-Tiempo: 2 horas. 45 placas en 7 bloques, cada uno abre con un separador (número grande y
+Tiempo: 2 horas. 46 placas en 7 bloques, cada uno abre con un separador (número grande y
 riel de avance). Los minutos NO aparecen en pantalla: son sólo para vos. El cronómetro de
 la botonera se pone ámbar a la 1:45 y rojo a las 2:00.
 
@@ -55,7 +55,24 @@ APERTURA (placa 1) · DIÁLOGO CON MIGUE
     5 ¡Mucho gusto, gente! Soy Migue… ¡Y ahora también me hacen viajar por trabajo!
       VOS: Bueno, Migue, dejame contarles el plan de hoy.
     6 ¡Dale, Marco! Pero acordate que tenemos diez minutos. ¡No te me embalés!
-      VOS: Hoy no, Migue: hoy tenemos dos horas.   → SIGUIENTE.
+      VOS: Hoy no, Migue: hoy tenemos dos horas. Y vos me vas a acompañar en cada
+           bloque.   → SIGUIENTE.
+
+MIGUE CO-CONDUCE (guion completo, placa por placa, en guion-modulo6.pdf)
+  Está parado en cada separador y abre el bloque; la botonera hace latir MIGUE HABLA
+  cuando le toca. Las frases nuevas salen con globo (si se graba media/m6-….mp4, se usa).
+    7  (placa 4,  bloque 1)  «Yo no firmo nada… las decisiones las toman las personas.»
+    8  (placa 9,  bloque 2)  «Sin datos conectados no sirvo de mucho, chango.»
+    9-10 (placa 14, vitrina Migue)  videos: «Vos me contás qué te pasa…», «Entiendo, organizo…»
+    11 (placa 16, bloque 3)  «Mi mejor indicador: los vecinos vuelven, ya son 3.797.»
+    12 (placa 24, bloque 4)  «Cada pregunta que me hacen cuesta: se paga por tokens.»
+    13 (placa 31, bloque 5)  «Mi parte favorita: mi tablero.»
+    14 (placa 37, bloque 6)  «Yo ayudo a pensar, no pienso por vos… si no sé, te paso con una persona.»
+    15 (placa 40, bloque 7)  «¿Y si cada municipio del Chaco tuviera su Migue?»
+    16 (placa 44, conclusión) «Reglas, datos, costos y personas. ¡Y a mí, que me sigan gobernando!»
+    17 (placa 45, preguntas)  «¡A mí también me pueden preguntar, en vivo!»
+    18 (placa 46, gracias)    video: «¡Muchas gracias! Nos vemos en la ciudad.»
+  Placa 43 · Un caso: los siete bloques en Migue (Migue al lado, a la derecha).
   2 · El plan (siete preguntas)   3 · Cómo empezó (se recorre sola: hablá encima)
 
 BLOQUE 1 · DE LA IA INDIVIDUAL A LA INSTITUCIONAL (placas 4–8)
@@ -69,7 +86,7 @@ BLOQUE 2 · LAS CAPAS (placas 9–15)
   11 Licencias: ocho condiciones antes de firmar.
   12 Detrás de escena CIMBA: CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
   13 Detrás de escena Migue: CONTÁ CÓMO SE MANTIENEN LAS FUENTES.
-  14 Vitrina Migue (MIGUE 7 y MIGUE 8 cuando quieras).
+  14 Vitrina Migue (MIGUE 9 y MIGUE 10 cuando quieras).
   15 IA soberana: matriz sensibilidad × volumen. ¿Soberanía municipal o provincial?
 
 BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 16–23)
@@ -98,9 +115,10 @@ BLOQUE 7 · HOJA DE RUTA PARA CHACO (placas 40–42)
   41 Cinco fases con criterio de paso; la etapa 2027 (ECOM) cubre las tres primeras.
   42 Quién hace qué: la provincia una vez para los 70, cada municipio lo suyo.
 
-CIERRE (placas 43–45)
-  43 Conclusión.   44 Preguntas (Q: QR gigante; preguntas a Migue con la voz).
-  45 Gracias: MIGUE 9 se despide. Queda proyectada.
+CIERRE (placas 43–46)
+  43 Un caso: los siete bloques en Migue.   44 Conclusión (MIGUE 16).
+  45 Preguntas (MIGUE 17; Q: QR gigante; preguntas a Migue con la voz).
+  46 Gracias: MIGUE 18 se despide. Queda proyectada.
 
 SI ALGO FALLA
   - Una frase de Migue de más: ↶ deshacer.

@@ -26,10 +26,21 @@ window.CONTENIDO = {
     { archivo: null, video: 'media/apertura6.mp4', texto: 'Mucho gusto, gente', sub: '¡Mucho gusto, gente! Soy Migue, el asistente de inteligencia artificial de San Miguel de Tucumán. Atiendo a los vecinos las 24 horas, respondo consultas, ayudo con los trámites… ¡Y ahora también me hacen viajar por trabajo!',
       marco: 'Bueno, Migue, dejame contarles el plan de hoy.' },
     { archivo: null, video: 'media/apertura7.mp4', texto: 'No te me embalés', sub: '¡Dale, Marco! Pero acordate que tenemos diez minutos. ¡No te me embalés!',
-      marco: 'Hoy no, Migue: hoy tenemos dos horas. (SIGUIENTE) El plan de hoy…' },
-    // ---- Vitrina Migue (MIGUE 7 y 8) y cierre (MIGUE 9)
+      marco: 'Hoy no, Migue: hoy tenemos dos horas. Y vos me vas a acompañar en cada bloque. (SIGUIENTE) El plan de hoy…' },
+    // ---- Módulo 6: Migue co-conduce. Abre cada bloque desde su separador (MIGUE 7, 8, 11…15),
+    // sus videos en la vitrina (MIGUE 9 y 10), la conclusión (16), las preguntas (17) y el cierre (18).
+    // Las frases sin grabar salen con globo; si se graba el video con ese nombre, se usa solo.
+    { archivo: null, video: 'media/m6-bloque1.mp4', texto: 'Yo no firmo nada', sub: 'Les cuento un secreto: yo no firmo nada, ¿eh? Yo entiendo, busco y ayudo. Las decisiones las toman las personas.' },
+    { archivo: null, video: 'media/m6-bloque2.mp4', texto: 'Sin datos no sirvo', sub: 'Para responderle bien a un vecino necesito fuentes oficiales: trámites, turnos, reclamos, cortes. ¡Sin datos conectados no sirvo de mucho, chango!' },
     { archivo: 'media/migue2.mp4', texto: 'Vos me contás qué te pasa', sub: 'Vos me contás qué te pasa. Yo intento entender qué necesitás.' },
     { archivo: 'media/migue4.mp4', texto: 'Entiendo, organizo, busco y ayudo', sub: 'Yo entiendo, organizo, busco… y ayudo.' },
+    { archivo: null, video: 'media/m6-bloque3.mp4', texto: 'Los vecinos vuelven', sub: '¿Saben cuál es mi mejor indicador? Que los vecinos vuelven: ya son 3.797 los que me consultan otra vez.' },
+    { archivo: null, video: 'media/m6-bloque4.mp4', texto: 'Cada pregunta cuesta', sub: '¿Sabían que cada pregunta que me hacen cuesta? Se paga por tokens. Por eso conviene que responda claro y cortito, ¡como me gusta a mí!' },
+    { archivo: null, video: 'media/m6-bloque5.mp4', texto: 'Mi parte favorita: mi tablero', sub: 'Acá viene mi parte favorita: mi tablero. Ahí me miran todo: el corazón, el cerebro… ¡y hasta el humor de los vecinos!' },
+    { archivo: null, video: 'media/m6-bloque6.mp4', texto: 'Ayudo a pensar', sub: 'Yo ayudo a pensar, no pienso por vos. Si te respondo algo raro, ¡chequealo! Y si no sé, te paso con una persona.' },
+    { archivo: null, video: 'media/m6-bloque7.mp4', texto: '¿Un Migue por municipio?', sub: '¿Y si cada municipio del Chaco tuviera su Migue? Yo ya trabajo en CIMBA, en EstudIA, en el Presupuesto Participativo y en el Bus Turístico.' },
+    { archivo: null, video: 'media/m6-conclusion.mp4', texto: 'Que me sigan gobernando', sub: 'Resumiendo, chango: reglas, datos, costos y personas. ¡Y a mí, que me sigan gobernando!' },
+    { archivo: null, video: 'media/m6-preguntas.mp4', texto: 'A mí también pregúntenme', sub: '¿Preguntas? ¡A mí también me pueden preguntar, eh! Ahora mismo, en vivo.' },
     { archivo: 'media/migue14.mp4', texto: '¡Gracias! Nos vemos en la ciudad', sub: '¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad.' },
   ],
 
