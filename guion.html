@@ -120,7 +120,7 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     <li>Antes de proyectar una demo, que no quede abierta ninguna pantalla con nombres, teléfonos o direcciones de vecinos.</li></ul>`;
 
   out += `<h2>Migue co-conduce: sus ${V.length} frases</h2>
-    <p>Cada vez que en la placa le toca hablar, la botonera hace latir <b>MIGUE HABLA</b>. Las frases salen en orden; las nuevas del módulo salen con globo de texto (si se graba el video con su nombre, se usa solo).</p>
+    <p>Cada vez que en la placa le toca hablar, la botonera hace latir <b>MIGUE HABLA</b>. Las frases salen en orden y todas tienen video. En los separadores Migue está parado, sin hablar.</p>
     <table><tr><th>N.º</th><th>Placa</th><th>Migue dice</th></tr>
     ${V.map((v, i) => `<tr><td class="num">${i + 1}</td><td class="num">${dondeFrase[i + 1] || '—'}</td><td>${esc(v.sub || v.texto)}${v.archivo || (v.video && !/m6-/.test(v.video)) ? '' : ' <span class="ceja">· globo</span>'}</td></tr>`).join('')}</table>`;
 
