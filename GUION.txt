@@ -1,104 +1,114 @@
-GUION DE PRÁCTICA · LA IA COMO SERVICIO PÚBLICO (UBA, 16/10/2026, 11:45)
-=========================================================================
-Tiempo: 10 minutos. Apertura con Migue ~1:20 · cómo empezó y reglas ~1:40 · seis vitrinas
-~45 s cada una (Ciudad abierta se puede acortar con SIGUIENTE) · cierre ~0:40.
-El cronómetro de la botonera se pone ámbar a los 8 y rojo a los 10.
-Vos sólo tocás SIGUIENTE (y MIGUE HABLA en la apertura). Las vitrinas pasan solas, en crescendo:
-puertas adentro → el camino → Ciudad abierta → UrbanIA → Migue → CIMBA → EstudIA.
+GUION DE PRÁCTICA · MÓDULO 6 · GOBERNAR LA IA AGÉNTICA EN EL ESTADO
+"Gobernar con IA" · 70 municipios del Chaco · IALAB UBA · Presidencia Roque Sáenz Peña
+=====================================================================================
+Tiempo: 2 horas. 44 placas en 7 bloques, cada uno abre con un separador (número grande y
+riel de avance). El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.
+En la botonera, cada placa trae su línea de guion (arriba) y las notas completas.
 
-LINKS (sin código: canal fijo en config.js)
-  Pantalla (técnica): https://uba-ia-servicio-publico.vercel.app
-  Botonera (tu cel):  https://uba-ia-servicio-publico.vercel.app/control   (no se comparte)
+  0:00  Apertura con Migue + el plan + cómo empezó ........................  8 min
+  0:08  Bloque 1 · De la IA individual a la institucional .................. 15 min
+  0:23  Bloque 2 · Las capas: licencias, datos e IA soberana ............... 20 min
+  0:43  Bloque 3 · Del piloto a la producción (demo CIMBA) ................. 20 min
+  1:03  Bloque 4 · La economía de los agentes (demo EstudIA, opcional) ..... 15 min
+  1:18  Bloque 5 · Gobernanza del agente (demo Migue) ...................... 15 min
+  1:33  Bloque 6 · El costo que la factura no muestra ...................... 10 min
+  1:43  Bloque 7 · Hoja de ruta para Chaco ................................. 12 min
+  1:55  Conclusión, preguntas y gracias .................................... resto
 
 ANTES DE EMPEZAR
-  - Ideal: la técnica toca COMENZAR (así Migue tiene sonido). Si se olvida, tu primer
-    SIGUIENTE la arranca igual (Migue habla sin sonido, con subtítulo).
-  - En la botonera, todo en verde. Si aparece "Hay 2 pantallas abiertas", cerrá la
-    que no sea la del salón (las dos obedecen).
-  - Debajo de SIGUIENTE dice qué viene. En las vitrinas, una franja dice qué se ve y
-    en cuántos segundos pasa solo. ◀ ▶ lo frena para explicar; "Que siga sola" lo retoma.
+  - Pantalla: abrí la presentación y tocá COMENZAR (así Migue tiene sonido). Si te
+    olvidás, tu primer SIGUIENTE la arranca igual (Migue sin sonido, con subtítulo).
+  - Botonera: todo en verde. Si aparece "Hay 2 pantallas abiertas", cerrá la otra.
+  - DEMOS EN VIVO: en la misma compu, dejá abiertas tres pestañas con la sesión ya
+    iniciada: CIMBA (cimba.smt.gob.ar), EstudIA (estudia.smt.gob.ar) y el panel de
+    Migue (migue.smt.gob.ar). En cada placa "EN VIVO" pasás con Alt+Tab y volvés igual.
+  - Antes de proyectar una demo, revisá que no quede abierta ninguna pantalla con
+    nombres, teléfonos o direcciones de vecinos (Migue: "pendientes de validación" e
+    interacciones; Bus: interacciones; EstudIA: datos de alumnos).
+  - Si querés el logo del Gobierno del Chaco en portada y cierre: guardalo como
+    img/logos/gobierno-chaco.png (o .svg) y aparece solo en lugar del texto.
 
- 1 · PORTADA + DIÁLOGO CON MIGUE
-   Tocá MIGUE HABLA: la portada queda en penumbra y Migue aparece grande. Cuando
-   termina cada frase, la botonera te muestra tu línea («DECÍS …»). Decila y tocá
-   MIGUE HABLA otra vez. Son 6 frases de Migue:
-     1 ¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?
-       VOS: Migue, pará un segundo. Date vuelta, estás mirando al revés.
-     2 ¡Ahí tá! ¡Ahora sí! ¡Epa! ¿Y toda esta gente?
-       VOS: Estamos en la Facultad de Derecho de la UBA, Migue. ¿No te acordás…?
-     3 ¡Ah, cierto! … ¡No has parado un segundo, chango!
-       VOS: Bueno, entonces ya sabés de qué vamos a hablar.
-     4 ¡Claro! De cómo estamos usando IA para ayudar a los vecinos…
-       VOS: Exactamente. Bueno, presentate vos, Migue.
-     5 ¡Mucho gusto, gente! Soy Migue… ¡Y ahora también me hacen viajar por trabajo!
-       VOS: Bueno, Migue, dejame contarles cómo empezó todo.
-     6 ¡Dale, Marco! Pero acordate que tenemos diez minutos. ¡No te me embalés!
-       → SIGUIENTE.
+APERTURA (placa 1) · DIÁLOGO CON MIGUE
+  Tocá MIGUE HABLA; cuando termina cada frase, la botonera muestra tu línea («VOS …»).
+    1 ¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?
+      VOS: Migue, pará un segundo. Date vuelta, estás mirando al revés.
+    2 ¡Ahí tá! ¡Ahora sí! ¡Epa! ¿Y toda esta gente?
+      VOS: Estamos en Presidencia Roque Sáenz Peña, Migue, en el Chaco. Vinimos a
+           trabajar con los 70 municipios de la provincia.
+    3 ¡Ah, cierto! … ¡No has parado un segundo, chango!
+      VOS: Bueno, entonces ya sabés de qué vamos a hablar.
+    4 ¡Claro! De cómo estamos usando IA para ayudar a los vecinos…
+      VOS: Eso, y algo más: cómo se gobierna la IA cuando deja de ser de uno y pasa a
+           ser de toda la institución. Presentate, Migue.
+    5 ¡Mucho gusto, gente! Soy Migue… ¡Y ahora también me hacen viajar por trabajo!
+      VOS: Bueno, Migue, dejame contarles el plan de hoy.
+    6 ¡Dale, Marco! Pero acordate que tenemos diez minutos. ¡No te me embalés!
+      VOS: Hoy no, Migue: hoy tenemos dos horas.   → SIGUIENTE.
+  2 · El plan (siete bloques)   3 · Cómo empezó (se recorre sola: hablá encima)
 
- 2 · CÓMO EMPEZÓ (línea de tiempo)
-   Junio 2025 nace la Dirección de IA → capacitación → diciembre, las reglas →
-   puertas adentro → para el vecino → hoy: Migue, CIMBA, EstudIA.
+BLOQUE 1 · DE LA IA INDIVIDUAL A LA INSTITUCIONAL (placas 4–8)
+  5  Pregunta a la sala: ¿quién usa IA en el trabajo? ¿con cuenta personal? (manos)
+  6  Cuatro niveles: individual, de equipo, institucional, agéntica. Quién paga,
+     dónde quedan los datos, quién responde.
+  7  Chat responde / agente actúa. La IA interpreta, los sistemas ejecutan, las
+     personas deciden (ejemplo CIMBA).
+  8  Vitrina Herramientas internas: Generador de Notas (la IA redacta, la persona
+     firma) y tableros.
 
- 3 · PRIMERO, LAS REGLAS
-   Decreto 0596/INT/2025: cinco principios, una guía práctica y ética para todas
-   las áreas, capacitación constante (34 gerentes de datos, 71 egresados).
-   "La decisión final, la firma, la responsabilidad, es y será siempre humana."
+BLOQUE 2 · LAS CAPAS (placas 9–14)
+  10 Cinco capas: modelos, datos, integración, agentes, personas (con ejemplo SMT).
+  11 Licencias: ocho condiciones antes de firmar.
+  12 Detrás de escena CIMBA: 6 canales → CIMBA → 12 empresas, SIGOV, mapa, foto,
+     cierre. CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
+  13 Detrás de escena Migue: fuentes oficiales → Migue → Ciudad Digital, Telegram,
+     WhatsApp. CONTÁ CÓMO SE MANTIENEN LAS FUENTES.
+  14 IA soberana: matriz sensibilidad × volumen. ¿Soberanía municipal o provincial?
 
- (Cómo empezó se recorre sola en ~15 s: hablá encima, sin tocar nada.)
+BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 15–22)
+  16 Embudo y seis causas. "Un piloto prueba la tecnología; la producción, la organización."
+  17 El camino: primero adentro, después el vecino por Ciudad Digital.
+  18 Checklist de seis preguntas antes del piloto (para llevarse).
+  19 Vitrina CIMBA (el avance arranca solo).
+  20 EN VIVO · CIMBA: mapa, cómo entra y se cierra un reclamo, avance con fotos.
+  21 Vitrina UrbanIA + Presupuesto Participativo.   22 Vitrina Ciudad abierta.
 
- 4 · VITRINA HERRAMIENTAS INTERNAS
-   Generador de Notas: había mucho miedo a la IA; fue la herramienta transversal que
-   abrió puertas (la IA redacta, la persona firma). Después, los tableros de trabajo
-   inteligente: carga de trabajo, efectividad, juego, alertas a tiempo y trazabilidad.
+BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES (placas 23–29)
+  24 Tokens: la pregunta de un vecino ≈ 12 tokens. Entra y sale; todo lo leído cuenta.
+  25 El multiplicador: chat 1.500 tokens; agente de 6 pasos 21.000 (≈ 14×). Ilustrativo.
+  26 Costo efectivo: el precio por token es el piso. Medí el costo por trámite resuelto.
+  27 Vitrina EstudIA: tope de 50 usos por día, US$ 0,017 en 30 días.
+  28 EN VIVO · EstudIA (opcional): borrador del docente, panel de consumo, topes.
+  29 Cinco reglas para presupuestar.
 
- 5 · EL CAMINO: PRIMERO ADENTRO
-   "Primero la usamos nosotros. Cuando funcionó adentro, la llevamos al vecino, con
-   Ciudad Digital como puerta: 160.000 vecinos."
+BLOQUE 5 · GOBERNANZA DEL AGENTE (placas 30–35)
+  31 Las reglas: Decreto 0596, cinco principios, la firma es humana.
+  32 Semáforo de permisos: verde (solo), ámbar (propone y aprueba una persona), rojo (nunca solo).
+  33 Trazabilidad: qué, cuándo, a pedido de quién, con qué permiso. El agente no es
+     responsable: lo es quien dio el permiso y quien firma.
+  34 Vitrina Migue (MIGUE 7 y MIGUE 8 cuando quieras).
+  35 EN VIVO · Migue: cerebro, termómetro y una pregunta en vivo desde la botonera.
 
- 6 · VITRINA CIUDAD DIGITAL + MIGUE
-   MIGUE 7 y MIGUE 8 cuando quieras. Problema → solución: 24 h, 17.848 consultas, 91%.
-   Después: Ciudad Digital, el cerebro, el termómetro y la tarjeta para preguntar en
-   vivo (tocá la pregunta; otro toque la cierra).
+BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA (placas 36–38)
+  37 IA que piensa por vos / IA que te hace pensar. "La IA ayuda a pensar, no hace la tarea."
+  38 Cuatro prácticas para cuidar las capacidades (34 gerentes de datos, 71 egresados).
 
- 7 · VITRINA CIMBA
-   Reclamos dispersos, duplicados, mal clasificados → cierre en un clic, 4.316 baches,
-   880 t de mezcla trazada. Después el avance arranca solo (18 segundos).
+BLOQUE 7 · HOJA DE RUTA PARA CHACO (placas 39–41)
+  40 Cinco fases con criterio de paso; la etapa 2027 (ECOM) cubre las tres primeras.
+  41 Quién hace qué: la provincia una vez para los 70, cada municipio lo suyo.
 
- 8 · VITRINA ESTUDIA
-   ¿Celulares sí o no?, docentes sobrecargados, datos dispersos, mal uso de la IA →
-   1 minuto por actividad, una plataforma, IA con tope y costo a la vista.
-
- 9 · VITRINA URBANIA + PRESUPUESTO PARTICIPATIVO (la voz del vecino)
-   UrbanIA: Código de 1998 y audiencias sin sistematizar → cada idea del vecino cruzada
-   con su norma, minuto a minuto. Presupuesto: la IA te ayuda a armar el proyecto para
-   tu barrio, con Migue integrado.
-
-10 · VITRINA CIUDAD ABIERTA (sólo problema → solución, más las evidencias de Applaza)
-   Applaza (del Excel a certificar con un clic) → Bus Turístico (del Google Form a
-   reservas inteligentes) → FerIA (foto, costos y marketplace).
-
-11 · CONCLUSIÓN
-   Reglas primero, adentro primero, el vecino en el centro. La IA interpreta; las
-   personas deciden.
-
-12 · GRACIAS (queda proyectada)
-   MIGUE 9: "¡Muchas gracias a todos! Y ahora sí… nos vemos en la ciudad."
+CIERRE (placas 42–44)
+  42 Conclusión: decidir quién puede hacer qué, con qué datos, permisos, costo y firma.
+  43 Preguntas (Q: QR gigante; preguntas a Migue con la voz desde la botonera).
+  44 Gracias: MIGUE 9 se despide. Queda proyectada.
 
 LAS VITRINAS VAN EN LOOP: al terminar el último recurso vuelven al primero, hasta que
 tocás SIGUIENTE. ◀ ▶ las frena en ese recurso; "Que siga sola" las vuelve a soltar.
-
-PARA LAS PREGUNTAS DEL PANEL
-  "Extras para preguntas · cajones": abrí el proyecto que te pregunten (sobre cualquier
-  placa), ◀ ▶ para moverte, "Cerrar cajón" para volver.
-  Pregunta del público a Migue: 🎤 PREGUNTAR CON LA VOZ, que la diga cerca del celular,
-  revisá el texto (se puede corregir) y tocá Preguntar. La primera vez el celular pide
-  permiso para el micrófono: dalo antes de la charla. Si no dicta, el micrófono del
-  teclado también sirve.
+Extras para preguntas: los cajones de los 10 proyectos se abren sobre cualquier placa.
 
 SI ALGO FALLA
   - Una frase de Migue de más: ↶ deshacer.
-  - Migue no responde en vivo: a los ~40 s sale una respuesta de cortesía; tocá la
-    misma pregunta otra vez para cerrarla.
-  - Aviso rojo "La pantalla no pudo hacer…": seguí con SIGUIENTE, la presentación no se traba.
+  - Migue no responde en vivo: a los ~40 s sale una respuesta de cortesía.
+  - Aviso rojo "La pantalla no pudo hacer…": seguí con SIGUIENTE, no se traba.
   - Aviso "Versión distinta": recargar pantalla y botonera.
+  - Una demo no carga: seguí con la vitrina de ese sistema, que tiene las capturas.
   - Pantalla negra: Extras → Negro. Saltar a una placa: "Ir a la placa", al final.

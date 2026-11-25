@@ -9,5 +9,5 @@
 window.UBA_CONFIG = {
   supabaseUrl: 'https://sdnbrlobzqfzurfpoxam.supabase.co',
   supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkbmJybG9ienFmenVyZnBveGFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2MTMzNzAsImV4cCI6MjEwNjE4OTM3MH0.oin_JWb1_obOMFtXl-ToZRJN449fVVN3BgaFiebCfAk',
-  sala: 'panel-uba-16-10',
+  sala: 'chaco-modulo6-2026',
 };

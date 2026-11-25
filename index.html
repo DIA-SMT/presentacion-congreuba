@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La IA como servicio público · San Miguel de Tucumán</title>
+<title>Gobernar la IA agéntica en el Estado · Módulo 6</title>
 <script src="lib/supabase.js"></script>
 <link rel="stylesheet" href="lib/maplibre-gl.css">
 <script src="lib/maplibre-gl.js"></script>
@@ -14,39 +14,64 @@
 <script src="remoto.js"></script>
 <link rel="stylesheet" href="estilo.css">
 <link rel="stylesheet" href="efectos.css">
+<link rel="stylesheet" href="m6.css">
 </head>
 <body>
 <div id="stage">
 
 <!-- =====================================================================
-     LAS PLACAS, con la grilla del template del congreso.
+     MÓDULO 6 · GOBERNAR LA IA AGÉNTICA EN EL ESTADO
+     "Gobernar con IA" · 70 municipios del Chaco · IALAB UBA · 2 horas.
+     Recorrido: apertura → plan → de dónde venimos → 7 bloques (cada uno abre
+     con un separador .m6-sep) → cierre → preguntas → gracias.
        data-guion  → ayuda memoria en el celular (una línea).
        data-notas  → el texto completo; "MIGUE n" marca dónde va la frase n.
-       data-migue  → dónde está Migue: der o no (si habla en una placa sin
-                     él, aparece a la derecha y después se va).
+       data-bloque → en los separadores: número de bloque (m6.js arma el riel).
      ===================================================================== -->
 
-<!-- ===================== 1. PORTADA ===================== -->
+<!-- ===================== PORTADA + DIÁLOGO CON MIGUE ===================== -->
 <section class="slide portada" data-migue="no" data-dialogo
   data-guion="Apertura: diálogo con Migue. Tocá MIGUE HABLA; cuando termina, decí tu línea (aparece acá) y tocá MIGUE HABLA otra vez. Son 6 frases."
-  data-notas="MIGUE 1 · MIGUE 2 · MIGUE 3 · MIGUE 4 · MIGUE 5 · MIGUE 6 · Apertura en diálogo: Migue habla, vos respondés con la línea que te aparece en la botonera. Al terminar (\"no te me embalés\"), SIGUIENTE: cómo empezó todo.">
-  <div class="capa-logos a fade" data-logos></div>
+  data-notas="MIGUE 1 · MIGUE 2 · MIGUE 3 · MIGUE 4 · MIGUE 5 · MIGUE 6 · Apertura en diálogo: Migue habla, vos respondés con la línea que te aparece en la botonera. Remate: cuando Migue dice «tenemos diez minutos», le contestás «hoy no, Migue: hoy tenemos dos horas». Después, SIGUIENTE: el plan de hoy.">
+  <div class="m6-logos a fade">
+    <img class="ialab" src="assets/template/logos/uba-ialab.png" alt="UBA · IALAB">
+    <i></i>
+    <span class="marca" data-logo-chaco><small>Gobierno del</small><b>CHACO</b></span>
+    <i></i>
+    <img src="img/logos/logo-horizontal-color.png" alt="Ciudad de San Miguel de Tucumán">
+  </div>
   <div class="portada-centro">
-    <p class="p-evento a" style="--d:.2s">Celebrando Magnífica Humanitas · Panel: IA Federal, innovación desde los territorios</p>
-    <h1 class="p-titulo a" style="--d:.35s">La IA como servicio público</h1>
-    <p class="p-sub a" style="--d:.45s">Desde el Estado más cercano al vecino: la experiencia de San Miguel de Tucumán</p>
-    <p class="p-orador a" style="--d:.55s">Dr. Marco Rossi · <em>Director de Inteligencia Artificial</em></p>
-    <p class="p-inst a" style="--d:.65s">Municipalidad de San Miguel de Tucumán · en representación de la Intendenta, Dra. Rossana Chahla</p>
-    <p class="p-fecha a" style="--d:.8s">Viernes 16 de octubre · Facultad de Derecho, UBA</p>
-    <img class="p-logo a" style="--d:.95s" src="img/logos/logo-horizontal-color.png" alt="Ciudad de San Miguel de Tucumán">
+    <p class="p-evento a" style="--d:.2s">Gobernar con IA · Capacitación para los 70 municipios del Chaco</p>
+    <p class="p-modulo a" style="--d:.3s">IA para Gobiernos Locales · Módulo 6</p>
+    <h1 class="p-titulo a" style="--d:.4s">Gobernar la IA agéntica en el Estado</h1>
+    <p class="p-sub a" style="--d:.5s">De la IA individual a la IA institucional</p>
+    <p class="p-orador a" style="--d:.6s">Dr. Marco Rossi · <em>Director de Inteligencia Artificial</em></p>
+    <p class="p-inst a" style="--d:.7s">Municipalidad de San Miguel de Tucumán</p>
+    <p class="p-fecha a" style="--d:.8s">Noviembre de 2026 · Presidencia Roque Sáenz Peña, Chaco</p>
   </div>
 </section>
 
-<!-- ===================== 2. CÓMO EMPEZÓ TODO ===================== -->
+<!-- ===================== EL PLAN DE HOY ===================== -->
+<section class="slide" data-migue="no" data-titulo="El plan de hoy · 7 bloques"
+  data-guion="El plan: siete bloques en dos horas. De la IA individual a la institucional, las capas, del piloto a la producción, la economía, la gobernanza, lo que la factura no muestra y la hoja de ruta para Chaco."
+  data-notas="Les cuento el plan. Son siete bloques. Arrancamos por la pregunta de fondo: qué cambia cuando la IA deja de ser de cada uno y pasa a ser de la institución. Después vemos las capas que hay que gobernar, por qué tantos proyectos no pasan del piloto, cuánto cuesta de verdad un agente, quién responde por lo que hace, el costo que no aparece en ninguna factura, y cerramos con una hoja de ruta para los municipios del Chaco. En cada bloque les muestro lo que hicimos en San Miguel de Tucumán, con los sistemas reales.">
+  <div class="titular a fade"><h1>El plan</h1><span class="pill">Módulo 6</span><span class="subt">Siete bloques · dos horas</span></div>
+  <ol class="m6-agenda m6-area">
+    <li class="a" style="--d:.15s"><b>1</b><strong>De la IA individual a la institucional</strong><span>¿Qué cambia cuando la IA deja de ser de cada uno?</span><em>15 min</em></li>
+    <li class="a" style="--d:.25s"><b>2</b><strong>Las capas: licencias, datos e IA soberana</strong><span>¿Qué se contrata, qué se conecta, qué se construye?</span><em>20 min</em></li>
+    <li class="a" style="--d:.35s"><b>3</b><strong>Del piloto a la producción</strong><span>¿Por qué tantos proyectos no escalan?</span><em>20 min</em></li>
+    <li class="a" style="--d:.45s"><b>4</b><strong>La economía de los agentes</strong><span>¿Cuánto cuesta de verdad?</span><em>15 min</em></li>
+    <li class="a" style="--d:.55s"><b>5</b><strong>Gobernanza del agente</strong><span>¿Quién responde por lo que hace un agente?</span><em>15 min</em></li>
+    <li class="a" style="--d:.65s"><b>6</b><strong>El costo que la factura no muestra</strong><span>¿Qué capacidades perdemos si delegamos todo?</span><em>10 min</em></li>
+    <li class="a" style="--d:.75s"><b>7</b><strong>Hoja de ruta para Chaco</strong><span>¿Por dónde empieza cada municipio?</span><em>15 min</em></li>
+  </ol>
+</section>
+
+<!-- ===================== DE DÓNDE VENIMOS ===================== -->
 <section class="slide" data-migue="no"
-  data-guion="Cómo empezó: junio de 2025 nace la Dirección de IA; capacitación; diciembre, las reglas; puertas adentro; después el vecino; y hoy, Migue, CIMBA y EstudIA."
-  data-notas="Todo empezó con una oficina nueva: en junio de 2025 la Intendenta creó la Dirección de Inteligencia Artificial. Lo primero fue diagnosticar y capacitar. En diciembre pusimos las reglas, con un decreto. Después la usamos puertas adentro. Y cuando funcionó, la llevamos al vecino, hasta los sistemas que hoy son el corazón: Migue, CIMBA y EstudIA.">
-  <div class="titular a fade"><h1>Cómo empezó</h1><span class="pill">La historia</span><span class="subt">De una oficina nueva a servicios para toda la ciudad</span></div>
+  data-guion="De dónde venimos: junio de 2025 nace la Dirección de IA; capacitación; diciembre, las reglas; puertas adentro; después el vecino; y hoy, Migue, CIMBA y EstudIA."
+  data-notas="Para que sepan desde dónde les hablo. En junio de 2025 la Intendenta creó la Dirección de Inteligencia Artificial. Lo primero fue diagnosticar y capacitar. En diciembre pusimos las reglas, con un decreto. Después la usamos puertas adentro. Y cuando funcionó, la llevamos al vecino, hasta los sistemas que hoy son el corazón: Migue, CIMBA y EstudIA. Todo lo que les voy a contar hoy sale de este recorrido, con sus aciertos y sus errores.">
+  <div class="titular a fade"><h1>Cómo empezó</h1><span class="pill">San Miguel de Tucumán</span><span class="subt">De una oficina nueva a servicios para toda la ciudad</span></div>
   <div class="linea-tiempo">
     <i class="lt-eje"></i><i class="lt-avance"></i><i class="lt-cometa"></i><b class="lt-anio"></b>
     <div class="hito" data-anio="2025" style="--d:.3s"><span class="h-ic">🏛️</span><b class="h-fecha">Junio 2025</b><p class="h-tit">Nace la Dirección de IA</p><small>Decreto 0358/INT/2025</small></div>
@@ -58,10 +83,495 @@
   </div>
 </section>
 
-<!-- ===================== 2. PRIMERO, LAS REGLAS ===================== -->
+<!-- ===================================================================
+     BLOQUE 1 · DE LA IA INDIVIDUAL A LA IA INSTITUCIONAL
+     =================================================================== -->
+<section class="slide m6-sep" data-migue="no" data-bloque="1" data-titulo="Bloque 1 · De la IA individual a la institucional"
+  data-guion="Bloque 1 (15 min): de la IA individual a la institucional. Pregunta a la sala, los cuatro niveles, qué cambia cuando la IA ejecuta, y el Generador de Notas."
+  data-notas="Primer bloque: qué cambia cuando la IA deja de ser una herramienta de cada uno y pasa a ser de la institución.">
+  <div class="m6-sep-num a fade">1</div>
+  <div class="m6-sep-txt">
+    <span class="ceja a" style="--d:.2s">Bloque 1 de 7 · 15 minutos</span>
+    <h2 class="a" style="--d:.35s">De la IA individual a la IA institucional</h2>
+    <p class="a" style="--d:.55s">¿Qué cambia cuando la IA deja de ser de cada uno y pasa a ser de toda la institución?</p>
+  </div>
+  <ol class="m6-riel a fade" style="--d:.7s"></ol>
+</section>
+
+<section class="slide m6-pregunta" data-migue="no" data-titulo="Pregunta a la sala · ¿Quién usa IA?"
+  data-guion="Pedí manos: ¿quién usa IA en su trabajo? (esperá) ¿Y con una cuenta personal? Ahí empieza la IA individual."
+  data-notas="Hagamos una prueba. Levanten la mano los que usan IA en su trabajo. (Esperar.) Ahora, que la bajen los que la usan con una cuenta institucional. Los que quedan con la mano arriba usan IA individual: es útil, ahorra tiempo, pero no tiene reglas, no deja registro, nadie la paga formalmente y los datos del municipio quedan en cuentas personales. No es un reproche: así empezamos todos. Es el punto de partida del módulo.">
+  <div class="m6-pregunta-caja">
+    <span class="ceja a" style="--d:.1s">Pregunta a la sala</span>
+    <div class="m6-mano a" style="--d:.3s">✋</div>
+    <h2 class="a" style="--d:.45s">¿Quién usa IA en su trabajo?</h2>
+    <h3 class="a" style="--d:2.4s">¿Y quién lo hace con una cuenta personal?</h3>
+    <p class="a" style="--d:3.4s">Ahí empieza la IA individual: útil, pero sin reglas, sin registro y con los datos afuera.</p>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Cuatro niveles · De uno a la institución"
+  data-guion="Cuatro niveles: individual, de equipo, institucional, agéntica. En cada escalón cambia quién paga, dónde quedan los datos y quién responde."
+  data-notas="Lo podemos ordenar en cuatro escalones. Individual: cada uno con su chat y su cuenta. De equipo: un área adopta una herramienta, la paga como puede y nadie firmó condiciones. Institucional: la gestión fija reglas, contrata con condiciones escritas y conecta la IA con sus sistemas. Y el cuarto, el de este módulo: la IA agéntica, que ya no solo responde sino que ejecuta acciones en los sistemas. Fíjense en las tres filas de abajo: quién paga, dónde quedan los datos y quién responde. Cada escalón es una respuesta distinta a esas tres preguntas.">
+  <div class="titular a fade"><h1>Cuatro niveles</h1><span class="pill">De uno a todos</span><span class="subt">Lo que cambia en cada escalón</span></div>
+  <div class="m6-escalera m6-area">
+    <article class="m6-escalon a" style="--d:.15s">
+      <header><small>Nivel 1</small><b>Individual</b></header>
+      <p>Cada uno usa la herramienta que conoce, con su propia cuenta.</p>
+      <dl><dt>Quién paga</dt><dd>Cada uno, o nadie</dd><dt>Dónde quedan los datos</dt><dd>En cuentas personales</dd><dt>Quién responde</dt><dd>No está claro</dd></dl>
+    </article>
+    <article class="m6-escalon a" style="--d:.35s">
+      <header><small>Nivel 2</small><b>De equipo</b></header>
+      <p>Un área elige un servicio y lo usa para su tarea.</p>
+      <dl><dt>Quién paga</dt><dd>El área, sin contrato marco</dd><dt>Dónde quedan los datos</dt><dd>En un proveedor, con condiciones estándar</dd><dt>Quién responde</dt><dd>El jefe del área</dd></dl>
+    </article>
+    <article class="m6-escalon a" style="--d:.55s">
+      <header><small>Nivel 3</small><b>Institucional</b></header>
+      <p>La gestión fija reglas, contrata y conecta la IA con sus sistemas.</p>
+      <dl><dt>Quién paga</dt><dd>El municipio, con contrato</dd><dt>Dónde quedan los datos</dt><dd>Con condiciones escritas</dd><dt>Quién responde</dt><dd>Quien firma</dd></dl>
+    </article>
+    <article class="m6-escalon foco a" style="--d:.75s">
+      <span class="m6-sello">Este módulo</span>
+      <header><small>Nivel 4</small><b>Agéntica</b></header>
+      <p>Un agente consulta, redacta y registra en los sistemas, con permisos.</p>
+      <dl><dt>Quién paga</dt><dd>Por uso: cada paso consume tokens</dd><dt>Dónde quedan los datos</dt><dd>El agente los lee y los escribe</dd><dt>Quién responde</dt><dd>Quien autorizó el permiso</dd></dl>
+    </article>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="IA agéntica · Del chat que responde al agente que actúa"
+  data-guion="Chat responde (una llamada; si se equivoca, lo descartás). Agente actúa (planifica, usa herramientas, repite; si se equivoca, el error ya está hecho). La IA interpreta, los sistemas ejecutan, las personas deciden."
+  data-notas="¿Qué es un agente? Un chat responde: le preguntás, contesta, y si se equivoca lo ves y lo descartás. Un agente actúa: recibe un objetivo, planifica, usa herramientas —consulta un sistema, redacta, registra—, revisa y repite hasta terminar. Por eso cambia todo: si un agente se equivoca, el error ya está hecho en el sistema. Nuestro criterio, desde el primer día: la IA interpreta, los sistemas ejecutan con reglas fijas, y las personas deciden. En CIMBA se ve claro: la IA clasifica y detecta duplicados, el sistema registra y ordena, y el cierre lo hace una persona, con foto.">
+  <div class="titular a fade"><h1>IA agéntica</h1><span class="pill">Qué cambia</span><span class="subt">Del chat que responde al agente que actúa</span></div>
+  <div class="m6-area">
+    <div class="m6-dos">
+      <div class="m6-caja a" style="--d:.15s">
+        <span class="ceja">Chat</span><h3>Responde</h3>
+        <div class="m6-cadena"><span>Pregunta</span><i>→</i><span class="fuerte">Respuesta</span></div>
+        <p>Una llamada al modelo. Si se equivoca, lo ves y lo descartás.</p>
+      </div>
+      <div class="m6-caja a" style="--d:.45s">
+        <span class="ceja">Agente</span><h3>Actúa</h3>
+        <div class="m6-cadena"><span>Objetivo</span><i>→</i><span>Planifica</span><i>→</i><span>Usa herramientas</span><i>→</i><span>Revisa</span><i>→</i><span class="fuerte">Resultado</span></div>
+        <div class="m6-bucle"><svg viewBox="0 0 64 36"><path d="M8 26 C8 6, 56 6, 56 22 M48 16 L56 24 L62 15"/></svg>Repite hasta terminar: muchas llamadas por tarea</div>
+        <p>Consulta sistemas, redacta y registra. Si se equivoca, el error ya está hecho.</p>
+      </div>
+    </div>
+    <div class="m6-triada">
+      <div class="a" style="--d:.9s"><b>La IA interpreta</b><p>Entiende el pedido, clasifica y propone. En CIMBA: detecta duplicados y clasifica cada reclamo.</p></div>
+      <div class="a" style="--d:1.1s"><b>Los sistemas ejecutan</b><p>Registran, ordenan y avisan, con reglas fijas y trazables.</p></div>
+      <div class="a" style="--d:1.3s"><b>Las personas deciden</b><p>Aprueban, firman y responden. En CIMBA: el cierre es un clic de una persona, con foto.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide vitrina" data-vitrina="notas,tableros" data-migue="no" data-titulo="Vitrina · Herramientas internas"
+  data-guion="El primer salto a lo institucional: el Generador de Notas, transversal, le sacó el miedo a la IA (la IA redacta, la persona firma). Después, los tableros: carga, efectividad, juego, alertas y trazabilidad."
+  data-notas="El primer salto de lo individual a lo institucional lo dimos puertas adentro. Había mucho miedo a usar la IA. La primera herramienta fue transversal, para todas las áreas: el Generador de Notas. Diez tipos de nota, en lenguaje claro y con el mismo criterio; la IA redacta, la persona firma. Fíjense que no es un chat: es una herramienta institucional, con el padrón de áreas y cargos, el mismo formato para todos y una firma humana al final. Después vinieron los tableros de trabajo inteligente: carga de trabajo, efectividad, juego, alertas y trazabilidad de cada proceso."></section>
+
+<!-- ===================================================================
+     BLOQUE 2 · LAS CAPAS: LICENCIAS, DATOS E IA SOBERANA
+     =================================================================== -->
+<section class="slide m6-sep" data-migue="no" data-bloque="2" data-titulo="Bloque 2 · Las capas: licencias, datos e IA soberana"
+  data-guion="Bloque 2 (20 min): las capas. Las cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue, y cuándo conviene la IA soberana."
+  data-notas="Segundo bloque: la IA institucional no es una cosa sola, son capas, y cada una se gobierna distinto.">
+  <div class="m6-sep-num a fade">2</div>
+  <div class="m6-sep-txt">
+    <span class="ceja a" style="--d:.2s">Bloque 2 de 7 · 20 minutos</span>
+    <h2 class="a" style="--d:.35s">Las capas de la IA institucional</h2>
+    <p class="a" style="--d:.55s">¿Qué se contrata, qué se conecta y qué conviene construir?</p>
+  </div>
+  <ol class="m6-riel a fade" style="--d:.7s"></ol>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Las capas · IA institucional"
+  data-guion="Cinco capas, de abajo hacia arriba: modelos (licencias y costo), datos, integración, agentes (permisos y registro) y personas. Cada una con su ejemplo en SMT y el bloque donde la vemos."
+  data-notas="Les propongo mirar la IA institucional en cinco capas, de abajo hacia arriba. Abajo, los modelos: ahí se gobiernan las licencias, las condiciones y el costo por uso. Arriba, los datos: su calidad, de quién son y cómo se protegen. Después la integración: el acceso a los sistemas que ya existen, que es donde se juega casi todo. Encima, los agentes: qué pueden hacer y qué registro dejan. Y arriba de todo, las personas: quién supervisa, quién firma y qué capacidades conservamos. A la derecha tienen un ejemplo de cada capa en San Miguel de Tucumán y el bloque de hoy donde la desarrollamos.">
+  <div class="titular a fade"><h1>Las capas</h1><span class="pill">IA institucional</span><span class="subt">Cada capa se gobierna distinto</span></div>
+  <div class="m6-capas m6-area">
+    <div class="m6-capa a" style="--d:1.05s"><div><em>5</em><b>Personas</b><span>Supervisión, firma y capacidades</span></div><p><small>En San Miguel de Tucumán</small>34 gerentes de datos · Decreto 0596: la firma es humana</p><i>Bloques 5 y 6</i></div>
+    <div class="m6-capa a" style="--d:.85s"><div><em>4</em><b>Agentes</b><span>Permisos y registro de cada acción</span></div><p><small>En San Miguel de Tucumán</small>Migue atiende las 24 horas en Ciudad Digital, Telegram y WhatsApp</p><i>Bloque 5</i></div>
+    <div class="m6-capa a" style="--d:.65s"><div><em>3</em><b>Integración</b><span>Acceso a los sistemas que ya existen</span></div><p><small>En San Miguel de Tucumán</small>CIMBA conecta 6 canales de reclamos, 12 empresas y SIGOV</p><i>Bloques 2 y 3</i></div>
+    <div class="m6-capa a" style="--d:.45s"><div><em>2</em><b>Datos</b><span>Calidad, propiedad y privacidad</span></div><p><small>En San Miguel de Tucumán</small>218 espacios verdes georreferenciados · 4.316 baches con lugar y fecha</p><i>Bloque 2</i></div>
+    <div class="m6-capa a" style="--d:.25s"><div><em>1</em><b>Modelos</b><span>Licencias, condiciones y costo por uso</span></div><p><small>En San Miguel de Tucumán</small>EstudIA: tope de 50 usos por día y costo a la vista</p><i>Bloques 2 y 4</i></div>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Licencias · Ocho condiciones antes de firmar"
+  data-guion="Licencias: ocho condiciones antes de firmar. Datos que no entrenan, dónde quedan, cuentas institucionales, registro, precio con tope, salida sin rehenes, API y continuidad. Contratar es una decisión de gobierno."
+  data-notas="Primera capa: qué licencias contratar y con qué condiciones. Antes de firmar, ocho preguntas. Uno: que lo que cargamos no se use para entrenar modelos. Dos: dónde quedan los datos, cuánto tiempo y cómo se borran. Tres: cuentas institucionales, con alta y baja centralizadas, no cuentas personales. Cuatro: registro de uso, quién usó qué y cuándo. Cinco: precio por uso con topes y alertas. Seis: poder irnos con nuestros datos si cambiamos de proveedor. Siete: acceso por API, para integrarlo con nuestros sistemas y no quedarnos en el chat. Y ocho: continuidad, aviso cuando cambian el modelo y soporte. Contratar IA no es una compra más: es una decisión de gobierno.">
+  <div class="titular a fade"><h1>Licencias</h1><span class="pill">Qué contratar</span><span class="subt">Ocho condiciones antes de firmar</span></div>
+  <div class="m6-area">
+    <div class="m6-clausulas">
+      <div class="m6-clausula a" style="--d:.15s"><em>01</em><i>🔒</i><b>Datos que no entrenan</b><p>Lo que cargamos no se usa para entrenar modelos.</p></div>
+      <div class="m6-clausula a" style="--d:.25s"><em>02</em><i>🌎</i><b>Dónde quedan los datos</b><p>Jurisdicción, retención y borrado, por escrito.</p></div>
+      <div class="m6-clausula a" style="--d:.35s"><em>03</em><i>👤</i><b>Cuentas institucionales</b><p>Usuarios del municipio, con alta y baja centralizadas.</p></div>
+      <div class="m6-clausula a" style="--d:.45s"><em>04</em><i>🧾</i><b>Registro de uso</b><p>Quién usó qué y cuándo, exportable para auditar.</p></div>
+      <div class="m6-clausula a" style="--d:.55s"><em>05</em><i>🧮</i><b>Precio por uso, con tope</b><p>Tarifa por token, topes y alertas de consumo.</p></div>
+      <div class="m6-clausula a" style="--d:.65s"><em>06</em><i>🚪</i><b>Salida sin rehenes</b><p>Exportar datos y configuraciones si cambiamos de proveedor.</p></div>
+      <div class="m6-clausula a" style="--d:.75s"><em>07</em><i>🔌</i><b>Acceso por API</b><p>Para integrarlo con los sistemas propios, no solo por chat.</p></div>
+      <div class="m6-clausula a" style="--d:.85s"><em>08</em><i>🛟</i><b>Continuidad y soporte</b><p>Aviso de cambios de modelo, disponibilidad y soporte.</p></div>
+    </div>
+    <div class="tarjeta pestana m6-nota a" style="--d:1.1s"><i>!</i><div><span class="ceja">Para recordar</span><p>Contratar IA no es una compra más: es una decisión de gobierno.</p></div></div>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Detrás de escena · CIMBA: datos conectados"
+  data-guion="Detrás de escena de CIMBA: seis canales de reclamos entran a una sola bandeja; la IA detecta duplicados y clasifica; sale a 12 empresas, SIGOV, el mapa, la foto y el cierre. Contá qué implicó articularlo."
+  data-notas="Les muestro lo que no se ve. Los reclamos de baches llegaban por seis canales: el 147, el Concejo, el S.A.T., las secretarías, las redes y Ciudad Digital. Cada uno con su planilla. CIMBA los junta en una sola bandeja, la IA detecta los duplicados y clasifica cada pedido, y del otro lado se conecta con las 12 empresas, con SIGOV, con el mapa público, con la foto de antes y después y con el cierre del reclamo. Lo difícil no fue la IA: fue ponernos de acuerdo entre áreas y empresas para trabajar sobre los mismos datos. (Contá acá cómo fue esa articulación.)">
+  <div class="titular a fade"><h1>Detrás de escena</h1><span class="pill">CIMBA</span><span class="subt">Seis canales y doce empresas, conectados</span></div>
+  <div class="m6-area">
+    <div class="m6-flujo a fade" style="height:400px; --d:.1s">
+      <svg viewBox="0 0 1748 400" preserveAspectRatio="none">
+        <path style="--d:.5s" d="M400,45 C500,45 500,200 600,200"/><path style="--d:.6s" d="M400,107 C500,107 500,200 600,200"/><path style="--d:.7s" d="M400,169 C500,169 500,200 600,200"/>
+        <path style="--d:.8s" d="M400,231 C500,231 500,200 600,200"/><path style="--d:.9s" d="M400,293 C500,293 500,200 600,200"/><path style="--d:1s" d="M400,355 C500,355 500,200 600,200"/>
+        <path style="--d:1.5s" d="M1060,200 C1160,200 1160,76 1260,76"/><path style="--d:1.6s" d="M1060,200 C1160,200 1160,138 1260,138"/><path style="--d:1.7s" d="M1060,200 C1160,200 1160,200 1260,200"/>
+        <path style="--d:1.8s" d="M1060,200 C1160,200 1160,262 1260,262"/><path style="--d:1.9s" d="M1060,200 C1160,200 1160,324 1260,324"/>
+      </svg>
+      <span class="lado" style="left:0">Entran · 6 canales</span><span class="lado" style="left:1260px">Sale y se conecta</span>
+      <span class="chip a" style="--d:.3s; left:0; top:19px; width:400px; height:52px">147</span>
+      <span class="chip a" style="--d:.35s; left:0; top:81px; width:400px; height:52px">Concejo</span>
+      <span class="chip a" style="--d:.4s; left:0; top:143px; width:400px; height:52px">S.A.T.</span>
+      <span class="chip a" style="--d:.45s; left:0; top:205px; width:400px; height:52px">Secretarías</span>
+      <span class="chip a" style="--d:.5s; left:0; top:267px; width:400px; height:52px">Redes</span>
+      <span class="chip a" style="--d:.55s; left:0; top:329px; width:400px; height:52px">Ciudad Digital</span>
+      <div class="hub a" style="--d:1.15s; left:600px; top:85px; width:460px; height:230px"><b>CIMBA</b><span>La IA detecta duplicados y clasifica cada pedido</span></div>
+      <span class="chip sale a" style="--d:1.9s; left:1260px; top:50px; width:488px; height:52px">12 empresas <small>cada arreglo, con su empresa</small></span>
+      <span class="chip sale a" style="--d:2s; left:1260px; top:112px; width:488px; height:52px">SIGOV</span>
+      <span class="chip sale a" style="--d:2.1s; left:1260px; top:174px; width:488px; height:52px">Mapa <small>lo pedido y lo hecho</small></span>
+      <span class="chip sale a" style="--d:2.2s; left:1260px; top:236px; width:488px; height:52px">Foto de antes y después</span>
+      <span class="chip sale a" style="--d:2.3s; left:1260px; top:298px; width:488px; height:52px">Cierre del reclamo <small>en 1 clic</small></span>
+    </div>
+    <div class="m6-implico" style="margin-top:56px">
+      <div class="a" style="--d:2.6s"><b data-n="6">6</b><span>canales de reclamos en una sola bandeja</span></div>
+      <div class="a" style="--d:2.7s"><b data-n="12">12</b><span>empresas trabajando en el mismo sistema</span></div>
+      <div class="a" style="--d:2.8s"><b>880 t</b><span>de mezcla asfáltica, trazada</span></div>
+      <div class="a" style="--d:2.9s"><b data-n="1383">1.383</b><span>arreglos con foto de antes y después</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Detrás de escena · Migue: una puerta conectada"
+  data-guion="Detrás de escena de Migue: busca en Guía de Trámites, Turnos, Reclamos y Cortes; responde en Ciudad Digital (160.000 vecinos), Telegram y WhatsApp. 17.848 consultas, 91% resueltas. Contá cómo se conectaron las fuentes."
+  data-notas="Lo mismo con Migue. El vecino no piensa en organigramas: pregunta por su problema. Para responder bien, Migue tiene que estar conectado a las fuentes oficiales: la Guía de Trámites, los turnos, los reclamos y los cortes de tránsito. Y tiene que estar donde ya está el vecino: lo pusimos adentro de Ciudad Digital, que ya tenía 160.000 vecinos con cuenta, y en Telegram y WhatsApp. El 99,8 % de las consultas llega por Ciudad Digital: no abrimos un canal nuevo, usamos la puerta que ya existía. (Contá acá qué implicó mantener esas fuentes al día.)">
+  <div class="titular a fade"><h1>Detrás de escena</h1><span class="pill">Migue</span><span class="subt">Una puerta, conectada a las fuentes oficiales</span></div>
+  <div class="m6-area">
+    <div class="m6-flujo a fade" style="height:400px; --d:.1s">
+      <svg viewBox="0 0 1748 400" preserveAspectRatio="none">
+        <path style="--d:.5s" d="M400,92 C500,92 500,200 600,200"/><path style="--d:.6s" d="M400,164 C500,164 500,200 600,200"/>
+        <path style="--d:.7s" d="M400,236 C500,236 500,200 600,200"/><path style="--d:.8s" d="M400,308 C500,308 500,200 600,200"/>
+        <path style="--d:1.5s" d="M1060,200 C1160,200 1160,128 1260,128"/><path style="--d:1.6s" d="M1060,200 C1160,200 1160,200 1260,200"/><path style="--d:1.7s" d="M1060,200 C1160,200 1160,272 1260,272"/>
+      </svg>
+      <span class="lado" style="left:0">Busca en · fuentes oficiales</span><span class="lado" style="left:1260px">Responde en</span>
+      <span class="chip a" style="--d:.3s; left:0; top:64px; width:400px; height:56px">Guía de Trámites</span>
+      <span class="chip a" style="--d:.35s; left:0; top:136px; width:400px; height:56px">Turnos</span>
+      <span class="chip a" style="--d:.4s; left:0; top:208px; width:400px; height:56px">Reclamos</span>
+      <span class="chip a" style="--d:.45s; left:0; top:280px; width:400px; height:56px">Cortes de tránsito</span>
+      <div class="hub a" style="--d:1.15s; left:600px; top:85px; width:460px; height:230px"><b>Migue</b><span>Entiende el pedido y busca la respuesta en fuentes oficiales, las 24 horas</span></div>
+      <span class="chip sale a" style="--d:1.8s; left:1260px; top:100px; width:488px; height:56px">Ciudad Digital <small>160.000 vecinos con cuenta</small></span>
+      <span class="chip sale a" style="--d:1.9s; left:1260px; top:172px; width:488px; height:56px">Telegram</span>
+      <span class="chip sale a" style="--d:2s; left:1260px; top:244px; width:488px; height:56px">WhatsApp</span>
+    </div>
+    <div class="m6-implico" style="margin-top:56px">
+      <div class="a" style="--d:2.3s"><b data-n="17848">17.848</b><span>consultas respondidas</span></div>
+      <div class="a" style="--d:2.4s"><b data-n="91" data-pos=" %">91 %</b><span>resueltas</span></div>
+      <div class="a" style="--d:2.5s"><b>99,8 %</b><span>llegan por Ciudad Digital</span></div>
+      <div class="a" style="--d:2.6s"><b data-n="3797">3.797</b><span>vecinos que vuelven a consultar</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="IA soberana · ¿Cuándo conviene?"
+  data-guion="IA soberana: depende de qué tan sensibles son los datos y cuánto se usa. Arriba a la derecha (datos sensibles a escala) conviene soberana. Para 70 municipios, la soberanía puede ser provincial y compartida."
+  data-notas="¿Cuándo conviene la IA soberana, es decir, un modelo propio o en infraestructura propia? Depende de dos cosas: qué tan sensibles son los datos que toca y cuánto se usa. Si los datos no son sensibles y el uso es bajo, alcanza con un servicio comercial con licencia institucional. Si el uso es alto con información pública, conviene un servicio comercial por API, con topes. Si los datos son sensibles pero el uso es bajo, cláusulas fuertes o anonimizar antes. Y si los datos son sensibles y el uso es masivo, ahí empieza a convenir la soberana. Pero ojo: soberana exige equipo técnico y presupuesto todos los meses. Para 70 municipios, la pregunta no es si cada uno tiene la suya, sino si conviene una infraestructura provincial compartida.">
+  <div class="titular a fade"><h1>IA soberana</h1><span class="pill">¿Cuándo conviene?</span><span class="subt">Depende de qué datos toca y cuánto se usa</span></div>
+  <div class="m6-matriz-caja m6-area">
+    <div class="m6-matriz a fade" style="--d:.1s">
+      <div class="ejes"></div>
+      <span class="eje-y">Sensibilidad de los datos →</span>
+      <span class="eje-x">Volumen de uso →</span>
+      <div class="cuad">
+        <div class="m6-cuad a" style="--d:.5s"><small>Datos sensibles · poco uso</small><b>Comercial con cláusulas fuertes</b><p>O anonimizar antes de enviar. Ejemplo: analizar un expediente puntual.</p></div>
+        <div class="m6-cuad fuerte a" style="--d:.8s"><small>Datos sensibles · uso masivo</small><b>Soberana: propia o compartida</b><p>Modelo en infraestructura propia. Ejemplo: padrones y datos personales a escala.</p></div>
+        <div class="m6-cuad a" style="--d:.3s"><small>Datos no sensibles · poco uso</small><b>Comercial con licencia institucional</b><p>Redactar, resumir, traducir, con cuentas del municipio.</p></div>
+        <div class="m6-cuad a" style="--d:.4s"><small>Datos no sensibles · uso masivo</small><b>Comercial por API, con topes</b><p>Atención con información pública. Precio por uso y alertas.</p></div>
+      </div>
+    </div>
+    <div class="m6-condiciones">
+      <div class="tarjeta a" style="--d:1s"><h4>Soberana conviene si…</h4><ul><li>Toca datos personales sensibles a escala.</li><li>El costo por uso ya supera lo que cuesta operar infraestructura.</li><li>Hay un equipo técnico para mantenerla.</li></ul></div>
+      <div class="tarjeta no a" style="--d:1.2s"><h4>No conviene si…</h4><ul><li>No hay presupuesto todos los meses.</li><li>Nadie puede actualizarla ni auditarla.</li></ul></div>
+      <div class="tarjeta pestana a" style="--d:1.4s"><i>?</i><div><span class="ceja">Para 70 municipios</span><p>¿Soberanía municipal, o una infraestructura provincial compartida?</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN
+     =================================================================== -->
+<section class="slide m6-sep" data-migue="no" data-bloque="3" data-titulo="Bloque 3 · Del piloto a la producción"
+  data-guion="Bloque 3 (20 min): del piloto a la producción. Por qué no escalan, el camino de SMT, el checklist, CIMBA en vitrina y en vivo, y otros que ya están en producción."
+  data-notas="Tercer bloque: por qué tantos proyectos institucionales de IA se quedan en la prueba, y qué hicimos para que los nuestros pasaran a producción.">
+  <div class="m6-sep-num a fade">3</div>
+  <div class="m6-sep-txt">
+    <span class="ceja a" style="--d:.2s">Bloque 3 de 7 · 20 minutos</span>
+    <h2 class="a" style="--d:.35s">Del piloto a la producción</h2>
+    <p class="a" style="--d:.55s">¿Por qué tantos proyectos de IA se quedan en la prueba?</p>
+  </div>
+  <ol class="m6-riel a fade" style="--d:.7s"></ol>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Del piloto a la producción · Por qué no escalan"
+  data-guion="El embudo: muchas ideas, pocos pilotos, menos en producción, poquitos en uso diario. Seis causas: sin dueño, sin datos, sin integración, sin reglas, sin presupuesto de uso, sin capacitación."
+  data-notas="Todos los municipios tienen ideas de IA. Algunas llegan a piloto. Muchas menos pasan a producción con datos reales, y muy pocas terminan usándose todos los días. ¿Por qué? Casi nunca es la tecnología. Son seis causas: no tiene dueño en el área; los datos están en planillas sueltas; no se conecta con los sistemas que ya existen; nadie sabe qué se puede hacer y qué no; se pagó la prueba pero no el uso de todos los meses; y la herramienta llegó antes que la capacitación. Un piloto prueba la tecnología; la producción prueba a la organización.">
+  <div class="titular a fade"><h1>Del piloto</h1><span class="pill">A la producción</span><span class="subt">Por qué tantos proyectos se quedan en la prueba</span></div>
+  <div class="m6-area">
+    <div class="m6-piloto">
+      <div class="m6-embudo">
+        <div class="a" style="--d:.15s"><b>Ideas</b><small>todas las áreas tienen</small></div>
+        <div class="a" style="--d:.35s"><b>Pilotos</b><small>se prueban algunas</small></div>
+        <div class="a" style="--d:.55s"><b>En producción</b><small>con datos reales</small></div>
+        <div class="a" style="--d:.75s"><b>En uso diario</b><small>la gente lo pide</small></div>
+      </div>
+      <div class="m6-causas">
+        <div class="m6-causa a" style="--d:1s"><i>🙋</i><b>Sin dueño</b><span>Nadie del área lo siente propio.</span></div>
+        <div class="m6-causa a" style="--d:1.1s"><i>🗂️</i><b>Sin datos</b><span>La información está en planillas sueltas.</span></div>
+        <div class="m6-causa a" style="--d:1.2s"><i>🔌</i><b>Sin integración</b><span>No se conecta con los sistemas que ya existen.</span></div>
+        <div class="m6-causa a" style="--d:1.3s"><i>📜</i><b>Sin reglas</b><span>Nadie sabe qué se puede hacer y qué no.</span></div>
+        <div class="m6-causa a" style="--d:1.4s"><i>💸</i><b>Sin presupuesto de uso</b><span>Se paga la prueba, no el uso de todos los meses.</span></div>
+        <div class="m6-causa a" style="--d:1.5s"><i>🎓</i><b>Sin capacitación</b><span>La herramienta llega antes que las personas.</span></div>
+      </div>
+    </div>
+    <div class="tarjeta pestana m6-nota a" style="--d:1.8s"><i>!</i><div><span class="ceja">Para recordar</span><p>Un piloto prueba la tecnología. La producción prueba a la organización.</p></div></div>
+  </div>
+</section>
+
+<section class="slide" data-migue="no"
+  data-guion="Lo que hicimos distinto: primero adentro (Generador de Notas, tableros, capacitación), después el vecino por Ciudad Digital (160.000 vecinos). Usamos una puerta que ya existía."
+  data-notas="¿Qué hicimos distinto? Primero la usamos nosotros, puertas adentro: para escribir mejor y para organizar el trabajo, con capacitación. Eso nos dio dueños en las áreas, datos ordenados y reglas probadas. Cuando funcionó adentro, la llevamos al vecino, y no abrimos una puerta nueva: usamos Ciudad Digital, que ya tenía 160.000 vecinos con cuenta. Migue, CIMBA, EstudIA, UrbanIA y el resto llegaron después de ese camino.">
+  <div class="titular a fade"><h1>El camino</h1><span class="pill">Primero adentro</span><span class="subt">Lo usamos nosotros; después, el vecino</span></div>
+  <div class="camino">
+    <div class="tramo adentro a" style="--d:.15s">
+      <p class="tramo-tit"><span>1</span>Puertas adentro</p>
+      <ul>
+        <li><b data-n="10" data-pre="" data-pos="">10</b><span>tipos de nota · Generador de Notas, la que abrió la puerta</span></li>
+        <li><b data-n="5" data-pre="" data-pos="">5</b><span>claves en un tablero · Trabajo inteligente</span></li>
+        <li><b data-n="34" data-pre="" data-pos="">34</b><span>gerentes de datos · Capacitación</span></li>
+      </ul>
+    </div>
+    <div class="camino-flecha a" style="--d:.7s"><svg viewBox="0 0 80 40"><path d="M4 20 H70 M56 6 L72 20 L56 34"/></svg></div>
+    <div class="tramo afuera a" style="--d:1s">
+      <p class="tramo-tit"><span>2</span>Para el vecino <em>por Ciudad Digital · 160.000 vecinos</em></p>
+      <ul>
+        <li><b data-n="17848" data-pre="" data-pos="">17.848</b><span>consultas · Migue</span></li>
+        <li><b data-n="4316" data-pre="" data-pos="">4.316</b><span>baches · CIMBA</span></li>
+        <li><b data-n="2000" data-pre="" data-pos="">2.000</b><span>alumnos · EstudIA</span></li>
+        <li><b class="palabra">Meses</b><span>de grabación y deliberación · UrbanIA</span></li>
+        <li><b data-n="4" data-pre="+" data-pos="">+4</b><span>servicios · Presupuesto Participativo, Applaza, Bus Turístico, FerIA</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Checklist · Seis preguntas antes del piloto"
+  data-guion="Checklist para llevarse: seis preguntas antes de lanzar un piloto. Dueño, datos, integración, regla, quién paga el uso y quién capacita. Si alguna es «no sabemos», todavía no."
+  data-notas="Esto es para llevarse al municipio. Antes de lanzar un piloto, respondan seis preguntas. ¿Quién es el dueño? Un área que lo pide y lo va a usar todos los días. ¿De dónde salen los datos? Si están en planillas sueltas, ese es el primer trabajo. ¿Con qué sistema se conecta? Lo que no se integra, se abandona. ¿Qué regla lo cubre? Qué puede hacer la IA, qué no, y quién firma. ¿Quién paga el uso? No el piloto: el consumo de todos los meses. ¿Quién capacita? La capacitación va con la herramienta, no después. Si alguna respuesta es «no sabemos», todavía no es momento de lanzar.">
+  <div class="titular a fade"><h1>Checklist</h1><span class="pill">Antes del piloto</span><span class="subt">Seis preguntas para llevarse al municipio</span></div>
+  <div class="m6-area">
+    <div class="m6-check">
+      <div class="a" style="--d:.15s"><span class="caja">✓</span><b>¿Quién es el dueño?</b><span>Un área que lo pide y lo va a usar todos los días.</span></div>
+      <div class="a" style="--d:.45s"><span class="caja">✓</span><b>¿Qué regla lo cubre?</b><span>Qué puede hacer la IA, qué no, y quién firma.</span></div>
+      <div class="a" style="--d:.25s"><span class="caja">✓</span><b>¿De dónde salen los datos?</b><span>Si están en planillas sueltas, ese es el primer trabajo.</span></div>
+      <div class="a" style="--d:.55s"><span class="caja">✓</span><b>¿Quién paga el uso?</b><span>No el piloto: el consumo de todos los meses.</span></div>
+      <div class="a" style="--d:.35s"><span class="caja">✓</span><b>¿Con qué sistema se conecta?</b><span>Lo que no se integra, se abandona.</span></div>
+      <div class="a" style="--d:.65s"><span class="caja">✓</span><b>¿Quién capacita?</b><span>La capacitación va con la herramienta, no después.</span></div>
+    </div>
+    <div class="tarjeta pestana m6-nota a" style="--d:1.1s"><i>?</i><div><span class="ceja">Regla práctica</span><p>Si alguna respuesta es «no sabemos», todavía no es momento de lanzar.</p></div></div>
+  </div>
+</section>
+
+<section class="slide vitrina" data-vitrina="cimba" data-migue="no" data-titulo="Vitrina · CIMBA"
+  data-guion="CIMBA, un caso que pasó a producción: reclamos en 6 canales, duplicados, mal clasificados, sin trazabilidad. Ahora: áreas conectadas, cierre en un clic, 4.316 baches. Avance."
+  data-notas="Un caso que pasó a producción: CIMBA. El problema: los reclamos llegaban por seis canales, duplicados y mal clasificados, cada área y cada empresa con su planilla, y sin trazabilidad de los materiales. La solución: todas las áreas conectadas, cada bache con lugar, fecha, empresa y foto, la mezcla trazada y el reclamo que se cierra con un clic. Miren cómo se fue llenando la ciudad: 4.316 baches desde marzo."></section>
+
+<section class="slide m6-demo-placa" data-migue="no" data-titulo="En vivo · CIMBA"
+  data-guion="EN VIVO: pasá a la pestaña de CIMBA (Alt+Tab). Mostrá el mapa, cómo entra y se cierra un reclamo, y el avance con fotos. Cuidado: no abras datos personales de vecinos. Volvés con Alt+Tab."
+  data-notas="Demo en vivo de CIMBA. Antes de la charla: dejá abierta una pestaña con la sesión iniciada. Mostrá: 1) el mapa, lo pedido y lo hecho; 2) cómo entra un reclamo y cómo se cierra, con la clasificación de la IA; 3) el avance con foto de antes y después. No abras fichas con nombres, teléfonos ni direcciones de vecinos. Para volver, Alt+Tab a la presentación y SIGUIENTE.">
+  <div class="titular a fade"><h1>En vivo</h1><span class="pill">CIMBA</span><span class="subt">El sistema real, en uso</span></div>
+  <div class="m6-demo m6-area">
+    <div class="m6-demo-tapa a" style="--d:.1s">
+      <span class="m6-envivo"><i></i>EN VIVO</span>
+      <h2>CIMBA</h2>
+      <p>Del reclamo al bache reparado, con cada paso trazado.</p>
+      <code>cimba.smt.gob.ar</code>
+    </div>
+    <ol class="m6-demo-lista">
+      <li class="a" style="--d:.4s"><b>El mapa: lo pedido y lo hecho</b><span>Cada reclamo y cada arreglo, ubicados en la ciudad.</span></li>
+      <li class="a" style="--d:.55s"><b>Cómo entra y cómo se cierra un reclamo</b><span>La IA clasifica y detecta duplicados; una persona cierra, con foto.</span></li>
+      <li class="a" style="--d:.7s"><b>El avance, con foto de antes y después</b><span>La trazabilidad que vuelve a la gestión.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="slide vitrina" data-vitrina="urbania,presupuesto" data-migue="no" data-titulo="Vitrina · UrbanIA + Presupuesto Participativo"
+  data-guion="Otros dos en producción, la voz del vecino. UrbanIA: audiencias sin sistematizar; ahora cada idea cruzada con su norma, minuto a minuto (la IA orienta, el equipo valida). Presupuesto Participativo: la IA ayuda a armar el proyecto, con Migue."
+  data-notas="Otros dos que ya están en uso, con el mismo problema: escuchar al vecino y convertir lo que dice en algo concreto. Estamos reformando el Código de Planeamiento Urbano, que viene de 1998. El problema: horas de audiencias públicas y las ideas de los vecinos sin cruzar con cada norma. La solución: la IA cruza lo que dijo cada vecino con la norma que toca, con la cita y el minuto del audio. La IA orienta; el equipo valida. Y en el Presupuesto Participativo: la IA te ayuda a armar el proyecto para tu barrio, con Migue para consultas y accesibilidad."></section>
+
+<section class="slide vitrina" data-vitrina="espacio,bus,ferias" data-solo="ps" data-migue="no" data-titulo="Vitrina · Ciudad abierta"
+  data-guion="Y más chicos, también en producción: Applaza (del Excel a certificar con un clic), Bus Turístico (del Google Form a reservas) y FerIA (foto, costos y marketplace)."
+  data-notas="Y tres más chicos, que muestran que no todo es un gran sistema. Applaza: el control de poda, mantenimiento y limpieza de 24 cooperativas se hacía en un Excel; ahora se certifica con un clic, con georreferencia y comparación de estados. Bus Turístico: era un Google Form y turistas sin respuesta; ahora es un sistema de reservas con Migue. Y FerIA: capacitación y vidriera para cada feriante, con la foto del producto, los costos y un marketplace con IA."></section>
+
+<!-- ===================================================================
+     BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES
+     =================================================================== -->
+<section class="slide m6-sep" data-migue="no" data-bloque="4" data-titulo="Bloque 4 · La economía de los agentes"
+  data-guion="Bloque 4 (15 min): la economía. Qué es un token, el multiplicador del agente, precio publicado frente a costo efectivo, EstudIA y cómo presupuestar."
+  data-notas="Cuarto bloque: la plata. Cuánto cuesta de verdad la IA cuando pasa de chat a agente.">
+  <div class="m6-sep-num a fade">4</div>
+  <div class="m6-sep-txt">
+    <span class="ceja a" style="--d:.2s">Bloque 4 de 7 · 15 minutos</span>
+    <h2 class="a" style="--d:.35s">La economía de los agentes</h2>
+    <p class="a" style="--d:.55s">¿Cuánto cuesta de verdad, y por qué la factura sorprende?</p>
+  </div>
+  <ol class="m6-riel a fade" style="--d:.7s"></ol>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Tokens · La unidad de cobro"
+  data-guion="Los modelos cobran por tokens, pedazos de texto. Se cobra lo que entra y lo que sale, y todo lo que el modelo lee cuenta: instrucciones, documentos, conversación anterior."
+  data-notas="Para hablar de costos hay que entender la unidad: el token. Los modelos no cobran por consulta: cobran por pedazos de texto. Esta pregunta de un vecino son unos doce tokens; cada modelo corta distinto. Tres cosas para retener. Se cobra lo que entra y lo que sale. Todo lo que el modelo lee cuenta: no solo la pregunta, también las instrucciones, los documentos que le pasamos y la conversación anterior. Y una respuesta larga cuesta más que una corta.">
+  <div class="titular a fade"><h1>Tokens</h1><span class="pill">La unidad de cobro</span><span class="subt">Se cobra por pedazos de texto, no por consulta</span></div>
+  <div class="m6-area">
+    <div class="m6-frase a" style="--d:.1s">
+      <span class="ceja">La pregunta de un vecino, cortada en tokens</span>
+      <div class="m6-fichas"><span style="--d:.5s">¿</span><span style="--d:.62s">Dónde</span><span style="--d:.74s"> recl</span><span style="--d:.86s">amo</span><span style="--d:.98s"> un</span><span style="--d:1.1s"> b</span><span style="--d:1.22s">ache</span><span style="--d:1.34s"> en</span><span style="--d:1.46s"> mi</span><span style="--d:1.58s"> cu</span><span style="--d:1.7s">adra</span><span style="--d:1.82s">?</span></div>
+      <div class="m6-cuenta"><b data-n="12">12</b><span>tokens, aproximadamente</span><small>Ejemplo ilustrativo: cada modelo corta distinto</small></div>
+    </div>
+    <div class="m6-tres">
+      <div class="a" style="--d:2.2s"><i>⇄</i><b>Se cobra lo que entra y lo que sale</b><p>La pregunta y la respuesta tienen precio propio.</p></div>
+      <div class="a" style="--d:2.35s"><i>📚</i><b>Todo lo que el modelo lee cuenta</b><p>Instrucciones, documentos y la conversación anterior, en cada llamada.</p></div>
+      <div class="a" style="--d:2.5s"><i>📏</i><b>Más largo, más caro</b><p>Una respuesta larga cuesta más que una corta.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="El multiplicador · Un agente hace muchas llamadas"
+  data-guion="Chat: una llamada, 1.500 tokens. Agente de 6 pasos: cada paso relee instrucciones e historial; 21.000 tokens por una tarea, unas 14 veces un chat. Y cada reintento suma otra barra."
+  data-notas="Ahora vean qué pasa con un agente. Un chat es una llamada: digamos 1.500 tokens entre instrucciones, pregunta y respuesta. Un agente que resuelve una tarea en seis pasos hace seis llamadas, y en cada una relee las instrucciones más todo lo que pasó antes. Las barras crecen: 1.500, 2.300, 3.100… hasta 5.500. En total, 21.000 tokens por una sola tarea: unas catorce veces lo que cuesta un chat. Son números ilustrativos, pero la forma es siempre esa. Y si el agente se equivoca y reintenta un paso, suma otra barra.">
+  <div class="titular a fade"><h1>El multiplicador</h1><span class="pill">Agentes</span><span class="subt">Cada paso del agente relee todo lo anterior</span></div>
+  <div class="m6-area">
+    <div class="m6-multi">
+      <div class="m6-barras-caja a" style="--d:.1s">
+        <span class="ceja">Chat</span><h3>1 llamada</h3>
+        <div class="m6-barras"><div><b>1.500</b><i style="--h:27%; --d:.5s"></i><small>Respuesta</small></div></div>
+        <footer>&nbsp;</footer>
+      </div>
+      <div class="m6-barras-caja a" style="--d:.3s">
+        <span class="ceja">Agente</span><h3>6 pasos para una tarea</h3>
+        <div class="m6-barras">
+          <div><b>1.500</b><i style="--h:27%; --d:1s"></i><small>Paso 1</small></div>
+          <div><b>2.300</b><i class="ctx" style="--h:42%; --c:35%; --d:1.3s"></i><small>Paso 2</small></div>
+          <div><b>3.100</b><i class="ctx" style="--h:56%; --c:52%; --d:1.6s"></i><small>Paso 3</small></div>
+          <div><b>3.900</b><i class="ctx" style="--h:71%; --c:62%; --d:1.9s"></i><small>Paso 4</small></div>
+          <div><b>4.700</b><i class="ctx" style="--h:85%; --c:68%; --d:2.2s"></i><small>Paso 5</small></div>
+          <div><b>5.500</b><i class="ctx" style="--h:100%; --c:73%; --d:2.5s"></i><small>Paso 6</small></div>
+        </div>
+        <footer><div class="m6-leyenda"><span><i></i>Instrucciones y pedido</span><span><i class="ctx"></i>Lo anterior, que relee en cada paso</span></div></footer>
+      </div>
+      <div class="m6-total a" style="--d:2.9s">
+        <span class="ceja">Una sola tarea</span>
+        <b data-n="21000">21.000</b><span>tokens, contra 1.500 de un chat</span>
+        <hr>
+        <strong>≈ 14×</strong><span>Y cada reintento suma otra barra.</span>
+      </div>
+    </div>
+    <p class="m6-leyenda" style="margin-top:26px">Ejemplo ilustrativo: 1.500 tokens de instrucciones y pedido, y 800 más por cada paso que el agente acumula y relee.</p>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Costo efectivo · Lo que no dice la lista"
+  data-guion="El precio por token es el piso, no la factura. Encima: contexto que se relee, pasos del agente, reintentos, herramientas e integración, soporte y personas. Medí el costo por trámite resuelto."
+  data-notas="Por eso el precio publicado por token es el piso, no la factura. Encima se apilan: el contexto que se relee en cada llamada, los pasos del agente, los reintentos y errores, las herramientas y búsquedas, y lo que no son tokens: la integración con los sistemas, el soporte y las horas de las personas que lo supervisan. La pregunta útil no es cuánto cuesta el token, sino cuánto cuesta cada trámite resuelto.">
+  <div class="titular a fade"><h1>Costo efectivo</h1><span class="pill">Lo que no dice la lista</span><span class="subt">El precio por token es el piso, no la factura</span></div>
+  <div class="m6-cascada-caja m6-area">
+    <div class="m6-cascada a fade" style="--d:.1s">
+      <span class="ilustra">Proporciones ilustrativas</span>
+      <div><i style="--b:0px; --h:67px; --d:.4s"></i><b>Precio publicado</b></div>
+      <div><i style="--b:67px; --h:78px; --d:.7s"></i><b>Contexto que se relee</b></div>
+      <div><i style="--b:145px; --h:123px; --d:1s"></i><b>Pasos del agente</b></div>
+      <div><i style="--b:268px; --h:56px; --d:1.3s"></i><b>Reintentos y errores</b></div>
+      <div><i style="--b:324px; --h:45px; --d:1.6s"></i><b>Herramientas y búsquedas</b></div>
+      <div><i style="--b:369px; --h:90px; --d:1.9s"></i><b>Integración, soporte y personas</b></div>
+      <div><i style="--b:0px; --h:459px; --d:2.3s"></i><b>Costo efectivo</b></div>
+    </div>
+    <div class="m6-formula">
+      <div class="tarjeta a" style="--d:2.6s"><h4>Costo por tarea</h4><p class="ecuacion">tokens por paso × pasos × precio<br><span>+ reintentos</span><br><span>+ lo que no son tokens: integración, soporte y horas de personas</span></p></div>
+      <div class="tarjeta pestana a" style="--d:2.9s"><i>!</i><div><span class="ceja">La pregunta útil</span><p>No cuánto cuesta el token: cuánto cuesta cada trámite resuelto.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide vitrina" data-vitrina="estudia" data-migue="no" data-titulo="Vitrina · EstudIA"
+  data-guion="EstudIA, costo a la vista: celulares sí o no, docentes sobrecargados, datos dispersos, mal uso de la IA. Ahora: una plataforma, 1 minuto por actividad, tope de 50 usos por día y US$ 0,017 en 30 días."
+  data-notas="Un caso real donde el costo está a la vista: EstudIA, en dos escuelas piloto. El problema era cuádruple: el debate de los celulares en el aula, docentes sobrecargados y sin una IA segura, los datos dispersos y estudiantes usando mal la IA. La solución: una sola plataforma donde la IA arma el borrador en un minuto y el docente decide. Y miren el último recurso: cuánto cuesta, a la vista. Cada docente tiene un tope de 50 usos de IA por día, y el costo de IA del piloto en 30 días fue de 0,017 dólares."></section>
+
+<section class="slide m6-demo-placa" data-migue="no" data-titulo="En vivo · EstudIA"
+  data-guion="EN VIVO (opcional): pestaña de EstudIA. Mostrá cómo el docente arma una actividad, el panel de consumo de IA y los topes. Sin nombres de alumnos en pantalla. Volvés con Alt+Tab."
+  data-notas="Demo en vivo de EstudIA (si hay tiempo). Antes de la charla: pestaña abierta con un usuario de prueba o de docente. Mostrá: 1) cómo el docente elige y la IA arma el borrador; 2) el panel de consumo de IA; 3) los topes por docente. No muestres nombres ni datos de alumnos. Para volver, Alt+Tab y SIGUIENTE.">
+  <div class="titular a fade"><h1>En vivo</h1><span class="pill">EstudIA</span><span class="subt">El costo de la IA, a la vista</span></div>
+  <div class="m6-demo m6-area">
+    <div class="m6-demo-tapa a" style="--d:.1s">
+      <span class="m6-envivo"><i></i>EN VIVO</span>
+      <h2>EstudIA</h2>
+      <p>La IA en la escuela, con tope y costo a la vista.</p>
+      <code>estudia.smt.gob.ar</code>
+    </div>
+    <ol class="m6-demo-lista">
+      <li class="a" style="--d:.4s"><b>El docente elige, la IA arma el borrador</b><span>Una actividad en un minuto; el docente revisa y decide.</span></li>
+      <li class="a" style="--d:.55s"><b>El panel de consumo de IA</b><span>Cuánto se usa y cuánto cuesta.</span></li>
+      <li class="a" style="--d:.7s"><b>Los topes</b><span>50 usos de IA por día, por docente.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Presupuestar · Cinco reglas"
+  data-guion="Cinco reglas para presupuestar: tope por usuario y sistema, costo a la vista de la dirección, costo por tarea resuelta, el modelo justo para cada tarea, alertas antes del límite."
+  data-notas="¿Cómo se presupuesta, entonces? Cinco reglas que aplicamos. Uno: topes por usuario y por sistema, como los 50 usos por día de EstudIA. Dos: el costo a la vista, en un panel que mire la dirección y no solo el área de sistemas. Tres: medir el costo por tarea resuelta, por trámite, por reclamo. Cuatro: el modelo justo para cada tarea; el más grande no siempre hace falta. Y cinco: alertas antes de llegar al límite.">
+  <div class="titular a fade"><h1>Presupuestar</h1><span class="pill">Agentes</span><span class="subt">Cinco reglas para que la factura no sorprenda</span></div>
+  <aside class="panel a izq" style="--d:.1s">
+    <p class="pn-tit">EstudIA</p>
+    <p class="pn-gigante chico m6-moneda"><small>US$</small>0,017</p>
+    <p class="pn-desc">costo de IA del piloto en 30 días</p>
+    <hr>
+    <dl><dt>Tope</dt><dd>50 usos</dd><dd class="desc">de IA por día, por docente</dd><dt>Piloto</dt><dd>2 escuelas</dd></dl>
+  </aside>
+  <div class="derecha">
+    <ol class="m6-reglas5">
+      <li class="a" style="--d:.3s"><em>1</em><div><b>Tope por usuario y por sistema</b><span>Como los 50 usos por día de EstudIA.</span></div></li>
+      <li class="a" style="--d:.45s"><em>2</em><div><b>Costo a la vista</b><span>Un panel de consumo que mire la dirección, no solo sistemas.</span></div></li>
+      <li class="a" style="--d:.6s"><em>3</em><div><b>Costo por tarea resuelta</b><span>Cuánto cuesta cada trámite o reclamo resuelto.</span></div></li>
+      <li class="a" style="--d:.75s"><em>4</em><div><b>El modelo justo para cada tarea</b><span>El más grande no siempre hace falta.</span></div></li>
+      <li class="a" style="--d:.9s"><em>5</em><div><b>Alertas antes del límite</b><span>Avisos con tiempo, antes de que se corte el servicio.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================================================================
+     BLOQUE 5 · GOBERNANZA DEL AGENTE
+     =================================================================== -->
+<section class="slide m6-sep" data-migue="no" data-bloque="5" data-titulo="Bloque 5 · Gobernanza del agente"
+  data-guion="Bloque 5 (15 min): gobernanza. Las reglas (decreto 0596), el semáforo de permisos, trazabilidad y responsabilidad, Migue en vitrina y en vivo."
+  data-notas="Quinto bloque: quién responde por lo que hace un agente.">
+  <div class="m6-sep-num a fade">5</div>
+  <div class="m6-sep-txt">
+    <span class="ceja a" style="--d:.2s">Bloque 5 de 7 · 15 minutos</span>
+    <h2 class="a" style="--d:.35s">Gobernanza del agente</h2>
+    <p class="a" style="--d:.55s">Supervisión humana, permisos, trazabilidad: ¿quién responde por lo que hace un agente?</p>
+  </div>
+  <ol class="m6-riel a fade" style="--d:.7s"></ol>
+</section>
+
 <section class="slide" data-migue="no"
   data-guion="Primero, las reglas: Decreto 0596/INT/2025. Cinco principios, una guía práctica y ética para todas las áreas, capacitación constante. La decisión es siempre humana."
-  data-notas="Antes de usar la IA, la regulamos. La Intendenta firmó en diciembre de 2025 el Decreto 0596, con una Guía Práctica y Ética de Uso de IA para toda la gestión: supervisión humana, equidad, privacidad, transparencia y rendición de cuentas. Pone como base la capacitación constante: ya formamos 34 gerentes de datos y 71 egresados de diplomados. La frase que lo resume: la decisión final, la firma y la responsabilidad son siempre humanas.">
+  data-notas="La gobernanza empieza antes que la herramienta. Antes de usar la IA, la regulamos. La Intendenta firmó en diciembre de 2025 el Decreto 0596, con una Guía Práctica y Ética de Uso de IA para toda la gestión: supervisión humana, equidad, privacidad, transparencia y rendición de cuentas. Pone como base la capacitación constante. La frase que lo resume, y que vale todavía más para los agentes: la decisión final, la firma y la responsabilidad son siempre humanas.">
   <div class="titular a fade"><h1>Primero</h1><span class="pill">Las reglas</span><span class="subt">Decreto 0596/INT/2025 · Guía Práctica y Ética de Uso de IA</span></div>
   <aside class="panel numeros a izq" style="--d:.1s">
     <p class="pn-tit">Decreto</p>
@@ -87,191 +597,242 @@
   </div>
 </section>
 
-<!-- ===================== (oculta) TRES FRENTES ===================== -->
-<section class="slide" data-oculta data-migue="no"
-  data-guion="Tres frentes, un criterio: para el vecino, para el equipo municipal y para que dure. La IA interpreta, los sistemas ejecutan, las personas deciden."
-  data-notas="Trabajamos en tres frentes. Para el vecino: respuestas cuando las necesita. Para el equipo municipal: menos papel y más tiempo para lo importante. Y para que dure: capacitación y datos propios. Con un criterio que repetimos en cada herramienta: la IA interpreta, los sistemas ejecutan y las personas deciden.">
-  <div class="titular a fade"><h1>Cómo trabajamos</h1><span class="pill">Tres frentes</span><span class="subt">La IA interpreta, los sistemas ejecutan, <b>las personas deciden</b></span></div>
-  <div class="columnas tres">
-    <article class="col-card a" style="--d:.15s">
-      <header>Para el vecino</header>
-      <div><span class="ceja">Eje 1</span><b>Respuestas cuando las necesita</b><p>Atención las 24 horas, trámites en lenguaje simple y participación en las decisiones del barrio.</p>
-        <ul class="hitos"><li>Migue, asistente virtual</li><li>Ciudadano Digital</li><li>Presupuesto Participativo</li></ul></div>
-    </article>
-    <article class="col-card a" style="--d:.3s">
-      <header>Para el equipo municipal</header>
-      <div><span class="ceja">Eje 2</span><b>Menos papel, más tiempo para lo importante</b><p>Obra pública, espacios verdes y el trabajo interno, con trazabilidad de punta a punta.</p>
-        <ul class="hitos"><li>CIMBA, obra vial</li><li>Applaza, espacios verdes</li><li>Tableros de trabajo inteligente</li></ul></div>
-    </article>
-    <article class="col-card a" style="--d:.45s">
-      <header>Capacitación constante</header>
-      <div><span class="ceja">Eje 3</span><b>Para que dure: personas que saben usarla</b>
-        <ul class="mini-cifras">
-          <li><b data-n="34">34</b><span>gerentes de datos en 46 direcciones</span></li>
-          <li><b data-n="800" data-pre="+">+800</b><span>indicadores municipales (eran 50)</span></li>
-          <li><b data-n="71">71</b><span>egresados de diplomados</span></li>
-        </ul></div>
-    </article>
+<section class="slide" data-migue="no" data-titulo="Permisos · Qué puede hacer un agente"
+  data-guion="Semáforo de permisos. Verde, lo hace solo (responder con info pública, clasificar, buscar normas). Ámbar, propone y una persona aprueba (redactar, cerrar un reclamo). Rojo, nunca solo (firmar, sancionar, pagar, decidir derechos)."
+  data-notas="Con agentes, la pregunta concreta es: ¿qué puede hacer solo? Nosotros lo pensamos como un semáforo. Verde: lo hace solo; responder con información pública, clasificar y ordenar pedidos, buscar y resumir normas. Migue y la clasificación de CIMBA están acá. Ámbar: propone, y una persona aprueba; redactar notas, cerrar un reclamo, cruzar lo que pidió un vecino con una norma. El Generador de Notas y UrbanIA están acá. Rojo: nunca solo; firmar, sancionar, pagar o adjudicar, decidir sobre los derechos de una persona. Eso lo dice el decreto: la firma es humana.">
+  <div class="titular a fade"><h1>Permisos</h1><span class="pill">Semáforo</span><span class="subt">No todo se delega igual</span></div>
+  <div class="m6-semaforo m6-area">
+    <div class="m6-luz verde a" style="--d:.15s">
+      <header><i></i><div><small>Verde</small><b>Lo hace solo</b></div></header>
+      <ul><li>Responder con información pública</li><li>Clasificar y ordenar pedidos</li><li>Buscar y resumir normas y documentos</li></ul>
+      <footer><b>En San Miguel de Tucumán</b>Migue responde trámites las 24 horas; CIMBA detecta duplicados.</footer>
+    </div>
+    <div class="m6-luz ambar a" style="--d:.4s">
+      <header><i></i><div><small>Ámbar</small><b>Propone; una persona aprueba</b></div></header>
+      <ul><li>Redactar notas y respuestas</li><li>Cerrar un reclamo</li><li>Cruzar lo que pidió el vecino con la norma</li></ul>
+      <footer><b>En San Miguel de Tucumán</b>Generador de Notas: la IA redacta, la persona firma. UrbanIA: la IA orienta, el equipo valida.</footer>
+    </div>
+    <div class="m6-luz rojo a" style="--d:.65s">
+      <header><i></i><div><small>Rojo</small><b>Nunca solo</b></div></header>
+      <ul><li>Firmar</li><li>Sancionar o multar</li><li>Pagar o adjudicar</li><li>Decidir sobre los derechos de una persona</li></ul>
+      <footer><b>En San Miguel de Tucumán</b>Decreto 0596: la decisión final, la firma y la responsabilidad son humanas.</footer>
+    </div>
   </div>
 </section>
 
-<!-- ===================== VITRINAS: adentro; después lo más contundente (Migue, CIMBA, EstudIA) y al final lo más chico ===================== -->
-<section class="slide vitrina" data-vitrina="notas,tableros" data-migue="no" data-titulo="Vitrina · Herramientas internas"
-  data-guion="Puertas adentro: el Generador de Notas fue transversal y le sacó el miedo a la IA: abrió puertas. Después, los tableros de trabajo inteligente: carga, efectividad, juego, alertas y trazabilidad."
-  data-notas="Primero, adentro. Había mucho miedo a usar la IA. La primera herramienta fue transversal, para todas las áreas: el Generador de Notas. Diez tipos de nota, en lenguaje claro y con el mismo criterio; la IA redacta, la persona firma. Eso abrió puertas. Después vinieron los tableros de trabajo inteligente: nos permiten sopesar la carga de trabajo, medir la efectividad en las tareas, gamificar la experiencia, avisarnos con tiempo sobre los proyectos y tener trazabilidad de cada proceso de trabajo."></section>
-
-<!-- ===================== 3. EL CAMINO: PRIMERO ADENTRO, DESPUÉS EL VECINO ===================== -->
-<section class="slide" data-migue="no"
-  data-guion="Funcionó adentro: entonces la llevamos al vecino, con Ciudad Digital como puerta (160.000 vecinos). Primero lo más contundente: Migue, CIMBA y EstudIA; después, las herramientas más chicas."
-  data-notas="Primero comimos la comida que servimos: la IA la usamos nosotros, puertas adentro, para escribir mejor y para organizar el trabajo con tableros inteligentes. Cuando funcionó adentro, tuvo sentido llevarla al vecino, con Ciudad Digital como puerta de entrada: Migue, los reclamos que llegan a CIMBA, la escuela, el Código de Planeamiento y la ciudad.">
-  <div class="titular a fade"><h1>El camino</h1><span class="pill">Primero adentro</span><span class="subt">Lo usamos nosotros; después, el vecino</span></div>
-  <div class="camino">
-    <div class="tramo adentro a" style="--d:.15s">
-      <p class="tramo-tit"><span>1</span>Puertas adentro</p>
-      <ul>
-        <li><b data-n="10" data-pre="" data-pos="">10</b><span>tipos de nota · Generador de Notas, la que abrió la puerta</span></li>
-        <li><b data-n="5" data-pre="" data-pos="">5</b><span>claves en un tablero · Trabajo inteligente</span></li>
-        <li><b data-n="34" data-pre="" data-pos="">34</b><span>gerentes de datos · Capacitación</span></li>
-      </ul>
+<section class="slide" data-migue="no" data-titulo="Trazabilidad · Quién hizo qué"
+  data-guion="Cada acción de un agente deja registro: qué hizo, cuándo, a pedido de quién, con qué datos y qué permiso. El agente no tiene responsabilidad: la tiene quien le dio el permiso y quien firma."
+  data-notas="Lo segundo es la trazabilidad. Cada acción de un agente tiene que dejar registro, y ese registro tiene que contestar cuatro preguntas: qué hizo, cuándo, a pedido de quién, y con qué datos y qué permiso. Acá ven un ejemplo ilustrativo de un agente de reclamos: el agente clasifica y une duplicados, el sistema asigna y avisa, y la persona aprueba el cierre. Y la idea más importante del bloque: un agente no tiene responsabilidad. La tiene quien le dio el permiso y quien firma.">
+  <div class="titular a fade"><h1>Trazabilidad</h1><span class="pill">Quién hizo qué</span><span class="subt">Cada acción de un agente deja registro</span></div>
+  <div class="m6-area">
+    <div class="m6-traza">
+      <div class="m6-log a" style="--d:.1s">
+        <header>Registro de acciones · Agente de reclamos <span>Ejemplo ilustrativo</span></header>
+        <p style="--d:.5s"><time>10:02:14</time><b class="ia">Agente</b><span>Clasificó el pedido como «bache» y lo ubicó en el mapa.</span></p>
+        <p style="--d:.9s"><time>10:02:15</time><b class="ia">Agente</b><span>Detectó que repite otro reclamo de la misma cuadra y los unió.</span></p>
+        <p style="--d:1.3s"><time>10:02:16</time><b class="sis">Sistema</b><span>Lo asignó a la empresa de la zona, según el contrato vigente.</span></p>
+        <p style="--d:1.7s"><time>11:40:03</time><b class="per">Inspectora</b><span>Aprobó el cierre, con foto de antes y después.</span></p>
+        <p style="--d:2.1s"><time>11:40:04</time><b class="sis">Sistema</b><span>Avisó al vecino por Ciudad Digital.</span></p>
+      </div>
+      <div class="m6-preguntas4">
+        <div class="a" style="--d:2.4s"><i>📝</i><b>¿Qué hizo?</b></div>
+        <div class="a" style="--d:2.5s"><i>⏱️</i><b>¿Cuándo?</b></div>
+        <div class="a" style="--d:2.6s"><i>🙋</i><b>¿A pedido de quién?</b></div>
+        <div class="a" style="--d:2.7s"><i>🔑</i><b>¿Con qué datos y qué permiso?</b></div>
+      </div>
     </div>
-    <div class="camino-flecha a" style="--d:.7s"><svg viewBox="0 0 80 40"><path d="M4 20 H70 M56 6 L72 20 L56 34"/></svg></div>
-    <div class="tramo afuera a" style="--d:1s">
-      <p class="tramo-tit"><span>2</span>Para el vecino <em>por Ciudad Digital · 160.000 vecinos</em></p>
-      <ul>
-        <li><b data-n="17848" data-pre="" data-pos="">17.848</b><span>consultas · Migue</span></li>
-        <li><b data-n="4316" data-pre="" data-pos="">4.316</b><span>baches · CIMBA</span></li>
-        <li><b data-n="2000" data-pre="" data-pos="">2.000</b><span>alumnos · EstudIA</span></li>
-        <li><b class="palabra">Meses</b><span>de grabación y deliberación · UrbanIA</span></li>
-        <li><b data-n="4" data-pre="+" data-pos="">+4</b><span>servicios · Presupuesto Participativo, Applaza, Bus Turístico, FerIA</span></li>
-      </ul>
-    </div>
+    <div class="tarjeta pestana m6-nota a" style="--d:3s"><i>!</i><div><span class="ceja">Responsabilidad</span><p>Un agente no tiene responsabilidad: la tiene quien le dio el permiso y quien firma.</p></div></div>
   </div>
 </section>
 
 <section class="slide vitrina" data-vitrina="migue" data-migue="no" data-titulo="Vitrina · Ciudad Digital + Migue"
-  data-guion="Migue: cada trámite en un área distinta y la ventanilla de 8 a 13. Ahora: una puerta, Ciudad Digital, 24 h. 17.848 consultas, 91% resueltas. (MIGUE 7 y 8)"
-  data-notas="MIGUE 7 · MIGUE 8 · El problema: cada trámite en un área distinta, la ventanilla de 8 a 13 y la información dispersa. La solución: una sola puerta, Ciudad Digital, con Migue adentro las 24 horas. 17.848 consultas, 91% resueltas, y casi todas llegan por Ciudad Digital. Lo gobernamos con datos: su cerebro y su termómetro. Al final, si hay tiempo, le preguntamos en vivo."></section>
-<section class="slide vitrina" data-vitrina="cimba" data-migue="no" data-titulo="Vitrina · CIMBA"
-  data-guion="CIMBA: reclamos en 6 canales, planillas sueltas, el vecino sin saber. Ahora: áreas conectadas, cierre del reclamo y trazabilidad. Avance: 4.316 baches."
-  data-notas="El problema: los reclamos llegaban por seis canales, cada área y cada empresa con su planilla, el vecino sin saber si se arregló y sin trazabilidad de los materiales. La solución: todas las áreas conectadas, cada bache con lugar, fecha, empresa y foto, la mezcla trazada y el reclamo que se cierra solo. Miren cómo se fue llenando la ciudad: 4.316 baches desde marzo."></section>
-<section class="slide vitrina" data-vitrina="estudia" data-migue="no" data-titulo="Vitrina · EstudIA"
-  data-guion="EstudIA: ¿celulares sí o no?, docentes sobrecargados y sin IA segura, datos dispersos, estudiantes usando mal la IA. Ahora: una plataforma, IA con reglas, 1 minuto por actividad."
-  data-notas="En la escuela el problema era cuádruple: el debate de los celulares en el aula, docentes sobrecargados y sin una IA segura, los datos dispersos y estudiantes usando mal la IA. La solución: una sola plataforma donde la IA arma el borrador en un minuto y el docente decide; la IA ayuda a pensar, no hace la tarea; y con tope y costo a la vista."></section>
-<section class="slide vitrina" data-vitrina="urbania,presupuesto" data-migue="no" data-titulo="Vitrina · UrbanIA + Presupuesto Participativo"
-  data-guion="La voz del vecino. UrbanIA: un Código de 1998 y horas de audiencias sin sistematizar; ahora cada idea cruzada con su norma, minuto a minuto. Presupuesto Participativo: armar un proyecto era difícil; ahora la IA te ayuda a armarlo, con Migue integrado."
-  data-notas="Dos herramientas más chicas con el mismo problema: escuchar al vecino y convertir lo que dice en algo concreto. Estamos reformando el Código de Planeamiento Urbano, que viene de 1998. El problema: horas de audiencias públicas y las ideas de los vecinos sin cruzar con cada norma. La solución: cada audiencia queda registrada y la IA cruza lo que dijo cada vecino con la norma que toca, con la cita y el minuto del audio. La IA orienta; el equipo valida. Y en el presupuesto Participativo: la IA te ayuda a armar el proyecto para tu barrio, con Migue para consultas y accesibilidad."></section>
-<section class="slide vitrina" data-vitrina="espacio,bus,ferias" data-solo="ps" data-migue="no" data-titulo="Vitrina · Ciudad abierta"
-  data-guion="Y algo más, para terminar: Applaza (del Excel a certificar con un clic, con su foto), Bus Turístico (del Google Form a reservas inteligentes) y FerIA (foto, costos y marketplace)."
-  data-notas="Y algo más de la ciudad. Applaza: el control de poda, mantenimiento y limpieza de 24 cooperativas se hacía en un Excel; ahora se certifica con un clic, con georreferencia y comparación de estados. Bus Turístico: era un Google Form y turistas sin respuesta; ahora es un sistema de reservas que piensa en la experiencia del turista. Y FerIA: capacitación y vidriera para cada feriante, con la foto del producto, los costos y un marketplace con IA."></section>
+  data-guion="Migue, gobernado con datos: una puerta (Ciudad Digital), 24 h, 17.848 consultas, 91% resueltas. El cerebro (gobernanza de cada consulta) y el termómetro (clima ciudadano). (MIGUE 7 y 8)"
+  data-notas="MIGUE 7 · MIGUE 8 · Migue es nuestro agente más visible, y por eso el más gobernado. El problema: cada trámite en un área distinta, la ventanilla de 8 a 13 y la información dispersa. La solución: una sola puerta, Ciudad Digital, con Migue adentro las 24 horas. 17.848 consultas, 91% resueltas. Y lo gobernamos con datos: su cerebro, la gobernanza de cada consulta, y su termómetro, el clima ciudadano. Al final, si hay tiempo, le preguntamos en vivo."></section>
 
-<!-- ===================== (oculta) CASO: MIGUE — reemplazada por la vitrina ===================== -->
-<section class="slide" data-oculta data-migue="der"
-  data-guion="Caso Migue: el vecino no piensa en organigramas. 17.848 consultas, 91% resueltas, 3.797 vecinos que vuelven. (MIGUE 2 y 3; cajón 1: preguntale en vivo, por ejemplo si regulamos la IA)"
-  data-notas="MIGUE 2 · MIGUE 3 · El vecino no piensa en organigramas: pregunta por su problema. Por eso hicimos Migue, un asistente propio que entiende lenguaje natural, busca en fuentes oficiales —la guía de trámites, los turnos, los reclamos, los cortes— y responde por la web, el Ciudadano Digital, Telegram y WhatsApp. Lleva 17.848 consultas, resuelve 9 de cada 10 y casi cuatro mil vecinos ya volvieron a consultarlo. Y lo gobernamos con datos: un panel con su corazón, su cerebro y su termómetro.">
-  <div class="titular a fade"><h1>Caso</h1><span class="pill">Experiencia</span></div>
-  <aside class="panel a izq" style="--d:.1s">
-    <p class="pn-tit">Caso de estudio</p>
-    <p class="pn-sub">San Miguel de Tucumán</p>
-    <p class="pn-gigante chico" data-n="17848">17.848</p>
-    <p class="pn-desc">consultas respondidas</p>
-    <hr>
-    <dl>
-      <dt>Resolución</dt><dd><span data-n="91" data-pos="%">91%</span></dd>
-      <dt>Alcance</dt><dd><span data-n="3797">3.797</span> vecinos que vuelven</dd><dd class="desc">Web, Ciudadano Digital, Telegram y WhatsApp</dd>
-    </dl>
-  </aside>
-  <div class="derecha">
-    <div class="barra-tit a" style="--d:.2s">Migue: la IA como servicio público</div>
-    <div class="tarjeta lista a" style="--d:.35s">
-      <p><b>El desafío:</b> el vecino no piensa en organigramas, pregunta por su problema. Y la ventanilla cierra a las 13.</p>
-      <p><b>Lo que hicimos:</b> un asistente propio que entiende lenguaje natural y busca en fuentes oficiales: trámites, turnos, reclamos y cortes.</p>
-      <p><b>Cómo lo gobernamos:</b> un panel con su corazón (consultas por minuto), su cerebro (gobernanza de datos) y su termómetro (el clima ciudadano).</p>
+<section class="slide m6-demo-placa" data-migue="no" data-titulo="En vivo · Migue"
+  data-guion="EN VIVO: pestaña de Migue. Mostrá el cerebro (gobernanza de cada consulta), el termómetro (clima) y hacé una pregunta en vivo desde la botonera. Cuidado: «pendientes de validación» tiene datos de vecinos, no lo abras."
+  data-notas="Demo en vivo de Migue. Antes de la charla: pestaña abierta con el panel. Mostrá: 1) el cerebro, la gobernanza de cada consulta; 2) el termómetro, el clima ciudadano; 3) una pregunta en vivo desde la botonera (PREGUNTAS). No abras la lista de pendientes de validación ni interacciones con datos de vecinos. Para volver, Alt+Tab y SIGUIENTE.">
+  <div class="titular a fade"><h1>En vivo</h1><span class="pill">Migue</span><span class="subt">Cómo se gobierna un agente que atiende vecinos</span></div>
+  <div class="m6-demo m6-area">
+    <div class="m6-demo-tapa a" style="--d:.1s">
+      <span class="m6-envivo"><i></i>EN VIVO</span>
+      <h2>Migue</h2>
+      <p>El asistente de la ciudad, y el panel con el que lo gobernamos.</p>
+      <code>migue.smt.gob.ar</code>
     </div>
-    <div class="tarjeta pestana testimonio a" style="--d:.55s"><i></i><div><span class="ceja">Testimonio</span><p>“Vos me contás qué te pasa. Yo intento entender qué necesitás.”</p><cite>Migue · asistente virtual de la ciudad</cite></div></div>
+    <ol class="m6-demo-lista">
+      <li class="a" style="--d:.4s"><b>El cerebro: gobernanza de cada consulta</b><span>Cada consulta queda registrada y se revisa.</span></li>
+      <li class="a" style="--d:.55s"><b>El termómetro: el clima ciudadano</b><span>Lo que preocupa en la ciudad, leído por IA.</span></li>
+      <li class="a" style="--d:.7s"><b>Una pregunta en vivo</b><span>La respuesta real de Migue, en pantalla.</span></li>
+    </ol>
   </div>
 </section>
 
-<!-- ===================== (oculta) LOS NÚMEROS — están en cada vitrina ===================== -->
-<section class="slide" data-oculta data-migue="no"
-  data-guion="Medimos para decidir: 4.316 baches con ubicación y fecha, 17.848 consultas a Migue y 911 evidencias en plazas."
-  data-notas="Medimos para decidir. CIMBA: 4.316 baches reparados desde marzo, 64.570 metros cuadrados, cada uno con ubicación y fecha. Migue: 17.848 consultas, 91% resueltas. Applaza: 911 evidencias en los 218 espacios verdes del padrón.">
-  <div class="titular a fade"><h1>Datos</h1><span class="pill">Evidencia</span></div>
-  <aside class="panel a izq" style="--d:.1s">
-    <p class="pn-tit">Dato clave</p>
-    <p class="pn-gigante chico" data-n="4316">4.316</p>
-    <p class="pn-desc">baches reparados desde marzo, con ubicación y fecha</p>
-    <hr>
-    <dl>
-      <dt>Fuente</dt><dd>CIMBA, 14/10/2026</dd>
-      <dt>Otro dato</dt><dd><span data-n="64570">64.570</span> m²</dd><dd class="desc">de calzada reparada, medidos uno por uno</dd>
-    </dl>
-  </aside>
-  <div class="derecha">
-    <div class="barra-tit a" style="--d:.2s">Cada herramienta deja datos que vuelven a la gestión</div>
-    <div class="tarjeta cifras3 a" style="--d:.35s">
-      <div><span class="ceja">Atención ciudadana</span><b data-n="17848">17.848</b><p>consultas a Migue, 91% resueltas</p><small>Panel de Migue · 14/10/2026</small></div>
-      <div><span class="ceja">Espacio público</span><b data-n="911">911</b><p>evidencias en los 218 espacios verdes del padrón</p><small>Applaza · 14/10/2026</small></div>
-      <div><span class="ceja">Gestión interna</span><b data-n="10">10</b><p>tipos de nota con el Generador, en lenguaje claro</p><small>Generador de Notas · Dirección de IA</small></div>
+<!-- ===================================================================
+     BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA
+     =================================================================== -->
+<section class="slide m6-sep" data-migue="no" data-bloque="6" data-titulo="Bloque 6 · El costo que la factura no muestra"
+  data-guion="Bloque 6 (10 min): sedentarismo cognitivo. Dos maneras de usar la IA y cómo cuidamos las capacidades del personal."
+  data-notas="Sexto bloque: el costo que no aparece en ninguna factura.">
+  <div class="m6-sep-num a fade">6</div>
+  <div class="m6-sep-txt">
+    <span class="ceja a" style="--d:.2s">Bloque 6 de 7 · 10 minutos</span>
+    <h2 class="a" style="--d:.35s">El costo que la factura no muestra</h2>
+    <p class="a" style="--d:.55s">Sedentarismo cognitivo: ¿qué capacidades perdemos si delegamos todo?</p>
+  </div>
+  <ol class="m6-riel a fade" style="--d:.7s"></ol>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Sedentarismo cognitivo · Dos maneras de usar la IA"
+  data-guion="Sedentarismo cognitivo: la IA que piensa por vos (firmar sin leer, copiar sin chequear, perder el criterio, no poder sin el sistema) frente a la IA que te hace pensar (borrador y decisión humana, pedir el porqué, revisar la fuente, discutir)."
+  data-notas="Hay un costo que no aparece en ninguna factura: el sedentarismo cognitivo. Igual que el cuerpo, el criterio se pierde si no se usa. La IA que piensa por vos lleva a firmar sin leer, a copiar sin chequear la fuente, a perder el criterio para detectar un error, y a no poder hacer la tarea si el sistema se cae. La IA que te hace pensar es otra cosa: arma el borrador y la persona decide, explica por qué, obliga a revisar la fuente antes de firmar, y sirve para discutir una idea, no para obedecer. En EstudIA lo dijimos así: la IA ayuda a pensar, no hace la tarea. Vale igual para el personal municipal.">
+  <div class="titular a fade"><h1>Lo que no se ve</h1><span class="pill">Sedentarismo cognitivo</span><span class="subt">El criterio se pierde si no se usa</span></div>
+  <div class="m6-area">
+    <div class="m6-versus">
+      <div class="mal a" style="--d:.15s">
+        <header>IA que piensa por vos</header>
+        <ul><li><i>✍️</i>Firmar sin leer lo que redactó la IA</li><li><i>📋</i>Copiar la respuesta sin chequear la fuente</li><li><i>🧭</i>Perder el criterio para detectar un error</li><li><i>🔌</i>No poder hacer la tarea si el sistema se cae</li></ul>
+      </div>
+      <div class="a" style="--d:.6s">
+        <header>IA que te hace pensar</header>
+        <ul><li><i>🧑‍🏫</i>La IA arma el borrador; la persona decide</li><li><i>❓</i>Pedirle que explique por qué</li><li><i>🔎</i>Revisar la fuente antes de firmar</li><li><i>💬</i>Usarla para discutir una idea, no para obedecer</li></ul>
+      </div>
     </div>
-    <div class="tarjeta pestana a" style="--d:.6s"><i>!</i><div><span class="ceja">Conclusión</span><p>No medimos para mostrar: medimos para decidir dónde va la próxima cuadrilla, la próxima respuesta, el próximo trámite.</p></div></div>
+    <div class="tarjeta pestana testimonio m6-nota a" style="--d:1.1s"><i></i><div><span class="ceja">SMT EstudIA</span><p>“La IA ayuda a pensar, no hace la tarea.”</p></div></div>
   </div>
 </section>
 
-<!-- ===================== (oculta) ANTES / AHORA — cada vitrina ya lo muestra ===================== -->
-<section class="slide" data-oculta data-migue="no" data-escena="giro"
-  data-guion="Antes / ahora: ventanilla → 24 h; reclamo perdido → bache con foto; expediente en papel → digital; aula repartida → una plataforma."
-  data-notas="Dejá que aparezca cada 'ahora'. Antes, preguntar era ir a la ventanilla; ahora Migue responde a toda hora. Antes, el reclamo se perdía entre planillas; ahora cada pedido llega al bache tapado con foto. Antes, una licencia tardaba 35 días en papel; ahora el expediente es digital y una persona firma. Antes, lo que pasaba en el aula quedaba repartido; ahora hay una sola plataforma.">
-  <div class="titular a fade"><h1>Comparación</h1><span class="pill">Dos miradas</span><span class="subt">Lo que cambió para el vecino y para el Estado</span></div>
-  <div class="columnas dos comparacion">
-    <article class="col-card antes a" style="--d:.15s">
-      <header>Antes</header>
-      <ol>
-        <li><span class="ceja">Atención</span><b>Preguntar era ir a la ventanilla, de 8 a 13.</b></li>
-        <li><span class="ceja">Obra pública</span><b>El reclamo se perdía entre planillas y llamados.</b></li>
-        <li><span class="ceja">Gestión interna</span><b>Cada área escribía a su manera; 35 días por licencia.</b></li>
-        <li><span class="ceja">Escuela</span><b>Lo del aula, repartido en cuadernos y grupos de WhatsApp.</b></li>
-      </ol>
-    </article>
-    <article class="col-card ahora a" style="--d:.3s">
-      <header>Ahora</header>
-      <ol>
-        <li style="--d:1.0s"><span class="ceja">Atención</span><b>Migue responde a cualquier hora, en lenguaje simple.</b></li>
-        <li style="--d:1.8s"><span class="ceja">Obra pública</span><b>Cada pedido llega al bache tapado, con foto y GPS.</b></li>
-        <li style="--d:2.6s"><span class="ceja">Gestión interna</span><b>Notas en lenguaje claro: la IA redacta, una persona firma.</b></li>
-        <li style="--d:3.4s"><span class="ceja">Escuela</span><b>Una sola plataforma: cada uno ve lo suyo.</b></li>
-      </ol>
-    </article>
+<section class="slide" data-migue="no" data-titulo="Capacidades · Cómo cuidarlas"
+  data-guion="Cuidar las capacidades: capacitación constante (34 gerentes de datos en 46 direcciones, 71 egresados), revisión antes de firmar, criterio propio y medir capacidades, no solo productividad."
+  data-notas="¿Cómo cuidamos las capacidades? Primero, capacitación constante: ya formamos 34 gerentes de datos en 46 direcciones y 71 egresados de diplomados, y no es un curso, es un programa que acompaña cada herramienta. Segundo, revisión antes de firmar: la firma es humana, y firmar es haber leído. Tercero, criterio propio: saber hacer la tarea sin IA, para darse cuenta cuando se equivoca. Y cuarto, medir capacidades, no solo cuánto tiempo ahorramos.">
+  <div class="titular a fade"><h1>Capacidades</h1><span class="pill">Cómo cuidarlas</span><span class="subt">Cuatro prácticas para que la IA sume y no reste</span></div>
+  <aside class="panel a izq" style="--d:.1s">
+    <p class="pn-tit">Capacitación</p>
+    <p class="pn-gigante chico" data-n="34">34</p>
+    <p class="pn-desc">gerentes de datos en 46 direcciones</p>
+    <hr>
+    <dl><dt>Diplomados</dt><dd><span data-n="71">71</span> egresados</dd><dt>Base</dt><dd class="chico">Decreto 0596: capacitación constante</dd></dl>
+  </aside>
+  <div class="derecha">
+    <div class="m6-practicas">
+      <div class="a" style="--d:.3s"><i>🎓</i><b>Capacitación constante</b><p>No un curso: un programa que acompaña cada herramienta nueva.</p></div>
+      <div class="a" style="--d:.45s"><i>✍️</i><b>Revisión antes de firmar</b><p>La firma es humana, y firmar es haber leído.</p></div>
+      <div class="a" style="--d:.6s"><i>🧭</i><b>Criterio propio</b><p>Saber hacer la tarea sin IA, para darse cuenta cuando se equivoca.</p></div>
+      <div class="a" style="--d:.75s"><i>📈</i><b>Medir capacidades</b><p>No solo cuánto tiempo ahorramos: también qué sabemos hacer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     BLOQUE 7 · HOJA DE RUTA PARA CHACO
+     =================================================================== -->
+<section class="slide m6-sep" data-migue="no" data-bloque="7" data-titulo="Bloque 7 · Hoja de ruta para Chaco"
+  data-guion="Bloque 7 (15 min): hoja de ruta para Chaco. Cinco fases con criterios de paso, y qué hace la provincia y qué hace cada municipio."
+  data-notas="Último bloque: cómo se lleva todo esto a los 70 municipios del Chaco.">
+  <div class="m6-sep-num a fade">7</div>
+  <div class="m6-sep-txt">
+    <span class="ceja a" style="--d:.2s">Bloque 7 de 7 · 15 minutos</span>
+    <h2 class="a" style="--d:.35s">Hoja de ruta para Chaco</h2>
+    <p class="a" style="--d:.55s">70 municipios, distintas escalas: ¿por dónde empieza cada uno?</p>
+  </div>
+  <ol class="m6-riel a fade" style="--d:.7s"></ol>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Hoja de ruta · Chaco, 70 municipios"
+  data-guion="Hoja de ruta en cinco fases: reglas, personas, puertas adentro, servicios compartidos, para el vecino. Cada una con su criterio para pasar a la siguiente. La etapa 2027 de capacitación (ECOM) cubre las tres primeras."
+  data-notas="Les propongo una hoja de ruta en cinco fases, el mismo orden que nos funcionó a nosotros pero a escala provincial. Uno, reglas: una guía provincial modelo que cada municipio adopta con norma propia. Dos, personas: un referente de datos por municipio, formado y con tiempo asignado. Tres, puertas adentro: una herramienta transversal que use todo el personal. Cuatro, servicios compartidos: licencias negociadas por la provincia, datos conectados y un asistente común. Y cinco, para el vecino: atención, reclamos y trámites con agentes, con permisos y firma humana. Cada fase tiene un criterio para pasar a la siguiente. Y la etapa de 2027, de más de nueve meses de capacitación intensiva, es la oportunidad para recorrer las tres primeras.">
+  <div class="titular a fade"><h1>Hoja de ruta</h1><span class="pill">Chaco · 70 municipios</span><span class="subt">El orden que nos funcionó, a escala provincial</span></div>
+  <div class="m6-ruta m6-area">
+    <div class="m6-cinta a" style="--d:1.6s"><b>2027</b> · más de nueve meses de capacitación intensiva (ECOM Chaco)</div>
+    <div class="m6-fases">
+      <div class="m6-fase a" style="--d:.15s"><em>1</em><div><b>Reglas</b><p>Una guía provincial modelo, que cada municipio adopta con norma propia.</p><span class="smt">En SMT: Decreto 0596, diciembre de 2025</span><span class="pasa"><small>Pasa cuando</small>Cada municipio tiene su norma.</span></div></div>
+      <div class="m6-fase a" style="--d:.35s"><em>2</em><div><b>Personas</b><p>Un referente de datos por municipio, formado y con tiempo asignado.</p><span class="smt">En SMT: 34 gerentes de datos en 46 direcciones</span><span class="pasa"><small>Pasa cuando</small>Los 70 municipios tienen referente.</span></div></div>
+      <div class="m6-fase a" style="--d:.55s"><em>3</em><div><b>Puertas adentro</b><p>Una herramienta transversal que use todo el personal.</p><span class="smt">En SMT: Generador de Notas, 10 tipos de nota</span><span class="pasa"><small>Pasa cuando</small>Se usa todos los días, con firma humana.</span></div></div>
+      <div class="m6-fase a" style="--d:.75s"><em>4</em><div><b>Servicios compartidos</b><p>Licencias negociadas por la provincia, datos conectados y un asistente común.</p><span class="smt">En SMT: Ciudad Digital como puerta única</span><span class="pasa"><small>Pasa cuando</small>Hay costo por tarea medido y registro de cada acción.</span></div></div>
+      <div class="m6-fase a" style="--d:.95s"><em>5</em><div><b>Para el vecino</b><p>Atención, reclamos y trámites con agentes, con permisos y firma humana.</p><span class="smt">En SMT: Migue, CIMBA, EstudIA</span><span class="pasa"><small>Pasa cuando</small>El vecino lo usa y la gestión rinde cuentas.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-migue="no" data-titulo="Quién hace qué · Provincia y municipios"
+  data-guion="Quién hace qué. La provincia, una vez para todos: licencias, guía modelo, infraestructura y datos compartidos, formar referentes, tablero de costos. Cada municipio: adoptar la norma, designar referente, elegir su primer problema, medir, escuchar al vecino."
+  data-notas="¿Quién hace qué? Hay cosas que conviene hacer una sola vez para los 70: negociar licencias y precios por volumen, una guía y un modelo de norma, la infraestructura y los datos compartidos, formar a los referentes y un tablero de uso y costos. Y hay cosas que solo puede hacer cada municipio: adoptar la norma, designar a su referente, elegir su primer problema —no su primera herramienta—, medir y rendir cuentas, y escuchar al vecino. Lo que se compra una vez para 70 sale más barato y se gobierna mejor.">
+  <div class="titular a fade"><h1>Quién hace qué</h1><span class="pill">Provincia y municipios</span><span class="subt">Lo que conviene hacer una vez, y lo de cada uno</span></div>
+  <div class="m6-area">
+    <div class="m6-quien">
+      <article class="col-card a" style="--d:.15s">
+        <header>La provincia <small>una vez, para los 70</small></header>
+        <div><ul>
+          <li><i>🤝</i>Negociar licencias y precios por volumen</li>
+          <li><i>📜</i>Guía práctica y modelo de norma</li>
+          <li><i>🗄️</i>Infraestructura y datos compartidos</li>
+          <li><i>🎓</i>Formar a los referentes de datos</li>
+          <li><i>📊</i>Tablero de uso y costos</li>
+        </ul></div>
+      </article>
+      <article class="col-card a" style="--d:.45s">
+        <header>Cada municipio <small>lo que nadie puede hacer por él</small></header>
+        <div><ul>
+          <li><i>✍️</i>Adoptar la norma</li>
+          <li><i>🙋</i>Designar a su referente</li>
+          <li><i>🎯</i>Elegir su primer problema, no su primera herramienta</li>
+          <li><i>🧾</i>Medir y rendir cuentas</li>
+          <li><i>👂</i>Escuchar al vecino</li>
+        </ul></div>
+      </article>
+    </div>
+    <div class="tarjeta pestana m6-nota m6-quien-pie a" style="--d:.9s"><i>!</i><div><span class="ceja">Escala</span><p>Lo que se compra una vez para 70 sale más barato y se gobierna mejor.</p></div></div>
   </div>
 </section>
 
 <!-- ===================== CONCLUSIÓN ===================== -->
-<section class="slide" data-migue="no"
-  data-guion="La IA como servicio público: primero las reglas, primero adentro, y siempre el vecino en el centro. La IA interpreta, las personas deciden."
-  data-notas="Lo que nos llevamos: la IA, en un municipio, es un servicio público más. Primero pusimos reglas. Después la usamos nosotros. Y cuando funcionó, la llevamos al vecino. La IA interpreta; las personas deciden.">
-  <div class="titular a fade"><h1>Conclusión</h1><span class="pill">Cierre</span><span class="subt">Lo que nos llevamos</span></div>
+<section class="slide" data-migue="no" data-fin
+  data-guion="Para llevarse: gobernar la IA agéntica es decidir quién puede hacer qué, con qué datos, permisos, costo y firma. Reglas antes que herramientas, conectar antes que acumular, medir el costo por tarea, las personas deciden."
+  data-notas="Para llevarse. Gobernar la IA agéntica no es comprar una herramienta: es decidir quién puede hacer qué, con qué datos, con qué permisos, a qué costo y con qué firma. Cuatro ideas. Reglas antes que herramientas. Conectar antes que acumular sistemas. Medir el costo por tarea resuelta, no por token. Y la que repetimos desde el primer día: la IA interpreta, las personas deciden.">
+  <div class="titular a fade"><h1>Conclusión</h1><span class="pill">Para llevarse</span><span class="subt">Lo que nos llevamos de hoy</span></div>
   <div class="banner a" style="--d:.15s">
     <header>Mensaje final</header>
-    <div><b>La IA como servicio público</b><p data-cita>Con reglas, puertas adentro primero, y el vecino en el centro.</p></div>
+    <div><b>Gobernar la IA agéntica es decidir quién puede hacer qué</b><p data-cita>Con qué datos, con qué permisos, a qué costo y con qué firma.</p></div>
   </div>
-  <div class="columnas tres ideas">
+  <div class="columnas m6-cuatro ideas">
     <article class="col-card a" style="--d:.4s"><header>1 · Reglas</header><div><span class="emoji">📜</span><b>Un decreto antes que una herramienta</b></div></article>
-    <article class="col-card a" style="--d:.55s"><header>2 · Adentro</header><div><span class="emoji">🏛️</span><b>La usamos primero nosotros</b></div></article>
-    <article class="col-card a" style="--d:.7s"><header>3 · El vecino</header><div><span class="emoji">🤝</span><b>La IA interpreta, las personas deciden</b></div></article>
+    <article class="col-card a" style="--d:.55s"><header>2 · Datos</header><div><span class="emoji">🔗</span><b>Conectar antes que acumular</b></div></article>
+    <article class="col-card a" style="--d:.7s"><header>3 · Costos</header><div><span class="emoji">🧮</span><b>Medir el costo por tarea resuelta</b></div></article>
+    <article class="col-card a" style="--d:.85s"><header>4 · Personas</header><div><span class="emoji">🤝</span><b>La IA interpreta, las personas deciden</b></div></article>
   </div>
 </section>
 
-<!-- ===================== 9. GRACIAS ===================== -->
+<!-- ===================== PREGUNTAS ===================== -->
+<section class="slide" data-migue="no" data-titulo="Preguntas · y a Migue, en vivo"
+  data-guion="Preguntas de la sala. Si preguntan algo de trámites, mandalo a Migue en vivo (PREGUNTAR CON LA VOZ). Q muestra el QR gigante."
+  data-notas="Abrimos a preguntas. Si alguien pregunta algo que Migue sabe, se lo preguntamos en vivo desde la botonera: con la voz, se revisa el texto y se manda. También pueden escribirle ahora por Telegram o desde smt.gob.ar.">
+  <div class="titular a fade"><h1>Preguntas</h1><span class="pill">Conversemos</span><span class="subt">Y si quieren, le preguntamos a Migue en vivo</span></div>
+  <div class="m6-cierre">
+    <div class="a" style="--d:.15s"><h2>¿Preguntas?</h2><p>También pueden escribirle a Migue ahora, desde el celular.</p></div>
+    <div class="qrs">
+      <div class="qr a" style="--d:.4s"><img src="img/migue/qr-telegram.svg" alt="Código QR al bot de Telegram"><b>@MigueSMT_bot</b><span>En Telegram</span></div>
+      <div class="qr a" style="--d:.55s"><img src="img/migue/qr-smt.svg" alt="Código QR a smt.gob.ar"><b>smt.gob.ar</b><span>Botón de Migue, abajo a la derecha</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GRACIAS ===================== -->
 <section class="slide portada gracias" data-migue="no"
   data-guion="Gracias. (MIGUE 9 se despide) Queda proyectada."
-  data-notas="MIGUE 9 · Muchas gracias. (Queda proyectada mientras sigue el panel.)">
-  <div class="capa-logos a fade" data-logos></div>
+  data-notas="MIGUE 9 · Muchas gracias. (Queda proyectada.)">
+  <div class="m6-logos a fade">
+    <img class="ialab" src="assets/template/logos/uba-ialab.png" alt="UBA · IALAB">
+    <i></i>
+    <span class="marca" data-logo-chaco><small>Gobierno del</small><b>CHACO</b></span>
+    <i></i>
+    <img src="img/logos/logo-horizontal-color.png" alt="Ciudad de San Miguel de Tucumán">
+  </div>
   <div class="portada-centro">
-    <p class="p-evento a" style="--d:.2s">Celebrando Magnífica Humanitas · Panel: IA Federal, innovación desde los territorios</p>
-    <h1 class="p-titulo a" style="--d:.35s">¡Muchas gracias por su atención!</h1>
+    <p class="p-evento a" style="--d:.2s">Gobernar con IA · Capacitación para los 70 municipios del Chaco</p>
+    <h1 class="p-titulo a" style="--d:.35s">¡Muchas gracias!</h1>
     <p class="p-orador a" style="--d:.55s">Dr. Marco Rossi · <em>Director de Inteligencia Artificial</em></p>
     <p class="p-inst a" style="--d:.65s">Municipalidad de San Miguel de Tucumán</p>
-    <p class="p-fecha a" style="--d:.8s">Viernes 16 de octubre · Facultad de Derecho, UBA</p>
-    <img class="p-logo a" style="--d:.95s" src="img/logos/logo-horizontal-color.png" alt="Ciudad de San Miguel de Tucumán">
+    <p class="p-fecha a" style="--d:.8s">IA para Gobiernos Locales · Módulo 6 · IALAB UBA</p>
   </div>
 </section>
 
@@ -324,7 +885,7 @@
 <div id="ayuda">
   <b>→ · Espacio · AvPág</b> placa siguiente · <b>← · RePág</b> anterior<br>
   <b>Enter · M</b> Migue habla · <b>N</b> la anterior · <b>C</b> se calla · <b>Z</b> deshace<br>
-  <b>1 … 6</b> abre el cajón de ese proyecto · <b>Esc</b> lo cierra · <b>[ ]</b> recurso anterior / siguiente<br>
+  <b>1 … 9</b> abre el cajón de ese proyecto · <b>Esc</b> lo cierra · <b>[ ]</b> recurso anterior / siguiente<br>
   <b>P</b> reproduce el avance de CIMBA · <b>K</b> pregunta a Migue en vivo · <b>X</b> la cierra<br>
   <b>Q</b> QR de Migue · <b>L</b> foco en Migue · <b>H</b> oculta a Migue · <b>F</b> pantalla completa · <b>?</b> ayuda
 </div>
@@ -332,8 +893,8 @@
 <div id="inicio">
   <div class="ini-izq">
     <img class="ini-logo" src="img/logos/logo-horizontal-color.png" alt="">
-    <p class="ini-tit">La IA como servicio público</p>
-    <p class="ini-sub">Celebrando Magnífica Humanitas · Facultad de Derecho, UBA</p>
+    <p class="ini-tit">Gobernar la IA agéntica en el Estado</p>
+    <p class="ini-sub">Gobernar con IA · Chaco · Módulo 6 · IALAB UBA</p>
     <button class="ini-boton" type="button">Comenzar</button>
     <small>Un clic para empezar (habilita el sonido y la pantalla completa) · Q: QR para vincular el celular</small>
   </div>
@@ -359,5 +920,6 @@
 <script src="datos/cimba-avance.js"></script>
 <script src="avance.js"></script>
 <script src="arranque.js"></script>
+<script src="m6.js"></script>
 </body>
 </html>

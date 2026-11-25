@@ -1,0 +1,379 @@
+/* =====================================================================
+   MÓDULO 6 · GOBERNAR LA IA AGÉNTICA EN EL ESTADO (Chaco, noviembre 2026)
+   Componentes nuevos sobre la grilla del template (1920×1080). Todo con
+   prefijo m6- para no pisar lo de estilo.css. Las entradas usan la misma
+   convención: .a + --d (retardo).
+   ===================================================================== */
+:root { --m6-verde: #2f9e6e; --m6-ambar: #d9a400; --m6-rojo: #d6453d; --m6-celeste: #2eb1ff; }
+
+/* Área de contenido común: debajo del titular. */
+.m6-area { position: absolute; left: 86px; top: 215px; width: 1748px; height: 768px; }
+
+/* ---------- Logos de la portada y el cierre (IALAB · Chaco · Ciudad) ---------- */
+.m6-logos { position: absolute; left: 0; right: 0; top: 118px; display: flex; align-items: center; justify-content: center; gap: 56px; }
+.m6-logos img { height: 76px; width: auto; object-fit: contain; }
+.m6-logos img.ialab { height: 64px; }
+.m6-logos i { width: 2px; height: 70px; background: var(--arena); }
+.m6-logos .marca { display: flex; flex-direction: column; line-height: 1; color: var(--azul); }
+.m6-logos .marca small { font-size: 22px; font-weight: 500; letter-spacing: .5px; }
+.m6-logos .marca b { font-size: 46px; font-weight: 800; letter-spacing: 1px; }
+.portada .portada-centro { top: 330px; }
+.p-modulo { font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gris); }
+.portada .p-titulo { font-size: 70px; line-height: 80px; max-width: 1500px; }
+
+/* ---------- Separador de bloque ---------- */
+.m6-sep::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(var(--extra, 0px) / -2); right: calc(var(--extra, 0px) / -2);
+  background: radial-gradient(1200px 700px at 85% 15%, #24305e 0%, rgba(36,48,94,0) 60%), radial-gradient(900px 600px at 0% 100%, #1b2550 0%, rgba(27,37,80,0) 60%), var(--azul); }
+.m6-sep .encab { color: var(--blanco); }
+.m6-sep .logo-sup { filter: brightness(0) invert(1); opacity: .9; }
+.m6-sep-num { position: absolute; left: 70px; top: 120px; font-size: 600px; line-height: 1; font-weight: 800; letter-spacing: -30px; color: transparent;
+  -webkit-text-stroke: 3px rgba(201,196,184,.55); font-variant-numeric: tabular-nums; }
+.m6-sep-txt { position: absolute; left: 640px; right: 120px; top: 270px; display: flex; flex-direction: column; gap: 26px; color: var(--blanco); }
+.m6-sep-txt .ceja { color: var(--arena); font-size: 22px; letter-spacing: 4px; }
+.m6-sep-txt h2 { font-size: 92px; line-height: 1.02; font-weight: 800; letter-spacing: -1.5px; }
+.m6-sep-txt p { font-size: 40px; line-height: 1.3; font-weight: 500; font-style: italic; color: #d9dcea; max-width: 1050px; }
+.m6-riel { position: absolute; left: 86px; right: 86px; bottom: 70px; list-style: none; display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+.m6-riel li { position: relative; padding-top: 22px; font-size: 18px; line-height: 1.25; font-weight: 600; color: rgba(255,255,255,.38); }
+.m6-riel li::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 6px; border-radius: 3px; background: rgba(255,255,255,.14); }
+.m6-riel li b { display: block; font-size: 14px; letter-spacing: 2px; color: inherit; }
+.m6-riel li.hecho { color: var(--arena); }
+.m6-riel li.hecho::before { background: var(--arena); }
+.m6-riel li.on { color: var(--blanco); }
+.m6-riel li.on::before { background: var(--blanco); box-shadow: 0 0 22px rgba(255,255,255,.55); }
+.on .m6-riel li.on::before { animation: m6-latido 2.4s ease-in-out infinite 1s; }
+@keyframes m6-latido { 50% { box-shadow: 0 0 4px rgba(255,255,255,.2); } }
+
+/* ---------- Agenda: los siete bloques ---------- */
+.m6-agenda { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.m6-agenda li { height: 98px; display: grid; grid-template-columns: 98px 600px 1fr 150px; align-items: center; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; overflow: hidden; }
+.m6-agenda li > b { height: 100%; display: flex; align-items: center; justify-content: center; background: var(--azul); color: var(--blanco); font-size: 44px; font-weight: 800; }
+.m6-agenda li > strong { padding: 0 34px; font-size: 30px; line-height: 1.15; font-weight: 700; }
+.m6-agenda li > span { padding-right: 24px; font-size: 23px; line-height: 1.3; font-style: italic; color: var(--suave); }
+.m6-agenda li > em { justify-self: end; margin-right: 26px; font-style: normal; font-size: 20px; font-weight: 700; letter-spacing: 1px; color: var(--azul); background: var(--hueso); border-radius: 22px; padding: 8px 18px; }
+
+/* ---------- Pregunta a la sala ---------- */
+.m6-pregunta-caja { position: absolute; left: 160px; right: 160px; top: 250px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 34px; }
+.m6-pregunta-caja .ceja { font-size: 24px; letter-spacing: 5px; }
+.m6-pregunta-caja h2 { font-size: 96px; line-height: 1.08; font-weight: 800; letter-spacing: -1.5px; }
+.m6-pregunta-caja h3 { font-size: 64px; line-height: 1.15; font-weight: 700; color: var(--azul2); }
+.m6-pregunta-caja p { font-size: 30px; color: var(--suave); }
+.m6-mano { font-size: 110px; line-height: 1; }
+.on .m6-mano { animation: m6-mano 1.6s ease-in-out 1s 2; transform-origin: 70% 90%; }
+@keyframes m6-mano { 25% { transform: rotate(-14deg); } 75% { transform: rotate(10deg); } }
+
+/* ---------- Escalera: de la IA individual a la agéntica ---------- */
+.m6-escalera { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; align-items: end; height: 768px; }
+.m6-escalon { position: relative; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+.m6-escalon:nth-child(1) { height: 520px; } .m6-escalon:nth-child(2) { height: 600px; } .m6-escalon:nth-child(3) { height: 680px; } .m6-escalon:nth-child(4) { height: 768px; }
+.m6-escalon > header { flex: none; padding: 20px 28px 18px; color: var(--blanco); background: var(--azul3); }
+.m6-escalon:nth-child(2) > header { background: #2a3460; } .m6-escalon:nth-child(3) > header { background: #1d2650; } .m6-escalon:nth-child(4) > header { background: var(--azul); }
+.m6-escalon > header small { display: block; font-size: 16px; font-weight: 700; letter-spacing: 2px; color: var(--arena); text-transform: uppercase; }
+.m6-escalon > header b { display: block; font-size: 36px; line-height: 1.1; font-weight: 800; }
+.m6-escalon > p { padding: 22px 28px 6px; font-size: 23px; line-height: 1.35; color: var(--azul2); }
+.m6-escalon dl { margin-top: auto; padding: 0 28px 26px; display: flex; flex-direction: column; gap: 12px; }
+.m6-escalon dt { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gris); }
+.m6-escalon dd { font-size: 21px; line-height: 1.3; font-weight: 600; color: var(--azul); margin-top: -8px; }
+.m6-escalon.foco { border: 3px solid var(--azul); box-shadow: 0 26px 60px rgba(17,26,59,.22); }
+.m6-escalon .m6-sello { position: absolute; right: 18px; top: 18px; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: var(--m6-celeste); color: var(--azul); border-radius: 16px; padding: 6px 12px; }
+
+/* ---------- Chat frente a agente ---------- */
+.m6-dos { display: grid; grid-template-columns: 1fr 1.55fr; gap: 30px; height: 470px; }
+.m6-caja { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 18px; padding: 30px 36px; display: flex; flex-direction: column; gap: 22px; }
+.m6-caja > .ceja { font-size: 18px; }
+.m6-caja > h3 { font-size: 40px; line-height: 1.1; font-weight: 800; }
+.m6-cadena { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.m6-cadena span { background: var(--hueso); border-radius: 14px; padding: 12px 16px; font-size: 21px; font-weight: 600; color: var(--azul); white-space: nowrap; }
+.m6-cadena span.fuerte { background: var(--azul); color: var(--blanco); }
+.m6-cadena i { font-style: normal; font-size: 30px; color: var(--gris); }
+.m6-caja > p { margin-top: auto; font-size: 22px; line-height: 1.4; color: var(--suave); }
+.m6-bucle { display: flex; align-items: center; gap: 14px; font-size: 20px; font-weight: 600; color: var(--gris); }
+.m6-bucle svg { width: 64px; height: 36px; flex: none; }
+.m6-bucle path { fill: none; stroke: var(--gris); stroke-width: 3; stroke-linecap: round; }
+.on .m6-bucle svg { animation: m6-gira 3s linear infinite 1.5s; }
+@keyframes m6-gira { 50% { transform: translateX(8px); } }
+.m6-triada { margin-top: 28px; height: 240px; display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 18px; overflow: hidden; }
+.m6-triada > div { padding: 30px 38px; display: flex; flex-direction: column; justify-content: center; gap: 10px; color: var(--blanco); }
+.m6-triada > div:nth-child(1) { background: #3a4366; } .m6-triada > div:nth-child(2) { background: #26305a; } .m6-triada > div:nth-child(3) { background: var(--azul); }
+.m6-triada b { font-size: 38px; line-height: 1.1; font-weight: 800; }
+.m6-triada p { font-size: 21px; line-height: 1.35; color: #d5d9e8; }
+
+/* ---------- Las capas de la IA institucional ---------- */
+.m6-capas { display: flex; flex-direction: column; gap: 12px; }
+.m6-capa { height: 142px; display: grid; grid-template-columns: 820px 1fr 170px; align-items: stretch; border-radius: 16px; overflow: hidden; background: var(--blanco); border: 1.5px solid var(--borde); }
+.m6-capa > div:first-child { display: flex; align-items: center; gap: 26px; padding: 0 34px; color: var(--blanco); }
+.m6-capa > div:first-child em { font-style: normal; font-size: 18px; font-weight: 700; letter-spacing: 2px; color: var(--arena); width: 30px; }
+.m6-capa > div:first-child b { font-size: 38px; font-weight: 800; min-width: 250px; }
+.m6-capa > div:first-child span { font-size: 22px; line-height: 1.3; color: #dfe3f0; }
+.m6-capa > p { display: flex; flex-direction: column; justify-content: center; padding: 0 30px; font-size: 21px; line-height: 1.35; color: var(--azul2); }
+.m6-capa > p small { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gris); }
+.m6-capa > i { font-style: normal; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; letter-spacing: 1px; color: var(--azul); background: var(--hueso); text-align: center; line-height: 1.25; padding: 0 10px; }
+.m6-capa:nth-child(1) > div:first-child { background: var(--azul); }
+.m6-capa:nth-child(2) > div:first-child { background: #1d2752; }
+.m6-capa:nth-child(3) > div:first-child { background: #2a3566; }
+.m6-capa:nth-child(4) > div:first-child { background: #39457a; }
+.m6-capa:nth-child(5) > div:first-child { background: #4b5890; }
+
+/* ---------- Licencias: ocho condiciones ---------- */
+.m6-clausulas { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 262px); gap: 22px; }
+.m6-clausula { position: relative; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; padding: 26px 28px; display: flex; flex-direction: column; gap: 10px; }
+.m6-clausula > i { font-style: normal; font-size: 44px; line-height: 1; }
+.m6-clausula > em { position: absolute; right: 22px; top: 20px; font-style: normal; font-size: 18px; font-weight: 800; color: var(--arena); }
+.m6-clausula > b { font-size: 27px; line-height: 1.15; font-weight: 800; }
+.m6-clausula > p { font-size: 20px; line-height: 1.4; color: var(--azul2); }
+.m6-nota { margin-top: 22px; }
+.m6-nota.pestana { min-height: 150px; }
+
+/* ---------- Detrás de escena: datos conectados (flujos) ---------- */
+.m6-flujo { position: relative; width: 1748px; }
+.m6-flujo > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.m6-flujo path { fill: none; stroke: #9aa1b8; stroke-width: 2.5; stroke-dasharray: 600; stroke-dashoffset: 0; }
+.on .m6-flujo path { animation: m6-traza 1.2s ease both; animation-delay: var(--d, .4s); }
+@keyframes m6-traza { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+.m6-flujo .chip { position: absolute; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-radius: 12px; background: var(--blanco); border: 1.5px solid var(--borde); font-size: 21px; font-weight: 600; color: var(--azul); white-space: nowrap; }
+.m6-flujo .chip small { font-size: 16px; font-weight: 500; color: var(--suave); }
+.m6-flujo .chip.sale { background: var(--hueso); border-color: transparent; }
+.m6-flujo .hub { position: absolute; border-radius: 20px; background: var(--azul); color: var(--blanco); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 8px; padding: 0 26px; box-shadow: 0 24px 60px rgba(17,26,59,.25); }
+.m6-flujo .hub b { font-size: 46px; font-weight: 800; letter-spacing: 1px; }
+.m6-flujo .hub span { font-size: 19px; line-height: 1.35; color: #d7dbe9; }
+.m6-flujo .lado { position: absolute; top: -32px; font-size: 15px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); }
+.m6-implico { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 30px; }
+.m6-implico > div { background: var(--blanco); border-left: 6px solid var(--azul); border-radius: 12px; padding: 20px 26px; display: flex; flex-direction: column; gap: 6px; }
+.m6-implico b { font-size: 58px; font-weight: 800; line-height: 1; letter-spacing: -1.5px; font-variant-numeric: tabular-nums; }
+.m6-implico span { font-size: 21px; line-height: 1.3; color: var(--azul2); }
+
+/* ---------- IA soberana: matriz 2×2 ---------- */
+.m6-matriz-caja { display: grid; grid-template-columns: 1080px 1fr; gap: 40px; height: 768px; }
+.m6-matriz { position: relative; padding: 0 0 56px 70px; }
+.m6-matriz .ejes { position: absolute; left: 50px; bottom: 40px; top: 0; right: 0; border-left: 3px solid var(--azul); border-bottom: 3px solid var(--azul); pointer-events: none; }
+.m6-matriz .eje-y { position: absolute; left: -2px; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); font-size: 17px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--azul); white-space: nowrap; }
+.m6-matriz .eje-x { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); font-size: 17px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--azul); white-space: nowrap; }
+.m6-matriz .cuad { height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; padding: 0 0 0 0; }
+.m6-cuad { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; padding: 24px 28px; display: flex; flex-direction: column; gap: 10px; }
+.m6-cuad small { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gris); }
+.m6-cuad b { font-size: 29px; line-height: 1.15; font-weight: 800; }
+.m6-cuad p { font-size: 19px; line-height: 1.4; color: var(--azul2); margin-top: auto; }
+.m6-cuad.fuerte { background: var(--azul); color: var(--blanco); border-color: var(--azul); }
+.m6-cuad.fuerte small { color: var(--arena); } .m6-cuad.fuerte p { color: #d7dbe9; }
+.m6-condiciones { display: flex; flex-direction: column; gap: 18px; }
+.m6-condiciones .tarjeta { padding: 26px 30px; }
+.m6-condiciones h4 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+.m6-condiciones ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.m6-condiciones li { position: relative; padding-left: 30px; font-size: 20px; line-height: 1.35; color: var(--azul2); }
+.m6-condiciones li::before { content: '✓'; position: absolute; left: 0; top: 0; font-weight: 800; color: var(--m6-verde); }
+.m6-condiciones .no li::before { content: '✕'; color: var(--m6-rojo); }
+.m6-condiciones .pestana p { font-size: 24px; }
+
+/* ---------- Del piloto a la producción: embudo y causas ---------- */
+.m6-piloto { display: grid; grid-template-columns: 560px 1fr; gap: 40px; height: 560px; }
+.m6-embudo { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+.m6-embudo div { height: 108px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--blanco); text-align: center; clip-path: polygon(0 0, 100% 0, 94% 100%, 6% 100%); }
+.m6-embudo div:nth-child(1) { width: 560px; background: #4b5890; }
+.m6-embudo div:nth-child(2) { width: 470px; background: #39457a; }
+.m6-embudo div:nth-child(3) { width: 380px; background: #26305a; }
+.m6-embudo div:nth-child(4) { width: 290px; background: var(--azul); }
+.m6-embudo b { font-size: 28px; font-weight: 800; line-height: 1.1; }
+.m6-embudo small { font-size: 16px; color: #d7dbe9; }
+.m6-causas { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 16px; }
+.m6-causa { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 14px; padding: 20px 26px; display: grid; grid-template-columns: 54px 1fr; column-gap: 16px; align-items: center; }
+.m6-causa i { grid-row: span 2; font-style: normal; font-size: 40px; text-align: center; }
+.m6-causa b { font-size: 27px; font-weight: 800; line-height: 1.15; }
+.m6-causa span { font-size: 19px; line-height: 1.35; color: var(--azul2); }
+
+/* ---------- Checklist antes del piloto ---------- */
+.m6-check { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 20px 30px; height: 590px; }
+.m6-check > div { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; padding: 22px 30px; display: grid; grid-template-columns: 64px 1fr; column-gap: 22px; align-items: center; }
+.m6-check .caja { grid-row: span 2; width: 58px; height: 58px; border-radius: 14px; border: 3px solid var(--azul); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; color: var(--blanco); }
+.on .m6-check .caja { animation: m6-tilde .5s ease both; animation-delay: calc(var(--d, 0s) + .6s); }
+@keyframes m6-tilde { from { background: transparent; color: transparent; } to { background: var(--azul); color: var(--blanco); } }
+.m6-check .caja { background: var(--azul); }
+.m6-check b { font-size: 29px; line-height: 1.2; font-weight: 800; }
+.m6-check span { font-size: 20px; line-height: 1.35; color: var(--azul2); }
+
+/* ---------- Pase a demo en vivo ---------- */
+.m6-demo { display: grid; grid-template-columns: 900px 1fr; gap: 34px; height: 768px; }
+.m6-demo-tapa { background: var(--azul); color: var(--blanco); border-radius: 22px; padding: 60px 64px; display: flex; flex-direction: column; justify-content: center; gap: 22px; position: relative; overflow: hidden; }
+.m6-demo-tapa::after { content: ''; position: absolute; right: -160px; bottom: -160px; width: 520px; height: 520px; border-radius: 50%; border: 60px solid rgba(255,255,255,.05); }
+.m6-envivo { display: inline-flex; align-items: center; gap: 14px; font-size: 22px; font-weight: 800; letter-spacing: 4px; color: #ffb3ae; }
+.m6-envivo i { width: 20px; height: 20px; border-radius: 50%; background: var(--m6-rojo); box-shadow: 0 0 0 0 rgba(214,69,61,.7); }
+.on .m6-envivo i { animation: m6-rec 1.6s ease-out infinite; }
+@keyframes m6-rec { 70% { box-shadow: 0 0 0 22px rgba(214,69,61,0); } 100% { box-shadow: 0 0 0 0 rgba(214,69,61,0); } }
+.m6-demo-tapa h2 { font-size: 120px; line-height: 1; font-weight: 800; letter-spacing: -2px; }
+.m6-demo-tapa p { font-size: 30px; line-height: 1.35; color: #d7dbe9; }
+.m6-demo-tapa code { align-self: flex-start; font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 600; background: rgba(255,255,255,.1); border-radius: 14px; padding: 10px 20px; color: var(--blanco); }
+.m6-demo-lista { list-style: none; display: flex; flex-direction: column; gap: 18px; counter-reset: dm; }
+.m6-demo-lista > .ceja { margin: 6px 0 2px; }
+.m6-demo-lista li { flex: 1; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; padding: 22px 30px 22px 100px; position: relative; display: flex; flex-direction: column; justify-content: center; gap: 6px; counter-increment: dm; }
+.m6-demo-lista li::before { content: counter(dm); position: absolute; left: 28px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: var(--azul); color: var(--blanco); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; }
+.m6-demo-lista b { font-size: 29px; line-height: 1.2; font-weight: 800; }
+.m6-demo-lista span { font-size: 20px; line-height: 1.35; color: var(--azul2); }
+
+/* ---------- Tokens ---------- */
+.m6-frase { background: var(--blanco); border-radius: 20px; padding: 46px 56px 40px; display: flex; flex-direction: column; gap: 26px; }
+.m6-frase .ceja { font-size: 18px; }
+.m6-fichas { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.m6-fichas span { font-size: 64px; line-height: 1.25; font-weight: 700; padding: 4px 6px; border-radius: 10px; white-space: pre; }
+.m6-fichas span:nth-child(4n+1) { background: #dbe7ff; } .m6-fichas span:nth-child(4n+2) { background: #f6e7c3; }
+.m6-fichas span:nth-child(4n+3) { background: #d9f0e4; } .m6-fichas span:nth-child(4n) { background: #f3dcdc; }
+.on .m6-fichas span { animation: m6-ficha .5s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, 0s); }
+@keyframes m6-ficha { from { opacity: 0; transform: translateY(24px) scale(.9); } to { opacity: 1; transform: none; } }
+.m6-cuenta { display: flex; align-items: baseline; gap: 20px; }
+.m6-cuenta b { font-size: 96px; line-height: 1; font-weight: 800; letter-spacing: -2px; }
+.m6-cuenta span { font-size: 28px; color: var(--azul2); }
+.m6-cuenta small { margin-left: auto; font-size: 18px; color: var(--gris); }
+.m6-tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 26px; }
+.m6-tres > div { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; padding: 26px 30px; display: flex; flex-direction: column; gap: 10px; }
+.m6-tres i { font-style: normal; font-size: 40px; }
+.m6-tres b { font-size: 27px; line-height: 1.2; font-weight: 800; }
+.m6-tres p { font-size: 20px; line-height: 1.4; color: var(--azul2); }
+
+/* ---------- El multiplicador del agente ---------- */
+.m6-multi { display: grid; grid-template-columns: 330px 1fr 380px; gap: 30px; height: 610px; }
+.m6-barras-caja { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 18px; padding: 28px 30px 22px; display: flex; flex-direction: column; gap: 14px; }
+.m6-barras-caja > .ceja { font-size: 17px; }
+.m6-barras-caja > h3 { font-size: 32px; font-weight: 800; line-height: 1.1; }
+.m6-barras { flex: 1; display: flex; align-items: flex-end; gap: 18px; border-bottom: 3px solid var(--azul); padding: 0 6px; }
+.m6-barras > div { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 8px; height: 100%; }
+.m6-barras i { display: block; width: 100%; max-width: 110px; height: var(--h); border-radius: 10px 10px 0 0; background: linear-gradient(180deg, #4b5890, var(--azul)); transform-origin: bottom; }
+.m6-barras i.ctx { background: linear-gradient(180deg, #8f98b8 0, #8f98b8 var(--c), #4b5890 var(--c), var(--azul)); }
+.on .m6-barras i { animation: m6-crece .9s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, .3s); }
+@keyframes m6-crece { from { transform: scaleY(0); } to { transform: none; } }
+.m6-barras b { font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.m6-barras small { font-size: 15px; font-weight: 600; color: var(--gris); margin-bottom: -40px; height: 32px; }
+.m6-barras-caja > footer { margin-top: 38px; font-size: 17px; color: var(--suave); }
+.m6-total { background: var(--azul); color: var(--blanco); border-radius: 18px; padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.m6-total .ceja { color: var(--arena); }
+.m6-total b { font-size: 92px; line-height: 1; font-weight: 800; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.m6-total span { font-size: 24px; line-height: 1.35; color: #d7dbe9; }
+.m6-total hr { border: 0; height: 2px; background: var(--azul3); margin: 10px 0; }
+.m6-total strong { font-size: 62px; line-height: 1; font-weight: 800; color: var(--m6-celeste); }
+.m6-leyenda { display: flex; gap: 26px; font-size: 17px; color: var(--suave); margin-top: 18px; }
+.m6-leyenda span { display: inline-flex; align-items: center; gap: 10px; }
+.m6-leyenda i { width: 22px; height: 16px; border-radius: 4px; background: var(--azul); }
+.m6-leyenda i.ctx { background: #8f98b8; }
+
+/* ---------- Precio publicado frente a costo efectivo (cascada) ---------- */
+.m6-cascada-caja { display: grid; grid-template-columns: 1fr 470px; gap: 34px; height: 768px; }
+.m6-cascada { position: relative; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 18px; padding: 40px 40px 30px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; align-items: end; }
+.m6-cascada > div { position: relative; height: 560px; }
+.m6-cascada i { position: absolute; left: 0; right: 0; bottom: var(--b); height: var(--h); border-radius: 8px; background: #b8bfd6; transform-origin: bottom; }
+.m6-cascada > div:first-child i { background: var(--m6-celeste); }
+.m6-cascada > div:last-child i { background: var(--azul); }
+.on .m6-cascada i { animation: m6-crece .8s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, .3s); }
+.m6-cascada b { position: absolute; left: -6px; right: -6px; bottom: -82px; height: 74px; font-size: 17px; line-height: 1.25; font-weight: 700; text-align: center; color: var(--azul); }
+.m6-cascada em { position: absolute; left: 0; right: 0; bottom: calc(var(--b) + var(--h) + 8px); text-align: center; font-style: normal; font-size: 22px; font-weight: 800; color: var(--azul2); }
+.m6-cascada { padding-bottom: 110px; }
+.m6-cascada .ilustra { position: absolute; left: 40px; top: 26px; font-size: 15px; font-weight: 600; color: var(--gris); }
+.m6-formula { display: flex; flex-direction: column; gap: 20px; }
+.m6-formula .tarjeta { padding: 30px 34px; }
+.m6-formula h4 { font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 14px; }
+.m6-formula .ecuacion { font-size: 27px; line-height: 1.45; font-weight: 700; color: var(--azul); }
+.m6-formula .ecuacion span { color: var(--suave); font-weight: 600; }
+.m6-formula .pestana p { font-size: 26px; }
+
+/* ---------- Presupuestar: cinco reglas (panel + lista) ---------- */
+.m6-reglas5 { list-style: none; display: flex; flex-direction: column; gap: 14px; height: 100%; }
+.m6-reglas5 li { flex: 1; background: var(--blanco); border-radius: 14px; display: grid; grid-template-columns: 90px 1fr; align-items: center; overflow: hidden; }
+.m6-reglas5 li > em { height: 100%; display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 40px; font-weight: 800; color: var(--azul); background: var(--hueso); }
+.m6-reglas5 li > div { padding: 0 34px; display: flex; flex-direction: column; gap: 4px; }
+.m6-reglas5 b { font-size: 29px; line-height: 1.15; font-weight: 800; }
+.m6-reglas5 span { font-size: 21px; line-height: 1.35; color: var(--azul2); }
+.panel .m6-moneda { font-size: 104px; letter-spacing: -3px; margin-top: 18px; }
+.m6-moneda small { display: block; font-size: 40px; line-height: 1.1; letter-spacing: 1px; }
+
+/* ---------- Semáforo de permisos ---------- */
+.m6-semaforo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; height: 768px; }
+.m6-luz { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+.m6-luz > header { flex: none; min-height: 150px; padding: 26px 32px; color: var(--blanco); display: flex; align-items: center; gap: 22px; }
+.m6-luz > header i { flex: none; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.95); box-shadow: inset 0 0 0 10px rgba(0,0,0,.12); }
+.m6-luz > header div { display: flex; flex-direction: column; gap: 2px; }
+.m6-luz > header small { font-size: 15px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: .85; }
+.m6-luz > header b { font-size: 34px; line-height: 1.1; font-weight: 800; }
+.m6-luz.verde > header { background: var(--m6-verde); } .m6-luz.ambar > header { background: var(--m6-ambar); } .m6-luz.rojo > header { background: var(--m6-rojo); }
+.m6-luz.verde > header i { background: #c9f2dd; } .m6-luz.ambar > header i { background: #fff0b8; } .m6-luz.rojo > header i { background: #ffd2cf; }
+.on .m6-luz > header i { animation: m6-enciende .9s ease both; animation-delay: calc(var(--d, 0s) + .4s); }
+@keyframes m6-enciende { from { background: rgba(255,255,255,.25); } }
+.m6-luz ul { list-style: none; padding: 26px 32px; display: flex; flex-direction: column; gap: 14px; }
+.m6-luz li { position: relative; padding-left: 26px; font-size: 25px; line-height: 1.3; font-weight: 600; color: var(--azul); }
+.m6-luz li::before { content: ''; position: absolute; left: 0; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: var(--arena); }
+.m6-luz > footer { margin-top: auto; margin: auto 24px 24px; background: var(--hueso); border-radius: 14px; padding: 18px 22px; font-size: 19px; line-height: 1.4; color: var(--azul2); }
+.m6-luz > footer b { display: block; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gris); margin-bottom: 4px; }
+
+/* ---------- Trazabilidad: el registro ---------- */
+.m6-traza { display: grid; grid-template-columns: 1040px 1fr; gap: 34px; height: 560px; }
+.m6-log { background: #0d1430; border-radius: 18px; padding: 30px 34px; display: flex; flex-direction: column; gap: 4px; font-variant-numeric: tabular-nums; position: relative; }
+.m6-log > header { display: flex; justify-content: space-between; align-items: center; font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8f98b8; margin-bottom: 14px; }
+.m6-log > header span { font-weight: 500; letter-spacing: .5px; text-transform: none; }
+.m6-log p { display: grid; grid-template-columns: 90px 230px 1fr; gap: 18px; padding: 15px 0; border-top: 1px solid rgba(255,255,255,.08); font-size: 21px; line-height: 1.35; color: #e6e9f4; }
+.m6-log p time { color: #8f98b8; font-weight: 600; }
+.m6-log p b { font-weight: 700; }
+.m6-log p b.ia { color: #9ec5ff; } .m6-log p b.sis { color: #b9c0d8; } .m6-log p b.per { color: #ffe27a; }
+.on .m6-log p { animation: m6-linea .5s ease both; animation-delay: var(--d, 0s); }
+@keyframes m6-linea { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+.m6-preguntas4 { display: grid; grid-template-rows: repeat(4, 1fr); gap: 14px; }
+.m6-preguntas4 > div { background: var(--blanco); border-radius: 14px; padding: 0 30px; display: flex; align-items: center; gap: 22px; }
+.m6-preguntas4 i { font-style: normal; font-size: 38px; }
+.m6-preguntas4 b { font-size: 29px; line-height: 1.15; font-weight: 800; }
+
+/* ---------- Sedentarismo cognitivo: dos maneras de usar la IA ---------- */
+.m6-versus { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; height: 560px; }
+.m6-versus > div { border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; background: var(--blanco); border: 1.5px solid var(--borde); }
+.m6-versus header { flex: none; padding: 24px 36px; font-size: 34px; font-weight: 800; color: var(--blanco); background: var(--azul); }
+.m6-versus .mal header { background: #8a8270; }
+.m6-versus ul { list-style: none; flex: 1; display: flex; flex-direction: column; }
+.m6-versus li { flex: 1; display: flex; align-items: center; gap: 20px; padding: 0 36px; border-top: 1.5px solid var(--borde); font-size: 26px; line-height: 1.3; font-weight: 600; color: var(--azul); }
+.m6-versus li:first-child { border-top: 0; }
+.m6-versus .mal li { color: var(--suave); }
+.m6-versus li i { font-style: normal; font-size: 30px; flex: none; }
+
+/* ---------- Prácticas (panel + lista de cuatro) ---------- */
+.m6-practicas { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 22px; height: 100%; }
+.m6-practicas > div { background: var(--blanco); border-radius: 16px; padding: 34px 38px; display: flex; flex-direction: column; gap: 12px; }
+.m6-practicas i { font-style: normal; font-size: 46px; }
+.m6-practicas b { font-size: 31px; line-height: 1.2; font-weight: 800; }
+.m6-practicas p { font-size: 22px; line-height: 1.4; color: var(--azul2); }
+
+/* ---------- Hoja de ruta para Chaco ---------- */
+.m6-ruta { position: relative; height: 768px; }
+.m6-cinta { position: absolute; left: 0; width: calc(60% - 12px); top: 0; height: 58px; border-radius: 29px; background: var(--m6-celeste); color: var(--azul); display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 20px; font-weight: 700; }
+.m6-cinta b { font-weight: 800; }
+.m6-fases { position: absolute; left: 0; right: 0; top: 88px; bottom: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.m6-fases::before { content: ''; position: absolute; left: 6%; right: 6%; top: 40px; height: 4px; background: var(--arena); border-radius: 2px; }
+.m6-fase { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+.m6-fase > em { align-self: center; z-index: 1; width: 84px; height: 84px; border-radius: 50%; background: var(--azul); color: var(--blanco); font-style: normal; font-size: 40px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 10px var(--hueso); }
+.m6-fase > div { margin-top: 22px; flex: 1; background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 16px; padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 10px; }
+.m6-fase b { font-size: 30px; line-height: 1.1; font-weight: 800; }
+.m6-fase p { font-size: 20px; line-height: 1.4; color: var(--azul2); }
+.m6-fase .smt { font-size: 16px; line-height: 1.35; color: var(--gris); font-weight: 600; }
+.m6-fase .pasa { margin-top: auto; background: var(--hueso); border-radius: 12px; padding: 14px 16px; font-size: 18px; line-height: 1.35; color: var(--azul); font-weight: 600; }
+.m6-fase .pasa small { display: block; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gris); margin-bottom: 2px; }
+
+/* ---------- Provincia y municipios ---------- */
+.m6-quien { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; height: 620px; }
+.m6-quien .col-card > div { align-items: stretch; text-align: left; padding: 30px 40px; gap: 0; }
+.m6-quien ul { list-style: none; display: flex; flex-direction: column; flex: 1; }
+.m6-quien li { flex: 1; display: flex; align-items: center; gap: 20px; border-top: 1.5px solid var(--borde); font-size: 25px; line-height: 1.3; font-weight: 600; color: var(--azul); }
+.m6-quien li:first-child { border-top: 0; }
+.m6-quien li i { font-style: normal; font-size: 30px; flex: none; width: 40px; text-align: center; }
+.m6-quien .col-card > header small { font-size: 18px; font-weight: 600; opacity: .8; margin-left: 12px; }
+.m6-quien-pie { margin-top: 24px; }
+
+/* ---------- Conclusión: cuatro ideas ---------- */
+.columnas.m6-cuatro { grid-template-columns: repeat(4, 1fr); top: 570px; height: 390px; gap: 26px; }
+.columnas.m6-cuatro .col-card > header { height: 80px; font-size: 26px; }
+.columnas.m6-cuatro .col-card > div { padding: 28px 26px; }
+.columnas.m6-cuatro .col-card > div > b { font-size: 29px; }
+
+/* ---------- Preguntas ---------- */
+.m6-cierre { position: absolute; left: 86px; right: 86px; top: 215px; height: 768px; display: grid; grid-template-columns: 1fr 760px; gap: 40px; align-items: center; }
+.m6-cierre h2 { font-size: 140px; line-height: 1; font-weight: 800; letter-spacing: -3px; }
+.m6-cierre p { font-size: 34px; line-height: 1.4; color: var(--azul2); margin-top: 24px; }
+.m6-cierre .qrs { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.m6-cierre .qr { background: var(--blanco); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.m6-cierre .qr img { width: 280px; height: 280px; }
+.m6-cierre .qr b { font-size: 26px; font-weight: 800; }
+.m6-cierre .qr span { font-size: 18px; color: var(--suave); }
+
+/* Modo captura (miniaturas de la botonera): todo quieto y en su estado final. */
+body.captura *, body.captura *::before, body.captura *::after { animation: none !important; transition: none !important; }
+body.captura .a { opacity: 1 !important; }
+body.captura #inicio, body.captura #cortina { display: none !important; }

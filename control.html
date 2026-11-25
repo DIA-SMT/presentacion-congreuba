@@ -517,8 +517,10 @@ function corta(t, n) { t = String(t || ''); return t.length > n ? t.slice(0, n -
 setInterval(() => {
   const d = ultimo && ultimo.empezado && ultimo.desde ? Math.max(0, Date.now() - ultimo.desde) : 0;
   const s = Math.floor(d / 1000);
-  $('reloj').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
-  $('reloj').classList.toggle('ojo', s >= 480 && s < 600); $('reloj').classList.toggle('ya', s >= 600);
+  // Módulo de 2 horas: ámbar desde 1:45 y rojo desde 2:00.
+  const hh = Math.floor(s / 3600), mm = Math.floor(s / 60) % 60, ss = String(s % 60).padStart(2, '0');
+  $('reloj').textContent = hh ? hh + ':' + String(mm).padStart(2, '0') + ':' + ss : mm + ':' + ss;
+  $('reloj').classList.toggle('ojo', s >= 6300 && s < 7200); $('reloj').classList.toggle('ya', s >= 7200);
 }, 500);
 
 // Que la pantalla del celular no se apague en medio de la charla.

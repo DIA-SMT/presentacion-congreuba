@@ -1,22 +1,37 @@
-# La IA como servicio público · Panel UBA (16/10/2026)
+# Gobernar la IA agéntica en el Estado · Módulo 6 (Chaco, noviembre 2026)
 
-Presentación interactiva del Dr. Marco Rossi (Dirección de IA, Municipalidad de San Miguel de Tucumán) para el panel "IA Federal: innovación desde los territorios", congreso Celebrando Magnífica Humanitas, Facultad de Derecho UBA. Estética del template oficial del congreso; se maneja desde el celular.
+Presentación interactiva del Dr. Marco Rossi (Dirección de IA, Municipalidad de San Miguel de Tucumán) para el Módulo 6 de "IA para Gobiernos Locales" (IALAB UBA), en la capacitación "Gobernar con IA" del Gobierno del Chaco para los 70 municipios de la provincia (25 y 26 de noviembre de 2026, Presidencia Roque Sáenz Peña). Dura 2 horas y se maneja desde el celular.
+
+La versión del panel UBA (16/10/2026) queda en la etiqueta `uba-2026-10-16`.
 
 ## Links
 
-Sin código de sala: la pantalla y la botonera se encuentran solas por un canal fijo (`sala` en `config.js`).
+Sin código de sala: la pantalla y la botonera se encuentran solas por un canal fijo (`sala` en `config.js`: `chaco-modulo6-2026`).
 
-- **Pantalla (para la técnica):** https://uba-ia-servicio-publico.vercel.app
-- **Botonera (tu celular):** https://uba-ia-servicio-publico.vercel.app/control
-- Proyecto en Vercel: https://vercel.com/direccionia-5744s-projects/uba-ia-servicio-publico
+- **Pantalla (para la técnica):** `https://<dominio>/`
+- **Botonera (tu celular):** `https://<dominio>/control`
+
+El proyecto de Vercel (`uba-ia-servicio-publico`) respondía 402 (pago requerido) el 24/11/2026: la presentación se publica en un VPS (ver "Publicar en un VPS").
 
 El link de la botonera no se comparte: quien lo abra maneja la presentación. La técnica abre el de la pantalla y toca **Comenzar** (un clic: habilita el sonido de Migue y la pantalla completa). Todo lo demás, desde el celular.
 
-Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La botonera entra por la IP de la compu que muestra la ventana (mismo wifi). "Preguntale a Migue" necesita internet igual.
+Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La botonera entra por la IP de la compu que muestra la ventana (mismo wifi). "Preguntale a Migue" y las demos en vivo necesitan internet igual.
 
 ## Qué hay
 
-- 11 placas en el recorrido (`index.html`): portada, primero las reglas (decreto 0596), el camino (puertas adentro → para el vecino, por Ciudad Digital), **seis vitrinas** que arrancan con su problema → solución (Puertas adentro, Migue, CIMBA, EstudIA, UrbanIA, Ciudad abierta), conclusión y gracias. Quedan en el archivo con `data-oculta`: tres frentes, caso Migue, datos y antes/ahora.
+- 44 placas en 7 bloques (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan, cómo empezó, y por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
+  1. De la IA individual a la institucional: pregunta a la sala, cuatro niveles, chat frente a agente, vitrina Herramientas internas.
+  2. Las capas: cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue (datos conectados), IA soberana (matriz 2×2).
+  3. Del piloto a la producción: embudo y seis causas, el camino, checklist, vitrina y **demo en vivo** de CIMBA, vitrinas UrbanIA + Presupuesto y Ciudad abierta.
+  4. La economía de los agentes: tokens, el multiplicador del agente, costo efectivo, vitrina y demo de EstudIA, cinco reglas para presupuestar.
+  5. Gobernanza del agente: decreto 0596, semáforo de permisos, trazabilidad, vitrina y demo de Migue.
+  6. El costo que la factura no muestra: sedentarismo cognitivo y cuatro prácticas.
+  7. Hoja de ruta para Chaco: cinco fases con criterio de paso, y qué hace la provincia y qué cada municipio.
+  Cierre: conclusión, preguntas (QR de Migue) y gracias.
+- El encabezado de cada placa dice en qué bloque estás (lo arma `m6.js`).
+- **Demos en vivo** (placas "EN VIVO"): la placa anuncia el sistema y lo que se va a mostrar; en la botonera, el guion de qué mostrar y qué datos no exponer. Se pasa a la pestaña del sistema con Alt+Tab.
+- Logo del Gobierno del Chaco: si existe `img/logos/gobierno-chaco.png` (o `.svg`), reemplaza solo a la marca de texto en portada y cierre.
+- Cronómetro de la botonera: ámbar a la 1:45, rojo a las 2:00.
 - **Vitrinas** (`data-vitrina` en la placa): entran solas con la placa y sus recursos pasan solos (duraciones en `cajones.js` → `DURA`); el avance de CIMBA arranca solo. ◀ ▶ en la botonera las pausa; "Que siga sola" las retoma.
 - **Cajones** (extras para preguntas): el mismo contenido de `contenido.js` → `PROYECTOS`, abierto a mano sobre cualquier placa.
 - Migue de cuerpo entero con el verde recortado en vivo (`media/`), frases en `contenido.js` → `VIDEOS`.
@@ -26,9 +41,27 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 
 → / ← placas · Enter o M Migue habla · 1…8 abre ese cajón · Esc lo cierra · [ ] recurso anterior/siguiente · P reproduce el avance · K pregunta a Migue · X cierra la respuesta · Q QR de Migue · F pantalla completa · ? ayuda.
 
-## Publicar cambios
+## Publicar en un VPS
 
-El proyecto de Vercel está conectado a este repositorio: **cada push a `main` se publica solo** en https://uba-ia-servicio-publico.vercel.app (tarda menos de un minuto). Otras ramas generan una vista previa aparte, sin tocar la publicada.
+`server.js` no tiene dependencias y sirve todo: la presentación, `/control` y el puente de "Preguntale a Migue" (`/api/preguntar`). Con un dominio público la botonera va por Supabase (el mismo canal de `config.js`).
+
+1. Node.js 18 o más nuevo (usa `fetch` nativo).
+2. `git clone` del repositorio y `PORT=8090 node server.js` (con pm2 o un servicio de systemd para que quede andando).
+3. nginx adelante, con HTTPS (Let's Encrypt): `proxy_pass http://127.0.0.1:8090;`. HTTPS hace falta para el dictado por voz en el celular, la pantalla completa y el Wake Lock.
+4. Para actualizar: `git pull` en el VPS (no hay que compilar nada) y cambiar `version.js`.
+
+## Miniaturas de la botonera
+
+`herramientas/miniaturas.ps1` las regenera con Edge sin ventana, usando el modo captura (`?captura=N`, y `&rec=K` para un recurso de vitrina). Necesita la presentación servida en `http://localhost:8080`:
+
+```powershell
+.\herramientas\miniaturas.ps1 -Placas 5,6,7
+.\herramientas\miniaturas.ps1 -Placas 19 -Recursos 4
+```
+
+## Publicar cambios (Vercel)
+
+El proyecto de Vercel está conectado a este repositorio: **cada push a `main` se publica solo** en https://uba-ia-servicio-publico.vercel.app (tarda menos de un minuto), si la cuenta está al día. Otras ramas generan una vista previa aparte, sin tocar la publicada.
 
 ```bash
 git add -A
