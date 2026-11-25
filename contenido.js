@@ -65,13 +65,12 @@ window.CONTENIDO = {
   // la presentación (snippets/marco-presentacion.conf, ver README).
   // enmarcable: false = no se deja mostrar adentro: se ofrece abrirlo en una ventana.
   SISTEMAS: [
-    // El chat de Migue tal como lo usa un vecino: la web de la ciudad carga migue.smt.gob.ar/widget.js (botón abajo a la derecha).
-    { id: 'migue-chat', nombre: 'Migue · Chat', url: 'https://smt.gob.ar/', dominio: 'smt.gob.ar', enmarcable: true, captura: 'img/migue/canal-cidituc.png' },
+    // El chat de Migue tal como lo usa un vecino: Ciudad Digital lo trae adentro (botón abajo a la derecha), también en la portada, sin iniciar sesión.
+    { id: 'migue-chat', nombre: 'Migue · Ciudad Digital', url: 'https://ciudaddigital.smt.gob.ar/', dominio: 'ciudaddigital.smt.gob.ar', enmarcable: true, captura: 'img/migue/canal-cidituc.png' },
     { id: 'migue', nombre: 'Migue · Tablero', url: 'https://migue.smt.gob.ar/dashboard/', enmarcable: true, captura: 'img/capturas/migue/gobernanza.jpg' },
     { id: 'cimba', nombre: 'CIMBA', url: 'https://cimba.195-35-42-168.sslip.io/', dominio: 'cimba.smt.gob.ar', enmarcable: true, captura: 'img/capturas/cimba/mapa.jpg' },
     { id: 'estudia', nombre: 'EstudIA', url: 'https://estudia.195-35-42-168.sslip.io/', dominio: 'estudia.smt.gob.ar', enmarcable: true, captura: 'img/capturas/estudia/laboratorio-ia.png' },
     { id: 'urbania', nombre: 'UrbanIA', url: 'https://urbania.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/urbania/audiencias.jpg' },
-    { id: 'cidi', nombre: 'Ciudad Digital', url: 'https://ciudaddigital.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/cidituc/escritorio.jpg' },
     { id: 'applaza', nombre: 'Applaza', url: 'https://applazas.195-35-42-168.sslip.io/', dominio: 'appplazas.smt.gob.ar', enmarcable: true, captura: 'img/capturas/applaza/ev-1.jpg' },
     { id: 'bus', nombre: 'Bus Turístico', url: 'https://turismo.195-35-42-168.sslip.io/', dominio: 'busturistico.smt.gob.ar', enmarcable: true, captura: 'img/capturas/bus/resumen.jpg' },
     { id: 'feria', nombre: 'FerIA', url: 'https://feria.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/ferias/escritorio.jpg' },

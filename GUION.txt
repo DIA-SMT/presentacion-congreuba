@@ -19,15 +19,17 @@ botonera se pone ámbar a la 1:45 y rojo a las 2:00.
   1:55  Un caso (Migue), conclusión, preguntas y gracias ................... resto
 
 SISTEMAS EN VIVO, DENTRO DE LA PRESENTACIÓN
-  - Placas "EN VIVO": 15 chat con Migue (smt.gob.ar), 22 CIMBA, 30 EstudIA, 37 tablero
+  - Placas "EN VIVO": 15 chat con Migue (Ciudad Digital), 22 CIMBA, 30 EstudIA, 37 tablero
     de Migue. SIGUIENTE abre el sistema real dentro de la presentación; otro SIGUIENTE
     lo cierra y avanza; ANTERIOR (o ✕, o Esc) lo cierra y te quedás en la placa.
   - Adentro se navega con el MOUSE. Mientras el cursor está adentro, el teclado y el
     clicker le hablan al sistema: para seguir usá el celular o el ✕.
   - La botonera tiene "Sistemas en vivo": cualquier sistema, en cualquier momento.
-  - Chat con Migue: en smt.gob.ar, botón de abajo a la derecha. Sin usuario. Preguntas
-    probadas: bache en mi cuadra, corte de tránsito, licencia de conducir, habilitar un
-    negocio. Después, en el tablero (placa 37), la consulta debería verse en el Corazón.
+  - Chat con Migue: en Ciudad Digital (ciudaddigital.smt.gob.ar), botón de abajo a la
+    derecha, ya en la portada: sin iniciar sesión. Mostrá el contador (casi 170.000
+    ciudadanos registrados). Preguntas probadas: bache en mi cuadra, corte de tránsito,
+    licencia de conducir, habilitar un negocio. Después, en el tablero (placa 37), la
+    consulta debería verse en el Corazón.
 
 ANTES DE EMPEZAR
   - Pantalla: abrí la presentación y tocá COMENZAR (así Migue tiene sonido).
@@ -37,8 +39,8 @@ ANTES DE EMPEZAR
     El tablero de Migue (37), en la pausa o justo antes del bloque 5: su sesión vence y
     no se renueva sola.
   - Que no quede abierta ninguna pantalla con nombres, teléfonos o direcciones de vecinos.
-  - Respaldo sin internet para la presentación: doble clic en INICIAR.bat (Node.js ya
-    está instalado). Los sistemas en vivo necesitan internet igual.
+  - Respaldo sin internet para la presentación: doble clic en INICIAR.bat (necesita
+    Node.js en esa compu). Los sistemas en vivo necesitan internet igual.
 
 APERTURA (placa 1) · DIÁLOGO CON MIGUE
     1 ¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?
@@ -82,7 +84,7 @@ BLOQUE 2 · LAS CAPAS (placas 9–16)
   12 Detrás de escena CIMBA: CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
   13 Detrás de escena Migue: CONTÁ CÓMO SE MANTIENEN LAS FUENTES.
   14 Vitrina Migue (MIGUE 9 y 10).
-  15 EN VIVO · Chateale a Migue en smt.gob.ar (botón abajo a la derecha).
+  15 EN VIVO · Chateale a Migue en Ciudad Digital (botón abajo a la derecha).
   16 IA soberana: ¿soberanía municipal o provincial?
 
 BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 17–24)
