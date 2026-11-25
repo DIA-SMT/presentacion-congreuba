@@ -53,11 +53,11 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 
 ## Sistemas que se muestran adentro (frame-ancestors)
 
-El tablero de Migue, EstudIA, UrbanIA y Ciudad Digital se dejan mostrar dentro de la presentación tal como están. En el VPS, nginx agrega a todos los sitios `X-Frame-Options: DENY` (`/etc/nginx/conf.d/seguridad-panel.conf`). El 25/11/2026 se habilitó a **CIMBA, Applaza, Bus Turístico y FerIA** para mostrarse **sólo** dentro de la presentación:
+El tablero de Migue, EstudIA, UrbanIA y Ciudad Digital se dejan mostrar dentro de la presentación tal como están. En el VPS, nginx agrega a todos los sitios `X-Frame-Options: DENY` (`/etc/nginx/conf.d/seguridad-panel.conf`). El 25/11/2026 se habilitó a **CIMBA, Applaza, Bus Turístico, FerIA y CIMT** para mostrarse **sólo** dentro de la presentación:
 
 - `/etc/nginx/snippets/marco-presentacion.conf`: repite las cabeceras globales (nosniff, Referrer-Policy, HSTS) salvo X-Frame-Options y agrega `Content-Security-Policy: frame-ancestors 'self' https://presentacion.195-35-42-168.sslip.io https://presentacion.smt.gob.ar`.
-- En los sitios `cimba`, `applaza`, `turismo` y `feria`, una línea `include snippets/marco-presentacion.conf;` debajo de cada `server_name`.
-- Respaldo de los cuatro archivos originales en `/root/respaldo-nginx-20261125-001302/`. Para volver atrás: sacar esas líneas (o restaurar el respaldo), `nginx -t` y `systemctl reload nginx`.
+- En los sitios `cimba`, `applaza`, `turismo`, `feria` y `cimt`, una línea `include snippets/marco-presentacion.conf;` debajo de cada `server_name`.
+- Respaldo de los archivos originales en `/root/respaldo-nginx-20261125-001302/` (los cuatro primeros) y `/root/respaldo-nginx-20261125-003433/` (cimt). Para volver atrás: sacar esas líneas (o restaurar el respaldo), `nginx -t` y `systemctl reload nginx`.
 
 Los sistemas del VPS se abren por su dirección `…195-35-42-168.sslip.io`: con la presentación en `presentacion.195-35-42-168.sslip.io` son el mismo sitio, así que el inicio de sesión dentro de la presentación funciona como en una pestaña común.
 
