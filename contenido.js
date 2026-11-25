@@ -65,6 +65,8 @@ window.CONTENIDO = {
   // la presentación (snippets/marco-presentacion.conf, ver README).
   // enmarcable: false = no se deja mostrar adentro: se ofrece abrirlo en una ventana.
   SISTEMAS: [
+    // El chat de Migue tal como lo usa un vecino: la web de la ciudad carga migue.smt.gob.ar/widget.js (botón abajo a la derecha).
+    { id: 'migue-chat', nombre: 'Migue · Chat', url: 'https://smt.gob.ar/', dominio: 'smt.gob.ar', enmarcable: true, captura: 'img/migue/canal-cidituc.png' },
     { id: 'migue', nombre: 'Migue · Tablero', url: 'https://migue.smt.gob.ar/dashboard/', enmarcable: true, captura: 'img/capturas/migue/gobernanza.jpg' },
     { id: 'cimba', nombre: 'CIMBA', url: 'https://cimba.195-35-42-168.sslip.io/', dominio: 'cimba.smt.gob.ar', enmarcable: true, captura: 'img/capturas/cimba/mapa.jpg' },
     { id: 'estudia', nombre: 'EstudIA', url: 'https://estudia.195-35-42-168.sslip.io/', dominio: 'estudia.smt.gob.ar', enmarcable: true, captura: 'img/capturas/estudia/laboratorio-ia.png' },
