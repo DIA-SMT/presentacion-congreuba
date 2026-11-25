@@ -95,6 +95,8 @@ function irA(n) {
     migueRetirado = false;
     if (p.dataset.vitrina && window.cajones) window.cajones.vitrina(p.dataset.vitrina, p.dataset.solo);
   } catch (e) { console.warn('vitrina', e); }
+  // Sistemas en vivo (m6.js): al cambiar de placa se cierra el navegador y se precarga el que viene.
+  try { if (window.web) window.web.placa(p); } catch (e) { console.warn('web', e); }
   p.classList.remove('on'); void p.offsetWidth; p.classList.add('on');
   window.efectos.contar(p);
   lugarMigue();

@@ -45,6 +45,22 @@ window.CONTENIDO = {
     '¿Cómo habilito un negocio?',
   ],
 
+  // Sistemas en vivo: se abren dentro de la presentación (navegador de m6.js), desde
+  // las placas "EN VIVO" (data-web) o desde la botonera. enmarcable: false = el
+  // servidor del sistema no deja mostrarlo dentro de otra página (X-Frame-Options
+  // DENY, revisado el 24/11/2026): se ofrece abrirlo en una ventana. Cuando el
+  // servidor lo permita (frame-ancestors, ver README), pasarlo a true.
+  SISTEMAS: [
+    { id: 'migue', nombre: 'Migue · Tablero', url: 'https://migue.smt.gob.ar/dashboard/', enmarcable: true, captura: 'img/capturas/migue/gobernanza.jpg' },
+    { id: 'cimba', nombre: 'CIMBA', url: 'https://cimba.smt.gob.ar/', enmarcable: false, captura: 'img/capturas/cimba/mapa.jpg' },
+    { id: 'estudia', nombre: 'EstudIA', url: 'https://estudia.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/estudia/laboratorio-ia.png' },
+    { id: 'urbania', nombre: 'UrbanIA', url: 'https://urbania.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/urbania/audiencias.jpg' },
+    { id: 'cidi', nombre: 'Ciudad Digital', url: 'https://ciudaddigital.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/cidituc/escritorio.jpg' },
+    { id: 'applaza', nombre: 'Applaza', url: 'https://appplazas.smt.gob.ar/', enmarcable: false, captura: 'img/capturas/applaza/ev-1.jpg' },
+    { id: 'bus', nombre: 'Bus Turístico', url: 'https://busturistico.smt.gob.ar/', enmarcable: false, captura: 'img/capturas/bus/resumen.jpg' },
+    { id: 'presupuesto', nombre: 'Presupuesto Participativo', url: 'https://presupuestoparticipativo.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/presupuesto/escritorio.jpg' },
+  ],
+
   // Los proyectos. El orden cuenta la historia: primero lo que usamos adentro,
   // después lo que llevamos al vecino. Cada uno arranca con 'ps' (problema → solución):
   //   problema: [ícono, frase corta] · solucion: { n, t, g? } (g: 'dona' | 'barras', de, a)

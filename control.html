@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#111a3b">
-<title>Botonera · Panel UBA</title>
+<title>Botonera · Módulo 6</title>
 <script src="lib/supabase.js"></script>
 <script src="config.js"></script>
 <script src="version.js"></script>
@@ -110,6 +110,10 @@ h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: u
 .voz-ayuda:empty { display: none; }
 #cerrarPregunta { height: 46px; background: transparent; border: 2px solid var(--azul3); font-size: 15px; }
 #cerrarPregunta.on { background: var(--rojo); border-color: var(--rojo); }
+.web-acciones { display: grid; grid-template-columns: 1fr 2fr; gap: 8px; margin-top: 8px; }
+.web-acciones button { height: 52px; background: var(--azul2); border: 2px solid var(--azul3); font-size: 15px; }
+#cerrarWeb.on { background: var(--rojo); border-color: var(--rojo); }
+.sistemas button em { display: block; margin-top: 2px; }
 .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .extras button { height: 56px; background: var(--azul2); border: 2px solid var(--azul3); font-size: 15px; }
 .extras button.on { background: var(--verde); border-color: var(--verde); color: #0d2419; }
@@ -241,6 +245,10 @@ html { -webkit-text-size-adjust: 100%; }
 <div class="preguntas" id="preguntas"></div>
 <button id="cerrarPregunta">Cerrar la respuesta</button>
 
+<h2>Sistemas en vivo · dentro de la presentación</h2>
+<div class="cajones sistemas" id="sistemas"></div>
+<div class="web-acciones"><button id="recargarWeb">↻ Recargar</button><button id="cerrarWeb">Cerrar el sistema ✕</button></div>
+
 <h2>Extras para preguntas · cajones</h2>
 <div class="cajones" id="cajones"></div>
 <div class="recursos" id="recursos">
@@ -339,6 +347,11 @@ boton('foco', () => ({ cmd: 'foco', on: !$('foco').classList.contains('on') }));
 // Los cajones y las preguntas salen de contenido.js (los mismos que la pantalla).
 $('cajones').innerHTML = C.PROYECTOS.map(p => `<button data-k="cj-${p.id}" data-id="${p.id}"><em>${p.num}</em>${p.nombre}</button>`).join('');
 $('cajones').querySelectorAll('button').forEach(b => b.addEventListener('click', () => enviar(b, { cmd: 'cajon', proyecto: b.dataset.id })));
+// Sistemas en vivo: se abren en el navegador de la presentación (m6.js).
+$('sistemas').innerHTML = (C.SISTEMAS || []).map(s => `<button data-k="web-${s.id}" data-id="${s.id}">${s.nombre}${s.enmarcable === false ? '<em>EN VENTANA</em>' : ''}</button>`).join('');
+$('sistemas').querySelectorAll('button').forEach(b => b.addEventListener('click', () => enviar(b, { cmd: 'web', sitio: b.dataset.id })));
+boton('cerrarWeb', () => ({ cmd: 'web-cerrar' }));
+boton('recargarWeb', () => ({ cmd: 'web-recargar' }));
 $('preguntas').innerHTML = (C.PREGUNTAS || []).map((p, i) => `<button data-k="pr-${i}" data-n="${i}"></button>`).join('');
 $('preguntas').querySelectorAll('button').forEach(b => { b.textContent = C.PREGUNTAS[+b.dataset.n]; b.addEventListener('click', () => enviar(b, { cmd: 'preguntar', n: +b.dataset.n })); });
 $('libre').addEventListener('submit', (e) => {
@@ -469,6 +482,11 @@ function pintar() {
   $('recTit').textContent = cj.recurso || '';
   $('reproducir').classList.toggle('ver', cj.modo === 'cajon' && cj.tipo === 'avance');
   $('reproducir').textContent = e.avance && e.avance.corriendo ? '⏵ REPRODUCIENDO…' : '▶ REPRODUCIR AVANCE';
+  // Sistemas en vivo
+  const w = e.web || {};
+  $('sistemas').querySelectorAll('button').forEach(b => b.classList.toggle('on', !!w.abierto && w.sitio === b.dataset.id));
+  $('cerrarWeb').classList.toggle('on', !!w.abierto);
+  $('cerrarWeb').textContent = w.abierto ? 'Cerrar ' + (w.nombre || 'el sistema') + ' ✕' : 'Cerrar el sistema ✕';
   // Preguntas
   // La pregunta cuya respuesta está en pantalla queda marcada: otro toque la cierra.
   (e.preguntas || []).forEach((p, i) => { const b = $('preguntas').children[i]; if (b) { b.classList.toggle('lista', !!p.lista); b.classList.toggle('abierta', p.texto === e.preguntaAbierta); } });

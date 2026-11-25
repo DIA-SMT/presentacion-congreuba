@@ -48,6 +48,109 @@
     im.src = srcs[0];
   })(['img/logos/gobierno-chaco.svg', 'img/logos/gobierno-chaco.png']);
 
+  // -------------------------------------------------------------------
+  // SISTEMAS EN VIVO: un navegador dentro de la presentación.
+  //   web.abrir(id) · web.cerrar() · web.recargar() · web.ventana(id)
+  // Cada sistema tiene su iframe, que queda vivo al cambiar de pestaña o al
+  // cerrar (no se pierde la sesión ni lo que se estaba mirando). Las placas
+  // con data-web lo precargan una placa antes, para que aparezca ya cargado.
+  // -------------------------------------------------------------------
+  const captura = new URLSearchParams(location.search).has('captura');
+  window.web = (function () {
+    const S = (window.CONTENIDO && window.CONTENIDO.SISTEMAS) || [];
+    const raiz = document.getElementById('web');
+    if (!raiz) return null;
+    const pest = raiz.querySelector('.web-pestanas'), txt = raiz.querySelector('.web-url .txt');
+    const cuerpo = raiz.querySelector('.web-cuerpo'), aviso = raiz.querySelector('.web-aviso');
+    const marcos = {};
+    let actual = null, abierto = false;
+    const sis = id => S.find(s => s.id === id);
+    const sinProto = u => String(u).replace(/^https?:\/\//, '').replace(/\/$/, '');
+
+    function crear(id) {
+      const s = sis(id);
+      if (!s || marcos[id]) return marcos[id];
+      let el;
+      if (s.enmarcable === false) {
+        // El servidor no deja mostrarlo adentro: tarjeta para abrirlo en una ventana (un clic con el mouse).
+        el = document.createElement('div'); el.className = 'web-afuera';
+        el.innerHTML = `<div class="fondo"${s.captura ? ` style="background-image:url('${esc(s.captura)}')"` : ''}></div>`
+          + `<div class="caja"><span class="ceja">En vivo</span><h3>${esc(s.nombre)} se abre en su propia ventana</h3>`
+          + `<button type="button">Abrir ${esc(s.nombre)} ↗</button><small>${esc(sinProto(s.url))}</small></div>`;
+        el.querySelector('button').addEventListener('click', () => ventana(id));
+      } else {
+        el = document.createElement('iframe');
+        el.title = s.nombre;
+        el.setAttribute('allow', 'clipboard-read; clipboard-write; fullscreen; microphone; geolocation');
+        el.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        el.addEventListener('load', () => { el.dataset.cargado = '1'; if (actual === id) aviso.classList.remove('ver'); });
+        el.src = s.url;
+      }
+      el.dataset.sitio = id;
+      cuerpo.appendChild(el);
+      marcos[id] = el;
+      pintarPestanas();
+      return el;
+    }
+    function pintarPestanas() {
+      pest.innerHTML = S.filter(s => marcos[s.id]).map(s => `<button type="button" data-sitio="${esc(s.id)}" class="${s.id === actual ? 'on' : ''}">${esc(s.nombre)}</button>`).join('');
+    }
+    function mostrar(id) {
+      const s = sis(id); if (!s) return;
+      actual = id;
+      Object.values(marcos).forEach(m => m.classList.toggle('on', m.dataset.sitio === id));
+      txt.textContent = sinProto(s.url);
+      const m = marcos[id];
+      aviso.querySelector('b').textContent = s.nombre;
+      aviso.classList.toggle('ver', m.tagName === 'IFRAME' && !m.dataset.cargado);
+      pintarPestanas();
+    }
+    function abrir(id) {
+      if (!sis(id)) return;
+      crear(id); mostrar(id);
+      abierto = true; raiz.classList.add('ver'); raiz.setAttribute('aria-hidden', 'false');
+      window.informar && window.informar();
+    }
+    function cerrar() {
+      if (!abierto) return;
+      abierto = false; raiz.classList.remove('ver'); raiz.setAttribute('aria-hidden', 'true');
+      // Que el teclado y el clicker vuelvan a manejar la presentación.
+      try { if (document.activeElement && document.activeElement.tagName === 'IFRAME') document.activeElement.blur(); window.focus(); } catch (e) { }
+      window.informar && window.informar();
+    }
+    function recargar() {
+      const s = sis(actual), m = marcos[actual];
+      if (!s || !m || m.tagName !== 'IFRAME') return;
+      delete m.dataset.cargado; aviso.classList.add('ver');
+      m.src = 'about:blank'; setTimeout(() => { m.src = s.url; }, 50);
+    }
+    function ventana(id) {
+      const s = sis(id || actual); if (!s) return;
+      window.open(s.url, 'sistema-' + s.id, 'popup,width=1600,height=900');
+    }
+    // Al llegar a una placa: se cierra el navegador y se precarga el sistema de esta placa o de la que sigue.
+    function placa(p) {
+      if (abierto) cerrar();
+      if (captura || !p) return;
+      p._webVisto = false;
+      const i = placas.indexOf(p), sig = placas[i + 1];
+      if (p.dataset.web) crear(p.dataset.web);
+      if (sig && sig.dataset.web) crear(sig.dataset.web);
+    }
+    raiz.addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      if (b.dataset.sitio) return mostrar(b.dataset.sitio);
+      const a = b.dataset.webAccion;
+      if (a === 'cerrar') cerrar(); else if (a === 'recargar') recargar(); else if (a === 'ventana') ventana();
+    });
+    return {
+      abrir, cerrar, recargar, ventana, placa,
+      abierto: () => abierto,
+      estado: () => ({ abierto, sitio: actual, nombre: actual ? sis(actual).nombre : '' }),
+      sistemas: () => S.map(s => ({ id: s.id, nombre: s.nombre })),
+    };
+  })();
+
   // Modo captura: ?captura=N abre la placa N quieta y en su estado final (sin
   // pantalla de inicio, sin contadores ni consultas a Migue). Lo usa
   // herramientas/miniaturas.ps1 para regenerar img/mini.

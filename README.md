@@ -19,17 +19,18 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 
 ## Qué hay
 
-- 44 placas en 7 bloques (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan, cómo empezó, y por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
+- 45 placas en 7 bloques (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan, cómo empezó, y por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
   1. De la IA individual a la institucional: pregunta a la sala, cuatro niveles, chat frente a agente, vitrina Herramientas internas.
-  2. Las capas: cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue (datos conectados), IA soberana (matriz 2×2).
+  2. Las capas: cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue (datos conectados), vitrina de Migue, IA soberana (matriz 2×2).
   3. Del piloto a la producción: embudo y seis causas, el camino, checklist, vitrina y **demo en vivo** de CIMBA, vitrinas UrbanIA + Presupuesto y Ciudad abierta.
   4. La economía de los agentes: tokens, el multiplicador del agente, costo efectivo, vitrina y demo de EstudIA, cinco reglas para presupuestar.
-  5. Gobernanza del agente: decreto 0596, semáforo de permisos, trazabilidad, vitrina y demo de Migue.
+  5. Gobernanza del agente: decreto 0596, semáforo de permisos, trazabilidad (CIMBA real), el tablero de Migue y el tablero en vivo.
   6. El costo que la factura no muestra: sedentarismo cognitivo y cuatro prácticas.
   7. Hoja de ruta para Chaco: cinco fases con criterio de paso, y qué hace la provincia y qué cada municipio.
   Cierre: conclusión, preguntas (QR de Migue) y gracias.
 - El encabezado de cada placa dice en qué bloque estás (lo arma `m6.js`).
-- **Demos en vivo** (placas "EN VIVO"): la placa anuncia el sistema y lo que se va a mostrar; en la botonera, el guion de qué mostrar y qué datos no exponer. Se pasa a la pestaña del sistema con Alt+Tab.
+- **Sistemas en vivo, dentro de la presentación** (`#web`, en `m6.js`): un navegador con pestañas que muestra el sistema real. En las placas "EN VIVO" (`data-web="cimba|estudia|migue"`) el primer SIGUIENTE lo abre y el siguiente lo cierra y avanza; la botonera tiene un botón por sistema (lista `SISTEMAS` en `contenido.js`). Se precarga una placa antes y conserva la sesión.
+- Capturas reales en las placas de trazabilidad (CIMBA, control de lo cargado), presupuesto (EstudIA, Laboratorio IA) y el tablero de Migue.
 - Logo del Gobierno del Chaco: si existe `img/logos/gobierno-chaco.png` (o `.svg`), reemplaza solo a la marca de texto en portada y cierre.
 - Cronómetro de la botonera: ámbar a la 1:45, rojo a las 2:00.
 - **Vitrinas** (`data-vitrina` en la placa): entran solas con la placa y sus recursos pasan solos (duraciones en `cajones.js` → `DURA`); el avance de CIMBA arranca solo. ◀ ▶ en la botonera las pausa; "Que siga sola" las retoma.
@@ -49,6 +50,17 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 2. `git clone` del repositorio y `PORT=8090 node server.js` (con pm2 o un servicio de systemd para que quede andando).
 3. nginx adelante, con HTTPS (Let's Encrypt): `proxy_pass http://127.0.0.1:8090;`. HTTPS hace falta para el dictado por voz en el celular, la pantalla completa y el Wake Lock.
 4. Para actualizar: `git pull` en el VPS (no hay que compilar nada) y cambiar `version.js`.
+
+## Sistemas que se muestran adentro (frame-ancestors)
+
+Revisado el 24/11/2026: el tablero de Migue, EstudIA, UrbanIA y Ciudad Digital se dejan mostrar dentro de la presentación. CIMBA, Applaza y Bus Turístico responden `X-Frame-Options: DENY`, así que la presentación ofrece abrirlos en una ventana. Para verlos adentro, en el `server {}` de nginx de cada uno:
+
+```nginx
+# sacar:  add_header X-Frame-Options DENY;
+add_header Content-Security-Policy "frame-ancestors 'self' https://<dominio-de-la-presentación>" always;
+```
+
+`nginx -t` y `systemctl reload nginx`, y después `enmarcable: true` en `SISTEMAS` (`contenido.js`). Si la presentación queda en un subdominio de `smt.gob.ar`, los inicios de sesión dentro de la presentación funcionan como en el navegador común (mismo sitio); desde otro dominio, cada sistema pide iniciar sesión una vez adentro.
 
 ## Miniaturas de la botonera
 

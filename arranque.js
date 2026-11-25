@@ -5,6 +5,14 @@
 let destino = null; // placa a la que se está yendo durante la cortina
 function cambiar(n) {
   n = Math.max(0, Math.min(placas.length - 1, n));
+  // Placas "EN VIVO" (data-web): el primer SIGUIENTE abre el sistema dentro de la
+  // presentación; el siguiente lo cierra y avanza. ANTERIOR con el sistema abierto
+  // lo cierra y se queda en la placa.
+  if (window.web && destino == null) {
+    const p = placas[actual];
+    if (n === actual + 1 && p.dataset.web && !window.web.abierto() && !p._webVisto) { p._webVisto = true; window.web.abrir(p.dataset.web); return; }
+    if (n === actual - 1 && window.web.abierto()) { window.web.cerrar(); return; }
+  }
   if (n === (destino != null ? destino : actual)) return;
   // Cambiar de placa cierra la pregunta en vivo; el cajón o la vitrina se cambian en irA, bajo la cortina.
   if (window.vivoAbierto()) window.vivo.cerrar();
@@ -50,6 +58,10 @@ function ejecutar1(c) {
     case 'qr': window.efectos.qr(c.on); break;
     case 'negro': window.efectos.negro(c.on); break;
     case 'foco': window.efectos.foco(c.on); break;
+    // Sistemas en vivo (navegador dentro de la presentación).
+    case 'web': if (window.web) window.web.abrir(c.sitio); break;
+    case 'web-cerrar': if (window.web) window.web.cerrar(); break;
+    case 'web-recargar': if (window.web) window.web.recargar(); break;
   }
 }
 window.presentacion = { ejecutar, debug: () => migue.debug() }; // para probar desde la consola
@@ -89,7 +101,7 @@ addEventListener('keydown', (e) => {
   if (['ArrowRight', 'PageDown', ' ', 'ArrowDown'].includes(k)) { e.preventDefault(); cambiar(base() + 1); }
   else if (['ArrowLeft', 'PageUp', 'ArrowUp', 'Backspace'].includes(k)) { e.preventDefault(); cambiar(base() - 1); }
   else if (k >= '1' && k <= '9') { const p = window.CONTENIDO.PROYECTOS[+k - 1]; if (p) window.cajones.alternar(p.id); }
-  else if (k === 'Escape') { if (window.vivoAbierto()) window.vivo.cerrar(); else window.cajones.cerrar(); }
+  else if (k === 'Escape') { if (window.web && window.web.abierto()) window.web.cerrar(); else if (window.vivoAbierto()) window.vivo.cerrar(); else window.cajones.cerrar(); }
   else if (k === ']') window.cajones.recurso(1);
   else if (k === '[') window.cajones.recurso(-1);
   else if (k === 'p' || k === 'P') window.avance.reproducir();
@@ -166,11 +178,16 @@ function informar() {
     return ((h ? h.textContent : '') + (b ? ' · ' + b.textContent : '')).replace(/\s+/g, ' ').trim();
   };
   const m = migue.listos(), v = window.vivo.chequeo();
+  const w = window.web ? window.web.estado() : { abierto: false };
+  // En una placa "EN VIVO", lo que viene con SIGUIENTE es abrir el sistema.
+  const sigEnVivo = p.dataset.web && !w.abierto && !p._webVisto;
   const estado = {
     placa: actual + 1, total: placas.length,
     pantalla: PANTALLA,
     titulo: tit(p),
-    siguiente: placas[actual + 1] ? tit(placas[actual + 1]) : 'Fin',
+    siguiente: sigEnVivo ? '● Abrir en vivo: ' + (((window.CONTENIDO.SISTEMAS || []).find(s => s.id === p.dataset.web) || {}).nombre || p.dataset.web) : (placas[actual + 1] ? tit(placas[actual + 1]) : 'Fin'),
+    web: w,
+    sistemas: window.web ? window.web.sistemas() : [],
     error: ultimoError,
     guion: p.dataset.guion || '',
     notas: p.dataset.notas || '',
