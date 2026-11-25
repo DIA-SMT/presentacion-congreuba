@@ -219,7 +219,7 @@
         _motivos: () => motivos.join(' '),
         // Pantalla: ¿hay un celular conectado a esta sala?
         controlVivo: async () => Date.now() - ultimoControl < 8000,
-        linkControl: async () => location.origin + '/control' + (canalPrueba ? '?canal=' + encodeURIComponent(canalPrueba) : CFG.sala ? '' : '?sala=' + encodeURIComponent(sala)),
+        linkControl: async () => (CFG.origenPublico || location.origin) + '/control' + (canalPrueba ? '?canal=' + encodeURIComponent(canalPrueba) : CFG.sala ? '' : '?sala=' + encodeURIComponent(sala)),
       };
       return api;
     }

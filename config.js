@@ -10,4 +10,7 @@ window.UBA_CONFIG = {
   supabaseUrl: 'https://sdnbrlobzqfzurfpoxam.supabase.co',
   supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkbmJybG9ienFmenVyZnBveGFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2MTMzNzAsImV4cCI6MjEwNjE4OTM3MH0.oin_JWb1_obOMFtXl-ToZRJN449fVVN3BgaFiebCfAk',
   sala: 'chaco-modulo6-2026',
+  // Dirección para los celulares (link y QR de la botonera). Es el nombre del VPS en
+  // Hostinger: no depende del DNS de sslip.io, que algunas redes de celular no resuelven.
+  origenPublico: 'https://presentacion.srv1915283.hstgr.cloud',
 };

@@ -9,7 +9,10 @@ La versión del panel UBA (16/10/2026) queda en la etiqueta `uba-2026-10-16`.
 Sin código de sala: la pantalla y la botonera se encuentran solas por un canal fijo (`sala` en `config.js`: `chaco-modulo6-2026`).
 
 - **Pantalla (para la técnica):** https://presentacion.195-35-42-168.sslip.io
-- **Botonera (tu celular):** https://presentacion.195-35-42-168.sslip.io/control
+- **Botonera (tu celular):** https://presentacion.srv1915283.hstgr.cloud/control
+- **Propuesta y guion de la intendenta (para compartir):** https://presentacion.srv1915283.hstgr.cloud/propuestayguion
+
+Dos nombres para el mismo sitio. `presentacion.srv1915283.hstgr.cloud` es el nombre del VPS en Hostinger (comodín `*.srv1915283.hstgr.cloud`, DNS de Hostinger): se agregó el 25/11/2026 porque algunas redes de celular no resuelven sslip.io (`ERR_NAME_NOT_RESOLVED`). Es el que va a los celulares (`origenPublico` en `config.js`: link y QR de la botonera). La pantalla sigue en sslip.io porque los sistemas en vivo sólo se dejan mostrar dentro de esa dirección (ver "Sistemas que se muestran adentro"). Respaldo del nginx anterior en `/root/respaldos-nginx/`.
 
 Publicada el 25/11/2026 en el VPS del municipio (195.35.42.168): carpeta `/var/www/presentacion-modulo6`, proceso pm2 `presentacion-modulo6` en `127.0.0.1:3090`, sitio nginx `presentacion-modulo6` con certificado de Let's Encrypt. Para republicar lo commiteado: `.\herramientas\publicar-vps.ps1` (usa la clave SSH `~/.ssh/vps_presentacion`). El proyecto de Vercel (`uba-ia-servicio-publico`) respondía 402 (pago requerido).
 

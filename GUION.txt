@@ -32,6 +32,14 @@ SISTEMAS EN VIVO, DENTRO DE LA PRESENTACIÓN
     consulta debería verse en el Corazón.
 
 ANTES DE EMPEZAR
+  - Direcciones. Pantalla: https://presentacion.195-35-42-168.sslip.io (ahí los sistemas
+    en vivo se dejan mostrar). Botonera en tu celular: https://presentacion.srv1915283.hstgr.cloud/control
+    (no depende de sslip.io, que algunas redes de celular no encuentran).
+  - Si la compu de la sala no abre la de sslip.io ("No se puede acceder… ERR_NAME_NOT_RESOLVED"):
+    en Chrome o Edge, Configuración → Privacidad → Usar DNS seguro → Google. Si no se puede
+    tocar esa compu, abrí la pantalla en presentacion.srv1915283.hstgr.cloud: anda todo,
+    también el chat con Migue y su tablero; CIMBA, EstudIA, FerIA y CIMT en vivo no
+    (seguí con sus vitrinas).
   - Pantalla: abrí la presentación y tocá COMENZAR (así Migue tiene sonido).
   - Botonera: todo en verde. Si aparece "Hay 2 pantallas abiertas", cerrá la otra.
   - Misma compu y mismo navegador para la prueba y para la charla (sin incógnito).
