@@ -457,6 +457,8 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
 .vit-rail { position: absolute; right: 22px; bottom: 70px; display: flex; flex-direction: column; align-items: center; gap: .75rem; color: var(--stage-ink); font-size: 1.05rem; }
 .vit-rail .av { width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--amarillo); border: 2px solid var(--stage-ink); }
 
+.desliza { display: none; margin-top: 1rem; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--amarillo); }
+
 /* Reglas con ícono */
 .pr-ic { display: grid; place-items: center; width: 2.3rem; height: 2.3rem; border-radius: .6rem; background: var(--stage); color: var(--amarillo); font-size: 1.15rem; font-weight: 800; margin-bottom: .75rem; }
 
@@ -503,14 +505,16 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
   .mapa b { grid-column: 2; grid-row: 1; }
   .mapa small { grid-column: 2; grid-row: 2; }
   .mapa .dur { grid-column: 3; grid-row: 1; margin-top: 0; padding-top: 0; }
-  .vit-grid { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .vit-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: .8rem; -webkit-overflow-scrolling: touch; }
+  .vit-item { scroll-snap-align: center; }
+  .desliza { display: block; }
   .historia { grid-template-columns: minmax(0, 1fr); justify-items: center; }
   .historia .cel { max-width: 290px; }
   .beats { width: 100%; }
 }
 @media (max-width: 640px) {
   body { font-size: 16px; }
-  .quiasmo .l2 { padding-left: 0; }
+  .quiasmo .l2, .hero-grid .quiasmo .l2 { padding-left: 0; }
   .pl-row { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
   .toma { max-width: 420px; }
   .principios { grid-template-columns: minmax(0, 1fr); }
@@ -915,6 +919,7 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
       <p class="eyebrow">Vitrina de gestión · placas 17 a 19</p>
       <h3>Tres celulares, tres cosas que hizo la gestión</h3>
       <p class="sub">Este es el espacio para vender la gestión. Comunicación elige los ejemplos que quiera y pone en cada celular un video vertical de 30 a 60 segundos. Las categorías son una guía, no una obligación.</p>
+      <p class="desliza">Deslizá para ver los tres →</p>
       <div class="vit-grid">
         <figure class="vit-item pl">
           <div class="vit-cel"><div class="barras" aria-hidden="true"><span class="barra"><i></i></span><span class="barra"><i></i></span><span class="barra"><i></i></span></div><div class="vit-rail" aria-hidden="true"><i class="av"></i><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic"><use href="#i-compartir"/></svg></div>
