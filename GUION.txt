@@ -4,26 +4,48 @@ GUION DE PRÁCTICA · MÓDULO 6 · GOBERNAR LA IA AGÉNTICA EN EL ESTADO
 El guion completo, placa por placa y con miniaturas, está en guion-modulo6.pdf
 (se regenera con .\herramientas\guion-pdf.ps1). Esto es el resumen.
 
-Tiempo: 2 horas. 49 placas. Primero LO QUE YA FUNCIONA (los diez desarrollos, qué
+Tiempo: 2 horas. 54 placas. Primero LO QUE YA FUNCIONA (los diez desarrollos, qué
 resuelve cada uno, Migue y CIMBA en vivo) y después los 7 bloques, cada uno con un
-separador. La presentación te lleva sola por los sistemas: la
-botonera es para volver o adelantar. Los minutos NO aparecen en pantalla: son sólo
-para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.
+separador. La presentación te lleva sola por los sistemas y por las preguntas al
+público: la botonera es para volver o adelantar. Los minutos NO aparecen en pantalla:
+son sólo para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.
 
-  0:00  Apertura con Migue + el plan + cómo empezó ........................  7 min
-  0:07  Primero · Lo que ya funciona (Migue y CIMBA en vivo; EstudIA opcional)  25 min
-  0:32  Bloque 1 · De la IA individual a la institucional .................. 10 min
-  0:42  Bloque 2 · Las capas .............................................. 15 min
-  0:57  Bloque 3 · Del piloto a la producción ..............................  8 min
-  1:05  Bloque 4 · La economía de los agentes .............................. 12 min
-  1:17  Bloque 5 · Gobernanza del agente (tablero de Migue en vivo) ........ 15 min
-  1:32  Bloque 6 · El costo que la factura no muestra ......................  8 min
-  1:40  Bloque 7 · Hoja de ruta para Chaco ................................. 12 min
-  1:52  Un caso (Migue), conclusión, preguntas y gracias ................... resto
+  0:00  Apertura con Migue + el plan + Sumate (nube de inicio) + cómo empezó .. 10 min
+  0:10  Primero · Lo que ya funciona (Migue y CIMBA en vivo; EstudIA opcional)  28 min
+  0:38  Bloque 1 · De la IA individual a la institucional .................. 10 min
+  0:48  Bloque 2 · Las capas (con la votación de IA soberana) ............. 16 min
+  1:04  Bloque 3 · Del piloto a la producción ..............................  7 min
+  1:11  Bloque 4 · La economía de los agentes .............................. 11 min
+  1:22  Bloque 5 · Gobernanza del agente (tablero de Migue en vivo) ........ 14 min
+  1:36  Bloque 6 · El costo que la factura no muestra ......................  7 min
+  1:43  Bloque 7 · Hoja de ruta para Chaco ................................. 10 min
+  1:53  Un caso (Migue), conclusión, nube de cierre, preguntas y gracias ... resto
+
+EL PÚBLICO, DESDE EL CELULAR
+  - Entran por el QR de cada placa (presentacion.srv1915283.hstgr.cloud/sumate) con su
+    nombre y su municipio, y responden lo que esté abierto. Cada placa de participación
+    lo abre sola al llegar; queda abierto hasta la próxima.
+  - Placas:  3 Sumate · nube de inicio («cuando pensás en IA en tu municipio…»)
+            10 Ahora ustedes · Preguntale a Migue (hasta 3 preguntas cada uno; la
+               respuesta real les llega al celular, acá se ven las preguntas)
+            13 Adiviná · cuánto gastó en IA EstudIA en 30 días (SIGUIENTE revela:
+               US$ 0,017; otro SIGUIENTE avanza; ANTERIOR la vuelve a tapar)
+            19 Pregunta a la sala · ¿usás IA en tu trabajo? (cuenta personal / del
+               municipio / todavía no)
+            28 Votemos · IA soberana para el Chaco
+            52 Nube de cierre · ¿qué te llevás para tu municipio?
+  - Botonera, "El público": cuántos hay y de cuántos municipios; cualquier actividad
+    encima de cualquier placa (SIGUIENTE la saca); Revelar; Cerrar la pregunta en los
+    celulares; Moderar: ✕ saca de la pantalla una palabra, una pregunta o a una persona
+    (las malas palabras ya llegan ocultas), ▶ muestra una pregunta a Migue en grande,
+    con su respuesta.
+  - ANTES DE LA CHARLA: si probaste en la sala real, "Empezar de cero" (al final del
+    panel). Para probar sin tocarla: /?canal=prueba y /control?canal=prueba.
+  - Sin señal en la sala: las votaciones también van a mano alzada.
 
 SISTEMAS EN VIVO, DENTRO DE LA PRESENTACIÓN
-  - Placas "EN VIVO": 8 chat con Migue (Ciudad Digital), 10 CIMBA, 12 EstudIA (opcional),
-    39 tablero de Migue. SIGUIENTE abre el sistema real dentro de la presentación; otro
+  - Placas "EN VIVO": 9 chat con Migue (Ciudad Digital), 12 CIMBA, 15 EstudIA (opcional),
+    43 tablero de Migue. SIGUIENTE abre el sistema real dentro de la presentación; otro
     SIGUIENTE lo cierra y avanza; ANTERIOR (o ✕, o Esc) lo cierra y te quedás en la placa.
   - Adentro se navega con el MOUSE. Mientras el cursor está adentro, el teclado y el
     clicker le hablan al sistema: para seguir usá el celular o el ✕.
@@ -31,8 +53,8 @@ SISTEMAS EN VIVO, DENTRO DE LA PRESENTACIÓN
   - Chat con Migue: en Ciudad Digital (ciudaddigital.smt.gob.ar), botón de abajo a la
     derecha, ya en la portada: sin iniciar sesión. Mostrá el contador (casi 170.000
     ciudadanos registrados). Preguntas probadas: bache en mi cuadra, corte de tránsito,
-    licencia de conducir, habilitar un negocio. Después, en el tablero (placa 39), la
-    consulta debería verse en el Corazón.
+    licencia de conducir, habilitar un negocio. Después, en el tablero (placa 43), esa
+    consulta y las del público deberían verse en el Corazón.
 
 ANTES DE EMPEZAR
   - Direcciones. Pantalla: https://presentacion.195-35-42-168.sslip.io (ahí los sistemas
@@ -41,17 +63,18 @@ ANTES DE EMPEZAR
   - Si la compu de la sala no abre la de sslip.io ("No se puede acceder… ERR_NAME_NOT_RESOLVED"):
     en Chrome o Edge, Configuración → Privacidad → Usar DNS seguro → Google. Si no se puede
     tocar esa compu, abrí la pantalla en presentacion.srv1915283.hstgr.cloud: anda todo,
-    también el chat con Migue y su tablero; CIMBA, EstudIA, FerIA y CIMT en vivo no
-    (seguí con sus vitrinas).
+    también el público, el chat con Migue y su tablero; CIMBA, EstudIA, FerIA y CIMT en
+    vivo no (seguí con sus vitrinas).
   - Pantalla: abrí la presentación y tocá COMENZAR (así Migue tiene sonido).
   - Botonera: todo en verde. Si aparece "Hay 2 pantallas abiertas", cerrá la otra.
+  - Botonera, "El público": que diga 0 personas (si no, Empezar de cero).
   - Misma compu y mismo navegador para la prueba y para la charla (sin incógnito).
-  - Iniciá sesión una vez desde la presentación en CIMBA (10) y EstudIA (12) al llegar.
-    El tablero de Migue (39), en la pausa o justo antes del bloque 5: su sesión vence y
+  - Iniciá sesión una vez desde la presentación en CIMBA (12) y EstudIA (15) al llegar.
+    El tablero de Migue (43), en la pausa o justo antes del bloque 5: su sesión vence y
     no se renueva sola.
   - Que no quede abierta ninguna pantalla con nombres, teléfonos o direcciones de vecinos.
   - Respaldo sin internet para la presentación: doble clic en INICIAR.bat (necesita
-    Node.js en esa compu). Los sistemas en vivo necesitan internet igual.
+    Node.js en esa compu). Los sistemas en vivo y el público necesitan internet igual.
 
 APERTURA (placa 1) · DIÁLOGO CON MIGUE
     1 ¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?
@@ -70,68 +93,77 @@ APERTURA (placa 1) · DIÁLOGO CON MIGUE
       VOS: Hoy no, Migue: hoy tenemos dos horas. Y vos me vas a acompañar en cada
            bloque.   → SIGUIENTE.
   2 · El plan: primero lo que ya funciona; después, siete preguntas.
-  3 · Cómo empezó (se recorre sola: hablá encima).
+  3 · Sumate: QR, nombre y municipio, y la nube de inicio. Leé las palabras más grandes.
+  4 · Cómo empezó (se recorre sola: hablá encima).
 
 MIGUE: sólo dice lo que tiene video grabado (la botonera hace latir MIGUE HABLA cuando
 le toca). En los separadores está parado, sin hablar.
-    7-8 (placa 7, vitrina Migue)  videos: «Vos me contás qué te pasa…», «Entiendo, organizo…»
-    9  (placa 49, gracias)   video: «¡Muchas gracias! Nos vemos en la ciudad.»
+    7-8 (placa 8, vitrina Migue)  videos: «Vos me contás qué te pasa…», «Entiendo, organizo…»
+    9  (placa 54, gracias)   video: «¡Muchas gracias! Nos vemos en la ciudad.»
 
-PRIMERO · LO QUE YA FUNCIONA (placas 4–14)
-  4  Separador: lo que ya funciona.
-  5  El mapa: diez desarrollos, dos puertas adentro y ocho para el vecino. Nombrá cada
+PRIMERO · LO QUE YA FUNCIONA (placas 5–17)
+  5  Separador: lo que ya funciona.
+  6  El mapa: diez desarrollos, dos puertas adentro y ocho para el vecino. Nombrá cada
      uno con el problema que resuelve; los tres EN VIVO los abrimos ahora.
-  6  Vitrina Herramientas internas: Generador de Notas y Tableros.
-  7  Vitrina Migue (MIGUE 7 y 8).   8  EN VIVO · Chateale a Migue en Ciudad Digital.
-  9  Vitrina CIMBA.   10 EN VIVO · CIMBA.
-  11 Vitrina EstudIA.   12 EN VIVO · EstudIA (opcional; si vas justo de tiempo, SIGUIENTE
-     dos veces: abre y cierra).
-  13 Vitrina UrbanIA + Presupuesto Participativo.   14 Applaza, Bus Turístico y FerIA.
+  7  Vitrina Herramientas internas: Generador de Notas y Tableros.
+  8  Vitrina Migue (MIGUE 7 y 8).   9  EN VIVO · Chateale a Migue en Ciudad Digital.
+  10 Ahora ustedes: le preguntan a Migue desde el celular (▶ en la botonera para
+     mostrar una en grande).
+  11 Vitrina CIMBA.   12 EN VIVO · CIMBA.
+  13 Adiviná el costo de EstudIA (SIGUIENTE revela).   14 Vitrina EstudIA.
+  15 EN VIVO · EstudIA (opcional; si vas justo de tiempo, SIGUIENTE dos veces: abre y
+     cierra).
+  16 Vitrina UrbanIA + Presupuesto Participativo.   17 Applaza, Bus Turístico y FerIA.
 
-BLOQUE 1 · DE LA IA INDIVIDUAL A LA INSTITUCIONAL (placas 15–18)
-  16 Pregunta a la sala: ¿quién usa IA en el trabajo? ¿con cuenta personal? (manos)
-  17 Cuatro niveles.   18 Chat responde / agente actúa (en CIMBA: la IA clasifica, la
+BLOQUE 1 · DE LA IA INDIVIDUAL A LA INSTITUCIONAL (placas 18–21)
+  19 Pregunta a la sala, con votación: ¿usás IA en tu trabajo? (la barra de la cuenta
+     personal es la IA individual; sin celulares, manos).
+  20 Cuatro niveles.   21 Chat responde / agente actúa (en CIMBA: la IA clasifica, la
      persona cierra).
 
-BLOQUE 2 · LAS CAPAS (placas 19–24)
-  20 Cinco capas.   21 Licencias: ocho condiciones.
-  22 Detrás de escena CIMBA: CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
-  23 Detrás de escena Migue: CONTÁ CÓMO SE MANTIENEN LAS FUENTES.
-  24 IA soberana: ¿soberanía municipal o provincial?
+BLOQUE 2 · LAS CAPAS (placas 22–28)
+  23 Cinco capas.   24 Licencias: ocho condiciones.
+  25 Detrás de escena CIMBA: CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
+  26 Detrás de escena Migue: CONTÁ CÓMO SE MANTIENEN LAS FUENTES.
+  27 IA soberana.   28 Votemos: ¿municipal, provincial compartida o comercial?
 
-BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 25–28)
-  26 Embudo y seis causas.   27 El camino (los sistemas que ya vieron).
-  28 Checklist (para llevarse).
+BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 29–32)
+  30 Embudo y seis causas.   31 El camino (los sistemas que ya vieron).
+  32 Checklist (para llevarse).
 
-BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES (placas 29–33)
-  30 Tokens.   31 El multiplicador (ilustrativo).   32 Costo efectivo.
-  33 Presupuestar: cinco reglas, con EstudIA (US$ 0,017 en 30 días).
+BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES (placas 33–37)
+  34 Tokens.   35 El multiplicador (ilustrativo).   36 Costo efectivo.
+  37 Presupuestar: cinco reglas, con EstudIA (los US$ 0,017 que adivinaron).
 
-BLOQUE 5 · GOBERNANZA DEL AGENTE (placas 34–39)
-  35 Las reglas.   36 Semáforo de permisos.   37 Trazabilidad (CIMBA real).
-  38 El tablero de Migue.   39 EN VIVO · Tablero de Migue (buscá la consulta del chat
-     del principio).
+BLOQUE 5 · GOBERNANZA DEL AGENTE (placas 38–43)
+  39 Las reglas.   40 Semáforo de permisos.   41 Trazabilidad (CIMBA real).
+  42 El tablero de Migue.   43 EN VIVO · Tablero de Migue (buscá las consultas del chat
+     y del público).
 
-BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA (placas 40–42)
-  41 IA que piensa por vos / IA que te hace pensar.   42 Cuatro prácticas.
+BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA (placas 44–46)
+  45 IA que piensa por vos / IA que te hace pensar.   46 Cuatro prácticas.
 
-BLOQUE 7 · HOJA DE RUTA PARA CHACO (placas 43–45)
-  44 Cinco fases.   45 Quién hace qué.
+BLOQUE 7 · HOJA DE RUTA PARA CHACO (placas 47–49)
+  48 Cinco fases.   49 Quién hace qué.
 
-CIERRE (placas 46–49)
-  46 Un caso: los siete bloques en Migue.   47 Conclusión.
-  48 Preguntas (Q: QR gigante; preguntas a Migue con la voz).
-  49 Gracias: MIGUE 9 se despide (video). Queda proyectada.
+CIERRE (placas 50–54)
+  50 Un caso: los siete bloques en Migue.   51 Conclusión.
+  52 Nube de cierre: ¿qué te llevás? (para comparar, la de inicio sale encima desde la
+     botonera: El público → Nube de inicio).
+  53 Preguntas (Q: QR gigante; preguntas a Migue con la voz).
+  54 Gracias: MIGUE 9 se despide (video). Queda proyectada.
 
 SI ALGO FALLA
   - Una frase de Migue de más: ↶ deshacer. Migue no responde en vivo: a los ~40 s sale
     una respuesta de cortesía.
   - Un sistema en vivo no carga: ↻ (o "Recargar" en la botonera), o ↗ para abrirlo en
     una ventana; si no hay caso, seguí con la vitrina de ese sistema.
+  - El público no ve la pregunta: que recarguen la página del celular. Sin señal: a mano
+    alzada, y seguí.
   - Se cae el servidor: doble clic en INICIAR.bat y abrí http://localhost:8080 (la
     botonera entra por la IP que muestra la ventana, en el mismo wifi).
   - Aviso rojo "La pantalla no pudo hacer…": seguí con SIGUIENTE, no se traba.
   - Aviso "Versión distinta": recargar pantalla y botonera.
   - Pantalla negra: Extras → Negro. Saltar a una placa: "Ir a la placa", al final.
-  - Para volver a la versión anterior (sin "Lo que ya funciona"): está guardada en la
-    etiqueta chaco-antes-de-desarrollos del repositorio.
+  - Versiones anteriores, en etiquetas del repositorio: chaco-antes-de-desarrollos (sin
+    "Lo que ya funciona") y chaco-antes-del-publico (sin la participación del público).

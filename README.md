@@ -10,6 +10,7 @@ Sin código de sala: la pantalla y la botonera se encuentran solas por un canal 
 
 - **Pantalla (para la técnica):** https://presentacion.195-35-42-168.sslip.io
 - **Botonera (tu celular):** https://presentacion.srv1915283.hstgr.cloud/control
+- **El público (sale en el QR de las placas de participación):** https://presentacion.srv1915283.hstgr.cloud/sumate
 - **Propuesta y guion de la intendenta (para compartir):** https://presentacion.srv1915283.hstgr.cloud/propuestayguion
 
 Dos nombres para el mismo sitio. `presentacion.srv1915283.hstgr.cloud` es el nombre del VPS en Hostinger (comodín `*.srv1915283.hstgr.cloud`, DNS de Hostinger): se agregó el 25/11/2026 porque algunas redes de celular no resuelven sslip.io (`ERR_NAME_NOT_RESOLVED`). Es el que va a los celulares (`origenPublico` en `config.js`: link y QR de la botonera). La pantalla sigue en sslip.io porque los sistemas en vivo sólo se dejan mostrar dentro de esa dirección (ver "Sistemas que se muestran adentro"). Respaldo del nginx anterior en `/root/respaldos-nginx/`.
@@ -18,11 +19,11 @@ Publicada el 25/11/2026 en el VPS del municipio (195.35.42.168): carpeta `/var/w
 
 El link de la botonera no se comparte: quien lo abra maneja la presentación. La técnica abre el de la pantalla y toca **Comenzar** (un clic: habilita el sonido de Migue y la pantalla completa). Todo lo demás, desde el celular.
 
-Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La botonera entra por la IP de la compu que muestra la ventana (mismo wifi). "Preguntale a Migue" y las demos en vivo necesitan internet igual.
+Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La botonera entra por la IP de la compu que muestra la ventana (mismo wifi). "Preguntale a Migue", las demos en vivo y el público necesitan internet igual (con INICIAR.bat el público entra por la IP de la compu, en el mismo wifi).
 
 ## Qué hay
 
-- 49 placas (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan y cómo empezó. Después, **Primero · Lo que ya funciona** (separador `data-bloque="0"`): el mapa de los diez desarrollos (`.m6-mapa`) y sus vitrinas, con **Migue y CIMBA en vivo** y EstudIA opcional, para que cuando se hable de capas, datos y costos el público ya sepa de qué sistema se habla (desde el 25/11/2026; la versión anterior quedó en la etiqueta `chaco-antes-de-desarrollos`). Después, por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
+- 54 placas (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan y cómo empezó. Después, **Primero · Lo que ya funciona** (separador `data-bloque="0"`): el mapa de los diez desarrollos (`.m6-mapa`) y sus vitrinas, con **Migue y CIMBA en vivo** y EstudIA opcional, para que cuando se hable de capas, datos y costos el público ya sepa de qué sistema se habla (desde el 25/11/2026; la versión anterior quedó en la etiqueta `chaco-antes-de-desarrollos`). Después, por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
   1. De la IA individual a la institucional: pregunta a la sala, cuatro niveles, chat frente a agente.
   2. Las capas: cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue (datos conectados), IA soberana (matriz 2×2).
   3. Del piloto a la producción: embudo y seis causas, el camino, checklist.
@@ -32,7 +33,7 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
   7. Hoja de ruta para Chaco: cinco fases con criterio de paso, y qué hace la provincia y qué cada municipio.
   Cierre: conclusión, preguntas (QR de Migue) y gracias.
 - El encabezado de cada placa dice en qué bloque estás (lo arma `m6.js`).
-- **Migue**: dice sólo frases con video grabado (la apertura, sus dos videos en la vitrina y la despedida; desde el 25/11/2026 no hay frases con globo ni videos por grabar). En cada separador está parado, sin hablar, y la placa 46 recorre los siete bloques en su caso.
+- **Migue**: dice sólo frases con video grabado (la apertura, sus dos videos en la vitrina y la despedida; desde el 25/11/2026 no hay frases con globo ni videos por grabar). En cada separador está parado, sin hablar, y la placa 50 recorre los siete bloques en su caso.
 - **Guion imprimible**: `guion.html` arma el guion placa por placa leyendo la presentación (miniatura, línea de la botonera, notas, frases de Migue y demos). `.\herramientas\guion-pdf.ps1` lo imprime a `guion-modulo6.pdf` (A4) con Edge.
 - **Sistemas en vivo, dentro de la presentación** (`#web`, en `m6.js`): un navegador con pestañas que muestra el sistema real. En las placas "EN VIVO" (`data-web="cimba|estudia|migue"`) el primer SIGUIENTE lo abre y el siguiente lo cierra y avanza; la botonera tiene un botón por sistema (lista `SISTEMAS` en `contenido.js`). Se precarga una placa antes y conserva la sesión.
 - Capturas reales en las placas de trazabilidad (CIMBA, control de lo cargado), presupuesto (EstudIA, Laboratorio IA) y el tablero de Migue.
@@ -42,6 +43,18 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 - **Cajones** (extras para preguntas): el mismo contenido de `contenido.js` → `PROYECTOS`, abierto a mano sobre cualquier placa.
 - Migue de cuerpo entero con el verde recortado en vivo (`media/`), frases en `contenido.js` → `VIDEOS`.
 - Botonera (`control.html`): cronómetro, guion, siguiente/anterior, Migue, cajones con sus recursos, Reproducir avance, preguntas a Migue (preparadas, escritas o dictadas con la voz: el celular la pasa a texto, se revisa y se manda), QR, negro, foco y salto a cualquier placa.
+
+## El público participa desde el celular
+
+Desde el 25/11/2026 (la versión anterior quedó en la etiqueta `chaco-antes-del-publico`). El público entra en `/sumate` (`sumate.html`) por el QR de cada placa de participación, con su nombre y su municipio, y responde lo que esté abierto:
+
+- Placas con `data-publico="<id>"` (las actividades están en `publico-actividades.js`): 3 **Sumate** (nube de inicio), 10 **Ahora ustedes** (preguntas a Migue), 13 **Adiviná** el costo de EstudIA (`data-revelar`: el primer SIGUIENTE marca la respuesta, ANTERIOR la tapa), 19 **Pregunta a la sala** (votación), 28 **Votemos** (IA soberana) y 52 **Nube de cierre**. Al llegar, la placa abre su actividad en los celulares y queda abierta hasta que otra abra otra.
+- Pantalla: `publico.js` (QR, cuántos y de cuántos municipios, nube, barras o preguntas a Migue, cada 1,5 s). Encima de cualquier placa, desde la botonera (`#publico`).
+- Botonera, **El público**: abrir cualquier actividad encima, Revelar, Cerrar la pregunta en los celulares, **Moderar** (✕ oculta una palabra, una pregunta o a una persona con todo lo que mandó; ▶ muestra en grande una pregunta a Migue con su respuesta) y **Empezar de cero**.
+- Servidor: `publico-servidor.js` (lo usa `server.js`), por HTTP común con el mismo servidor, sin Supabase: probado con 250 celulares simulados (100 pedidos por segundo, 3 ms). Cada sala (canal) va aparte: `?canal=prueba` no se mezcla con la charla. Sólo se crea la sala de `config.js` o salas `prueba-…`.
+- Preguntas a Migue: al chat real (`migue.smt.gob.ar/api/chat`, `MIGUE_CHAT` para cambiarlo), en fila, de a dos y espaciadas 1,5 s; si el chat responde 429 o falla, reintenta y al final da una respuesta de cortesía. Hasta 3 por persona. Son consultas reales: suman en el tablero de Migue.
+- Malas palabras, links y teléfonos llegan ocultos (lista en `publico-servidor.js`); un nombre ofensivo no deja entrar.
+- **Datos personales**: nombres y municipios se guardan en `/var/www/presentacion-modulo6-publico/salas.json` en el VPS (`DATOS_PUBLICO` para cambiarlo), fuera de la carpeta publicada: nadie los descarga por la web. Después de la charla, borrarlo si no se van a usar.
 
 ## Teclado (en la compu de la pantalla)
 

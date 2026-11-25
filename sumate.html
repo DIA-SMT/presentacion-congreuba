@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sumate · Gobernar con IA</title>
+<meta name="theme-color" content="#111a3b">
+<link rel="icon" href="/img/migue/migue-cara.png">
+<!-- Celular del público: entra con su nombre y su municipio y responde lo que
+     esté abierto en la pantalla (nube de palabras, votación, preguntas a Migue).
+     Habla sólo con este servidor (publico-servidor.js), por HTTP común. -->
+<script src="/config.js"></script>
+<script src="/publico-actividades.js"></script>
+<style>
+@font-face { font-family: 'Poppins'; font-weight: 400; src: url(/fonts/Poppins-Regular.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 600; src: url(/fonts/Poppins-SemiBold.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 800; src: url(/fonts/Poppins-ExtraBold.ttf); }
+:root { --azul: #111a3b; --azul2: #2e344b; --hueso: #e9e7e3; --borde: #dcd9d3; --gris: #8a8270; --suave: #5b616b;
+  --acento: #0066ff; --verde: #2f9e6e; --rojo: #d6453d; --blanco: #fff; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { -webkit-text-size-adjust: 100%; }
+body { min-height: 100vh; min-height: 100dvh; background: var(--hueso); color: var(--azul); font: 400 17px/1.45 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  padding: calc(14px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom)); }
+main { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+header { max-width: 560px; margin: 0 auto 14px; display: flex; align-items: center; gap: 12px; }
+header img { height: 34px; width: auto; }
+header p { font-size: 12px; line-height: 1.3; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gris); }
+header .gente { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--suave); white-space: nowrap; }
+.card { background: var(--blanco); border-radius: 20px; padding: 22px 20px; box-shadow: 0 1px 0 rgba(17,26,59,.06), 0 10px 26px rgba(17,26,59,.07); }
+.oscura { background: var(--azul); color: var(--blanco); }
+.ceja { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 6px; }
+.oscura .ceja { color: #c9c4b8; }
+h1 { font-size: 34px; line-height: 1.1; font-weight: 800; letter-spacing: -.5px; }
+h2 { font-size: 23px; line-height: 1.22; font-weight: 800; }
+p.ayuda, .nota { font-size: 14px; color: var(--suave); margin-top: 6px; }
+.oscura .ayuda { color: #d7dbe9; }
+label { display: block; font-size: 14px; font-weight: 600; margin: 16px 0 6px; }
+input, textarea { width: 100%; font: inherit; font-size: 18px; color: var(--azul); background: #f6f5f2; border: 2px solid var(--borde); border-radius: 14px; padding: 13px 14px; outline: none; }
+input:focus, textarea:focus { border-color: var(--acento); background: var(--blanco); }
+textarea { resize: none; min-height: 84px; }
+button { font: inherit; cursor: pointer; border: 0; }
+.boton { width: 100%; margin-top: 18px; background: var(--acento); color: var(--blanco); font-size: 18px; font-weight: 800; border-radius: 14px; padding: 15px; }
+.boton:disabled { opacity: .55; }
+.fila { display: flex; gap: 8px; margin-top: 14px; }
+.fila input { flex: 1; min-width: 0; }
+.fila button { flex: none; background: var(--acento); color: var(--blanco); font-weight: 800; border-radius: 14px; padding: 0 18px; }
+.msj { min-height: 20px; margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--rojo); }
+.msj.bien { color: var(--verde); }
+.sugerencias { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.sugerencias button { background: #eef3ff; color: var(--acento); font-size: 14px; font-weight: 600; border-radius: 999px; padding: 7px 12px; }
+.hola { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--suave); }
+.hola b { color: var(--azul); }
+.hola button { margin-left: auto; background: none; color: var(--acento); font-size: 14px; font-weight: 600; text-decoration: underline; }
+.mias { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.mias span { background: var(--hueso); border-radius: 999px; padding: 6px 12px; font-size: 15px; font-weight: 600; }
+.gracias { margin-top: 14px; font-weight: 600; color: var(--verde); }
+.opciones { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.opciones button { text-align: left; background: #f6f5f2; border: 2px solid var(--borde); border-radius: 14px; padding: 15px 16px; font-size: 17px; font-weight: 600; color: var(--azul); display: flex; align-items: center; gap: 12px; }
+.opciones button i { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 2px solid #b9b4a9; }
+.opciones button.elegida { border-color: var(--acento); background: #eef3ff; }
+.opciones button.elegida i { border: 7px solid var(--acento); }
+.opciones button.correcta { border-color: var(--verde); background: #e7f5ee; }
+.opciones button:disabled { cursor: default; }
+.opciones button:disabled:not(.correcta):not(.elegida) { opacity: .55; }
+.revelacion { margin-top: 14px; padding: 14px 16px; border-radius: 14px; background: #e7f5ee; font-size: 15px; }
+.revelacion b { display: block; font-size: 18px; }
+.espera { text-align: center; padding: 34px 22px; }
+.espera .icono { font-size: 44px; line-height: 1; margin-bottom: 10px; }
+/* Migue */
+.migue-cab { display: flex; align-items: center; gap: 12px; }
+.migue-cab img { width: 52px; height: 52px; border-radius: 50%; background: #dbe7ff; object-fit: cover; }
+.hilo { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.hilo .q { align-self: flex-end; max-width: 88%; background: var(--acento); color: var(--blanco); border-radius: 18px 18px 4px 18px; padding: 10px 14px; font-size: 16px; }
+.hilo .r { align-self: flex-start; max-width: 94%; background: #f1f0ec; border-radius: 18px 18px 18px 4px; padding: 12px 14px; font-size: 15.5px; line-height: 1.5; overflow-wrap: anywhere; }
+.hilo .r a { color: var(--acento); }
+.hilo .r.espera-migue { color: var(--suave); font-style: italic; }
+.puntos i { display: inline-block; width: 7px; height: 7px; margin: 0 2px; border-radius: 50%; background: var(--gris); animation: p 1.2s infinite; }
+.puntos i:nth-child(2) { animation-delay: .2s; } .puntos i:nth-child(3) { animation-delay: .4s; }
+@keyframes p { 50% { opacity: .2; transform: translateY(-3px); } }
+details.migue-mas summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 800; }
+details.migue-mas summary::-webkit-details-marker { display: none; }
+details.migue-mas summary img { width: 44px; height: 44px; border-radius: 50%; background: #dbe7ff; }
+details.migue-mas summary b { flex: 1; font-size: 17px; }
+details.migue-mas summary span { flex: none; font-size: 13px; font-weight: 600; color: var(--acento); white-space: nowrap; }
+.pie { max-width: 560px; margin: 18px auto 0; font-size: 12.5px; color: var(--gris); text-align: center; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <img src="/img/logos/logo-horizontal-color.png" alt="San Miguel de Tucumán">
+  <p>Gobernar con IA<br>Módulo 6</p>
+  <span class="gente" id="gente"></span>
+</header>
+
+<main>
+  <!-- Entrar: nombre y municipio (quedan guardados en este celular). -->
+  <form class="card" id="entrar" hidden autocomplete="off">
+    <span class="ceja">Gobernar con IA · Chaco</span>
+    <h1>Sumate</h1>
+    <p class="ayuda">Para responder desde tu celular las preguntas de la charla.</p>
+    <label for="nombre">Tu nombre</label>
+    <input id="nombre" maxlength="40" autocomplete="given-name" autocapitalize="words" enterkeyhint="next" placeholder="Por ejemplo, María">
+    <label for="muni">Tu municipio</label>
+    <input id="muni" maxlength="60" autocapitalize="words" enterkeyhint="go" placeholder="Empezá a escribir…">
+    <div class="sugerencias" id="sugerencias"></div>
+    <button class="boton" id="entrarBtn" type="submit">Entrar</button>
+    <p class="msj" id="entrarMsj"></p>
+    <p class="nota">Tu nombre y tu municipio pueden aparecer en la pantalla grande. Sólo se usan en esta charla.</p>
+  </form>
+
+  <!-- Adentro: lo que esté abierto en la pantalla. -->
+  <section id="adentro" hidden>
+    <div class="hola"><span>Hola, <b id="holaNombre"></b> · <span id="holaMuni"></span></span><button type="button" id="cambiar">Cambiar</button></div>
+    <div id="actividad" style="margin-top:12px"></div>
+    <div id="migueAparte" style="margin-top:14px"></div>
+  </section>
+</main>
+<p class="pie">IALAB UBA · Gobierno del Chaco · Municipalidad de San Miguel de Tucumán</p>
+
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const CFG = window.UBA_CONFIG || {}, P = window.PUBLICO || {};
+  const canal = (new URLSearchParams(location.search).get('canal') || '').trim();
+  const SALA = canal ? 'prueba-' + canal : (CFG.sala || 'sala');
+  const K = { yo: 'pub-yo-' + SALA, n: 'pub-nombre', m: 'pub-muni' };
+  const guardado = { get: k => { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) { } } };
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const sinTildes = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  let yo = guardado.get(K.yo), ultimo = null;
+
+  async function api(ruta, cuerpo) {
+    try {
+      const r = cuerpo
+        ? await fetch('/api/publico/' + ruta, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sala: SALA, yo, ...cuerpo }) })
+        : await fetch('/api/publico/' + ruta + (ruta.includes('?') ? '&' : '?') + 'sala=' + encodeURIComponent(SALA) + '&yo=' + encodeURIComponent(yo) + '&_=' + Date.now(), { cache: 'no-store' });
+      const j = await r.json().catch(() => ({}));
+      return { ok: r.ok, cod: r.status, j };
+    } catch (e) { return { ok: false, cod: 0, j: { error: 'Sin conexión. Probá de nuevo.' } }; }
+  }
+
+  // ------------------------------------------------------------ entrar
+  const munis = (P.MUNICIPIOS || []).concat(P.OTROS || []);
+  function sugerir() {
+    const t = sinTildes($('muni').value.trim()), caja = $('sugerencias');
+    if (t.length < 2) { caja.innerHTML = ''; return; }
+    const lista = munis.filter(m => sinTildes(m).includes(t)).slice(0, 6);
+    if (lista.length === 1 && sinTildes(lista[0]) === t) { caja.innerHTML = ''; return; }
+    caja.innerHTML = lista.map(m => `<button type="button">${esc(m)}</button>`).join('');
+  }
+  $('muni').addEventListener('input', sugerir);
+  $('sugerencias').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; $('muni').value = b.textContent; $('sugerencias').innerHTML = ''; $('entrarBtn').focus(); });
+  $('nombre').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); $('muni').focus(); } });
+  $('entrar').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nombre = $('nombre').value.trim(), municipio = $('muni').value.trim();
+    if (nombre.length < 2) { $('entrarMsj').textContent = 'Escribí tu nombre.'; $('nombre').focus(); return; }
+    if (municipio.length < 2) { $('entrarMsj').textContent = 'Escribí tu municipio.'; $('muni').focus(); return; }
+    $('entrarBtn').disabled = true; $('entrarMsj').textContent = '';
+    const r = await entrar(nombre, municipio);
+    $('entrarBtn').disabled = false;
+    if (!r.ok) { $('entrarMsj').textContent = r.j.error || 'No pude entrar. Probá de nuevo.'; return; }
+    document.activeElement && document.activeElement.blur();
+    mostrarAdentro(); sondear();
+  });
+  async function entrar(nombre, municipio) {
+    const r = await api('entrar', { nombre, municipio });
+    if (r.ok) {
+      yo = r.j.yo; guardado.set(K.yo, yo); guardado.set(K.n, nombre); guardado.set(K.m, municipio);
+      $('holaNombre').textContent = r.j.nombre; $('holaMuni').textContent = r.j.municipio;
+    }
+    return r;
+  }
+  function mostrarEntrar() {
+    $('nombre').value = guardado.get(K.n); $('muni').value = guardado.get(K.m);
+    $('entrar').hidden = false; $('adentro').hidden = true;
+  }
+  function mostrarAdentro() {
+    $('holaNombre').textContent = $('holaNombre').textContent || guardado.get(K.n);
+    $('holaMuni').textContent = $('holaMuni').textContent || guardado.get(K.m);
+    $('entrar').hidden = true; $('adentro').hidden = false;
+  }
+  $('cambiar').addEventListener('click', mostrarEntrar);
+
+  // ------------------------------------------------------------ lo abierto
+  let firma = '', reentrando = 0;
+  function pintar(e) {
+    ultimo = e;
+    $('gente').textContent = e.gente ? e.gente + (e.gente === 1 ? ' persona' : ' personas') : '';
+    // La sala se reinició (o este celular venía de otra): vuelve a entrar solo, con lo guardado.
+    if (!e.conocido && yo && Date.now() - reentrando > 8000 && guardado.get(K.n)) {
+      reentrando = Date.now(); entrar(guardado.get(K.n), guardado.get(K.m)).then(r => r.ok && sondear());
+    }
+    const a = e.act;
+    const nueva = a ? a.id + '|' + (a.revelada ? 1 : 0) : 'nada';
+    if (nueva !== firma) { firma = nueva; armar(a); if (navigator.vibrate && a) navigator.vibrate(30); }
+    actualizar(a, e);
+    pintarMigue(e);
+  }
+  function armar(a) {
+    const caja = $('actividad');
+    if (!a) {
+      caja.innerHTML = `<div class="card espera"><div class="icono">👀</div><h2>Ya estás adentro</h2><p class="ayuda">Cuando aparezca una pregunta en la pantalla grande, la vas a ver acá.</p></div>`;
+      return;
+    }
+    if (a.tipo === 'nube') {
+      caja.innerHTML = `<form class="card" data-tipo="nube" autocomplete="off"><span class="ceja">Nube de palabras</span><h2>${esc(a.pregunta)}</h2><p class="ayuda">${esc(a.ayuda)}</p>
+        <div class="fila"><input maxlength="30" placeholder="Tu palabra" enterkeyhint="send" autocapitalize="sentences"><button type="submit">Mandar</button></div>
+        <p class="msj"></p><div class="mias"></div><p class="gracias" hidden>¡Gracias! Mirá la pantalla grande.</p></form>`;
+      const f = caja.querySelector('form');
+      f.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const inp = f.querySelector('input'), v = inp.value.trim(), msj = f.querySelector('.msj');
+        if (!v) { inp.focus(); return; }
+        f.querySelector('button').disabled = true;
+        const r = await api('responder', { act: a.id, valor: v });
+        f.querySelector('button').disabled = false;
+        msj.classList.toggle('bien', r.ok);
+        msj.textContent = r.ok ? '¡Listo! Ya está en la pantalla.' : (r.j.error || 'No salió. Probá de nuevo.');
+        if (r.ok) { inp.value = ''; sondear(); }
+      });
+    } else if (a.tipo === 'encuesta') {
+      caja.innerHTML = `<div class="card" data-tipo="encuesta"><span class="ceja">${a.correcta != null || a.revelada ? 'Adiviná' : 'Votación'}</span><h2>${esc(a.pregunta)}</h2>
+        <div class="opciones">${a.opciones.map((o, i) => `<button type="button" data-i="${i}"><i></i><span>${esc(o)}</span></button>`).join('')}</div>
+        <p class="msj"></p><div class="revelacion" hidden></div></div>`;
+      caja.querySelectorAll('.opciones button').forEach(b => b.addEventListener('click', async () => {
+        if (b.disabled) return;
+        const antes = caja.querySelector('.elegida');
+        caja.querySelectorAll('.opciones button').forEach(x => x.classList.toggle('elegida', x === b));
+        const r = await api('responder', { act: a.id, valor: +b.dataset.i });
+        const msj = caja.querySelector('.msj');
+        msj.classList.toggle('bien', r.ok);
+        msj.textContent = r.ok ? '¡Listo! Mirá la pantalla. Podés cambiar tu voto mientras siga abierta.' : (r.j.error || 'No salió. Probá de nuevo.');
+        if (!r.ok) caja.querySelectorAll('.opciones button').forEach(x => x.classList.toggle('elegida', x === antes));
+        else sondear();
+      }));
+    } else if (a.tipo === 'migue') {
+      caja.innerHTML = `<div class="card" data-tipo="migue"><div class="migue-cab"><img src="/img/migue/migue-cara.png" alt=""><div><span class="ceja">Preguntale a Migue</span><h2>${esc(a.pregunta)}</h2></div></div>
+        <p class="ayuda">${esc(a.ayuda)}</p><div class="migue-aca"></div></div>`;
+    }
+  }
+  function actualizar(a, e) {
+    if (!a) return;
+    const caja = $('actividad'), mio = e.mio || {};
+    if (a.tipo === 'nube') {
+      const pal = mio.palabras || [], lleno = pal.length >= (a.max || 3);
+      caja.querySelector('.mias').innerHTML = pal.map(p => `<span>${esc(p)}</span>`).join('');
+      caja.querySelector('.fila').hidden = lleno; caja.querySelector('.ayuda').hidden = lleno;
+      caja.querySelector('.gracias').hidden = !lleno;
+      if (lleno) caja.querySelector('.msj').textContent = '';
+    } else if (a.tipo === 'encuesta') {
+      const botones = caja.querySelectorAll('.opciones button');
+      if (mio.voto != null && !caja.querySelector('.elegida')) botones.forEach(b => b.classList.toggle('elegida', +b.dataset.i === mio.voto));
+      if (a.revelada) {
+        botones.forEach(b => { b.disabled = true; b.classList.toggle('correcta', +b.dataset.i === a.correcta); b.classList.toggle('elegida', +b.dataset.i === mio.voto); });
+        const rev = caja.querySelector('.revelacion');
+        const acerto = a.correcta != null && mio.voto === a.correcta;
+        rev.innerHTML = a.correcta != null
+          ? `<b>${mio.voto == null ? 'La respuesta: ' + esc(a.opciones[a.correcta]) : acerto ? '¡Acertaste! 🎉' : 'Era: ' + esc(a.opciones[a.correcta])}</b>${esc(a.revelacion || '')}`
+          : '<b>La votación se cerró.</b>Mirá los resultados en la pantalla.';
+        rev.hidden = false; caja.querySelector('.msj').textContent = '';
+      }
+    }
+  }
+
+  // ------------------------------------------------------------ Migue
+  let firmaMigue = '';
+  function formatear(t) {
+    return esc(String(t).trim())
+      .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<b>$1</b>')
+      .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+      .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>')
+      .replace(/^\s*[-•]\s+/gm, '• ').replace(/\n{2,}/g, '<br><br>').replace(/\n/g, '<br>');
+  }
+  function pintarMigue(e) {
+    const m = e.migue, enActividad = e.act && e.act.tipo === 'migue';
+    const aparte = $('migueAparte');
+    if (!m) { aparte.innerHTML = ''; firmaMigue = ''; return; }
+    let destino = enActividad ? $('actividad').querySelector('.migue-aca') : null;
+    if (!enActividad) {
+      if (!aparte.querySelector('details')) {
+        aparte.innerHTML = `<details class="card migue-mas"><summary><img src="/img/migue/migue-cara.png" alt=""><b>Preguntale a Migue</b><span>Abrir</span></summary><div class="migue-aca"></div></details>`;
+        firmaMigue = '';
+        aparte.querySelector('details').addEventListener('toggle', () => ultimo && pintarMigue(ultimo));
+      }
+      destino = aparte.querySelector('.migue-aca');
+    } else if (aparte.innerHTML) { aparte.innerHTML = ''; }
+    if (!destino) return;
+    if (!destino.querySelector('form')) {
+      destino.innerHTML = `<div class="hilo"></div><form autocomplete="off" style="margin-top:12px"><textarea maxlength="300" placeholder="Por ejemplo: ¿Cómo saco la licencia de conducir?"></textarea>
+        <button class="boton" type="submit" style="margin-top:10px">Preguntar</button><p class="msj"></p><p class="nota quedan"></p></form>`;
+      firmaMigue = '';
+      const f = destino.querySelector('form');
+      f.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const ta = f.querySelector('textarea'), t = ta.value.trim(), msj = f.querySelector('.msj');
+        if (t.length < 4) { ta.focus(); return; }
+        f.querySelector('button').disabled = true;
+        const r = await api('migue', { texto: t });
+        f.querySelector('button').disabled = false;
+        msj.classList.toggle('bien', r.ok);
+        msj.textContent = r.ok ? '' : (r.j.error || 'No salió. Probá de nuevo.');
+        if (r.ok) { ta.value = ''; ta.blur(); sondear(); }
+      });
+    }
+    const pregs = m.preguntas || [], quedan = Math.max(0, m.max - pregs.length);
+    const nuevaFirma = JSON.stringify(pregs);
+    if (nuevaFirma !== firmaMigue) {
+      firmaMigue = nuevaFirma;
+      destino.querySelector('.hilo').innerHTML = pregs.map(p => `<div class="q">${esc(p.q)}</div>` + (
+        p.e === 'ok' || p.e === 'error' ? `<div class="r">${formatear(p.r || '')}</div>`
+          : p.e === 'pensando' ? `<div class="r espera-migue">Migue está escribiendo <span class="puntos"><i></i><i></i><i></i></span></div>`
+          : `<div class="r espera-migue">En la fila${p.antes ? ': hay ' + p.antes + (p.antes === 1 ? ' pregunta' : ' preguntas') + ' antes que la tuya' : ''} <span class="puntos"><i></i><i></i><i></i></span></div>`)).join('');
+    }
+    const f = destino.querySelector('form');
+    f.querySelector('textarea').hidden = !quedan; f.querySelector('.boton').hidden = !quedan;
+    f.querySelector('.quedan').textContent = quedan ? (pregs.length ? 'Te quedan ' + quedan + (quedan === 1 ? ' pregunta.' : ' preguntas.') : 'Podés hacerle hasta ' + m.max + ' preguntas.') : '¡Gracias por probar a Migue!';
+    const det = aparte.querySelector('details');
+    if (det) det.querySelector('summary span').textContent = det.open ? 'Cerrar' : (quedan ? (pregs.length ? 'Te quedan ' + quedan : 'Abrir') : 'Ver respuestas');
+  }
+
+  // ------------------------------------------------------------ sondeo
+  let timer = null, sondeando = false;
+  async function sondear() {
+    clearTimeout(timer);
+    if (!yo) return;
+    if (!sondeando) {
+      sondeando = true;
+      const r = await api('estado');
+      sondeando = false;
+      if (r.ok) pintar(r.j);
+    }
+    const quieto = ultimo && ultimo.migue && (ultimo.migue.preguntas || []).some(p => p.e === 'cola' || p.e === 'pensando');
+    if (document.visibilityState === 'visible') timer = setTimeout(sondear, quieto ? 1500 : 2200);
+  }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') sondear(); });
+  addEventListener('pageshow', (e) => { if (e.persisted) sondear(); });
+  addEventListener('online', sondear);
+
+  if (yo && guardado.get(K.n)) { mostrarAdentro(); sondear(); }
+  else mostrarEntrar();
+})();
+</script>
+</body>
+</html>

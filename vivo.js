@@ -83,9 +83,12 @@
     estadoVivo = 'respondiendo'; avisar();
     tipear(txt, formatear(respuesta), () => { estadoVivo = 'respondida'; avisar(); });
   }
-  async function preguntar(texto) {
+  // Con `respuesta` (una pregunta del público que Migue ya contestó en el celular)
+  // se muestra esa misma, sin volver a consultar.
+  async function preguntar(texto, respuesta) {
     texto = String(texto || '').trim().slice(0, 400);
     if (!texto) return;
+    if (respuesta) guardadas.set(texto, String(respuesta));
     // La misma pregunta otra vez, con su respuesta en pantalla: se cierra y se sigue donde estaba.
     if (vivoEl.classList.contains('ver') && texto === ultimaPregunta) { cerrar(); return; }
     ultimaPregunta = texto;

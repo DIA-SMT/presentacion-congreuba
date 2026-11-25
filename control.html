@@ -9,6 +9,7 @@
 <script src="config.js"></script>
 <script src="version.js"></script>
 <script src="contenido.js"></script>
+<script src="publico-actividades.js"></script>
 <script src="remoto.js"></script>
 <style>
 @font-face { font-family: 'Poppins'; font-weight: 400; src: url(fonts/Poppins-Regular.ttf); }
@@ -120,6 +121,32 @@ h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: u
 .placas { display: flex; flex-direction: column; gap: 6px; }
 .placas button { background: var(--azul2); font-size: 14px; font-weight: 600; text-align: left; align-items: flex-start; padding: 12px 14px; border-radius: 14px; }
 .placas button.on { background: #f5f3ee; color: var(--azul); }
+
+/* El público: lo que responden desde los celulares (publico-servidor.js). */
+.pub-est { background: var(--azul2); border-radius: 14px; padding: 10px 12px; font-size: 14px; font-weight: 600; color: #dfe4f2; line-height: 1.4; }
+.pub-est b { color: #fff; font-size: 17px; }
+.pub-est i { font-style: normal; color: var(--verde); }
+.pub-acts button { height: 74px; font-size: 13px; padding-top: 14px; }
+.pub-acts button em { font-size: 11px; color: var(--arena); font-style: normal; }
+.pub-acts button.activa { border-color: var(--verde); }
+.pub-acts button.activa::before { content: '● ABIERTA'; position: absolute; left: 8px; top: 3px; font-size: 9px; letter-spacing: .5px; color: var(--verde); }
+.pub-acts button.on::before { content: '● EN PANTALLA'; color: #0d2419; }
+#pubRevelar { display: none; height: 54px; background: var(--amarillo); color: #222; font-size: 17px; }
+#pubRevelar.ver { display: flex; }
+#pubSacar.on { background: var(--rojo); border-color: var(--rojo); }
+.pub-mod { background: var(--azul2); border-radius: 16px; padding: 4px 12px; }
+.pub-mod summary { list-style: none; cursor: pointer; padding: 10px 0; font-size: 14px; font-weight: 800; letter-spacing: .5px; }
+.pub-mod summary::-webkit-details-marker { display: none; }
+.pub-mod summary span { font-weight: 600; color: var(--arena); }
+.pub-sub { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--arena); margin: 10px 0 2px; }
+.pub-item { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-top: 1px solid var(--azul3); font-size: 14px; font-weight: 600; line-height: 1.3; }
+.pub-item > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.pub-item small { display: block; font-size: 11px; font-weight: 700; color: var(--arena); }
+.pub-item.oculto > span { text-decoration: line-through; opacity: .5; }
+.pub-item button { flex: none; height: 40px; min-width: 46px; padding: 0 10px; background: var(--azul3); font-size: 14px; border-radius: 12px; }
+.pub-item button.pant { background: var(--verde); color: #0d2419; }
+.pub-item em { flex: none; font-style: normal; font-size: 11px; color: #aab3cc; }
+#pubCero { height: 44px; background: transparent; border: 2px dashed var(--azul3); font-size: 13px; font-weight: 600; color: #aab3cc; }
 
 /* Chequeo antes de empezar. */
 #chequeo { background: var(--azul2); border: 2px solid var(--azul3); border-radius: 20px; padding: 14px 16px; display: none; flex-direction: column; gap: 8px; }
@@ -238,6 +265,14 @@ html { -webkit-text-size-adjust: 100%; }
   <p class="listo" id="ck-listo">Revisando…</p>
 </div>
 
+<h2>El público · desde sus celulares</h2>
+<div class="pub-est" id="pubEst">Todavía no se sumó nadie.</div>
+<div class="cajones pub-acts" id="pubActs"></div>
+<button id="pubRevelar">Revelar la respuesta</button>
+<div class="web-acciones"><button id="pubSacar">Sacar de la pantalla</button><button id="pubCerrar">Cerrar la pregunta en los celulares</button></div>
+<details class="pub-mod" id="pubMod"><summary>Moderar <span id="pubModRes"></span></summary><div id="pubItems"></div></details>
+<button id="pubCero">Empezar de cero · borra todo lo del público…</button>
+
 <h2>Preguntale a Migue, en vivo</h2>
 <button id="voz"><span id="vozTit">🎤 PREGUNTAR CON LA VOZ</span><small id="vozSub">Tocá, hablá, revisá y mandá</small></button>
 <form class="libre" id="libre"><textarea id="pregLibre" rows="1" placeholder="Escribí o dictá otra pregunta…" autocomplete="off" enterkeyhint="send"></textarea><button type="submit" id="enviarLibre">Preguntar</button></form>
@@ -352,6 +387,83 @@ $('sistemas').innerHTML = (C.SISTEMAS || []).map(s => `<button data-k="web-${s.i
 $('sistemas').querySelectorAll('button').forEach(b => b.addEventListener('click', () => enviar(b, { cmd: 'web', sitio: b.dataset.id })));
 boton('cerrarWeb', () => ({ cmd: 'web-cerrar' }));
 boton('recargarWeb', () => ({ cmd: 'web-recargar' }));
+
+// El público (participación desde los celulares). Los datos los trae esta
+// botonera directo del servidor (es el mismo que sirve la pantalla); abrir una
+// actividad encima de la placa o revelar una respuesta va como orden a la pantalla.
+const PUB = (window.PUBLICO && window.PUBLICO.ACTIVIDADES) || [];
+const salaPub = remoto.sala || (window.UBA_CONFIG || {}).sala || 'sala';
+const escP = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+let pubDatos = null, pubRevelada = false, pubFirma = '';
+const pubMigue = {};
+$('pubActs').innerHTML = PUB.map(a => `<button data-k="pub-${a.id}" data-id="${a.id}">${escP(a.titulo)}<em></em></button>`).join('');
+$('pubActs').querySelectorAll('button').forEach(b => b.addEventListener('click', () => enviar(b, { cmd: 'publico', act: b.dataset.id })));
+boton('pubSacar', () => ({ cmd: 'publico-cerrar' }));
+boton('pubRevelar', () => ({ cmd: 'publico-revelar', on: !pubRevelada }));
+async function pubPost(ruta, cuerpo) {
+  try { const r = await fetch('api/publico/' + ruta, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sala: salaPub, ...cuerpo }) }); return r.ok; }
+  catch (e) { return false; }
+}
+async function pubBoton(b, ruta, cuerpo) {
+  b.classList.remove('llego', 'fallo'); b.classList.add('enviando');
+  const ok = await pubPost(ruta, cuerpo);
+  b.classList.remove('enviando'); b.classList.add(ok ? 'llego' : 'fallo');
+  setTimeout(() => b.classList.remove('llego', 'fallo'), ok ? 450 : 1600);
+  sondearPub();
+}
+$('pubCerrar').addEventListener('click', () => pubBoton($('pubCerrar'), 'activar', { act: null }));
+$('pubCero').addEventListener('click', () => {
+  if (!confirm('¿Borrar todo lo del público: personas, palabras, votos y preguntas a Migue? No se puede deshacer.')) return;
+  pubBoton($('pubCero'), 'reiniciar', {});
+});
+$('pubItems').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.pant) { const m = pubMigue[b.dataset.pant]; if (m) enviar(b, { cmd: 'preguntar', texto: m.texto, respuesta: m.r }); return; }
+  pubBoton(b, 'ocultar', { k: b.dataset.k, x: b.dataset.x === '1' });
+});
+async function sondearPub() {
+  try {
+    const r = await fetch('api/publico/panel?sala=' + encodeURIComponent(salaPub) + '&_=' + Date.now(), { cache: 'no-store' });
+    if (r.ok) { pubDatos = await r.json(); pintarPub(); }
+  } catch (e) { }
+}
+setInterval(() => { if (!document.hidden) sondearPub(); }, 3000);
+sondearPub();
+function pintarPub() {
+  const d = pubDatos; if (!d) return;
+  const pe = (ultimo && ultimo.publico) || {};
+  const abierta = PUB.find(a => a.id === d.act);
+  $('pubEst').innerHTML = `<b>${d.gente}</b> ${d.gente === 1 ? 'persona' : 'personas'} · <b>${d.municipios}</b> ${d.municipios === 1 ? 'municipio' : 'municipios'}<br>`
+    + (abierta ? 'En los celulares: <i>● ' + escP(abierta.titulo) + '</i>' : 'En los celulares: nada abierto');
+  $('pubActs').querySelectorAll('button').forEach((b) => {
+    const x = d.actividades.find(a => a.id === b.dataset.id) || { n: 0 };
+    b.classList.toggle('activa', d.act === b.dataset.id);
+    b.classList.toggle('on', !!pe.flota && pe.act === b.dataset.id);
+    b.querySelector('em').textContent = x.n + (x.tipo === 'encuesta' ? (x.n === 1 ? ' voto' : ' votos') : x.tipo === 'nube' ? (x.n === 1 ? ' palabra' : ' palabras') : (x.n === 1 ? ' pregunta' : ' preguntas'));
+  });
+  // Revelar: cuando la pantalla muestra una actividad con respuesta correcta (Adiviná).
+  const enPantalla = d.actividades.find(a => a.id === pe.act);
+  pubRevelada = !!(enPantalla && (enPantalla.revelada || pe.revelada));
+  $('pubRevelar').classList.toggle('ver', !!(enPantalla && enPantalla.correcta));
+  $('pubRevelar').textContent = pubRevelada ? 'Tapar la respuesta' : 'Revelar la respuesta';
+  $('pubSacar').classList.toggle('on', !!pe.flota);
+  // Moderar: ✕ lo saca de la pantalla grande (↺ lo devuelve). Lo que trae malas palabras ya llega oculto.
+  const firma = JSON.stringify([d.items, d.migue, d.personas]);
+  if (firma === pubFirma) return;
+  pubFirma = firma;
+  const fila = (it, conTexto, extra) => `<div class="pub-item${it.x || it.xp ? ' oculto' : ''}"><span>${escP(conTexto ? it.texto : it.quien)}${conTexto ? '<small>' + escP(it.quien) + '</small>' : ''}</span>${extra || ''}<button data-k="${escP(it.k)}" data-x="${it.x ? 0 : 1}">${it.x ? '↺' : '✕'}</button></div>`;
+  const ESTADO = { cola: 'en la fila', pensando: 'escribiendo…', error: 'sin respuesta' };
+  let html = '';
+  if (d.items.length) html += '<p class="pub-sub">Palabras de la nube abierta</p>' + d.items.map(it => fila(it, true)).join('');
+  if (d.migue.length) {
+    d.migue.forEach(m => { if (m.r) pubMigue[m.k] = { texto: m.texto, r: m.r }; });
+    html += '<p class="pub-sub">Preguntas a Migue · ▶ la muestra en la pantalla con su respuesta</p>'
+      + d.migue.map(m => fila(m, true, m.r ? `<button class="pant" data-k="pant-${escP(m.k)}" data-pant="${escP(m.k)}">▶</button>` : `<em>${ESTADO[m.e] || ''}</em>`)).join('');
+  }
+  if (d.personas.length) html += '<p class="pub-sub">Personas (✕ oculta su nombre y todo lo que mandó)</p>' + d.personas.map(it => fila(it, false)).join('');
+  $('pubItems').innerHTML = html || '<p class="pub-sub">Todavía no hay nada para revisar.</p>';
+  $('pubModRes').textContent = '· ' + d.items.length + ' palabras · ' + d.migue.length + ' preguntas · ' + d.gente + ' personas';
+}
 $('preguntas').innerHTML = (C.PREGUNTAS || []).map((p, i) => `<button data-k="pr-${i}" data-n="${i}"></button>`).join('');
 $('preguntas').querySelectorAll('button').forEach(b => { b.textContent = C.PREGUNTAS[+b.dataset.n]; b.addEventListener('click', () => enviar(b, { cmd: 'preguntar', n: +b.dataset.n })); });
 $('libre').addEventListener('submit', (e) => {
@@ -502,6 +614,7 @@ function pintar() {
     (e.placas || []).forEach((t, i) => { const b = document.createElement('button'); b.dataset.k = 'pl-' + i; b.textContent = t; b.addEventListener('click', () => enviar(b, { cmd: 'ir', n: i })); pl.appendChild(b); });
   }
   [...pl.children].forEach((b, i) => b.classList.toggle('on', i === e.placa - 1));
+  try { pintarPub(); } catch (err) { } // (antes de que cargue la parte del público)
 }
 // Miniaturas: img/mini/mNN-K.jpg (NN = placa; K = recurso de la vitrina, 1 en las demás).
 const dos = (n) => String(n).padStart(2, '0');

@@ -8,6 +8,13 @@ function cambiar(n) {
   // Placas "EN VIVO" (data-web): el primer SIGUIENTE abre el sistema dentro de la
   // presentación; el siguiente lo cierra y avanza. ANTERIOR con el sistema abierto
   // lo cierra y se queda en la placa.
+  // Placas con data-revelar (adiviná): el primer SIGUIENTE marca la respuesta
+  // correcta; ANTERIOR con la respuesta a la vista la vuelve a tapar.
+  if (window.publico && destino == null) {
+    const p = placas[actual];
+    if (n === actual + 1 && window.publico.puedeRevelar()) { window.publico.revelar(true); return; }
+    if (n === actual - 1 && p.dataset.revelar !== undefined && window.publico.estado().revelada && !window.publico.abierta()) { window.publico.revelar(false); return; }
+  }
   if (window.web && destino == null) {
     const p = placas[actual];
     if (n === actual + 1 && p.dataset.web && !window.web.abierto() && !p._webVisto) { p._webVisto = true; window.web.abrir(p.dataset.web); return; }
@@ -52,7 +59,7 @@ function ejecutar1(c) {
     case 'seguir': window.cajones.seguir(); break;
     case 'ir-recurso': window.cajones.irRecurso(c.n); break;
     case 'reproducir': window.avance.reproducir(); break;
-    case 'preguntar': c.texto ? window.vivo.preguntar(c.texto) : window.vivo.preguntarN(c.n | 0); break;
+    case 'preguntar': c.texto ? window.vivo.preguntar(c.texto, c.respuesta) : window.vivo.preguntarN(c.n | 0); break;
     case 'preguntar-siguiente': window.vivo.preguntarSiguiente(); break;
     case 'cerrar-pregunta': window.vivo.cerrar(); break;
     case 'qr': window.efectos.qr(c.on); break;
@@ -62,6 +69,10 @@ function ejecutar1(c) {
     case 'web': if (window.web) window.web.abrir(c.sitio); break;
     case 'web-cerrar': if (window.web) window.web.cerrar(); break;
     case 'web-recargar': if (window.web) window.web.recargar(); break;
+    // Participación del público (publico.js): abrir una actividad encima, sacarla o revelar.
+    case 'publico': if (window.publico) window.publico.abrir(c.act); break;
+    case 'publico-cerrar': if (window.publico) window.publico.cerrar(); break;
+    case 'publico-revelar': if (window.publico) window.publico.revelar(c.on !== false); break;
   }
 }
 window.presentacion = { ejecutar, debug: () => migue.debug() }; // para probar desde la consola
@@ -101,7 +112,7 @@ addEventListener('keydown', (e) => {
   if (['ArrowRight', 'PageDown', ' ', 'ArrowDown'].includes(k)) { e.preventDefault(); cambiar(base() + 1); }
   else if (['ArrowLeft', 'PageUp', 'ArrowUp', 'Backspace'].includes(k)) { e.preventDefault(); cambiar(base() - 1); }
   else if (k >= '1' && k <= '9') { const p = window.CONTENIDO.PROYECTOS[+k - 1]; if (p) window.cajones.alternar(p.id); }
-  else if (k === 'Escape') { if (window.web && window.web.abierto()) window.web.cerrar(); else if (window.vivoAbierto()) window.vivo.cerrar(); else window.cajones.cerrar(); }
+  else if (k === 'Escape') { if (window.web && window.web.abierto()) window.web.cerrar(); else if (window.vivoAbierto()) window.vivo.cerrar(); else if (window.publico && window.publico.abierta()) window.publico.cerrar(); else window.cajones.cerrar(); }
   else if (k === ']') window.cajones.recurso(1);
   else if (k === '[') window.cajones.recurso(-1);
   else if (k === 'p' || k === 'P') window.avance.reproducir();
@@ -181,12 +192,14 @@ function informar() {
   const w = window.web ? window.web.estado() : { abierto: false };
   // En una placa "EN VIVO", lo que viene con SIGUIENTE es abrir el sistema.
   const sigEnVivo = p.dataset.web && !w.abierto && !p._webVisto;
+  const pub = window.publico ? window.publico.estado() : null;
   const estado = {
     placa: actual + 1, total: placas.length,
     pantalla: PANTALLA,
     titulo: tit(p),
-    siguiente: sigEnVivo ? '● Abrir en vivo: ' + (((window.CONTENIDO.SISTEMAS || []).find(s => s.id === p.dataset.web) || {}).nombre || p.dataset.web) : (placas[actual + 1] ? tit(placas[actual + 1]) : 'Fin'),
+    siguiente: pub && pub.revelable ? '● Revelar la respuesta' : sigEnVivo ? '● Abrir en vivo: ' + (((window.CONTENIDO.SISTEMAS || []).find(s => s.id === p.dataset.web) || {}).nombre || p.dataset.web) : (placas[actual + 1] ? tit(placas[actual + 1]) : 'Fin'),
     web: w,
+    publico: pub,
     sistemas: window.web ? window.web.sistemas() : [],
     error: ultimoError,
     guion: p.dataset.guion || '',

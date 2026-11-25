@@ -97,6 +97,8 @@ function irA(n) {
   } catch (e) { console.warn('vitrina', e); }
   // Sistemas en vivo (m6.js): al cambiar de placa se cierra el navegador y se precarga el que viene.
   try { if (window.web) window.web.placa(p); } catch (e) { console.warn('web', e); }
+  // Participación del público (publico.js): la placa abre su actividad en los celulares.
+  try { if (window.publico) window.publico.placa(p); } catch (e) { console.warn('publico', e); }
   p.classList.remove('on'); void p.offsetWidth; p.classList.add('on');
   window.efectos.contar(p);
   lugarMigue();

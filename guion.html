@@ -8,6 +8,7 @@
      contenido.js, así que siempre coincide con las placas. Para el PDF:
      .\herramientas\guion-pdf.ps1 (Edge sin ventana → guion-modulo6.pdf). -->
 <script src="contenido.js"></script>
+<script src="publico-actividades.js"></script>
 <style>
 @font-face { font-family: 'Poppins'; font-weight: 400; src: url(fonts/Poppins-Regular.ttf); }
 @font-face { font-family: 'Poppins'; font-weight: 500; src: url(fonts/Poppins-Medium.ttf); }
@@ -70,15 +71,15 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
   const C = window.CONTENIDO, V = C.VIDEOS, S = C.SISTEMAS || [];
   const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   // Antes de los bloques, "Lo que ya funciona" (separador con data-bloque="0").
-  const PRIMERO = { t: 'Lo que ya funciona: los desarrollos, Migue y CIMBA en vivo', min: 25, desde: '0:07' };
+  const PRIMERO = { t: 'Lo que ya funciona: los desarrollos, Migue y CIMBA en vivo', min: 28, desde: '0:10' };
   const BLOQUES = [
-    { t: 'De la IA individual a la institucional', min: 10, desde: '0:32' },
-    { t: 'Las capas: licencias, datos e IA soberana', min: 15, desde: '0:42' },
-    { t: 'Del piloto a la producción', min: 8, desde: '0:57' },
-    { t: 'La economía de los agentes', min: 12, desde: '1:05' },
-    { t: 'Gobernanza del agente', min: 15, desde: '1:17' },
-    { t: 'El costo que la factura no muestra', min: 8, desde: '1:32' },
-    { t: 'Hoja de ruta para Chaco', min: 12, desde: '1:40' },
+    { t: 'De la IA individual a la institucional', min: 10, desde: '0:38' },
+    { t: 'Las capas: licencias, datos e IA soberana', min: 16, desde: '0:48' },
+    { t: 'Del piloto a la producción', min: 7, desde: '1:04' },
+    { t: 'La economía de los agentes', min: 11, desde: '1:11' },
+    { t: 'Gobernanza del agente', min: 14, desde: '1:22' },
+    { t: 'El costo que la factura no muestra', min: 7, desde: '1:36' },
+    { t: 'Hoja de ruta para Chaco', min: 10, desde: '1:43' },
   ];
   const html = await (await fetch('index.html', { cache: 'no-store' })).text();
   const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -107,10 +108,10 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     <div><span class="ceja">Botonera (tu celular, no se comparte)</span><b>https://presentacion.srv1915283.hstgr.cloud<wbr>/control</b></div></div></div>`;
 
   out += `<h2>El recorrido: 2 horas, ${placas.length} placas</h2><table><tr><th>Hora</th><th>Bloque</th><th>Min</th></tr>
-    <tr><td class="hora">0:00</td><td>Apertura con Migue, el plan y cómo empezó</td><td>7</td></tr>
+    <tr><td class="hora">0:00</td><td>Apertura con Migue, el plan, <b>Sumate</b> (nube de inicio) y cómo empezó</td><td>10</td></tr>
     <tr><td class="hora">${PRIMERO.desde}</td><td><b>Primero</b> · ${esc(PRIMERO.t)}</td><td>${PRIMERO.min}</td></tr>
     ${BLOQUES.map((b, i) => `<tr><td class="hora">${b.desde}</td><td><b>Bloque ${i + 1}</b> · ${esc(b.t)}</td><td>${b.min}</td></tr>`).join('')}
-    <tr><td class="hora">1:52</td><td>Un caso (Migue), conclusión, preguntas y gracias</td><td>resto</td></tr></table>
+    <tr><td class="hora">1:53</td><td>Un caso (Migue), conclusión, nube de cierre, preguntas y gracias</td><td>resto</td></tr></table>
     <p class="pie">Los minutos no aparecen en pantalla: son sólo para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.</p>`;
 
   out += `<h2>Antes de empezar</h2><ul class="lista">
@@ -118,6 +119,18 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     <li>Misma compu y mismo navegador para la prueba y para la charla (sin incógnito).</li>
     <li><b>Iniciá sesión una vez desde la presentación</b> en CIMBA (placa ${placas.findIndex(p => p.dataset.web === 'cimba') + 1}) y EstudIA (placa ${placas.findIndex(p => p.dataset.web === 'estudia') + 1}) al llegar. <b>El tablero de Migue, en la pausa o justo antes del bloque 5</b>: su sesión vence y no se renueva sola.</li>
     <li>Antes de proyectar una demo, que no quede abierta ninguna pantalla con nombres, teléfonos o direcciones de vecinos.</li></ul>`;
+
+  const PUB = (window.PUBLICO && window.PUBLICO.ACTIVIDADES) || [];
+  const placaDe = id => placas.findIndex(p => p.dataset.publico === id) + 1;
+  out += `<h2>El público participa desde el celular</h2>
+    <div class="links"><div><span class="ceja">Para el público (sale en el QR de cada placa)</span><b>https://presentacion.srv1915283.hstgr.cloud<wbr>/sumate</b></div></div>
+    <ul class="lista">
+    <li>Entran con su nombre y su municipio (queda guardado en el celular) y responden lo que esté abierto. Cada placa de participación lo abre sola al llegar y lo deja abierto hasta la próxima.</li>
+    <li>${PUB.map(a => `<b>${esc(a.titulo)}</b> (placa ${placaDe(a.id) || '—'})`).join(' · ')}.</li>
+    <li>Migue: desde la placa ${placaDe('migue')} cada uno le puede hacer hasta 3 preguntas; la respuesta real le llega al celular y en la pantalla se ven las preguntas. Una buena: botonera, <b>El público → Moderar → ▶</b> la muestra en grande con su respuesta.</li>
+    <li>Botonera, <b>El público</b>: cuántos hay, qué está abierto, abrir cualquier actividad encima de cualquier placa (SIGUIENTE la saca), <b>Revelar</b>, <b>Cerrar la pregunta en los celulares</b> y <b>Moderar</b> (✕ saca de la pantalla una palabra, una pregunta o a una persona; las malas palabras ya llegan ocultas).</li>
+    <li>Antes de la charla: si probaste en la sala real, <b>Empezar de cero</b> (al final del panel). Para probar sin tocarla: <code>/?canal=prueba</code>, <code>/control?canal=prueba</code> y el QR de esa pantalla.</li>
+    <li>Sin celulares o sin señal: las votaciones también se hacen a mano alzada; la presentación sigue igual.</li></ul>`;
 
   out += `<h2>Migue co-conduce: sus ${V.length} frases</h2>
     <p>Cada vez que en la placa le toca hablar, la botonera hace latir <b>MIGUE HABLA</b>. Las frases salen en orden y todas tienen video. En los separadores Migue está parado, sin hablar.</p>
@@ -152,6 +165,10 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
       const s = S.find(x => x.id === p.dataset.web) || {};
       extra += `<div class="vivo"><b>En vivo · ${esc(s.nombre || p.dataset.web)}</b> · SIGUIENTE lo abre dentro de la presentación (${esc(s.dominio || String(s.url || '').replace(/^https?:\/\//, '').replace(/\/$/, ''))}); otro SIGUIENTE lo cierra y avanza.</div>`;
     }
+    if (p.dataset.publico) {
+      const a = PUB.find(x => x.id === p.dataset.publico) || {};
+      extra += `<div class="vivo"><b>El público · ${esc(a.titulo || p.dataset.publico)}</b> · Al llegar se abre en los celulares: «${esc(a.pregunta || '')}»${a.opciones ? ' (' + a.opciones.map(esc).join(' / ') + ')' : ''}.${p.dataset.revelar !== undefined ? ' SIGUIENTE revela la respuesta; otro SIGUIENTE avanza.' : ''}</div>`;
+    }
     if (p.dataset.vitrina) {
       const recs = p.dataset.vitrina.split(',').map(id => (C.PROYECTOS.find(x => x.id === id) || {})).filter(x => x.nombre)
         .map(x => `${x.nombre}: ${x.recursos.filter(r => p.dataset.solo !== 'ps' || r.tipo === 'ps' || r.enVitrina).map(r => r.titulo).join(' → ')}`);
@@ -166,6 +183,7 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
   out += `<h2 class="salto">Si algo falla</h2><ul class="lista">
     <li>Una frase de Migue de más: ↶ deshacer. Migue no responde en vivo: a los ~40 s sale una respuesta de cortesía.</li>
     <li>Un sistema en vivo no carga: ↻, ↗ (ventana aparte) o seguí con la vitrina de ese sistema.</li>
+    <li>El público no ve la pregunta: que recarguen la página del celular. Sin señal en la sala: a mano alzada, y seguí.</li>
     <li>Aviso rojo "La pantalla no pudo hacer…": seguí con SIGUIENTE, no se traba. "Versión distinta": recargar pantalla y botonera.</li>
     <li>Pantalla negra: Extras → Negro. Saltar a una placa: "Ir a la placa", al final de la botonera.</li></ul>
     <p class="pie">Guion generado desde la presentación (versión ${esc(window.UBA_VERSION || '')}). Cifras de los sistemas al 14/10/2026; el multiplicador de tokens y la cascada de costos son ilustrativos.</p>`;

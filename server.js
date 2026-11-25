@@ -20,6 +20,12 @@ const TIPOS = {
     '.pdf': 'application/pdf',
 };
 
+// Participación del público (/sumate): nube de palabras, votaciones y preguntas a
+// Migue. Las respuestas se guardan FUERA de la carpeta publicada (nadie las descarga).
+const atenderPublico = require('./publico-servidor.js')({
+    datos: process.env.DATOS_PUBLICO || path.join(ROOT, '..', path.basename(ROOT) + '-publico'),
+});
+
 const oyentes = new Set();          // pantallas conectadas (botonera)
 let ultimoEstado = null;            // lo que la presentación reporta (placa actual, Migue, etc.)
 let ultimoControl = 0;              // última vez que el celular del expositor preguntó el estado
@@ -62,6 +68,8 @@ const ips = () => Object.values(os.networkInterfaces()).flat().filter(i => i && 
 
 http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://x');
+    // ---------------------------------------------------------------- público
+    if (await atenderPublico(req, res, url, leerCuerpo)) return;
     // ---------------------------------------------------------------- botonera
     if (url.pathname === '/events') return abrirSSE(req, res, oyentes);
     if (url.pathname === '/cmd' && req.method === 'POST') {
