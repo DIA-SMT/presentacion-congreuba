@@ -96,7 +96,8 @@ http.createServer(async (req, res) => {
         } catch (e) { res.writeHead(502, { 'Content-Type': 'application/json' }); return res.end(JSON.stringify({ error: 'Migue no respondió a tiempo' })); }
     }
     servirArchivo(req, res);
-}).listen(PORT, '0.0.0.0', () => {
+// HOST=127.0.0.1 en un servidor con nginx adelante (que el puerto no quede abierto a internet).
+}).listen(PORT, process.env.HOST || '0.0.0.0', () => {
     console.log(`\nPresentación:   http://localhost:${PORT}`);
     ips().forEach(ip => console.log(`Botonera:       http://${ip}:${PORT}/control`));
     console.log('');

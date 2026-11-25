@@ -46,18 +46,22 @@ window.CONTENIDO = {
   ],
 
   // Sistemas en vivo: se abren dentro de la presentación (navegador de m6.js), desde
-  // las placas "EN VIVO" (data-web) o desde la botonera. enmarcable: false = el
-  // servidor del sistema no deja mostrarlo dentro de otra página (X-Frame-Options
-  // DENY, revisado el 24/11/2026): se ofrece abrirlo en una ventana. Cuando el
-  // servidor lo permita (frame-ancestors, ver README), pasarlo a true.
+  // las placas "EN VIVO" (data-web) o desde la botonera. "dominio" es lo que se lee
+  // en la barra. Los que corren en el VPS del municipio se abren por su dirección
+  // …195-35-42-168.sslip.io: con la presentación publicada en
+  // presentacion.195-35-42-168.sslip.io son el mismo sitio y la sesión funciona
+  // adentro como en una pestaña común. Su nginx los deja mostrarse sólo dentro de
+  // la presentación (snippets/marco-presentacion.conf, ver README).
+  // enmarcable: false = no se deja mostrar adentro: se ofrece abrirlo en una ventana.
   SISTEMAS: [
     { id: 'migue', nombre: 'Migue · Tablero', url: 'https://migue.smt.gob.ar/dashboard/', enmarcable: true, captura: 'img/capturas/migue/gobernanza.jpg' },
-    { id: 'cimba', nombre: 'CIMBA', url: 'https://cimba.smt.gob.ar/', enmarcable: false, captura: 'img/capturas/cimba/mapa.jpg' },
-    { id: 'estudia', nombre: 'EstudIA', url: 'https://estudia.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/estudia/laboratorio-ia.png' },
+    { id: 'cimba', nombre: 'CIMBA', url: 'https://cimba.195-35-42-168.sslip.io/', dominio: 'cimba.smt.gob.ar', enmarcable: true, captura: 'img/capturas/cimba/mapa.jpg' },
+    { id: 'estudia', nombre: 'EstudIA', url: 'https://estudia.195-35-42-168.sslip.io/', dominio: 'estudia.smt.gob.ar', enmarcable: true, captura: 'img/capturas/estudia/laboratorio-ia.png' },
     { id: 'urbania', nombre: 'UrbanIA', url: 'https://urbania.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/urbania/audiencias.jpg' },
     { id: 'cidi', nombre: 'Ciudad Digital', url: 'https://ciudaddigital.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/cidituc/escritorio.jpg' },
-    { id: 'applaza', nombre: 'Applaza', url: 'https://appplazas.smt.gob.ar/', enmarcable: false, captura: 'img/capturas/applaza/ev-1.jpg' },
-    { id: 'bus', nombre: 'Bus Turístico', url: 'https://busturistico.smt.gob.ar/', enmarcable: false, captura: 'img/capturas/bus/resumen.jpg' },
+    { id: 'applaza', nombre: 'Applaza', url: 'https://applazas.195-35-42-168.sslip.io/', dominio: 'appplazas.smt.gob.ar', enmarcable: true, captura: 'img/capturas/applaza/ev-1.jpg' },
+    { id: 'bus', nombre: 'Bus Turístico', url: 'https://turismo.195-35-42-168.sslip.io/', dominio: 'busturistico.smt.gob.ar', enmarcable: true, captura: 'img/capturas/bus/resumen.jpg' },
+    { id: 'feria', nombre: 'FerIA', url: 'https://feria.195-35-42-168.sslip.io/', dominio: 'feria.smt.gob.ar', enmarcable: true, captura: 'img/capturas/ferias/escritorio.jpg' },
     { id: 'presupuesto', nombre: 'Presupuesto Participativo', url: 'https://presupuestoparticipativo.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/presupuesto/escritorio.jpg' },
   ],
 

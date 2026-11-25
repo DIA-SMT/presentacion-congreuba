@@ -76,7 +76,7 @@
         el = document.createElement('div'); el.className = 'web-afuera';
         el.innerHTML = `<div class="fondo"${s.captura ? ` style="background-image:url('${esc(s.captura)}')"` : ''}></div>`
           + `<div class="caja"><span class="ceja">En vivo</span><h3>${esc(s.nombre)} se abre en su propia ventana</h3>`
-          + `<button type="button">Abrir ${esc(s.nombre)} ↗</button><small>${esc(sinProto(s.url))}</small></div>`;
+          + `<button type="button">Abrir ${esc(s.nombre)} ↗</button><small>${esc(s.dominio || sinProto(s.url))}</small></div>`;
         el.querySelector('button').addEventListener('click', () => ventana(id));
       } else {
         el = document.createElement('iframe');
@@ -99,7 +99,7 @@
       const s = sis(id); if (!s) return;
       actual = id;
       Object.values(marcos).forEach(m => m.classList.toggle('on', m.dataset.sitio === id));
-      txt.textContent = sinProto(s.url);
+      txt.textContent = s.dominio || sinProto(s.url);
       const m = marcos[id];
       aviso.querySelector('b').textContent = s.nombre;
       aviso.classList.toggle('ver', m.tagName === 'IFRAME' && !m.dataset.cargado);
