@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>.hero .boton{background:var(--amarillo);color:var(--amarillo-ink)}.hero .boton:hover{background:var(--celeste);color:var(--amarillo-ink)}.pdf-link{margin-top:1rem}</style>
+</head>
+<body>
+<title>Gobernar y comunicar: romper el algoritmo gestionando</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+<style>
+/* Layout: la charla contada como una calle. Banda de escenario navy arriba y en el cierre, con carriles de
+   flechas y una sola que va a contramano. En el medio, el guion: cada momento con su cabeza fija a la
+   izquierda y, a la derecha, placa por placa (lo que se ve | lo que dice ella). La vitrina de gestión
+   es una banda navy con tres celulares vacíos para Comunicación. Paleta del repo + colores de la ciudad. */
+:root {
+  --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --bg: #ebe8e2;
+  --surface: #ffffff;
+  --ink: #111a3b;
+  --ink-2: #2e344b;
+  --muted: #5d6273;
+  --line: #d6d2c9;
+  --accent: #0057e0;
+  --accent-ink: #ffffff;
+  --resalte: #f4dc00;
+  --espacio-bg: #fbf1a6;
+  --espacio-borde: #a89400;
+  --bisel: #111a3b;
+
+  --stage: #111a3b;
+  --stage-2: #1d2856;
+  --stage-ink: #f3f1ec;
+  --stage-muted: #aab1cb;
+  --stage-line: rgba(243, 241, 236, .16);
+  --stage-flecha: rgba(243, 241, 236, .2);
+  --celeste: #2eb1ff;
+  --amarillo: #f4dc00;
+  --amarillo-ink: #111a3b;
+  --azul-ciudad: #0066ff;
+  --rojo: #e0483f;
+  --negro: #000000;
+  --noche: #05081a;
+  --tarjeta: #ffffff;
+  --tarjeta-muted: #6b6f7d;
+  --papel: #f6f3ea;
+  --papel-ink: #1b1b1b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1029; --surface: #141c40; --ink: #eceae5; --ink-2: #cfd2dc; --muted: #9ba2b9;
+    --line: #283160; --accent: #6aa5ff; --accent-ink: #0b1029;
+    --resalte: rgba(244, 220, 0, .34); --espacio-bg: rgba(244, 220, 0, .16); --espacio-borde: #f4dc00; --bisel: #2c3870;
+    --stage: #060a1e; --stage-2: #141d45;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1029; --surface: #141c40; --ink: #eceae5; --ink-2: #cfd2dc; --muted: #9ba2b9;
+  --line: #283160; --accent: #6aa5ff; --accent-ink: #0b1029;
+  --resalte: rgba(244, 220, 0, .34); --espacio-bg: rgba(244, 220, 0, .16); --espacio-borde: #f4dc00; --bisel: #2c3870;
+  --stage: #060a1e; --stage-2: #141d45;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--celeste); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1160px; margin-inline: auto;
+  padding-left: max(clamp(16px, 4vw, 40px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(16px, 4vw, 40px), env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { text-wrap: balance; }
+.eyebrow { font-family: var(--font-mono); font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 3.4vw, 2.5rem); line-height: 1.12; letter-spacing: -.015em; margin-top: .6rem; }
+.sec { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--line); }
+mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: inherit; padding-inline: .08em; }
+.k-int { color: var(--amarillo); font-style: normal; }
+.k-tik { color: var(--celeste); font-style: normal; }
+
+/* ---------- Escenario (hero, vitrina y cierre) ---------- */
+.hero, .cierre { background: radial-gradient(120% 90% at 88% 0%, var(--stage-2) 0%, var(--stage) 62%); color: var(--stage-ink); position: relative; overflow: hidden; }
+.hero { margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: calc(env(safe-area-inset-top, 0px) + clamp(2.5rem, 6vw, 4.5rem)); }
+.hero .wrap, .cierre .wrap { position: relative; z-index: 1; padding-bottom: clamp(7rem, 12vw, 8.5rem); }
+.kicker { display: flex; flex-wrap: wrap; gap: .35rem 1.1rem; font-family: var(--font-mono); font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--stage-muted); }
+.kicker .vivo { color: var(--amarillo); display: inline-flex; align-items: center; gap: .5rem; }
+.kicker .vivo::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--amarillo); }
+
+.titulo { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3.2vw, 2.45rem); line-height: 1.15; letter-spacing: -.012em; margin-top: 1.1rem; max-width: 32ch; }
+.roto { position: relative; display: inline-block; color: transparent; }
+.roto::before, .roto::after { content: attr(data-t); content: attr(data-t) / ""; position: absolute; left: 0; top: 0; color: var(--celeste); }
+.roto::before { clip-path: polygon(0 0, 100% 0, 100% 44%, 0 60%); transform: translateX(-.04em); }
+.roto::after { clip-path: polygon(0 60%, 100% 44%, 100% 100%, 0 100%); transform: translate(.07em, .03em); animation: falla 6s steps(1) infinite; }
+@keyframes falla { 0%, 90% { transform: translate(.07em, .03em); } 92% { transform: translate(-.06em, .03em); } 94% { transform: translate(.13em, 0); } 96% { transform: translate(.07em, .03em); } }
+
+.idea { margin-top: clamp(2.2rem, 4.5vw, 3.2rem); }
+.idea-tag { display: flex; align-items: center; gap: .7rem; font-family: var(--font-mono); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--amarillo); }
+.idea-tag::before { content: ""; width: 1.8rem; height: 2px; background: var(--amarillo); }
+.quiasmo { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.1rem, 6vw, 5.1rem); line-height: 1.03; letter-spacing: -.028em; margin-top: .9rem; }
+.quiasmo .l1, .quiasmo .l2 { display: block; }
+.quiasmo .l2 { padding-left: clamp(0px, 8vw, 8.5rem); }
+@keyframes desde-izq { from { opacity: 0; transform: translateX(-56px); } }
+@keyframes desde-der { from { opacity: 0; transform: translateX(56px); } }
+.quiasmo .l1 { animation: desde-izq .95s cubic-bezier(.2, .7, .2, 1) both; }
+.quiasmo .l2 { animation: desde-der .95s .22s cubic-bezier(.2, .7, .2, 1) both; }
+.para { color: var(--stage-muted); max-width: 44rem; margin-top: 1.6rem; }
+.saltos { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.6rem; }
+.saltos a { text-decoration: none; color: var(--stage-ink); border: 1px solid var(--stage-line); border-radius: 999px; padding: .42rem .95rem; font-size: .9rem; font-weight: 500; transition: border-color .2s, background-color .2s; }
+.saltos a:hover { border-color: var(--celeste); background: var(--stage-line); }
+
+/* Carriles: todas las flechas van para un lado; Rosalía, para el otro. */
+.carriles { position: absolute; left: 0; right: 0; bottom: clamp(1.4rem, 3vw, 2.2rem); display: grid; gap: 16px; pointer-events: none; }
+.carril { position: relative; height: 22px; }
+.carril::before { content: ""; position: absolute; inset: 0; background: var(--stage-flecha);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='22'%3E%3Cpath d='M14 11h28m-10-8 10 8-10 8' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0 / 72px 22px repeat-x;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='22'%3E%3Cpath d='M14 11h28m-10-8 10 8-10 8' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0 / 72px 22px repeat-x;
+  animation: fluir 2.6s linear infinite; }
+.carril + .carril::before { animation-duration: 3.4s; }
+@keyframes fluir { to { -webkit-mask-position: 72px 0; mask-position: 72px 0; } }
+.rosalia { position: absolute; left: 0; top: 0; height: 22px; display: inline-flex; align-items: center; gap: .45rem; padding: 0 .6rem; background: var(--stage); color: var(--amarillo); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; transform: translateX(58vw); animation: contramano 12s linear -5s infinite; }
+.rosalia svg { width: 40px; height: 22px; flex: none; }
+@keyframes contramano { from { transform: translateX(104vw); } to { transform: translateX(-14rem); } }
+
+/* ---------- La idea / tesis ---------- */
+.h-tesis { max-width: 30ch; }
+.dos-rec { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2.2rem; }
+.rec { border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; gap: .55rem; min-width: 0; }
+.rec .tag { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.rec p { font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 600; line-height: 1.3; }
+.rec.elegido { background: var(--stage); color: var(--stage-ink); }
+.rec.elegido .tag { color: var(--amarillo); }
+.tesis-frase { margin-top: 2.2rem; font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-weight: 600; line-height: 1.35; max-width: 38ch; }
+.como-dice { margin-top: 2.6rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 1.5rem 3rem; align-items: start; padding-top: 2rem; border-top: 1px solid var(--line); }
+.como-dice h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; }
+.como-dice .ayuda { color: var(--ink-2); font-size: .97rem; margin-top: .5rem; }
+.como-dice blockquote p { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.15rem, 2.2vw, 1.45rem); line-height: 1.4; }
+.como-dice cite { display: block; margin-top: .7rem; font-style: normal; font-family: var(--font-mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Mapa de los 35 minutos ---------- */
+.mapa { list-style: none; display: grid; grid-template-columns: 3fr 6fr 6fr 8fr 9fr 3fr; gap: 6px; margin-top: 2.2rem; }
+.mapa li { --seg: var(--celeste); min-width: 0; }
+.mapa li.nucleo { --seg: var(--amarillo); }
+.mapa li.borde { --seg: var(--muted); }
+.mapa a { position: relative; overflow: hidden; height: 100%; display: flex; flex-direction: column; gap: .35rem; padding: 1.1rem .8rem .9rem; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; transition: transform .2s, border-color .2s; }
+.mapa a::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--seg); }
+.mapa a:hover { border-color: var(--accent); transform: translateY(-3px); }
+.mapa .t, .mapa .dur { font-family: var(--font-mono); font-size: .74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mapa b { font-size: .97rem; line-height: 1.22; font-weight: 700; overflow-wrap: anywhere; hyphens: auto; }
+.mapa small { font-size: .8rem; line-height: 1.35; color: var(--muted); }
+.mapa .dur { margin-top: auto; padding-top: .4rem; }
+.nota { margin-top: 1rem; font-size: .92rem; color: var(--muted); max-width: 64ch; }
+
+/* ---------- Guion: cabecera ---------- */
+.guion-intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1.5rem 3rem; align-items: end; }
+.guion-intro p { color: var(--ink-2); max-width: 56ch; margin-top: .7rem; }
+.leyenda { display: flex; flex-direction: column; gap: .6rem; font-size: .92rem; color: var(--ink-2); }
+.leyenda span { display: flex; align-items: baseline; gap: .7rem; }
+.acciones { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: .6rem; }
+.boton { font: inherit; font-weight: 600; font-size: .95rem; background: var(--ink); color: var(--bg); border: 0; border-radius: 999px; padding: .7rem 1.25rem; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; transition: background-color .2s, color .2s; }
+.boton:hover { background: var(--accent); color: var(--accent-ink); }
+.estado { font-size: .88rem; color: var(--muted); }
+#guion-texto { width: 100%; min-height: 14rem; margin-top: 1rem; font: .85rem/1.5 var(--font-mono); padding: .8rem; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+
+/* ---------- Momentos ---------- */
+.momento { padding-block: clamp(3.5rem, 8vw, 5.5rem); border-top: 1px solid var(--line); }
+.m-grid { display: grid; grid-template-columns: minmax(0, 3.6fr) minmax(0, 8.4fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.m-cab { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 1.5rem); display: flex; flex-direction: column; gap: .45rem; }
+.m-num { font-family: var(--font-display); font-weight: 800; font-size: clamp(4.2rem, 9vw, 7.5rem); line-height: .85; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 2px var(--ink); }
+.m-t { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.m-cab h2 { margin-top: .1rem; font-size: clamp(1.5rem, 2.8vw, 2.1rem); }
+.m-idea { font-size: .95rem; line-height: 1.6; color: var(--ink-2); margin-top: .5rem; }
+.m-cuerpo { min-width: 0; }
+
+/* Placa por placa */
+.pl-row { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); gap: 1.6rem; padding-block: 1.7rem; border-top: 1px solid var(--line); }
+.pl-row:first-of-type { border-top: 0; padding-top: 0; }
+.toma { display: flex; flex-direction: column; gap: .55rem; min-width: 0; }
+.toma figcaption { font-size: .85rem; line-height: 1.45; color: var(--ink-2); }
+.n { display: inline-block; font-family: var(--font-mono); font-weight: 500; font-size: .74rem; color: var(--accent); margin-right: .45rem; font-variant-numeric: tabular-nums; }
+.dice { min-width: 0; }
+.dice-tag { display: block; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .45rem; }
+.dice-txt p { font-size: 1.02rem; line-height: 1.7; }
+.dice-txt p + p { margin-top: .75rem; }
+.acot { font-style: italic; color: var(--muted); font-size: .93em; }
+.espacio { background: var(--espacio-bg); border: 1px dashed var(--espacio-borde); border-radius: 4px; padding: .05em .35em; font-weight: 500; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+/* Miniaturas de placa (16:9) */
+.mini { container-type: inline-size; position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: var(--stage); color: var(--stage-ink); box-shadow: 0 0 0 1px var(--line); }
+.mini.negro { background: var(--negro); }
+.mini.destacada { background: var(--amarillo); color: var(--amarillo-ink); }
+.m-centro { position: absolute; inset: 0; display: grid; place-items: center; }
+.m-cel { position: relative; height: 43cqw; aspect-ratio: 9 / 16; border-radius: 3.2cqw; border: .8cqw solid var(--stage-line); background: var(--stage-2); display: grid; place-items: center; flex: none; }
+.m-play { width: 0; height: 0; border-left: 4.6cqw solid var(--amarillo); border-top: 2.8cqw solid transparent; border-bottom: 2.8cqw solid transparent; margin-left: 1cqw; }
+.m-tc { position: absolute; right: 4cqw; bottom: 3.5cqw; font-family: var(--font-mono); font-size: 3.8cqw; color: var(--stage-muted); }
+.m-tc.amarillo { color: var(--amarillo); }
+.m-txt { position: absolute; inset: 0; padding: 7cqw 8cqw; display: flex; flex-direction: column; justify-content: center; gap: 2.5cqw; font-family: var(--font-display); font-weight: 800; font-size: 7cqw; line-height: 1.08; letter-spacing: -.02em; }
+.m-txt small { font-family: var(--font-mono); font-weight: 500; font-size: 3.3cqw; letter-spacing: .12em; text-transform: uppercase; color: var(--stage-muted); }
+.m-recorte { position: absolute; left: 13%; right: 13%; top: 19%; bottom: 19%; background: var(--papel); color: var(--papel-ink); transform: rotate(-2.5deg); padding: 3.5cqw 5cqw; display: flex; flex-direction: column; justify-content: center; gap: 1.5cqw; box-shadow: 0 1.5cqw 4cqw rgba(0, 0, 0, .35); }
+.m-recorte small { font-family: var(--font-mono); font-size: 2.6cqw; letter-spacing: .1em; text-transform: uppercase; opacity: .6; }
+.m-recorte b { font-family: Georgia, "Times New Roman", serif; font-size: 6cqw; line-height: 1.12; }
+.m-recorte mark { background: var(--amarillo); color: var(--papel-ink); padding: 0 .1em; }
+.m-split { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; }
+.m-split > span { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3cqw; font-family: var(--font-mono); font-size: 3.3cqw; letter-spacing: .1em; text-transform: uppercase; color: var(--stage-muted); }
+.m-split > span + span { border-left: .4cqw solid var(--stage-line); }
+.m-split .pulido::before { content: ""; width: 72%; aspect-ratio: 16 / 9; border-radius: 1.4cqw; background: linear-gradient(135deg, var(--stage-2), var(--azul-ciudad)); }
+.m-split .crudo::before { content: ""; height: 30cqw; aspect-ratio: 9 / 16; border-radius: 2cqw; border: .7cqw solid var(--amarillo); }
+.m-fotos { position: absolute; inset: 12% 8%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3cqw; }
+.m-fotos span { border-radius: 1.6cqw; display: flex; align-items: flex-end; padding: 2.4cqw; font-size: 3.3cqw; font-weight: 600; line-height: 1.1;
+  background: radial-gradient(circle at 50% 36%, var(--stage-line) 0 17%, transparent 18%), radial-gradient(ellipse 46% 34% at 50% 92%, var(--stage-line) 0 99%, transparent 100%), var(--stage-2); }
+.m-fotos span:last-child { background: radial-gradient(circle at 50% 36%, rgba(17, 26, 59, .16) 0 17%, transparent 18%), radial-gradient(ellipse 46% 34% at 50% 92%, rgba(17, 26, 59, .16) 0 99%, transparent 100%), var(--amarillo); color: var(--amarillo-ink); }
+.m-celtxt { position: absolute; inset: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 5cqw; padding: 0 8cqw; }
+.m-rec { position: absolute; left: 2.2cqw; top: 2.4cqw; display: flex; align-items: center; gap: 1cqw; font-family: var(--font-mono); font-size: 2.6cqw; color: var(--stage-ink); }
+.m-rec::before { content: ""; width: 1.8cqw; height: 1.8cqw; border-radius: 50%; background: var(--rojo); animation: latir 1.2s ease-in-out infinite; }
+.m-frase { font-family: var(--font-display); font-weight: 800; font-size: 5.6cqw; line-height: 1.1; letter-spacing: -.015em; }
+.m-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.m-svg .via { fill: none; stroke: var(--stage-muted); stroke-width: 3; stroke-linecap: round; }
+.m-svg .via.elegida { stroke: var(--amarillo); }
+.m-svg .nodo { fill: var(--stage-ink); }
+.m-svg text { fill: var(--stage-ink); font-family: var(--font-mono); font-size: 7px; }
+.m-svg text.t-elegida { fill: var(--amarillo); }
+.m-svg .cruce { fill: var(--stage-2); }
+.m-svg .calle { fill: var(--stage-line); }
+.m-svg .calle-nombre { fill: var(--stage-muted); font-size: 6.5px; }
+.m-svg .sentido path { fill: none; stroke: var(--amarillo); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.m-svg .sentido { transform-box: fill-box; transform-origin: center; animation: girar 4s ease-in-out infinite; }
+.m-svg .sentido.b { animation-delay: 2s; }
+.m-doc { position: absolute; left: 32%; right: 32%; top: 11%; bottom: 11%; background: var(--stage-2); border-radius: 1.5cqw; padding: 3.5cqw; display: flex; flex-direction: column; gap: 2.2cqw; }
+.m-doc small { font-family: var(--font-mono); font-size: 2.4cqw; letter-spacing: .1em; text-transform: uppercase; color: var(--stage-muted); }
+.m-doc i { display: block; height: 1.5cqw; border-radius: 1cqw; background: var(--stage-line); }
+.m-doc i:nth-of-type(2) { width: 86%; } .m-doc i:nth-of-type(4) { width: 62%; }
+.m-sello { position: absolute; right: 9%; bottom: 15%; transform: rotate(-9deg); border: .6cqw solid var(--amarillo); color: var(--amarillo); font-family: var(--font-mono); font-size: 3.6cqw; letter-spacing: .1em; text-transform: uppercase; padding: 1cqw 2.4cqw; border-radius: 1cqw; }
+.m-flechas { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 3.4cqw; font-size: 9cqw; font-weight: 700; color: var(--stage-muted); }
+.m-flechas .contra { color: var(--amarillo); transform: scale(1.3); }
+.m-tabla { position: absolute; inset: 0; padding: 8cqw 9cqw; display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 2.6cqw 3.4cqw; align-content: center; font-size: 4.3cqw; line-height: 1.1; }
+.m-tabla .a { font-family: var(--font-mono); color: var(--stage-muted); text-decoration: line-through; text-decoration-color: var(--amarillo); text-decoration-thickness: .5cqw; }
+.m-tabla i { font-style: normal; color: var(--celeste); }
+.m-tabla .g { font-weight: 700; }
+
+/* ---------- La historia de Rosalía en el celular ---------- */
+.historia-cab { margin-bottom: 1rem; }
+.historia { display: grid; grid-template-columns: minmax(0, 270px) minmax(0, 1fr); gap: clamp(1.5rem, 3.5vw, 2.6rem); align-items: center; margin-bottom: 1rem; }
+.cel { position: relative; width: 100%; aspect-ratio: 9 / 16; background: var(--stage); color: var(--stage-ink); border-radius: 30px; padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 0 0 7px var(--bisel), 0 28px 60px -24px rgba(6, 10, 30, .55); cursor: pointer; user-select: none; }
+.barras { display: flex; gap: 4px; }
+.barra { flex: 1; height: 3px; border-radius: 2px; background: var(--stage-line); overflow: hidden; }
+.barra i { display: block; height: 100%; width: 0; background: var(--stage-ink); }
+.barra.hecha i { width: 100%; }
+.barra.on i { animation: llenar 5.5s linear forwards; }
+.cel:hover .barra.on i, .cel:focus-within .barra.on i, .cel.pausa .barra.on i { animation-play-state: paused; }
+@keyframes llenar { from { width: 0; } to { width: 100%; } }
+.cel-cab { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--stage-muted); }
+.cuadros { position: relative; flex: 1; }
+.cuadro { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 1rem; opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s ease; }
+.cuadro.on { opacity: 1; transform: none; }
+.c-paso { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--amarillo); }
+.c-txt { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; line-height: 1.06; letter-spacing: -.02em; text-wrap: balance; }
+.cel-pie { font-family: var(--font-mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--stage-muted); display: flex; justify-content: space-between; gap: .5rem; }
+.carteles { display: flex; flex-direction: column; gap: .45rem; }
+.cartel { display: flex; justify-content: space-between; align-items: center; gap: .6rem; background: var(--stage-ink); color: var(--stage); border-radius: 6px; padding: .45rem .7rem; font-weight: 700; font-size: .74rem; letter-spacing: .04em; text-transform: uppercase; }
+.giro { display: inline-block; font-style: normal; font-size: 1.05rem; line-height: 1; animation: girar 4s ease-in-out infinite; }
+.cartel + .cartel .giro { animation-delay: 2s; }
+@keyframes girar { 0%, 38% { transform: rotate(0); } 50%, 88% { transform: rotate(180deg); } 100% { transform: rotate(360deg); } }
+.comunicado { border: 1px dashed var(--stage-line); border-radius: 8px; padding: .7rem .8rem; display: flex; flex-direction: column; gap: .4rem; opacity: .7; }
+.comunicado span { font-family: var(--font-mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--stage-muted); }
+.comunicado i { display: block; height: 6px; border-radius: 3px; background: var(--stage-line); }
+.comunicado i:nth-child(3) { width: 82%; } .comunicado i:nth-child(4) { width: 64%; }
+.fila-flechas { display: flex; gap: .55rem; font-size: 1.4rem; font-weight: 700; color: var(--stage-muted); }
+.fila-flechas .contra { color: var(--amarillo); transform: scale(1.35); }
+.llamada { align-self: flex-start; display: inline-flex; align-items: center; gap: .55rem; background: var(--stage-line); border-radius: 999px; padding: .45rem .85rem; font-size: .8rem; font-weight: 600; }
+.llamada::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: var(--amarillo); animation: latir 1.2s ease-in-out infinite; }
+@keyframes latir { 50% { transform: scale(1.6); opacity: .5; } }
+.beats { list-style: none; display: flex; flex-direction: column; gap: .3rem; counter-reset: beat; }
+.beats button { counter-increment: beat; width: 100%; text-align: left; font: inherit; color: var(--ink-2); background: none; border: 0; border-left: 3px solid var(--line); padding: .5rem 0 .55rem 1rem; cursor: pointer; display: flex; flex-direction: column; gap: .1rem; transition: border-color .25s, background-color .25s; border-radius: 0 8px 8px 0; }
+.beats button:hover { background: var(--surface); }
+.beats button[aria-current="step"] { border-left-color: var(--amarillo); background: var(--surface); color: var(--ink); }
+.b-tit { font-weight: 700; color: var(--ink); font-size: .97rem; }
+.b-tit::before { content: counter(beat) " · "; font-family: var(--font-mono); font-weight: 500; font-size: .78rem; color: var(--muted); }
+.b-txt { font-size: .9rem; line-height: 1.5; }
+.fuente-video { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin: 1.2rem 0 2.2rem; }
+.fuente-video small { color: var(--muted); font-size: .84rem; }
+
+/* ---------- Vitrina de gestión ---------- */
+.vitrina { margin-top: 2.6rem; padding: clamp(1.6rem, 4vw, 2.8rem); border-radius: 22px; background: var(--stage); color: var(--stage-ink); }
+.vitrina .eyebrow { color: var(--amarillo); }
+.vitrina h3 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; margin-top: .5rem; }
+.vitrina .sub { color: var(--stage-muted); max-width: 62ch; margin-top: .7rem; }
+.vit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.2rem, 3vw, 2.2rem); margin-top: 2.2rem; }
+.vit-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; min-width: 0; }
+.vit-cel { width: 100%; max-width: 250px; aspect-ratio: 9 / 16; border-radius: 30px; background: var(--stage-2); box-shadow: 0 0 0 6px var(--stage-line); padding: 12px 13px 14px; display: flex; flex-direction: column; gap: 10px; }
+.vit-cel .barras .barra:first-child i { width: 100%; }
+.vit-pantalla { flex: 1; border: 1.5px dashed var(--amarillo); border-radius: 16px; padding: 14px 14px 12px; display: flex; flex-direction: column; gap: .7rem; }
+.vit-tag { font-family: var(--font-mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--amarillo); }
+.vit-obra { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; line-height: 1.08; letter-spacing: -.015em; margin-top: auto; }
+.vit-pasos { list-style: none; display: flex; flex-direction: column; gap: .45rem; margin-bottom: auto; }
+.vit-pasos li { font-size: .8rem; line-height: 1.35; color: var(--stage-muted); }
+.vit-pasos b { display: block; font-family: var(--font-mono); font-weight: 500; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--stage-ink); }
+.vit-pie { font-family: var(--font-mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--stage-muted); }
+.vit-item figcaption { font-size: .86rem; line-height: 1.45; color: var(--stage-muted); max-width: 250px; }
+.vit-item .n { color: var(--amarillo); }
+.vit-dice { margin-top: 2.4rem; padding-top: 1.8rem; border-top: 1px solid var(--stage-line); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 1rem 3rem; }
+.vit-dice h4 { font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+.vit-dice .dice-tag { color: var(--stage-muted); }
+.vit-dice .espacio { background: rgba(244, 220, 0, .16); border-color: var(--amarillo); color: var(--stage-ink); }
+.vit-dice .acot { color: var(--stage-muted); }
+
+/* ---------- Cierre ---------- */
+.cierre .eyebrow { color: var(--stage-muted); padding-top: clamp(3.5rem, 8vw, 6rem); }
+.ultima { margin-top: 1.4rem; }
+.ultima p { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 4.6vw, 3.7rem); line-height: 1.07; letter-spacing: -.025em; max-width: 22ch; text-wrap: balance; }
+.cierre .toma-txt { margin-top: 1.2rem; font-family: var(--font-mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--amarillo); }
+.cierre .toma-txt .n { color: var(--amarillo); }
+.dice-cierre { margin-top: 2.6rem; padding-top: 1.8rem; border-top: 1px solid var(--stage-line); max-width: 66ch; }
+.dice-cierre .dice-tag { color: var(--stage-muted); }
+.dice-cierre .acot { color: var(--stage-muted); }
+
+/* ---------- Para Comunicación ---------- */
+.principios { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 2.2rem; }
+.principio { background: var(--surface); padding: 1.4rem 1.4rem 1.5rem; min-width: 0; }
+.principio h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.3; margin-bottom: .4rem; }
+.principio p { font-size: .94rem; color: var(--ink-2); line-height: 1.55; }
+.material { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 1.5rem 3rem; margin-top: 3.5rem; align-items: start; }
+.material h3 { font-size: 1.35rem; font-weight: 700; line-height: 1.2; }
+.material .ayuda { color: var(--muted); font-size: .92rem; margin-top: .5rem; }
+.avance { margin-top: 1.4rem; }
+.avance b { font-family: var(--font-mono); font-weight: 500; font-size: 2.4rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.avance span { display: block; color: var(--muted); font-size: .9rem; margin-top: .3rem; }
+.avance-barra { height: 6px; border-radius: 3px; background: var(--line); margin-top: .8rem; overflow: hidden; }
+.avance-barra i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+.lista-mat { list-style: none; }
+.lista-mat label { display: flex; align-items: flex-start; gap: .85rem; padding: .8rem 0; border-bottom: 1px solid var(--line); cursor: pointer; font-size: .97rem; line-height: 1.45; }
+.lista-mat li:first-child label { border-top: 1px solid var(--line); }
+.lista-mat input { flex: none; width: 1.15rem; height: 1.15rem; margin-top: .18rem; accent-color: var(--accent); cursor: pointer; }
+.lista-mat input:checked + span { color: var(--muted); text-decoration: line-through; }
+.lista-mat small { display: block; color: var(--muted); font-size: .84rem; }
+.lista-mat .ref { font-family: var(--font-mono); font-size: .74rem; color: var(--accent); white-space: nowrap; }
+
+.fuentes { padding-block: 2.5rem 3rem; border-top: 1px solid var(--line); }
+.fuentes ul { list-style: none; display: flex; flex-direction: column; gap: .45rem; margin-top: .9rem; }
+.fuentes li { font-size: .92rem; color: var(--ink-2); }
+.fuentes a { color: var(--accent); text-underline-offset: 3px; }
+.pie { margin-top: 2rem; font-size: .84rem; color: var(--muted); }
+
+/* ---------- Lenguaje de redes: íconos, red de nodos, celulares ---------- */
+.ic { width: 1em; height: 1em; fill: currentColor; flex: none; display: inline-block; vertical-align: -.12em; }
+.red-hero { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.red-hero line { stroke: var(--stage-line); stroke-width: .18; }
+.red-hero circle { fill: rgba(46, 177, 255, .4); }
+.red-hero circle.a { fill: var(--amarillo); }
+.red-deco { position: absolute; right: -2%; top: -8%; width: 46%; max-width: 420px; height: auto; pointer-events: none; }
+.red-deco line { stroke: var(--stage-line); stroke-width: .5; }
+.red-deco circle { fill: rgba(46, 177, 255, .5); }
+.red-deco circle.a { fill: var(--amarillo); }
+
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
+.hero-txt { min-width: 0; }
+.hero-grid .quiasmo { font-size: clamp(2rem, 4.3vw, 3.8rem); }
+.hero-grid .quiasmo .l2 { padding-left: clamp(0px, 4vw, 4rem); }
+.redes { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.3rem; }
+.red-chip { display: inline-flex; align-items: center; gap: .45rem; border: 1px solid var(--stage-line); border-radius: 999px; padding: .3rem .85rem .3rem .65rem; font-size: .82rem; font-weight: 500; color: var(--stage-ink); }
+.red-chip .ic { font-size: 1.05rem; color: var(--celeste); }
+.credito { margin-top: 1.3rem; font-size: .82rem; color: var(--stage-muted); }
+.credito b { color: var(--stage-ink); font-weight: 600; }
+
+.fan { container-type: inline-size; position: relative; width: 100%; max-width: 520px; justify-self: center; aspect-ratio: 1 / .8; }
+.tel { position: absolute; width: 36cqw; aspect-ratio: 9 / 16; border-radius: 6cqw; background: var(--noche); padding: 1.3cqw; box-shadow: 0 0 0 1cqw var(--stage-2), 0 5cqw 10cqw rgba(0, 0, 0, .5); }
+.tel.t1 { left: 0; top: 10cqw; transform: rotate(-7deg); }
+.tel.t2 { left: 32cqw; top: 0; z-index: 2; }
+.tel.t3 { left: 64cqw; top: 10cqw; transform: rotate(7deg); }
+.pant { position: relative; width: 100%; height: 100%; border-radius: 4.8cqw; overflow: hidden; }
+.v-video { background: linear-gradient(170deg, #1a2a6b 0%, #0b1236 70%); }
+.tabs { position: absolute; top: 3cqw; left: 0; right: 0; display: flex; justify-content: center; gap: 2.3cqw; font-size: 1.6cqw; color: rgba(243, 241, 236, .6); }
+.tabs b { color: #fff; font-weight: 600; border-bottom: .35cqw solid #fff; padding-bottom: .3cqw; }
+.vid-flechas { position: absolute; top: 24cqw; left: 0; right: 7cqw; display: flex; justify-content: center; gap: 1.5cqw; font-size: 4.2cqw; font-weight: 800; color: rgba(243, 241, 236, .45); }
+.vid-flechas .contra { color: var(--amarillo); transform: scale(1.35); }
+.rail { position: absolute; right: 1.5cqw; bottom: 15cqw; display: flex; flex-direction: column; align-items: center; gap: 2cqw; color: #fff; font-size: 2.6cqw; }
+.rail .av { width: 4.6cqw; height: 4.6cqw; border-radius: 50%; background: var(--amarillo); border: .4cqw solid #fff; }
+.pie-post { position: absolute; left: 2.3cqw; right: 8.5cqw; bottom: 2.6cqw; font-size: 1.5cqw; line-height: 1.35; color: #fff; }
+.pie-post b { font-size: 1.7cqw; }
+.pie-post p { margin-top: .5cqw; }
+.musica { display: inline-flex; align-items: center; gap: .8cqw; margin-top: .8cqw; font-size: 1.45cqw; color: rgba(243, 241, 236, .85); }
+.v-story { background: linear-gradient(165deg, var(--azul-ciudad) 0%, #1b2f8f 45%, var(--stage) 100%); padding: 2.3cqw; display: flex; flex-direction: column; color: #fff; }
+.st-barras { display: flex; gap: .6cqw; }
+.st-barras i { flex: 1; height: .4cqw; border-radius: .2cqw; background: rgba(255, 255, 255, .35); }
+.st-barras i.on { background: #fff; }
+.st-user { display: flex; align-items: center; gap: 1.1cqw; margin-top: 1.6cqw; font-size: 1.6cqw; }
+.st-user .av { width: 3.9cqw; height: 3.9cqw; border-radius: 50%; background: var(--amarillo); border: .3cqw solid #fff; }
+.st-user span { color: rgba(255, 255, 255, .7); }
+.st-txt { margin: auto 0; }
+.st-txt small { font-size: 1.5cqw; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--amarillo); }
+.st-txt p { font-family: var(--font-display); font-size: 4.2cqw; line-height: 1.02; font-weight: 800; letter-spacing: -.02em; margin-top: 1.2cqw; }
+.st-txt p.st-sub { font-size: 2.8cqw; line-height: 1.1; font-weight: 700; }
+.st-pie { display: flex; align-items: center; gap: 1.5cqw; font-size: 2.3cqw; }
+.st-pie span { flex: 1; border: .25cqw solid rgba(255, 255, 255, .6); border-radius: 4cqw; padding: .9cqw 1.9cqw; font-size: 1.5cqw; }
+.v-notif { background: var(--papel); color: #111a3b; padding: 2.8cqw 2.2cqw; display: flex; flex-direction: column; gap: 1.5cqw; }
+.nt-cab { display: flex; align-items: center; gap: 1.1cqw; font-size: 2cqw; font-weight: 700; margin-bottom: .4cqw; }
+.nt { display: flex; gap: 1.4cqw; align-items: flex-start; background: var(--tarjeta); border-radius: 1.9cqw; padding: 1.4cqw; box-shadow: 0 .3cqw 1cqw rgba(17, 26, 59, .12); }
+.nt-ic { flex: none; width: 3.9cqw; height: 3.9cqw; border-radius: 1.1cqw; background: #111a3b; color: #fff; display: grid; place-items: center; font-size: 1.9cqw; font-style: normal; }
+.nt-ic.am { background: var(--amarillo); color: #111a3b; }
+.nt p { font-size: 1.4cqw; line-height: 1.3; color: #3a4058; }
+.nt p b { display: block; font-size: 1.6cqw; color: #111a3b; }
+.nt-lema { margin-top: auto; font-size: 1.45cqw; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #6b6f7d; text-align: center; }
+
+/* Maquetas de placa con interfaz de redes */
+.mini.destacada .m-txt small { color: var(--amarillo-ink); opacity: .65; display: flex; align-items: center; gap: 1cqw; }
+.k-tag { position: absolute; left: 3.5cqw; top: 3cqw; display: flex; align-items: center; gap: 1cqw; font-family: var(--font-mono); font-size: 3cqw; letter-spacing: .12em; text-transform: uppercase; color: var(--stage-muted); }
+.tf { position: absolute; top: 8%; height: 84%; aspect-ratio: 9 / 16; border-radius: 3.6cqw; background: var(--noche); padding: .9cqw; box-shadow: 0 0 0 .7cqw var(--stage-2); }
+.tf-centro { left: 50%; transform: translateX(-50%); }
+.tf-scr { position: relative; width: 100%; height: 100%; border-radius: 2.8cqw; overflow: hidden; background: linear-gradient(170deg, #1a2a6b, #0b1236 75%); }
+.tf-play { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); width: 0; height: 0; border-left: 4cqw solid #fff; border-top: 2.4cqw solid transparent; border-bottom: 2.4cqw solid transparent; opacity: .9; }
+.tf-rail { position: absolute; right: 1.2cqw; bottom: 9cqw; display: flex; flex-direction: column; gap: 1.6cqw; color: #fff; font-size: 2.6cqw; }
+.tf-rail.chico { right: .8cqw; bottom: 3cqw; gap: 1cqw; font-size: 2cqw; }
+.tf-rail .am { color: var(--amarillo); }
+.tf-pie { position: absolute; left: 1.6cqw; right: 5cqw; bottom: 2.2cqw; font-size: 1.7cqw; line-height: 1.3; color: #fff; }
+.tf-pie b { display: block; font-size: 1.9cqw; }
+.tf-barras { position: absolute; top: 1.6cqw; left: 1.6cqw; right: 1.6cqw; display: flex; gap: .5cqw; }
+.tf-barras i { flex: 1; height: .35cqw; background: rgba(255, 255, 255, .35); }
+.tf-barras i.on { background: #fff; }
+.tf-flechas { position: absolute; left: 0; right: 0; top: 30%; display: flex; justify-content: center; gap: .8cqw; font-size: 3.4cqw; font-weight: 800; color: rgba(243, 241, 236, .45); }
+.tf-flechas .contra { color: var(--amarillo); }
+.k-burbuja { position: absolute; display: flex; align-items: center; gap: 1.6cqw; background: var(--tarjeta); color: #111a3b; border-radius: 2.4cqw; padding: 1.8cqw 2.4cqw; box-shadow: 0 1cqw 3cqw rgba(0, 0, 0, .35); font-size: 2.8cqw; line-height: 1.25; }
+.kb-ic { flex: none; width: 5.4cqw; height: 5.4cqw; border-radius: 1.4cqw; background: #111a3b; color: var(--amarillo); display: grid; place-items: center; font-size: 3.2cqw; }
+.k-burbuja b { display: block; font-size: 2.3cqw; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--tarjeta-muted); }
+.m-recorte.k-izq { left: 7%; right: 40%; top: 18%; bottom: 18%; }
+.m-recorte.k-izq b { font-size: 4.8cqw; }
+.k-posts { position: absolute; inset: 10% 7%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.6cqw; }
+.k-post { background: var(--tarjeta); border-radius: 1.6cqw; padding: 1.4cqw; display: flex; flex-direction: column; gap: 1.2cqw; color: #111a3b; min-width: 0; }
+.kp-cab { display: flex; align-items: center; gap: 1cqw; font-size: 2.2cqw; font-weight: 600; white-space: nowrap; overflow: hidden; }
+.kp-cab i { flex: none; width: 2.6cqw; height: 2.6cqw; border-radius: 50%; background: var(--amarillo); }
+.kp-foto { flex: 1; border-radius: 1cqw; background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .45) 0 15%, transparent 16%), radial-gradient(ellipse 44% 32% at 50% 96%, rgba(255, 255, 255, .45) 0 99%, transparent 100%), #1d2856; }
+.k-post.ultima .kp-foto { background: radial-gradient(circle at 50% 38%, rgba(17, 26, 59, .2) 0 15%, transparent 16%), radial-gradient(ellipse 44% 32% at 50% 96%, rgba(17, 26, 59, .2) 0 99%, transparent 100%), var(--amarillo); }
+.kp-pie { display: flex; gap: 1.2cqw; font-size: 2.6cqw; }
+.k-comentario { position: absolute; left: 9%; right: 9%; top: 20%; background: var(--tarjeta); color: #111a3b; border-radius: 2.6cqw; padding: 3cqw 3.4cqw; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 2.4cqw; align-items: start; box-shadow: 0 1.4cqw 4cqw rgba(0, 0, 0, .4); }
+.kc-av { width: 6cqw; height: 6cqw; border-radius: 50%; background: #2a3566; }
+.k-comentario small { display: block; font-size: 2.5cqw; font-weight: 600; color: var(--tarjeta-muted); }
+.k-comentario p { font-family: var(--font-display); font-size: 5.4cqw; line-height: 1.1; font-weight: 800; letter-spacing: -.015em; margin-top: .6cqw; }
+.k-comentario > .ic { font-size: 3.4cqw; color: var(--rojo); }
+.k-coment-pie { position: absolute; left: 12%; bottom: 12%; display: flex; gap: 3cqw; font-size: 2.6cqw; color: var(--stage-muted); }
+.k-visto { position: absolute; left: 5%; bottom: 7%; display: flex; align-items: center; gap: 1.2cqw; font-size: 2.6cqw; color: var(--stage-muted); }
+.k-metricas { position: absolute; inset: 0; padding: 7cqw 8cqw; display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 2.4cqw 3cqw; align-content: center; font-size: 4.2cqw; line-height: 1.1; }
+.k-metricas .a { display: flex; align-items: center; gap: 1.4cqw; font-family: var(--font-mono); color: var(--stage-muted); text-decoration: line-through; text-decoration-color: var(--amarillo); text-decoration-thickness: .5cqw; }
+.k-metricas > i { font-style: normal; color: var(--celeste); }
+.k-metricas .g { display: flex; align-items: center; gap: 1.4cqw; font-weight: 700; }
+.k-metricas .g .ic { color: var(--amarillo); }
+.m-svg .pin { fill: var(--rojo); }
+
+/* Vitrina: celulares con barra de íconos */
+.vitrina { position: relative; overflow: hidden; }
+.vitrina > *:not(.red-deco) { position: relative; }
+.vit-cel { position: relative; }
+.vit-pantalla { padding-right: 46px; }
+.vit-rail { position: absolute; right: 22px; bottom: 70px; display: flex; flex-direction: column; align-items: center; gap: .75rem; color: var(--stage-ink); font-size: 1.05rem; }
+.vit-rail .av { width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--amarillo); border: 2px solid var(--stage-ink); }
+
+/* Reglas con ícono */
+.pr-ic { display: grid; place-items: center; width: 2.3rem; height: 2.3rem; border-radius: .6rem; background: var(--stage); color: var(--amarillo); font-size: 1.15rem; font-weight: 800; margin-bottom: .75rem; }
+
+/* Dirección de IA */
+.dia { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--line); }
+.dia-tapa { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 88% 0%, var(--stage-2) 0%, var(--stage) 62%); color: var(--stage-ink); border-radius: 22px; padding: clamp(1.6rem, 4vw, 3rem); }
+.dia-tapa > *:not(.red-deco) { position: relative; }
+.dia-tapa .eyebrow { color: var(--amarillo); }
+.dia-tapa h2 { font-size: clamp(1.6rem, 3.6vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; max-width: 26ch; }
+.dia-tapa p { color: var(--stage-muted); max-width: 60ch; margin-top: 1rem; }
+.ofertas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+.oferta { border: 1px solid var(--line); border-radius: 16px; padding: 1.4rem; display: flex; flex-direction: column; gap: .6rem; background: var(--surface); min-width: 0; }
+.o-ic { flex: none; width: 2.6rem; height: 2.6rem; border-radius: .7rem; background: var(--stage); color: var(--amarillo); display: grid; place-items: center; font-size: 1.3rem; }
+.oferta h3 { font-size: 1.08rem; font-weight: 700; line-height: 1.3; }
+.oferta p { font-size: .94rem; color: var(--ink-2); line-height: 1.55; }
+.oferta.ancha { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 1.2rem; background: var(--amarillo); border-color: var(--amarillo); color: var(--amarillo-ink); }
+.oferta.ancha h3 { font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 800; }
+.oferta.ancha p { color: var(--amarillo-ink); }
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .fan { max-width: 400px; }
+  .ofertas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .ofertas { grid-template-columns: minmax(0, 1fr); }
+  .oferta.ancha { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .m-grid { grid-template-columns: minmax(0, 1fr); }
+  .m-cab { position: static; }
+  .m-idea { max-width: 62ch; }
+  .guion-intro, .como-dice, .vit-dice { grid-template-columns: minmax(0, 1fr); }
+  .principios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .material { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .dos-rec { grid-template-columns: minmax(0, 1fr); }
+  .mapa { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .mapa a { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: .9rem; row-gap: .15rem; align-items: baseline; padding: 1.15rem .95rem .85rem; }
+  .mapa a::before { right: auto; width: calc(var(--min) / 9 * 100%); }
+  .mapa .t { grid-column: 1; grid-row: 1; }
+  .mapa b { grid-column: 2; grid-row: 1; }
+  .mapa small { grid-column: 2; grid-row: 2; }
+  .mapa .dur { grid-column: 3; grid-row: 1; margin-top: 0; padding-top: 0; }
+  .vit-grid { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .historia { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .historia .cel { max-width: 290px; }
+  .beats { width: 100%; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .quiasmo .l2 { padding-left: 0; }
+  .pl-row { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .toma { max-width: 420px; }
+  .principios { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .barra.on i { width: 100%; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-corazon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+  <symbol id="i-comentario" viewBox="0 0 24 24"><path d="M6 3h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-8l-5 4v-4H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z"/></symbol>
+  <symbol id="i-compartir" viewBox="0 0 24 24"><path d="M13 4l8 7.5-8 7.5v-4.3c-5.6 0-9 1.6-11 5.8.6-6.2 3.6-11.1 11-12.2V4z"/></symbol>
+  <symbol id="i-guardar" viewBox="0 0 24 24"><path d="M6 2.5h12a1 1 0 0 1 1 1V22l-7-4.6L5 22V3.5a1 1 0 0 1 1-1z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+  <symbol id="i-ojo" viewBox="0 0 24 24"><path d="M12 5C6.5 5 2.7 9.4 1.5 12c1.2 2.6 5 7 10.5 7s9.3-4.4 10.5-7C21.3 9.4 17.5 5 12 5zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></symbol>
+  <symbol id="i-persona" viewBox="0 0 24 24"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M9 16.2l-4.2-4.2-1.4 1.4L9 19 21 7l-1.4-1.4z"/></symbol>
+  <symbol id="i-nota" viewBox="0 0 24 24"><path d="M12 3v10.6A4 4 0 1 0 14 17V7h4V3h-6z"/></symbol>
+  <symbol id="i-campana" viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6v-5c0-3.4-2.2-6.2-5.5-6.8V3a1.5 1.5 0 0 0-3 0v1.2C7.2 4.8 5 7.6 5 11v5l-2 2v1h18v-1l-2-2z"/></symbol>
+  <symbol id="i-celular" viewBox="0 0 24 24"><path d="M8 1.5h8a2 2 0 0 1 2 2v17a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-17a2 2 0 0 1 2-2zm0 3v14h8v-14H8zm4 15.3a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z"/></symbol>
+  <symbol id="i-chispa" viewBox="0 0 24 24"><path d="M12 2l2.2 6.3L21 10l-6.8 1.9L12 18l-2.2-6.1L3 10l6.8-1.7z"/><path d="M19 15l1 2.6 2.6 1-2.6 1L19 22l-1-2.4-2.6-1 2.6-1z"/></symbol>
+  <symbol id="i-grafico" viewBox="0 0 24 24"><path d="M3 20h18v2H3zM5 11h3v7H5zm5.5-5h3v12h-3zM16 14h3v4h-3z"/></symbol>
+  <symbol id="i-cc" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm4.6 4.2C6.7 8.2 5.5 9.6 5.5 12s1.2 3.8 3.1 3.8c1.2 0 2.1-.5 2.6-1.5l-1.4-.8c-.3.5-.6.7-1.2.7-.9 0-1.4-.8-1.4-2.2s.5-2.2 1.4-2.2c.6 0 .9.2 1.2.7l1.4-.8c-.5-1-1.4-1.5-2.6-1.5zm7 0c-1.9 0-3.1 1.4-3.1 3.8s1.2 3.8 3.1 3.8c1.2 0 2.1-.5 2.6-1.5l-1.4-.8c-.3.5-.6.7-1.2.7-.9 0-1.4-.8-1.4-2.2s.5-2.2 1.4-2.2c.6 0 .9.2 1.2.7l1.4-.8c-.5-1-1.4-1.5-2.6-1.5z"/></symbol>
+  <symbol id="i-camara" viewBox="0 0 24 24"><path d="M7.5 2.5h9a5 5 0 0 1 5 5v9a5 5 0 0 1-5 5h-9a5 5 0 0 1-5-5v-9a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h9a3 3 0 0 0 3-3v-9a3 3 0 0 0-3-3h-9zm4.5 3a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm5.3-3.3a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></symbol>
+  <symbol id="i-tv" viewBox="0 0 24 24"><path d="M6 4.5h12a4 4 0 0 1 4 4v7a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-7a4 4 0 0 1 4-4zm4 4v7l6-3.5z"/></symbol>
+  <symbol id="i-red" viewBox="0 0 24 24"><path d="M5 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm14 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm-7 6.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm14 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM6.6 7.2l3.3 3-.9 1-3.3-3zm10.8 0l.9 1-3.3 3-.9-1zM9 13.1l.9 1-3.3 3-.9-1zm6 0l3.3 3-.9 1-3.3-3z"/></symbol>
+</svg>
+
+<header class="hero" id="inicio">
+  <svg class="red-hero" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <line x1="6" y1="12" x2="28" y2="5"/><line x1="28" y1="5" x2="58" y2="10"/><line x1="58" y1="10" x2="96" y2="4"/><line x1="96" y1="4" x2="132" y2="14"/><line x1="132" y1="14" x2="156" y2="6"/>
+    <line x1="28" y1="5" x2="20" y2="26"/><line x1="96" y1="4" x2="104" y2="28"/><line x1="132" y1="14" x2="148" y2="34"/><line x1="104" y1="28" x2="148" y2="34"/><line x1="58" y1="10" x2="104" y2="28"/>
+    <line x1="148" y1="34" x2="154" y2="62"/><line x1="120" y1="72" x2="154" y2="62"/><line x1="96" y1="84" x2="120" y2="72"/>
+    <circle cx="6" cy="12" r=".7"/><circle cx="28" cy="5" r=".9"/><circle cx="58" cy="10" r=".6"/><circle class="a" cx="96" cy="4" r=".9"/><circle cx="132" cy="14" r=".7"/><circle cx="156" cy="6" r=".6"/>
+    <circle cx="20" cy="26" r=".6"/><circle cx="104" cy="28" r=".8"/><circle cx="148" cy="34" r=".7"/><circle class="a" cx="154" cy="62" r=".8"/><circle cx="120" cy="72" r=".7"/><circle cx="96" cy="84" r=".6"/>
+  </svg>
+  <div class="wrap hero-grid">
+   <div class="hero-txt">
+    <p class="kicker"><span class="vivo">Charla para jóvenes</span><span>35 minutos</span><span>Intendenta Rossana Chahla</span></p>
+    <h1 class="titulo">Gobernar y comunicar: romper el <span class="roto" data-t="algoritmo">algoritmo</span> <span class="k-int">gestionando</span></h1>
+    <div class="idea">
+      <p class="idea-tag">La idea que tiene que quedar</p>
+      <p class="quiasmo">
+        <span class="l1">Una <em class="k-int">intendenta</em> que se hizo <em class="k-tik">tiktoker</em>,</span>
+        <span class="l2">no una <em class="k-tik">tiktoker</em> que se hizo <em class="k-int">intendenta</em>.</span>
+      </p>
+    </div>
+    <p class="para">Vista de trabajo para la intendenta y para Comunicación: la idea, el recorrido de 35 minutos, qué se ve y qué dice ella placa por placa, y el espacio para mostrar la gestión.</p>
+    <div class="redes" aria-label="Redes">
+      <span class="red-chip"><svg class="ic"><use href="#i-nota"/></svg>TikTok</span>
+      <span class="red-chip"><svg class="ic"><use href="#i-camara"/></svg>Instagram</span>
+      <span class="red-chip"><svg class="ic"><use href="#i-tv"/></svg>YouTube</span>
+      <span class="red-chip"><svg class="ic"><use href="#i-red"/></svg>El algoritmo</span>
+    </div>
+    <nav class="saltos" aria-label="Secciones">
+      <a href="#tesis">La idea</a>
+      <a href="#minutos">Los 35 minutos</a>
+      <a href="#guion">Guion de la intendenta</a>
+      <a href="#m3">Rosalía</a>
+      <a href="#vitrina">Vitrina de gestión</a>
+      <a href="#comunicacion">Para Comunicación</a>
+      <a href="#dia">Dirección de IA</a>
+    </nav>
+    <p class="credito">Propuesta de la <b>Dirección de Inteligencia Artificial</b></p>
+    <p class="pdf-link"><a class="boton" href="/propuestayguion/guion-intendenta.pdf">Ver el guion en PDF</a> <a class="boton" href="/propuestayguion">Volver</a></p>
+   </div>
+   <div class="fan" aria-hidden="true">
+    <div class="tel t1"><div class="pant v-video">
+      <div class="tabs"><span>Siguiendo</span><b>Para vos</b></div>
+      <div class="vid-flechas"><span>→</span><span>→</span><span class="contra">←</span><span>→</span></div>
+      <div class="rail"><i class="av"></i><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic"><use href="#i-guardar"/></svg><svg class="ic"><use href="#i-compartir"/></svg></div>
+      <div class="pie-post"><b>@munismtucuman</b><p>Va a contramano, Rosalía. Desde el viernes 23, Crisóstomo Álvarez y San Lorenzo cambian de mano.</p><span class="musica"><svg class="ic"><use href="#i-nota"/></svg>Conga · Fabián Show</span></div>
+    </div></div>
+    <div class="tel t2"><div class="pant v-story">
+      <div class="st-barras"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      <div class="st-user"><i class="av"></i><b>Intendenta</b><span>ahora</span></div>
+      <div class="st-txt"><small>Charla para jóvenes</small><p>Gobernar y comunicar</p><p class="st-sub">romper el <span class="k-tik">algoritmo</span> <span class="k-int">gestionando</span></p></div>
+      <div class="st-pie"><span>Enviar mensaje</span><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-compartir"/></svg></div>
+    </div></div>
+    <div class="tel t3"><div class="pant v-notif">
+      <div class="nt-cab"><svg class="ic"><use href="#i-campana"/></svg>Notificaciones</div>
+      <div class="nt"><i class="nt-ic am"><svg class="ic"><use href="#i-compartir"/></svg></i><p><b>Cambio de sentido</b>Crisóstomo Álvarez y San Lorenzo, desde el viernes 23.</p></div>
+      <div class="nt"><i class="nt-ic"><svg class="ic"><use href="#i-check"/></svg></i><p><b>Reclamo resuelto</b>El bache de tu cuadra ya está tapado.</p></div>
+      <div class="nt"><i class="nt-ic"><svg class="ic"><use href="#i-comentario"/></svg></i><p><b>Te respondieron</b>Tu consulta ya tiene respuesta.</p></div>
+      <div class="nt"><i class="nt-ic"><svg class="ic"><use href="#i-persona"/></svg></i><p><b>Participá</b>Elegí la obra para tu barrio.</p></div>
+      <p class="nt-lema">El feed de una gestión que comunica</p>
+    </div></div>
+   </div>
+  </div>
+  <div class="carriles" aria-hidden="true">
+    <div class="carril"></div>
+    <div class="carril"><span class="rosalia"><svg viewBox="0 0 40 22"><path d="M32 11H8m10-8-10 8 10 8" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rosalía</span></div>
+  </div>
+</header>
+
+<main>
+<section id="tesis" class="sec">
+  <div class="wrap">
+    <p class="eyebrow">La idea</p>
+    <h2 class="h-tesis">La transformación digital está cambiando la manera de construir influencia, ejercer el liderazgo y comunicar desde el poder.</h2>
+    <div class="dos-rec">
+      <article class="rec">
+        <span class="tag">De las redes al gobierno</span>
+        <p>Usar la popularidad para llegar al gobierno.</p>
+      </article>
+      <article class="rec elegido">
+        <span class="tag">Del gobierno a las redes · el de Rossana</span>
+        <p>Usar la comunicación para acercar el gobierno a la ciudadanía.</p>
+      </article>
+    </div>
+    <p class="tesis-frase">La experiencia de Rossana permite explorar el segundo camino: <mark>la comunicación como una extensión de la gestión</mark>, no como un sustituto de ella.</p>
+
+    <div class="como-dice">
+      <div>
+        <h3>Ella no recita la idea. La deja clara.</h3>
+        <p class="ayuda">La frase de arriba ordena toda la charla, pero dicha por ella en primera persona suena forzada. En la placa 2 la deja clara con sus palabras, a partir de cómo la llaman los diarios.</p>
+      </div>
+      <blockquote>
+        <p>«Por videos como ese, en los diarios me dicen "la intendenta tiktoker". No me molesta. Pero fíjense en el orden de las palabras: primero dice intendenta.»</p>
+        <cite>Placa 2 · así lo dice ella</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section id="minutos" class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Los 35 minutos</p>
+    <h2>Cuatro ideas, un video que abre y vuelve en el centro, y la gestión al final</h2>
+    <ol class="mapa">
+      <li class="borde" style="--min:3"><a href="#apertura"><span class="t">00:00</span><b>Apertura</b><small>El video, sin presentación</small><span class="dur">3 min</span></a></li>
+      <li style="--min:6"><a href="#m1"><span class="t">03:00</span><b>Autenticidad frente al algoritmo</b><small>Persona, no personaje</small><span class="dur">6 min</span></a></li>
+      <li style="--min:6"><a href="#m2"><span class="t">09:00</span><b>Los dos caminos de la influencia</b><small>De dónde venís y qué hacés al llegar</small><span class="dur">6 min</span></a></li>
+      <li class="nucleo" style="--min:8"><a href="#m3"><span class="t">15:00</span><b>Comunicar también es gestionar</b><small>La historia de Rosalía</small><span class="dur">8 min</span></a></li>
+      <li style="--min:9"><a href="#m4"><span class="t">23:00</span><b>Romper el algoritmo gestionando</b><small>Vistas o impacto, y la vitrina de gestión</small><span class="dur">9 min</span></a></li>
+      <li class="borde" style="--min:3"><a href="#cierre"><span class="t">32:00</span><b>Cierre</b><small>La frase para la foto</small><span class="dur">3 min</span></a></li>
+    </ol>
+    <p class="nota">Tiempos propuestos, para ajustar con ella. El último bloque es el más largo porque ahí ella muestra lo que hizo: es el momento de vender la gestión.</p>
+  </div>
+</section>
+
+<section id="guion" class="sec">
+  <div class="wrap guion-intro">
+    <div>
+      <p class="eyebrow">Guion de la intendenta</p>
+      <h2>20 placas: lo que se ve y lo que dice ella</h2>
+      <p>El texto está escrito para decirse en voz alta, y ella lo hace suyo. Dicho con calma da para unos 20 minutos. El resto lo ocupan los videos, la vitrina de gestión y lo que ella sume en los espacios marcados.</p>
+    </div>
+    <div>
+      <div class="leyenda">
+        <span><span class="espacio">Así</span> lo completa Comunicación, o ella con sus palabras.</span>
+        <span><span class="acot">(Así)</span> una indicación de escena: no se dice.</span>
+      </div>
+      <div class="acciones">
+        <button class="boton" type="button" id="copiar">Copiar guion completo</button>
+        <span class="estado" id="estado-copia" role="status"></span>
+      </div>
+      <textarea id="guion-texto" readonly hidden aria-label="Guion completo en texto"></textarea>
+    </div>
+  </div>
+</section>
+
+<section id="apertura" class="momento" data-bloque="00:00 · Apertura">
+  <div class="wrap m-grid">
+    <header class="m-cab">
+      <span class="m-t">00:00 – 03:00</span>
+      <h2>Apertura</h2>
+      <p class="m-idea">Arranca con el video, sin presentación. Cuando se corta, habla ella, y en el primer minuto ya quedó la idea: primero intendenta.</p>
+    </header>
+    <div class="m-cuerpo">
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini negro"><div class="tf tf-centro"><div class="tf-scr"><div class="tf-flechas"><span>→</span><span>→</span><span class="contra">←</span><span>→</span></div><i class="tf-play"></i><div class="tf-rail"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic"><use href="#i-compartir"/></svg></div><div class="tf-pie"><b>Va a contramano, Rosalía</b>♪ Conga</div></div></div><span class="k-tag">Sin presentación</span><span class="m-tc">0:20</span></div>
+          <figcaption><span class="n">01</span><span class="tx">Pantalla en negro y 20 segundos de «Va a contramano, Rosalía». Se corta antes del final.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt"><p><span class="acot">(Entra sin presentación. No dice nada mientras corre el video.)</span></p></div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><div class="m-recorte k-izq"><small>Política</small><b>Rossana Chahla, la «<mark>intendenta</mark> tiktoker»</b></div><div class="k-burbuja" style="right:5%;top:14%;width:44%"><span class="kb-ic"><svg class="ic"><use href="#i-campana"/></svg></span><span><b>Te mencionaron</b>«la intendenta tiktoker»</span></div></div>
+          <figcaption><span class="n">02</span><span class="tx">Recorte de una nota que la llama «la intendenta tiktoker», con «intendenta» resaltada.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Ese video llegó a lugares a los que nunca llegó un decreto. Ya les voy a contar por qué lo hicimos.</p>
+          <p>Por videos como ese, en los diarios me dicen "la intendenta tiktoker". No me molesta. Pero fíjense en el orden de las palabras: primero dice intendenta. Primero me tocó gobernar una ciudad, con sus calles, sus baches, sus colectivos y sus problemas de todos los días. Después aprendí a contarlo en el idioma en el que ustedes hablan.»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><svg class="red-deco" viewBox="0 0 70 46" aria-hidden="true"><line x1="8" y1="10" x2="30" y2="6"/><line x1="30" y1="6" x2="52" y2="16"/><line x1="52" y1="16" x2="64" y2="34"/><line x1="30" y1="6" x2="38" y2="30"/><circle cx="8" cy="10" r="1.2"/><circle cx="30" cy="6" r="1.5"/><circle class="a" cx="52" cy="16" r="1.6"/><circle cx="64" cy="34" r="1.2"/><circle cx="38" cy="30" r="1.4"/></svg><div class="m-txt"><span>Gobernar y comunicar: romper el <span class="roto" data-t="algoritmo">algoritmo</span> <span class="k-int">gestionando</span></span></div></div>
+          <figcaption><span class="n">03</span><span class="tx">El título, entero: Gobernar y comunicar: romper el algoritmo gestionando.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Por eso esta charla se llama "Gobernar y comunicar: romper el algoritmo gestionando". Gobernar va primero, y no es casualidad.</p>
+          <p>Les aviso algo antes de empezar: de redes, ustedes saben mucho más que yo. Yo aprendí siendo intendenta, con un equipo joven que me tuvo paciencia. Lo que sí sé es gobernar una ciudad. Y de eso les quiero hablar: de qué pasa cuando esas dos cosas se juntan. Son cuatro ideas. Y en el medio les voy a presentar a Rosalía, que iba a contramano.»</p>
+        </div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="m1" class="momento" data-bloque="03:00 · 1. La autenticidad frente al algoritmo">
+  <div class="wrap m-grid">
+    <header class="m-cab">
+      <span class="m-num" aria-hidden="true">1</span>
+      <span class="m-t">03:00 – 09:00</span>
+      <h2>La autenticidad frente al algoritmo</h2>
+      <p class="m-idea">Las redes premian a quien construye un personaje capaz de captar atención. Rossana hace otro recorrido: suma las redes a una identidad y a una forma de trabajar que ya existían. Ser mujer y su trayectoria profesional son parte de esa identidad.</p>
+    </header>
+    <div class="m-cuerpo">
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><div class="m-split"><span class="pulido">Institucional</span><span class="crudo">En crudo</span></div></div>
+          <figcaption><span class="n">04</span><span class="tx">Pantalla dividida: un video institucional clásico al lado de uno de ella en crudo. Sin texto.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Miren estas dos pantallas. A la izquierda, cómo comunicó el Estado durante años: todo prolijo, todo guionado, todo perfecto. A la derecha, un video mío, grabado con un celular en la calle.</p>
+          <p>El algoritmo premia a quien capta atención, y la forma más rápida de captar atención es armarse un personaje. Ustedes lo detectan en dos segundos: cuando alguien actúa, se nota. Y cuando se nota, se pierde lo único que importa en política, que te crean. Yo no tengo tiempo para un personaje. Tengo una ciudad.»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><div class="k-posts"><div class="k-post"><span class="kp-cab"><i></i>Médica</span><span class="kp-foto"></span><span class="kp-pie"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg></span></div><div class="k-post"><span class="kp-cab"><i></i>Gestión pública</span><span class="kp-foto"></span><span class="kp-pie"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg></span></div><div class="k-post ultima"><span class="kp-cab"><i></i>Intendenta</span><span class="kp-foto"></span><span class="kp-pie"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg></span></div></div></div>
+          <figcaption><span class="n">05</span><span class="tx">Su recorrido en tres fotos: médica, gestión pública, intendenta.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Soy médica. Antes de ser intendenta, mi vida fue la salud pública. Y una médica no le puede mentir a un paciente sobre su diagnóstico. Una intendenta tampoco le puede mentir a un vecino sobre una obra.</p>
+          <p>Y soy mujer, en un ambiente que todavía nos mide con otra vara: si sos seria, sos fría; si te reís, no sos seria. Decidí no actuar ninguna de las dos. Lo que ven en mis redes es lo que yo era antes de las redes. Las redes se sumaron a mi forma de trabajar, y no al revés.»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><div class="m-celtxt"><span class="m-cel"><span class="m-rec">REC</span><span class="tf-rail chico"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic"><use href="#i-compartir"/></svg></span></span><span class="m-frase">«Salimos, y de ahí salen esas <span class="k-int">perlitas</span>.»</span></div></div>
+          <figcaption><span class="n">06</span><span class="tx">En un celular, 20 segundos de detrás de cámara de un día real de gestión. Al lado, su frase: «Salimos, y de ahí salen esas perlitas».</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«¿Saben de dónde salen los videos? Una vez lo dije así y lo sostengo: salimos, y de ahí salen esas perlitas. No hay estudio de grabación. Hay una recorrida, un vecino que se acerca, un problema que se resuelve en el momento. La cámara llega después. Primero está el trabajo.</p>
+          <p><span class="espacio">Una anécdota propia de una recorrida que terminó en video.</span>»</p>
+        </div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="m2" class="momento" data-bloque="09:00 · 2. Los dos caminos de la influencia">
+  <div class="wrap m-grid">
+    <header class="m-cab">
+      <span class="m-num" aria-hidden="true">2</span>
+      <span class="m-t">09:00 – 15:00</span>
+      <h2>Los dos caminos de la influencia</h2>
+      <p class="m-idea">Se puede construir popularidad digital y después llegar a un cargo, o llegar al gobierno y aprender a comunicar en las plataformas. Ningún recorrido garantiza por sí mismo una buena gestión. La diferencia está en cómo se ejerce la responsabilidad institucional.</p>
+    </header>
+    <div class="m-cuerpo">
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><svg class="m-svg" viewBox="0 0 200 112.5" aria-hidden="true"><path class="via" d="M14 56H66C92 56 96 28 122 28H188"/><path class="via elegida" d="M66 56C92 56 96 84 122 84H188"/><circle class="nodo" cx="14" cy="56" r="4"/><text x="112" y="19">Redes → Gobierno</text><text x="112" y="101" class="t-elegida">Gobierno → Redes</text></svg></div>
+          <figcaption><span class="n">07</span><span class="tx">Bifurcación animada: de las redes al gobierno, y del gobierno a las redes.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Hoy hay dos caminos para tener influencia pública. Uno: hacerte conocido en las redes y después saltar a la política. Otro: llegar a un cargo y después aprender a comunicar en las plataformas. Yo vengo por el segundo.</p>
+          <p>Pero ojo, porque ninguno de los dos garantiza nada. En el primero, el riesgo es creer que gobernar es seguir haciendo contenido. En el segundo, el riesgo es creer que comunicar es un trámite. Los dos errores terminan igual: la gente deja de creerte. Lo que define todo es qué hacés con la responsabilidad cuando te toca.»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><div class="k-comentario"><i class="kc-av"></i><div><small>Un vecino, en la calle</small><p>Menos TikTok y más obras.</p></div><svg class="ic"><use href="#i-corazon"/></svg></div><div class="k-coment-pie"><span>Responder</span><span>Ver respuestas</span></div></div>
+          <figcaption><span class="n">08</span><span class="tx">En grande: «Menos TikTok y más obras».</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Una vez, en plena calle, me dijeron: "Menos TikTok y más obras". Lo pongo acá, en grande, porque es la crítica más justa que me pueden hacer. Si hiciera videos en lugar de gobernar, tendría toda la razón.</p>
+          <p><span class="espacio">Qué le contestó ese día, o qué piensa hoy de ese momento, con sus palabras.</span>»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini destacada"><div class="m-txt"><small>La regla</small><span>Si detrás del video no hay obra, el video sobra.</span></div></div>
+          <figcaption><span class="n">09</span><span class="tx">«Si detrás del video no hay obra, el video sobra.»</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Por eso tengo una regla, y se la regalo a cualquiera de ustedes que quiera dedicarse a esto: si detrás del video no hay obra, el video sobra. TikTok no reemplaza a la gestión. La cuenta.</p>
+          <p>Y si algún día les toca, antes de publicar háganse una sola pregunta: ¿esto le sirve a alguien? ¿Le avisa algo, le explica algo, le resuelve algo? Si la respuesta es no, no lo suban.»</p>
+        </div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="m3" class="momento" data-bloque="15:00 · 3. Comunicar también es gestionar">
+  <div class="wrap m-grid">
+    <header class="m-cab">
+      <span class="m-num" aria-hidden="true">3</span>
+      <span class="m-t">15:00 – 23:00</span>
+      <h2>Comunicar también es gestionar</h2>
+      <p class="m-idea">Una decisión pública no termina cuando se adopta. Muchas veces necesita ser explicada, comprendida y acompañada por la ciudadanía para producir los efectos buscados. La historia de Rosalía y el cambio de sentido de las calles es el ejemplo perfecto.</p>
+    </header>
+    <div class="m-cuerpo">
+      <p class="eyebrow historia-cab">La historia en un celular, como muestra</p>
+      <div class="historia">
+        <div class="cel pausa" id="cel" tabindex="0" role="group" aria-roledescription="carrusel" aria-label="La historia de Rosalía en cinco placas. Tocá para avanzar.">
+          <div class="barras" aria-hidden="true"><span class="barra"><i></i></span><span class="barra"><i></i></span><span class="barra"><i></i></span><span class="barra"><i></i></span><span class="barra"><i></i></span></div>
+          <div class="cel-cab">Así se cuenta · 5 placas</div>
+          <div class="cuadros">
+            <div class="cuadro on">
+              <span class="c-paso">La decisión</span>
+              <p class="c-txt">Dos calles del centro cambian de sentido.</p>
+              <div class="carteles"><span class="cartel">Crisóstomo Álvarez <i class="giro">→</i></span><span class="cartel">San Lorenzo <i class="giro">→</i></span></div>
+            </div>
+            <div class="cuadro">
+              <span class="c-paso">El problema</span>
+              <p class="c-txt">El comunicado salió. Mucha gente no se enteró.</p>
+              <div class="comunicado"><span>Comunicado oficial</span><i></i><i></i><i></i></div>
+            </div>
+            <div class="cuadro">
+              <span class="c-paso">La idea</span>
+              <p class="c-txt">Rosalía va a contramano.</p>
+              <div class="fila-flechas" aria-hidden="true"><span>→</span><span>→</span><span>→</span><span class="contra">←</span><span>→</span><span>→</span></div>
+            </div>
+            <div class="cuadro">
+              <span class="c-paso">La duda</span>
+              <p class="c-txt">¿Y si queda ridículo?</p>
+            </div>
+            <div class="cuadro">
+              <span class="c-paso">El resultado</span>
+              <p class="c-txt">Se enteraron hasta en Córdoba.</p>
+              <span class="llamada">Llamada entrante · Córdoba</span>
+            </div>
+          </div>
+          <div class="cel-pie"><span>Va a contramano, Rosalía</span><span>Ago 2024</span></div>
+        </div>
+        <ol class="beats">
+          <li><button type="button"><span class="b-tit">La decisión</span><span class="b-txt">Crisóstomo Álvarez y San Lorenzo cambian de sentido, dentro del Plan Integral de Movilidad Urbana. Rige desde el viernes 23 de agosto de 2024.</span></button></li>
+          <li><button type="button"><span class="b-tit">El problema</span><span class="b-txt">Se comunicó por los canales oficiales y mucha gente no se enteró.</span></button></li>
+          <li><button type="button"><span class="b-tit">La idea</span><span class="b-txt">Prensa propone recrear a Rosalía, la señora que baila al revés que todos, al ritmo de «Conga».</span></button></li>
+          <li><button type="button"><span class="b-tit">La duda</span><span class="b-txt">Rossana primero sintió que la estaban ridiculizando. Después se animó.</span></button></li>
+          <li><button type="button"><span class="b-tit">El resultado</span><span class="b-txt">Una amiga la llamó desde Córdoba para preguntarle si había cambiado el sentido de las calles.</span></button></li>
+        </ol>
+      </div>
+      <div class="fuente-video">
+        <a class="boton" href="https://www.instagram.com/reel/C--eojvtyTb/" target="_blank" rel="noopener">Ver el video ↗</a>
+        <small>Lo publicó la Municipalidad en TikTok; el link es una copia en Instagram.</small>
+      </div>
+
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><svg class="m-svg" viewBox="0 0 200 112.5" aria-hidden="true"><rect class="cruce" x="46" y="0" width="7" height="112.5"/><rect class="cruce" x="98" y="0" width="7" height="112.5"/><rect class="cruce" x="150" y="0" width="7" height="112.5"/><rect class="calle" x="0" y="31" width="200" height="12"/><rect class="calle" x="0" y="72" width="200" height="12"/><text class="calle-nombre" x="6" y="26">Crisóstomo Álvarez</text><text class="calle-nombre" x="6" y="67">San Lorenzo</text><g class="sentido"><path d="M64 37h20m-5-4 5 4-5 4"/></g><g class="sentido"><path d="M116 37h20m-5-4 5 4-5 4"/></g><g class="sentido b"><path d="M64 78h20m-5-4 5 4-5 4"/></g><g class="sentido b"><path d="M116 78h20m-5-4 5 4-5 4"/></g><path class="pin" d="M176 50a6 6 0 0 0-6 6c0 4.5 6 11 6 11s6-6.5 6-11a6 6 0 0 0-6-6zm0 8.2a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4z"/></svg><span class="m-tc amarillo">Cambian de mano</span></div>
+          <figcaption><span class="n">10</span><span class="tx">Mapa del centro: Crisóstomo Álvarez y San Lorenzo, con las flechas que se dan vuelta.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Ahora sí, Rosalía. En agosto de 2024 decidimos cambiar el sentido de dos calles del centro, Crisóstomo Álvarez y San Lorenzo, como parte del Plan Integral de Movilidad Urbana. Una decisión técnica, estudiada, necesaria. Y firmada.»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><div class="m-doc"><small>Comunicado oficial</small><i></i><i></i><i></i><i></i></div><span class="m-sello">No llegó</span><span class="k-visto"><svg class="ic"><use href="#i-ojo"/></svg>Gacetilla · medios · redes oficiales</span></div>
+          <figcaption><span class="n">11</span><span class="tx">El comunicado oficial, con un sello: «No llegó».</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«La comunicamos como se comunicaba siempre: gacetilla, medios, redes oficiales. ¿Y saben qué pasó? Mucha gente no se enteró.</p>
+          <p>Y no es que la gacetilla estuviera mal escrita. Estaba perfecta. El problema es que la gente ya no se informa así. Ustedes no leen gacetillas; yo, si no fuera intendenta, tampoco. Y una calle que cambia de mano sin que la gente lo sepa no es una política de movilidad. Es un peligro.»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><div class="m-flechas" aria-hidden="true"><span>→</span><span>→</span><span>→</span><span class="contra">←</span><span>→</span><span>→</span></div><span class="k-tag"><svg class="ic"><use href="#i-nota"/></svg>Conga</span><span class="m-tc amarillo">Rosalía</span></div>
+          <figcaption><span class="n">12</span><span class="tx">Flechas que van todas para un lado y una amarilla que va al revés: Rosalía.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Entonces el equipo de prensa me trae una idea. ¿Se acuerdan del video de la señora que baila al revés que todos? Rosalía. Me dicen: "Hagamos a Rosalía, que va a contramano".</p>
+          <p>Mi primera reacción fue: me están ridiculizando. Lo pensé. Y me di cuenta de que lo ridículo era otra cosa: que alguien agarrara una calle a contramano porque nosotros no supimos avisarle.»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini"><div class="tf" style="left:13%"><div class="tf-scr"><div class="tf-barras"><i class="on"></i><i class="on"></i><i></i></div><div class="tf-flechas"><span>→</span><span class="contra">←</span><span>→</span></div><i class="tf-play"></i><div class="tf-rail"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic am"><use href="#i-compartir"/></svg></div><div class="tf-pie"><b>@munismtucuman</b>♪ Conga · Fabián Show</div></div></div><div class="k-burbuja" style="right:6%;top:32%;width:48%"><span class="kb-ic"><svg class="ic"><use href="#i-celular"/></svg></span><span><b>Llamada entrante</b>Una amiga, desde Córdoba</span></div></div>
+          <figcaption><span class="n">13</span><span class="tx">El video completo, vertical, en un celular y con sonido.</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p><span class="acot">(Corre el video completo.)</span></p>
+          <p>«La gente lo compartía, lo comentaba, se reía. Y mientras se reía, se enteraba de que la calle había cambiado de mano. Eso era lo único que me importaba.</p>
+          <p>Al tiempo me llama una amiga desde Córdoba: "Rossana, ¿cambiaste el sentido de las calles?". Se habían enterado en Córdoba. Ahí supe que el mensaje había llegado. <span class="espacio">Si Comunicación confirma el alcance del video, va acá: «Lo vieron tantas personas».</span>»</p>
+        </div></div>
+      </article>
+      <article class="pl-row pl">
+        <figure class="toma"><div class="mini destacada"><div class="m-txt"><small>Lo que se llevan</small><span>Una calle cambia de mano el día que la gente se entera.</span></div></div>
+          <figcaption><span class="n">14</span><span class="tx">«Una calle cambia de mano el día que la gente se entera.»</span></figcaption></figure>
+        <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+          <p>«Esto es lo que les quiero dejar: una decisión pública no termina cuando se firma. Necesita ser explicada, entendida y acompañada. Una calle cambia de mano el día que la gente se entera. Antes de eso, es un papel.</p>
+          <p>Como médica lo aprendí hace mucho: un tratamiento que el paciente no entiende, no lo sigue. Con las decisiones públicas pasa lo mismo. Comunicar no es lo que viene después de gestionar. Es parte de gestionar.»</p>
+        </div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="m4" class="momento" data-bloque="23:00 · 4. Romper el algoritmo gestionando">
+  <div class="wrap">
+    <div class="m-grid">
+      <header class="m-cab">
+        <span class="m-num" aria-hidden="true">4</span>
+        <span class="m-t">23:00 – 32:00</span>
+        <h2>Romper el algoritmo gestionando</h2>
+        <p class="m-idea">El desafío no consiste simplemente en conseguir visualizaciones, sino en usar las herramientas de comunicación para que las decisiones públicas lleguen a las personas, se comprendan y faciliten su participación. Acá ella muestra lo que hizo.</p>
+      </header>
+      <div class="m-cuerpo">
+        <article class="pl-row pl">
+          <figure class="toma"><div class="mini"><div class="k-metricas"><span class="a"><svg class="ic"><use href="#i-ojo"/></svg>Vistas</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Se enteraron</span><span class="a"><svg class="ic"><use href="#i-corazon"/></svg>Likes</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Entendieron</span><span class="a"><svg class="ic"><use href="#i-persona"/></svg>Seguidores</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Participaron</span></div></div>
+            <figcaption><span class="n">15</span><span class="tx">Lo que mide el algoritmo tachado, y al lado lo que necesita saber la gestión, fila por fila.</span></figcaption></figure>
+          <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+            <p>«El algoritmo te mide en vistas, likes y seguidores. Son números lindos, pero no me dicen lo que necesito saber. A mí me importa cuántos vecinos se enteraron, cuántos entendieron, cuántos hicieron el trámite, cuántos participaron. Esa es la cuenta que hago yo.</p>
+            <p>No digo que las vistas no importen. Sirven para llegar. Pero llegar es el principio.»</p>
+          </div></div>
+        </article>
+        <article class="pl-row pl">
+          <figure class="toma"><div class="mini destacada"><div class="m-txt"><small><svg class="ic"><use href="#i-ojo"/></svg>1.000.000 de vistas</small><span>Un millón de vistas no tapa un bache.</span></div></div>
+            <figcaption><span class="n">16</span><span class="tx">«Un millón de vistas no tapa un bache.»</span></figcaption></figure>
+          <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
+            <p>«Se los digo fácil: un millón de vistas no tapa un bache. Lo que tapa un bache es una cuadrilla trabajando. Y eso también se puede contar, y se tiene que contar. Les muestro tres cosas que hicimos.»</p>
+          </div></div>
+        </article>
+      </div>
+    </div>
+
+    <div class="vitrina" id="vitrina">
+      <svg class="red-deco" viewBox="0 0 70 46" aria-hidden="true"><line x1="8" y1="10" x2="30" y2="6"/><line x1="30" y1="6" x2="52" y2="16"/><line x1="52" y1="16" x2="64" y2="34"/><line x1="30" y1="6" x2="38" y2="30"/><line x1="38" y1="30" x2="64" y2="34"/><circle cx="8" cy="10" r="1.2"/><circle cx="30" cy="6" r="1.5"/><circle class="a" cx="52" cy="16" r="1.6"/><circle cx="64" cy="34" r="1.2"/><circle cx="38" cy="30" r="1.4"/></svg>
+      <p class="eyebrow">Vitrina de gestión · placas 17 a 19</p>
+      <h3>Tres celulares, tres cosas que hizo la gestión</h3>
+      <p class="sub">Este es el espacio para vender la gestión. Comunicación elige los ejemplos que quiera y pone en cada celular un video vertical de 30 a 60 segundos. Las categorías son una guía, no una obligación.</p>
+      <div class="vit-grid">
+        <figure class="vit-item pl">
+          <div class="vit-cel"><div class="barras" aria-hidden="true"><span class="barra"><i></i></span><span class="barra"><i></i></span><span class="barra"><i></i></span></div><div class="vit-rail" aria-hidden="true"><i class="av"></i><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic"><use href="#i-compartir"/></svg></div>
+            <div class="vit-pantalla"><span class="vit-tag">Espacio para Comunicación</span><p class="vit-obra">Una obra que se ve</p><ul class="vit-pasos"><li><b>Antes</b>Cómo estaba</li><li><b>Hicimos</b>La decisión</li><li><b>Hoy</b>El resultado, con un dato confirmado</li></ul><span class="vit-pie">Video vertical · 30 a 60 s</span></div></div>
+          <figcaption><span class="n">17</span><span class="tx">Ejemplo 1, a elección de Comunicación: una obra que se ve en la calle.</span></figcaption>
+        </figure>
+        <figure class="vit-item pl">
+          <div class="vit-cel"><div class="barras" aria-hidden="true"><span class="barra"><i></i></span><span class="barra"><i></i></span><span class="barra"><i></i></span></div><div class="vit-rail" aria-hidden="true"><i class="av"></i><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic"><use href="#i-compartir"/></svg></div>
+            <div class="vit-pantalla"><span class="vit-tag">Espacio para Comunicación</span><p class="vit-obra">Un servicio que se usa</p><ul class="vit-pasos"><li><b>Antes</b>Cómo era el trámite o el problema</li><li><b>Hicimos</b>La decisión</li><li><b>Hoy</b>Cuántos lo usan</li></ul><span class="vit-pie">Video vertical · 30 a 60 s</span></div></div>
+          <figcaption><span class="n">18</span><span class="tx">Ejemplo 2, a elección de Comunicación: un servicio que los vecinos usan.</span></figcaption>
+        </figure>
+        <figure class="vit-item pl">
+          <div class="vit-cel"><div class="barras" aria-hidden="true"><span class="barra"><i></i></span><span class="barra"><i></i></span><span class="barra"><i></i></span></div><div class="vit-rail" aria-hidden="true"><i class="av"></i><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic"><use href="#i-compartir"/></svg></div>
+            <div class="vit-pantalla"><span class="vit-tag">Espacio para Comunicación</span><p class="vit-obra">Una decisión con los vecinos</p><ul class="vit-pasos"><li><b>Antes</b>Qué se discutía</li><li><b>Hicimos</b>Cómo participaron</li><li><b>Hoy</b>Qué se hizo con eso</li></ul><span class="vit-pie">Video vertical · 30 a 60 s</span></div></div>
+          <figcaption><span class="n">19</span><span class="tx">Ejemplo 3, a elección de Comunicación: una decisión en la que participaron los vecinos.</span></figcaption>
+        </figure>
+      </div>
+      <div class="vit-dice">
+        <h4>Lo que dice ella en cada celular</h4>
+        <div><span class="dice-tag">Dice</span><div class="dice-txt" id="vit-dice">
+          <p>«<span class="espacio">La obra o el programa</span>. Antes, <span class="espacio">cómo estaba</span>. Decidimos <span class="espacio">qué se hizo</span>. Y para que la gente se enterara, lo contamos así.» <span class="acot">(Corre el video.)</span></p>
+          <p>«Hoy <span class="espacio">el resultado, con un dato confirmado</span>. Eso no lo mide el algoritmo. Lo mide el vecino que <span class="espacio">lo usa, lo camina o lo ve</span>.»</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<section id="cierre" class="cierre" data-bloque="32:00 · Cierre">
+  <div class="wrap pl">
+    <p class="eyebrow">32:00 – 35:00 · Cierre</p>
+    <blockquote class="ultima"><p>No intento llegar al poder ni ejercerlo desde el <span class="k-tik">algoritmo</span>, sino que el algoritmo sea una herramienta para <span class="k-int">gobernar</span>.</p></blockquote>
+    <p class="toma-txt"><span class="n">20</span><span class="tx">La frase final, sola, sin logos ni datos. Pensada para que la fotografíen.</span></p>
+    <div class="dice-cierre"><span class="dice-tag">Dice</span><div class="dice-txt">
+      <p>«Hoy les conté cuatro cosas. Que lo auténtico le gana al personaje. Que no importa tanto por qué camino llegás, sino qué hacés cuando llegás. Que comunicar también es gestionar. Y que el algoritmo se rompe gestionando.</p>
+      <p>La verdadera transformación de la comunicación política no pasa cuando un gobernante se convierte en influencer. Pasa cuando aprende a usar los nuevos lenguajes sin olvidarse de que está ahí para gobernar.</p>
+      <p>Yo no busco llegar al poder ni ejercerlo desde el algoritmo. Quiero que el algoritmo sea una herramienta para gobernar.</p>
+      <p><span class="acot">(Pausa.)</span></p>
+      <p>Y si alguno de ustedes llega a gobernar algún día, acuérdense de Rosalía: a veces, para que una ciudad vaya en el sentido correcto, alguien tiene que animarse a bailar a contramano. Gracias.»</p>
+    </div></div>
+  </div>
+  <div class="carriles" aria-hidden="true">
+    <div class="carril"></div>
+    <div class="carril"><span class="rosalia"><svg viewBox="0 0 40 22"><path d="M32 11H8m10-8-10 8 10 8" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rosalía</span></div>
+  </div>
+</section>
+
+<section id="comunicacion" class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Para Comunicación</p>
+    <h2>Cómo tiene que verse</h2>
+    <div class="principios">
+      <div class="principio"><span class="pr-ic"><svg class="ic"><use href="#i-celular"/></svg></span><h3>Vertical, grande y con sonido</h3><p>Los videos se ven como en el celular: 9:16, a pantalla completa o dentro de un marco de teléfono. Nunca un video chiquito en una esquina.</p></div>
+      <div class="principio"><span class="pr-ic">1</span><h3>Una idea por placa</h3><p>Pocas palabras y letra enorme. El discurso lo dice ella; la placa lo remata.</p></div>
+      <div class="principio"><span class="pr-ic"><svg class="ic"><use href="#i-cc"/></svg></span><h3>Subtítulos siempre</h3><p>Quemados en cada video y en las frases clave, con el ritmo de las redes.</p></div>
+      <div class="principio"><span class="pr-ic"><svg class="ic"><use href="#i-play"/></svg></span><h3>Que algo pase cada pocos minutos</h3><p>Un video, una animación, un titular que entra. Media hora de placas quietas pierde a cualquiera de veinte años.</p></div>
+      <div class="principio"><span class="pr-ic"><svg class="ic"><use href="#i-corazon"/></svg></span><h3>Los recursos de las redes, al servicio de la gestión</h3><p>Barras de progreso, comentarios y contadores, usados para mostrar lo que hizo la ciudad.</p></div>
+      <div class="principio"><span class="pr-ic"><svg class="ic"><use href="#i-check"/></svg></span><h3>Solo datos confirmados</h3><p>Lo que falte se pide al área antes de diseñar la placa. Ningún número inventado.</p></div>
+    </div>
+
+    <div class="material">
+      <div>
+        <h3>Lo que tiene que conseguir o decidir Comunicación</h3>
+        <p class="ayuda">Marcá lo que ya está. Queda guardado en este navegador.</p>
+        <div class="avance"><b id="cuenta">0/12</b><span>piezas listas</span><div class="avance-barra"><i id="barra-avance"></i></div></div>
+      </div>
+      <ul class="lista-mat">
+        <li><label><input type="checkbox" id="mat-vitrina"><span>Los tres ejemplos de gestión, cada uno con su video vertical y un dato confirmado <span class="ref">P17–19</span><small>Los que Comunicación quiera mostrar</small></span></label></li>
+        <li><label><input type="checkbox" id="mat-video"><span>Video «Va a contramano, Rosalía» en alta y con sonido <span class="ref">P01 · P13</span><small>Archivo original del TikTok de la Municipalidad</small></span></label></li>
+        <li><label><input type="checkbox" id="mat-recorte"><span>Recorte de una nota que la llame «la intendenta tiktoker» <span class="ref">P02</span></span></label></li>
+        <li><label><input type="checkbox" id="mat-institucional"><span>Un video institucional clásico, propio, para la pantalla dividida <span class="ref">P04</span></span></label></li>
+        <li><label><input type="checkbox" id="mat-fotos"><span>Tres fotos de su recorrido: médica, gestión pública, intendenta <span class="ref">P05</span></span></label></li>
+        <li><label><input type="checkbox" id="mat-detras"><span>20 segundos de detrás de cámara de un día de gestión, en vertical <span class="ref">P06</span></span></label></li>
+        <li><label><input type="checkbox" id="mat-reaccion"><span>Qué contestó ella el día del «menos TikTok y más obras» <span class="ref">P08</span><small>Hablarlo con ella</small></span></label></li>
+        <li><label><input type="checkbox" id="mat-mapa"><span>Mapa del centro con las dos calles <span class="ref">P10</span></span></label></li>
+        <li><label><input type="checkbox" id="mat-gacetilla"><span>La gacetilla o gráfica oficial del cambio de sentido <span class="ref">P11</span></span></label></li>
+        <li><label><input type="checkbox" id="mat-datos"><span>Alcance del video de Rosalía, si el área lo confirma <span class="ref">P13</span></span></label></li>
+        <li><label><input type="checkbox" id="mat-animaciones"><span>Animaciones: la bifurcación y la tabla que se tacha <span class="ref">P07 · P15</span></span></label></li>
+        <li><label><input type="checkbox" id="mat-sala"><span>Prueba de audio y video en la sala<small>Con un celular de respaldo para los videos</small></span></label></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="dia" class="dia">
+  <div class="wrap">
+    <div class="dia-tapa">
+      <svg class="red-deco" viewBox="0 0 70 46" aria-hidden="true"><line x1="8" y1="10" x2="30" y2="6"/><line x1="30" y1="6" x2="52" y2="16"/><line x1="52" y1="16" x2="64" y2="34"/><line x1="30" y1="6" x2="38" y2="30"/><line x1="38" y1="30" x2="64" y2="34"/><line x1="8" y1="10" x2="16" y2="36"/><line x1="16" y1="36" x2="38" y2="30"/><circle cx="8" cy="10" r="1.2"/><circle cx="30" cy="6" r="1.5"/><circle class="a" cx="52" cy="16" r="1.6"/><circle cx="64" cy="34" r="1.2"/><circle cx="38" cy="30" r="1.4"/><circle cx="16" cy="36" r="1.1"/></svg>
+      <p class="eyebrow">Propuesta de la Dirección de Inteligencia Artificial</p>
+      <h2>Esta charla es una forma de trabajar. Se puede usar en cada medida que la ciudad necesite contar.</h2>
+      <p>La charla se pensó como se piensa un contenido: guion, placas y material en una sola pieza. Eso mismo, con inteligencia artificial, puede sumarse al trabajo diario de Comunicación.</p>
+    </div>
+    <div class="ofertas">
+      <div class="oferta"><span class="o-ic"><svg class="ic"><use href="#i-chispa"/></svg></span><h3>De la medida al guion</h3><p>Para cada decisión importante, un guion corto, las placas y la idea del video vertical, armados con IA en horas y revisados por el equipo.</p></div>
+      <div class="oferta"><span class="o-ic"><svg class="ic"><use href="#i-cc"/></svg></span><h3>Subtítulos y versiones verticales</h3><p>Subtítulos automáticos y versiones en 9:16 de cada video, listas para cada red.</p></div>
+      <div class="oferta"><span class="o-ic"><svg class="ic"><use href="#i-comentario"/></svg></span><h3>Saber si se entendió</h3><p>Lectura de comentarios con IA para saber qué entendió la gente y qué dudas quedaron. La métrica de la gestión, no la del algoritmo.</p></div>
+      <div class="oferta"><span class="o-ic"><svg class="ic"><use href="#i-celular"/></svg></span><h3>Que cada aviso tenga respuesta</h3><p>Cuando sale el video, Migue, el asistente de la ciudad, responde las dudas de los vecinos sobre esa medida, a cualquier hora.</p></div>
+      <div class="oferta"><span class="o-ic"><svg class="ic"><use href="#i-grafico"/></svg></span><h3>Tableros de alcance real</h3><p>Cuántos se enteraron, cuántos hicieron el trámite, cuántos participaron: en un tablero que Comunicación consulta cuando quiere.</p></div>
+      <div class="oferta"><span class="o-ic"><svg class="ic"><use href="#i-red"/></svg></span><h3>Escuchar antes de publicar</h3><p>Qué se está hablando en la ciudad antes de anunciar algo, para elegir el tono y el momento.</p></div>
+      <div class="oferta ancha"><span class="o-ic"><svg class="ic"><use href="#i-play"/></svg></span><div><h3>La próxima Rosalía puede salir de acá.</h3><p>El video avisa, Migue responde y el tablero muestra cuántos se enteraron. Así se rompe el algoritmo gestionando.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="fuentes">
+  <div class="wrap">
+    <p class="eyebrow">Fuentes de la historia</p>
+    <ul>
+      <li><a href="https://www.eltucumano.com/amp/noticia/actualidad/312991/salimos-y-de-ahi-salen-esas-perlitas-chahla-le-conto-a-pedro-rosemblat-como-se-convirtio-en-la-intendenta-tiktoker" target="_blank" rel="noopener">El Tucumano</a>: Chahla le cuenta a Pedro Rosemblat cómo se convirtió en la «intendenta tiktoker».</li>
+      <li><a href="https://tucumanalas7.com.ar/local/el-spot-que-utilizo-la-municipalidad-sobre-el-cambio-de-sentido-de-la-calle-va-a-contramano-rosalia/" target="_blank" rel="noopener">Tucumán a las 7</a>: el spot «Va a contramano, Rosalía».</li>
+      <li><a href="https://www.eltucumano.com/noticia/actualidad/316031/la-reaccion-de-rossana-chahla-cuando-en-plena-calle-le-pidieron-menos-tiktok-y-mas-obras" target="_blank" rel="noopener">El Tucumano</a>: «menos TikTok y más obras».</li>
+      <li><a href="https://www.lanacion.com.ar/politica/rossana-chahla-la-intendenta-tiktoker-furor-en-redes-que-llego-tarde-al-peronismo-y-desafia-a-sus-nid05092025/" target="_blank" rel="noopener">La Nación</a>: la «intendenta tiktoker».</li>
+      <li><a href="https://www.instagram.com/reel/C--eojvtyTb/" target="_blank" rel="noopener">El video en Instagram</a>.</li>
+    </ul>
+    <p class="pie">Propuesta de la Dirección de Inteligencia Artificial · Municipalidad de San Miguel de Tucumán. Borrador de trabajo, noviembre de 2026: tiempos y textos para ajustar con la intendenta.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* Historia en cinco placas: avanza sola mientras se ve; tocar adelanta o vuelve. */
+  var cel = document.getElementById('cel');
+  var cuadros = Array.prototype.slice.call(cel.querySelectorAll('.cuadro'));
+  var barras = Array.prototype.slice.call(cel.querySelectorAll('.barra'));
+  var beats = Array.prototype.slice.call(document.querySelectorAll('.beats button'));
+  var actual = 0;
+  function ir(n) {
+    actual = (n + cuadros.length) % cuadros.length;
+    cuadros.forEach(function (c, k) { c.classList.toggle('on', k === actual); c.setAttribute('aria-hidden', k === actual ? 'false' : 'true'); });
+    barras.forEach(function (b, k) { b.classList.toggle('hecha', k < actual); b.classList.remove('on'); });
+    void barras[actual].offsetWidth;
+    barras[actual].classList.add('on');
+    beats.forEach(function (b, k) { b.setAttribute('aria-current', k === actual ? 'step' : 'false'); });
+  }
+  barras.forEach(function (b) { b.querySelector('i').addEventListener('animationend', function () { ir(actual + 1); }); });
+  cel.addEventListener('click', function (e) {
+    var r = cel.getBoundingClientRect();
+    ir(e.clientX - r.left < r.width / 3 ? actual - 1 : actual + 1);
+  });
+  cel.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); ir(actual + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); ir(actual - 1); }
+  });
+  beats.forEach(function (b, k) { b.addEventListener('click', function () { ir(k); }); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) { cel.classList.toggle('pausa', !en.isIntersecting); });
+    }, { threshold: 0.5 }).observe(cel);
+  } else {
+    cel.classList.remove('pausa');
+  }
+  ir(0);
+
+  /* Material: la lista queda guardada en el navegador de quien la marca. */
+  var CLAVE = 'gobernar-comunicar-material-v2';
+  var marcados = {};
+  try { marcados = JSON.parse(localStorage.getItem(CLAVE) || '{}') || {}; } catch (e) { marcados = {}; }
+  var cajas = Array.prototype.slice.call(document.querySelectorAll('.lista-mat input'));
+  var cuenta = document.getElementById('cuenta');
+  var barra = document.getElementById('barra-avance');
+  function contar() {
+    var n = cajas.filter(function (c) { return c.checked; }).length;
+    cuenta.textContent = n + '/' + cajas.length;
+    barra.style.width = (n / cajas.length * 100) + '%';
+  }
+  cajas.forEach(function (c) {
+    c.checked = !!marcados[c.id];
+    c.addEventListener('change', function () {
+      marcados[c.id] = c.checked;
+      try { localStorage.setItem(CLAVE, JSON.stringify(marcados)); } catch (e) {}
+      contar();
+    });
+  });
+  contar();
+
+  /* Copiar el guion completo (qué se ve y qué dice) como texto, listo para las notas del PowerPoint. */
+  function limpio(el) {
+    if (!el) return '';
+    var copia = el.cloneNode(true);
+    Array.prototype.forEach.call(copia.querySelectorAll('.espacio'), function (s) { s.textContent = '[' + s.textContent.trim() + ']'; });
+    return Array.prototype.map.call(copia.querySelectorAll('p'), function (p) { return p.textContent.replace(/\s+/g, ' ').trim(); })
+      .filter(Boolean).join('\n');
+  }
+  function armarGuion() {
+    var plantilla = limpio(document.getElementById('vit-dice'));
+    var bloques = Array.prototype.map.call(document.querySelectorAll('[data-bloque]'), function (sec) {
+      var placas = Array.prototype.map.call(sec.querySelectorAll('.pl'), function (pl) {
+        var n = pl.querySelector('.n').textContent.trim();
+        var ve = pl.querySelector('.tx').textContent.replace(/\s+/g, ' ').trim();
+        var dice = pl.classList.contains('vit-item') ? plantilla : limpio(pl.querySelector('.dice-txt'));
+        return 'PLACA ' + n + '\nSE VE: ' + ve + '\nDICE:\n' + dice;
+      });
+      return '=== ' + sec.getAttribute('data-bloque') + ' ===\n\n' + placas.join('\n\n');
+    });
+    return 'Gobernar y comunicar: romper el algoritmo gestionando\nGuion de la intendenta · 35 minutos\nLo que va entre [corchetes] lo completa Comunicación o ella.\n\n' + bloques.join('\n\n');
+  }
+  var estado = document.getElementById('estado-copia');
+  var area = document.getElementById('guion-texto');
+  document.getElementById('copiar').addEventListener('click', function () {
+    var texto = armarGuion();
+    function respaldo() {
+      area.value = texto;
+      area.hidden = false;
+      area.focus();
+      area.select();
+      estado.textContent = 'Seleccioné el guion: copialo con Ctrl+C.';
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(function () { estado.textContent = 'Guion copiado.'; }, respaldo);
+    } else {
+      respaldo();
+    }
+  });
+})();
+</script>
+</body>
+</html>

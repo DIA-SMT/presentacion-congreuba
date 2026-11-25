@@ -17,6 +17,7 @@ const TIPOS = {
     '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
     '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml',
     '.mp4': 'video/mp4', '.webm': 'video/webm', '.ttf': 'font/ttf', '.woff2': 'font/woff2',
+    '.pdf': 'application/pdf',
 };
 
 const oyentes = new Set();          // pantallas conectadas (botonera)
@@ -26,6 +27,7 @@ let ultimoControl = 0;              // última vez que el celular del expositor 
 function servirArchivo(req, res) {
     let rel = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     if (rel === '/') rel = '/index.html';
+    else if (rel.endsWith('/')) rel = rel.slice(0, -1);   // /propuestayguion/ → /propuestayguion
     // Direcciones sin ".html", como en Vercel: /control → control.html
     if (!path.extname(rel) && fs.existsSync(path.join(ROOT, rel + '.html'))) rel += '.html';
     const archivo = path.normalize(path.join(ROOT, rel));
