@@ -4,16 +4,16 @@ GUION DE PRÁCTICA · MÓDULO 6 · GOBERNAR LA IA AGÉNTICA EN EL ESTADO
 El guion completo, placa por placa y con miniaturas, está en guion-modulo6.pdf
 (se regenera con .\herramientas\guion-pdf.ps1). Esto es el resumen.
 
-Tiempo: 2 horas. 54 placas. Primero LO QUE YA FUNCIONA (los diez desarrollos, qué
+Tiempo: 2 horas. 55 placas. Primero LO QUE YA FUNCIONA (los diez desarrollos, qué
 resuelve cada uno, Migue y CIMBA en vivo) y después los 7 bloques, cada uno con un
 separador. La presentación te lleva sola por los sistemas y por las preguntas al
 público: la botonera es para volver o adelantar. Los minutos NO aparecen en pantalla:
 son sólo para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.
 
   0:00  Apertura con Migue + el plan + Sumate (nube de inicio) + cómo empezó .. 10 min
-  0:10  Primero · Lo que ya funciona (Migue y CIMBA en vivo; EstudIA opcional)  28 min
-  0:38  Bloque 1 · De la IA individual a la institucional .................. 10 min
-  0:48  Bloque 2 · Las capas (con la votación de IA soberana) ............. 16 min
+  0:10  Primero · Lo que ya funciona (Migue y CIMBA en vivo; EstudIA opcional)  26 min
+  0:36  Bloque 1 · De la IA individual a la institucional .................. 10 min
+  0:46  Bloque 2 · Las capas (gobernanza de datos, votación IA soberana) ... 18 min
   1:04  Bloque 3 · Del piloto a la producción ..............................  7 min
   1:11  Bloque 4 · La economía de los agentes .............................. 11 min
   1:22  Bloque 5 · Gobernanza del agente (tablero de Migue en vivo) ........ 14 min
@@ -32,8 +32,8 @@ EL PÚBLICO, DESDE EL CELULAR
                US$ 0,017; otro SIGUIENTE avanza; ANTERIOR la vuelve a tapar)
             19 Pregunta a la sala · ¿usás IA en tu trabajo? (cuenta personal / del
                municipio / todavía no)
-            28 Votemos · IA soberana para el Chaco
-            52 Nube de cierre · ¿qué te llevás para tu municipio?
+            29 Votemos · IA soberana para el Chaco
+            53 Nube de cierre · ¿qué te llevás para tu municipio?
   - Botonera, "El público": cuántos hay y de cuántos municipios; cualquier actividad
     encima de cualquier placa (SIGUIENTE la saca); Revelar; Cerrar la pregunta en los
     celulares; Moderar: ✕ saca de la pantalla una palabra, una pregunta o a una persona
@@ -45,7 +45,7 @@ EL PÚBLICO, DESDE EL CELULAR
 
 SISTEMAS EN VIVO, DENTRO DE LA PRESENTACIÓN
   - Placas "EN VIVO": 9 chat con Migue (Ciudad Digital), 12 CIMBA, 15 EstudIA (opcional),
-    43 tablero de Migue. SIGUIENTE abre el sistema real dentro de la presentación; otro
+    44 tablero de Migue. SIGUIENTE abre el sistema real dentro de la presentación; otro
     SIGUIENTE lo cierra y avanza; ANTERIOR (o ✕, o Esc) lo cierra y te quedás en la placa.
   - Adentro se navega con el MOUSE. Mientras el cursor está adentro, el teclado y el
     clicker le hablan al sistema: para seguir usá el celular o el ✕.
@@ -53,7 +53,7 @@ SISTEMAS EN VIVO, DENTRO DE LA PRESENTACIÓN
   - Chat con Migue: en Ciudad Digital (ciudaddigital.smt.gob.ar), botón de abajo a la
     derecha, ya en la portada: sin iniciar sesión. Mostrá el contador (casi 170.000
     ciudadanos registrados). Preguntas probadas: bache en mi cuadra, corte de tránsito,
-    licencia de conducir, habilitar un negocio. Después, en el tablero (placa 43), esa
+    licencia de conducir, habilitar un negocio. Después, en el tablero (placa 44), esa
     consulta y las del público deberían verse en el Corazón.
 
 ANTES DE EMPEZAR
@@ -70,7 +70,7 @@ ANTES DE EMPEZAR
   - Botonera, "El público": que diga 0 personas (si no, Empezar de cero).
   - Misma compu y mismo navegador para la prueba y para la charla (sin incógnito).
   - Iniciá sesión una vez desde la presentación en CIMBA (12) y EstudIA (15) al llegar.
-    El tablero de Migue (43), en la pausa o justo antes del bloque 5: su sesión vence y
+    El tablero de Migue (44), en la pausa o justo antes del bloque 5: su sesión vence y
     no se renueva sola.
   - Que no quede abierta ninguna pantalla con nombres, teléfonos o direcciones de vecinos.
   - Respaldo sin internet para la presentación: doble clic en INICIAR.bat (necesita
@@ -99,7 +99,7 @@ APERTURA (placa 1) · DIÁLOGO CON MIGUE
 MIGUE: sólo dice lo que tiene video grabado (la botonera hace latir MIGUE HABLA cuando
 le toca). En los separadores está parado, sin hablar.
     7-8 (placa 8, vitrina Migue)  videos: «Vos me contás qué te pasa…», «Entiendo, organizo…»
-    9  (placa 54, gracias)   video: «¡Muchas gracias! Nos vemos en la ciudad.»
+    9  (placa 55, gracias)   video: «¡Muchas gracias! Nos vemos en la ciudad.»
 
 PRIMERO · LO QUE YA FUNCIONA (placas 5–17)
   5  Separador: lo que ya funciona.
@@ -121,37 +121,40 @@ BLOQUE 1 · DE LA IA INDIVIDUAL A LA INSTITUCIONAL (placas 18–21)
   20 Cuatro niveles.   21 Chat responde / agente actúa (en CIMBA: la IA clasifica, la
      persona cierra).
 
-BLOQUE 2 · LAS CAPAS (placas 22–28)
+BLOQUE 2 · LAS CAPAS (placas 22–29)
   23 Cinco capas.   24 Licencias: ocho condiciones.
-  25 Detrás de escena CIMBA: CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
-  26 Detrás de escena Migue: CONTÁ CÓMO SE MANTIENEN LAS FUENTES.
-  27 IA soberana.   28 Votemos: ¿municipal, provincial compartida o comercial?
+  25 Los datos · GOBERNANZA DE DATOS: seis reglas, cada una con su ejemplo en SMT
+     (34 gerentes de datos, CIMBA una sola bandeja, Applaza calidad a la vista,
+     Ley 25.326, Migue conectado a las fuentes, registro en su tablero).
+  26 Interoperar · CIMBA por dentro: CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
+  27 Interoperar · Migue por dentro: CONTÁ CÓMO SE MANTIENEN LAS FUENTES.
+  28 IA soberana.   29 Votemos: ¿municipal, provincial compartida o comercial?
 
-BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 29–32)
-  30 Embudo y seis causas.   31 El camino (los sistemas que ya vieron).
-  32 Checklist (para llevarse).
+BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 30–33)
+  31 Embudo y seis causas.   32 El camino (los sistemas que ya vieron).
+  33 Checklist (para llevarse).
 
-BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES (placas 33–37)
-  34 Tokens.   35 El multiplicador (ilustrativo).   36 Costo efectivo.
-  37 Presupuestar: cinco reglas, con EstudIA (los US$ 0,017 que adivinaron).
+BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES (placas 34–38)
+  35 Tokens.   36 El multiplicador (ilustrativo).   37 Costo efectivo.
+  38 Presupuestar: cinco reglas, con EstudIA (los US$ 0,017 que adivinaron).
 
-BLOQUE 5 · GOBERNANZA DEL AGENTE (placas 38–43)
-  39 Las reglas.   40 Semáforo de permisos.   41 Trazabilidad (CIMBA real).
-  42 El tablero de Migue.   43 EN VIVO · Tablero de Migue (buscá las consultas del chat
+BLOQUE 5 · GOBERNANZA DEL AGENTE (placas 39–44)
+  40 Las reglas.   41 Semáforo de permisos.   42 Trazabilidad (CIMBA real).
+  43 El tablero de Migue.   44 EN VIVO · Tablero de Migue (buscá las consultas del chat
      y del público).
 
-BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA (placas 44–46)
-  45 IA que piensa por vos / IA que te hace pensar.   46 Cuatro prácticas.
+BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA (placas 45–47)
+  46 IA que piensa por vos / IA que te hace pensar.   47 Cuatro prácticas.
 
-BLOQUE 7 · HOJA DE RUTA PARA CHACO (placas 47–49)
-  48 Cinco fases.   49 Quién hace qué.
+BLOQUE 7 · HOJA DE RUTA PARA CHACO (placas 48–50)
+  49 Cinco fases.   50 Quién hace qué.
 
-CIERRE (placas 50–54)
-  50 Un caso: los siete bloques en Migue.   51 Conclusión.
-  52 Nube de cierre: ¿qué te llevás? (para comparar, la de inicio sale encima desde la
+CIERRE (placas 51–55)
+  51 Un caso: los siete bloques en Migue.   52 Conclusión.
+  53 Nube de cierre: ¿qué te llevás? (para comparar, la de inicio sale encima desde la
      botonera: El público → Nube de inicio).
-  53 Preguntas (Q: QR gigante; preguntas a Migue con la voz).
-  54 Gracias: MIGUE 9 se despide (video). Queda proyectada.
+  54 Preguntas (Q: QR gigante; preguntas a Migue con la voz).
+  55 Gracias: MIGUE 9 se despide (video). Queda proyectada.
 
 SI ALGO FALLA
   - Una frase de Migue de más: ↶ deshacer. Migue no responde en vivo: a los ~40 s sale
@@ -166,4 +169,5 @@ SI ALGO FALLA
   - Aviso "Versión distinta": recargar pantalla y botonera.
   - Pantalla negra: Extras → Negro. Saltar a una placa: "Ir a la placa", al final.
   - Versiones anteriores, en etiquetas del repositorio: chaco-antes-de-desarrollos (sin
-    "Lo que ya funciona") y chaco-antes-del-publico (sin la participación del público).
+    "Lo que ya funciona"), chaco-antes-del-publico (sin la participación del público) y
+    chaco-antes-de-datos (sin la placa de gobernanza de datos).

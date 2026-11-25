@@ -23,7 +23,7 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 
 ## Qué hay
 
-- 54 placas (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan y cómo empezó. Después, **Primero · Lo que ya funciona** (separador `data-bloque="0"`): el mapa de los diez desarrollos (`.m6-mapa`) y sus vitrinas, con **Migue y CIMBA en vivo** y EstudIA opcional, para que cuando se hable de capas, datos y costos el público ya sepa de qué sistema se habla (desde el 25/11/2026; la versión anterior quedó en la etiqueta `chaco-antes-de-desarrollos`). Después, por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
+- 55 placas (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan y cómo empezó. Después, **Primero · Lo que ya funciona** (separador `data-bloque="0"`): el mapa de los diez desarrollos (`.m6-mapa`) y sus vitrinas, con **Migue y CIMBA en vivo** y EstudIA opcional, para que cuando se hable de capas, datos y costos el público ya sepa de qué sistema se habla (desde el 25/11/2026; la versión anterior quedó en la etiqueta `chaco-antes-de-desarrollos`). Después, por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
   1. De la IA individual a la institucional: pregunta a la sala, cuatro niveles, chat frente a agente.
   2. Las capas: cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue (datos conectados), IA soberana (matriz 2×2).
   3. Del piloto a la producción: embudo y seis causas, el camino, checklist.
@@ -33,7 +33,8 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
   7. Hoja de ruta para Chaco: cinco fases con criterio de paso, y qué hace la provincia y qué cada municipio.
   Cierre: conclusión, preguntas (QR de Migue) y gracias.
 - El encabezado de cada placa dice en qué bloque estás (lo arma `m6.js`).
-- **Migue**: dice sólo frases con video grabado (la apertura, sus dos videos en la vitrina y la despedida; desde el 25/11/2026 no hay frases con globo ni videos por grabar). En cada separador está parado, sin hablar, y la placa 50 recorre los siete bloques en su caso.
+- **Migue**: dice sólo frases con video grabado (la apertura, sus dos videos en la vitrina y la despedida; desde el 25/11/2026 no hay frases con globo ni videos por grabar). En cada separador está parado, sin hablar, y la placa 51 recorre los siete bloques en su caso.
+- **Gobernanza de datos** (placa 25, bloque 2): seis reglas con su ejemplo en SMT, entre Licencias y las dos placas de **Interoperar** (CIMBA y Migue por dentro). Así cada punto del programa del módulo tiene su placa.
 - **Guion imprimible**: `guion.html` arma el guion placa por placa leyendo la presentación (miniatura, línea de la botonera, notas, frases de Migue y demos). `.\herramientas\guion-pdf.ps1` lo imprime a `guion-modulo6.pdf` (A4) con Edge.
 - **Sistemas en vivo, dentro de la presentación** (`#web`, en `m6.js`): un navegador con pestañas que muestra el sistema real. En las placas "EN VIVO" (`data-web="cimba|estudia|migue"`) el primer SIGUIENTE lo abre y el siguiente lo cierra y avanza; la botonera tiene un botón por sistema (lista `SISTEMAS` en `contenido.js`). Se precarga una placa antes y conserva la sesión.
 - Capturas reales en las placas de trazabilidad (CIMBA, control de lo cargado), presupuesto (EstudIA, Laboratorio IA) y el tablero de Migue.
