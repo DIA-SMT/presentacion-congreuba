@@ -122,7 +122,9 @@ BLOQUE 1 · DE LA IA INDIVIDUAL A LA INSTITUCIONAL (placas 18–21)
      persona cierra).
 
 BLOQUE 2 · LAS CAPAS (placas 22–29)
-  23 Cinco capas.   24 Licencias: ocho condiciones.
+  23 Cinco capas.   24 Licencias: ocho condiciones. En la 02 (dónde quedan los
+     datos), la novedad: Res. AAIP 188/2026, Boletín Oficial del 25/11, cláusulas
+     modelo para datos personales que salen del país.
   25 Los datos · GOBERNANZA DE DATOS: seis reglas, cada una con su ejemplo en SMT
      (34 gerentes de datos, CIMBA una sola bandeja, Applaza calidad a la vista,
      Ley 25.326, Migue conectado a las fuentes, registro en su tablero).

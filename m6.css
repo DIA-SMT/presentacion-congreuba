@@ -124,6 +124,9 @@
 .m6-clausulas.m6-datos { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 268px); }
 .m6-datos .m6-clausula > b { padding-right: 40px; }
 .m6-datos .m6-clausula > small { margin-top: auto; padding-top: 12px; border-top: 1.5px dashed var(--borde); font-size: 19px; line-height: 1.3; font-weight: 600; color: var(--gris); }
+/* Licencias: la novedad normativa, en la condición que toca */
+.m6-clausula > small.m6-hoy { margin-top: auto; padding-top: 10px; border-top: 1.5px dashed var(--borde); font-size: 17px; line-height: 1.3; font-weight: 600; color: var(--gris); white-space: nowrap; }
+.m6-hoy b { color: var(--verde); font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
 .m6-nota { margin-top: 22px; }
 .m6-nota.pestana { min-height: 150px; }
 
