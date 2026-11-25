@@ -61,7 +61,7 @@ window.CONTENIDO = {
     { id: 'cidi', nombre: 'Ciudad Digital', url: 'https://ciudaddigital.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/cidituc/escritorio.jpg' },
     { id: 'applaza', nombre: 'Applaza', url: 'https://applazas.195-35-42-168.sslip.io/', dominio: 'appplazas.smt.gob.ar', enmarcable: true, captura: 'img/capturas/applaza/ev-1.jpg' },
     { id: 'bus', nombre: 'Bus Turístico', url: 'https://turismo.195-35-42-168.sslip.io/', dominio: 'busturistico.smt.gob.ar', enmarcable: true, captura: 'img/capturas/bus/resumen.jpg' },
-    { id: 'feria', nombre: 'FerIA', url: 'https://feria.195-35-42-168.sslip.io/', dominio: 'feria.smt.gob.ar', enmarcable: true, captura: 'img/capturas/ferias/escritorio.jpg' },
+    { id: 'feria', nombre: 'FerIA', url: 'https://feria.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/ferias/escritorio.jpg' },
     { id: 'presupuesto', nombre: 'Presupuesto Participativo', url: 'https://presupuestoparticipativo.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/presupuesto/escritorio.jpg' },
   ],
 

@@ -8,10 +8,10 @@ La versión del panel UBA (16/10/2026) queda en la etiqueta `uba-2026-10-16`.
 
 Sin código de sala: la pantalla y la botonera se encuentran solas por un canal fijo (`sala` en `config.js`: `chaco-modulo6-2026`).
 
-- **Pantalla (para la técnica):** `https://<dominio>/`
-- **Botonera (tu celular):** `https://<dominio>/control`
+- **Pantalla (para la técnica):** https://presentacion.195-35-42-168.sslip.io
+- **Botonera (tu celular):** https://presentacion.195-35-42-168.sslip.io/control
 
-El proyecto de Vercel (`uba-ia-servicio-publico`) respondía 402 (pago requerido) el 24/11/2026: la presentación se publica en un VPS (ver "Publicar en un VPS").
+Publicada el 25/11/2026 en el VPS del municipio (195.35.42.168): carpeta `/var/www/presentacion-modulo6`, proceso pm2 `presentacion-modulo6` en `127.0.0.1:3090`, sitio nginx `presentacion-modulo6` con certificado de Let's Encrypt. Para republicar lo commiteado: `.\herramientas\publicar-vps.ps1` (usa la clave SSH `~/.ssh/vps_presentacion`). El proyecto de Vercel (`uba-ia-servicio-publico`) respondía 402 (pago requerido).
 
 El link de la botonera no se comparte: quien lo abra maneja la presentación. La técnica abre el de la pantalla y toca **Comenzar** (un clic: habilita el sonido de Migue y la pantalla completa). Todo lo demás, desde el celular.
 
@@ -53,14 +53,13 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 
 ## Sistemas que se muestran adentro (frame-ancestors)
 
-Revisado el 24/11/2026: el tablero de Migue, EstudIA, UrbanIA y Ciudad Digital se dejan mostrar dentro de la presentación. CIMBA, Applaza y Bus Turístico responden `X-Frame-Options: DENY`, así que la presentación ofrece abrirlos en una ventana. Para verlos adentro, en el `server {}` de nginx de cada uno:
+El tablero de Migue, EstudIA, UrbanIA y Ciudad Digital se dejan mostrar dentro de la presentación tal como están. En el VPS, nginx agrega a todos los sitios `X-Frame-Options: DENY` (`/etc/nginx/conf.d/seguridad-panel.conf`). El 25/11/2026 se habilitó a **CIMBA, Applaza, Bus Turístico y FerIA** para mostrarse **sólo** dentro de la presentación:
 
-```nginx
-# sacar:  add_header X-Frame-Options DENY;
-add_header Content-Security-Policy "frame-ancestors 'self' https://<dominio-de-la-presentación>" always;
-```
+- `/etc/nginx/snippets/marco-presentacion.conf`: repite las cabeceras globales (nosniff, Referrer-Policy, HSTS) salvo X-Frame-Options y agrega `Content-Security-Policy: frame-ancestors 'self' https://presentacion.195-35-42-168.sslip.io https://presentacion.smt.gob.ar`.
+- En los sitios `cimba`, `applaza`, `turismo` y `feria`, una línea `include snippets/marco-presentacion.conf;` debajo de cada `server_name`.
+- Respaldo de los cuatro archivos originales en `/root/respaldo-nginx-20261125-001302/`. Para volver atrás: sacar esas líneas (o restaurar el respaldo), `nginx -t` y `systemctl reload nginx`.
 
-`nginx -t` y `systemctl reload nginx`, y después `enmarcable: true` en `SISTEMAS` (`contenido.js`). Si la presentación queda en un subdominio de `smt.gob.ar`, los inicios de sesión dentro de la presentación funcionan como en el navegador común (mismo sitio); desde otro dominio, cada sistema pide iniciar sesión una vez adentro.
+Los sistemas del VPS se abren por su dirección `…195-35-42-168.sslip.io`: con la presentación en `presentacion.195-35-42-168.sslip.io` son el mismo sitio, así que el inicio de sesión dentro de la presentación funciona como en una pestaña común.
 
 ## Miniaturas de la botonera
 
