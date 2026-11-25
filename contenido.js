@@ -75,7 +75,9 @@ window.CONTENIDO = {
     { id: 'bus', nombre: 'Bus Turístico', url: 'https://turismo.195-35-42-168.sslip.io/', dominio: 'busturistico.smt.gob.ar', enmarcable: true, captura: 'img/capturas/bus/resumen.jpg' },
     { id: 'feria', nombre: 'FerIA', url: 'https://feria.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/ferias/escritorio.jpg' },
     { id: 'cimt', nombre: 'CIMT', url: 'https://cimt.195-35-42-168.sslip.io/', dominio: 'cimt.smt.gob.ar', enmarcable: true },
-    { id: 'presupuesto', nombre: 'Presupuesto Participativo', url: 'https://presupuestoparticipativo.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/presupuesto/escritorio.jpg' },
+    // Presupuesto Participativo salió el 25/11/2026: Vercel desactivó el sitio (402,
+    // DEPLOYMENT_DISABLED). Sigue en la vitrina con capturas. Cuando vuelva a andar:
+    // { id: 'presupuesto', nombre: 'Presupuesto Participativo', url: 'https://presupuestoparticipativo.smt.gob.ar/', enmarcable: true, captura: 'img/capturas/presupuesto/escritorio.jpg' },
   ],
 
   // Los proyectos. El orden cuenta la historia: primero lo que usamos adentro,
