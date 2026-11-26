@@ -106,10 +106,10 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
 
 /* ================= INTRO ================= */
 .eyebrow { font-size: 7.2pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-.idea-box { background: var(--navy); color: var(--hueso); border-radius: 4mm; padding: 8mm 9mm; position: relative; overflow: hidden; }
+.idea-box { background: var(--navy); color: var(--hueso); border-radius: 4mm; padding: 6mm 8mm; position: relative; overflow: hidden; }
 .idea-box .eyebrow { color: var(--amarillo); }
-.idea-big { font-size: 20pt; line-height: 1.12; font-weight: 800; letter-spacing: -.015em; margin-top: 2.5mm; max-width: 150mm; }
-.idea-dice { margin-top: 5mm; padding-top: 4mm; border-top: .3mm solid rgba(243, 241, 236, .18); display: grid; grid-template-columns: 48mm 1fr; gap: 6mm; }
+.idea-big { font-size: 18pt; line-height: 1.12; font-weight: 800; letter-spacing: -.015em; margin-top: 2.5mm; max-width: 150mm; }
+.idea-dice { margin-top: 3.5mm; padding-top: 3mm; border-top: .3mm solid rgba(243, 241, 236, .18); display: grid; grid-template-columns: 48mm 1fr; gap: 6mm; }
 .idea-dice b { font-size: 8.5pt; font-weight: 600; color: var(--gris); line-height: 1.4; }
 .idea-dice p { font-size: 11pt; line-height: 1.5; font-weight: 500; }
 .red-box { position: absolute; right: -6mm; top: -4mm; width: 70mm; height: 46mm; opacity: .9; }
@@ -117,7 +117,7 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
 .red-box circle { fill: rgba(46, 177, 255, .5); }
 .red-box circle.a { fill: var(--amarillo); }
 
-.sub-tit { font-size: 12pt; font-weight: 700; color: var(--navy); margin: 8mm 0 3mm; display: flex; align-items: baseline; gap: 3mm; }
+.sub-tit { font-size: 12pt; font-weight: 700; color: var(--navy); margin: 5.5mm 0 2.5mm; display: flex; align-items: baseline; gap: 3mm; }
 .sub-tit span { font-size: 7.2pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
 .linea { display: flex; gap: 1.2mm; }
 .seg { display: flex; flex-direction: column; gap: 1mm; min-width: 0; }
@@ -129,11 +129,20 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
 .seg small { font-size: 6.8pt; color: var(--muted); }
 
 .reglas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
-.regla { border: .3mm solid var(--line); border-radius: 2.5mm; padding: 3.5mm; display: flex; gap: 3mm; align-items: flex-start; }
+.regla { border: .3mm solid var(--line); border-radius: 2.5mm; padding: 2.6mm 3mm; display: flex; gap: 3mm; align-items: flex-start; }
 .regla .r-ic { flex: none; width: 8mm; height: 8mm; border-radius: 2mm; background: var(--navy); color: var(--amarillo); display: grid; place-items: center; font-size: 11pt; font-weight: 800; }
 .regla h3 { font-size: 8.6pt; font-weight: 700; color: var(--navy); line-height: 1.25; }
 .regla p { font-size: 7.6pt; line-height: 1.4; color: var(--ink-2); margin-top: .8mm; }
 .leyenda { display: flex; gap: 8mm; flex-wrap: wrap; font-size: 8.6pt; color: var(--ink-2); }
+.conceptos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5mm; margin-top: 6mm; }
+.concepto { display: flex; flex-direction: column; min-height: 82mm; background: #f5f3ec; border-top: 1.6mm solid var(--amarillo); border-radius: 3mm; padding: 6mm 6mm 6.5mm; break-inside: avoid; }
+.c-donde { font-size: 7.4pt; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--azul); }
+.concepto h3 { font-size: 16pt; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: var(--navy); margin-top: 2mm; }
+.concepto p { font-size: 9.6pt; line-height: 1.5; color: var(--ink-2); margin-top: 2.5mm; }
+.concepto blockquote { margin-top: auto; padding-top: 4mm; border-top: .3mm solid var(--line); font-size: 11pt; line-height: 1.4; font-weight: 600; color: var(--navy); }
+.concepto p + blockquote { margin-top: auto; }
+.concepto blockquote::before { content: "Dice ella"; display: block; margin-bottom: 1.2mm; font-size: 6.8pt; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.mom-c { display: inline-block; margin-top: 3mm; background: var(--amarillo); color: var(--navy); font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 1mm 2.6mm; border-radius: 1mm; }
 
 /* ================= MOMENTOS ================= */
 .bloque { break-before: page; }
@@ -182,6 +191,8 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
 .cel .barras { position: absolute; top: 1.6cqw; left: 1.6cqw; right: 1.6cqw; display: flex; gap: .5cqw; }
 .cel .barras i { flex: 1; height: .35cqw; background: rgba(255, 255, 255, .35); }
 .cel .barras i.on { background: #fff; }
+.cel .pv { position: absolute; top: 2cqw; left: 0; right: 0; display: flex; justify-content: center; gap: 1.6cqw; font-size: 1.8cqw; color: rgba(243, 241, 236, .6); }
+.cel .pv b { color: #fff; font-weight: 600; border-bottom: .25cqw solid #fff; padding-bottom: .3cqw; }
 .cel .rec { position: absolute; left: 1.6cqw; top: 2cqw; display: flex; align-items: center; gap: .8cqw; font-size: 1.9cqw; font-weight: 600; color: #fff; }
 .cel .rec::before { content: ""; width: 1.4cqw; height: 1.4cqw; border-radius: 50%; background: var(--rojo); }
 .cel .flechitas { position: absolute; left: 0; right: 0; top: 38%; display: flex; justify-content: center; gap: .8cqw; font-size: 3.4cqw; font-weight: 800; color: rgba(243, 241, 236, .45); }
@@ -292,14 +303,14 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
 .dia-tapa p { font-size: 10pt; line-height: 1.55; color: var(--gris); margin-top: 3.5mm; max-width: 140mm; }
 .dia-tapa .red-box { width: 90mm; height: 60mm; right: -10mm; top: -8mm; }
 .ofertas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4mm; margin-top: 6mm; }
-.oferta { border: .3mm solid var(--line); border-radius: 3mm; padding: 5mm; display: flex; flex-direction: column; gap: 2mm; break-inside: avoid; }
+.oferta { border: .3mm solid var(--line); border-radius: 3mm; padding: 4mm; display: flex; flex-direction: column; gap: 2mm; break-inside: avoid; }
 .oferta.ancha { grid-column: 1 / -1; flex-direction: row; gap: 5mm; align-items: center; background: var(--amarillo); border-color: var(--amarillo); }
 .oferta .o-ic { width: 10mm; height: 10mm; border-radius: 2.6mm; background: var(--navy); color: var(--amarillo); display: grid; place-items: center; font-size: 14pt; flex: none; }
 .oferta h3 { font-size: 11pt; font-weight: 700; color: var(--navy); line-height: 1.25; }
 .oferta p { font-size: 9pt; line-height: 1.5; color: var(--ink-2); }
 .oferta.ancha h3 { font-size: 14pt; }
 .oferta.ancha p { color: var(--navy); }
-.dia-pie { margin-top: 7mm; display: flex; justify-content: space-between; align-items: center; gap: 6mm; padding-top: 4mm; border-top: .3mm solid var(--line); font-size: 8pt; color: var(--muted); }
+.dia-pie { margin-top: 5mm; display: flex; justify-content: space-between; align-items: center; gap: 6mm; padding-top: 4mm; border-top: .3mm solid var(--line); font-size: 8pt; color: var(--muted); }
 .dia-pie img { height: 9mm; }
 
 /* ================= EN PANTALLA (web y celular; no afecta al PDF) ================= */
@@ -344,6 +355,15 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
   .regla h3 { font-size: 14px; }
   .regla p { font-size: 13px; }
   .leyenda { flex-direction: column; gap: 8px; font-size: 14px; }
+  .conceptos { grid-template-columns: 1fr; gap: 10px; }
+  .concepto { padding: 14px 16px; }
+  .c-donde { font-size: 10.5px; }
+  .concepto h3 { font-size: 17px; }
+  .concepto p { font-size: 14px; }
+  .concepto { min-height: 0; }
+  .concepto blockquote { font-size: 15px; margin-top: 14px; padding-top: 12px; }
+  .concepto blockquote::before { font-size: 10.5px; }
+  .mom-c { font-size: 10.5px; padding: 5px 9px; margin-top: 12px; }
   .bloque, .dia { margin-top: 40px; }
   .mom { padding: 20px 18px; gap: 14px; }
   .mom-n { font-size: 40px; }
@@ -479,10 +499,10 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
   <h2 class="sub-tit">El recorrido <span>35 minutos · 20 placas</span></h2>
   <div class="linea">
     <div class="seg borde" style="flex:3"><i></i><b>00:00</b><span>Apertura</span><small>3 min</small></div>
-    <div class="seg" style="flex:6"><i></i><b>03:00</b><span>1 · Autenticidad frente al algoritmo</span><small>6 min</small></div>
-    <div class="seg" style="flex:6"><i></i><b>09:00</b><span>2 · Los dos caminos de la influencia</span><small>6 min</small></div>
-    <div class="seg nucleo" style="flex:8"><i></i><b>15:00</b><span>3 · Comunicar también es gestionar</span><small>8 min · Rosalía</small></div>
-    <div class="seg nucleo" style="flex:9"><i></i><b>23:00</b><span>4 · Romper el algoritmo gestionando</span><small>9 min · vitrina de gestión</small></div>
+    <div class="seg" style="flex:6"><i></i><b>03:00</b><span>1 · Autenticidad frente al algoritmo</span><small>6 min · lo real</small></div>
+    <div class="seg" style="flex:6"><i></i><b>09:00</b><span>2 · Los dos caminos de la influencia</span><small>6 min · legitimidad de ejercicio</small></div>
+    <div class="seg nucleo" style="flex:8"><i></i><b>15:00</b><span>3 · Comunicar también es gestionar</span><small>8 min · Rosalía rompe la burbuja</small></div>
+    <div class="seg nucleo" style="flex:9"><i></i><b>23:00</b><span>4 · Romper el algoritmo gestionando</span><small>9 min · conversión y vitrina</small></div>
     <div class="seg borde" style="flex:3"><i></i><b>32:00</b><span>Cierre</span><small>3 min</small></div>
   </div>
 
@@ -501,6 +521,21 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
     <span>A la izquierda, la placa: lo que se ve. A la derecha, lo que dice ella.</span>
     <span><span class="espacio">Así</span> lo completa Comunicación, o ella con sus palabras.</span>
     <span><span class="acot">(Así)</span> indicación de escena: no se dice.</span>
+  </div>
+</section>
+
+<!-- ======================= CONCEPTOS ======================= -->
+<section class="bloque">
+  <header class="mom">
+    <svg class="red-box" viewBox="0 0 70 46" aria-hidden="true"><line x1="8" y1="10" x2="30" y2="6"/><line x1="30" y1="6" x2="52" y2="16"/><line x1="52" y1="16" x2="64" y2="34"/><line x1="30" y1="6" x2="38" y2="30"/><line x1="38" y1="30" x2="64" y2="34"/><circle cx="8" cy="10" r="1.2"/><circle cx="30" cy="6" r="1.5"/><circle class="a" cx="52" cy="16" r="1.6"/><circle cx="64" cy="34" r="1.2"/><circle cx="38" cy="30" r="1.4"/></svg>
+    <span class="mom-n ic-n"><svg class="ic"><use href="#i-chispa"/></svg></span>
+    <div><span class="mom-t">Los conceptos que la legitiman</span><h2>Cuatro conceptos, uno por momento</h2><p>Le hablan a los jóvenes en su idioma, el de las redes y la tecnología. Sostienen la idea de que primero gobierna y después lo cuenta. Y en la charla salen de su boca, cada uno en su placa.</p></div>
+  </header>
+  <div class="conceptos">
+    <div class="concepto"><span class="c-donde">Momento 1 · placa 06</span><h3>Lo real</h3><p>En tiempos de contenido sintético y deepfakes, lo real es lo escaso. Lo que muestra es lo que hace.</p><blockquote>«Cuando todo se puede fabricar, lo real se vuelve escaso. Lo que ven en mis videos pasó de verdad.»</blockquote></div>
+    <div class="concepto"><span class="c-donde">Momento 2 · placa 07</span><h3>Legitimidad de ejercicio</h3><p>No la dan los votos ni los seguidores: se gana gobernando. Sus videos funcionan porque detrás hay gestión.</p><blockquote>«Es la que te ganás gobernando, todos los días.»</blockquote></div>
+    <div class="concepto"><span class="c-donde">Momento 3 · placa 13</span><h3>Romper la burbuja y ganarse el «Para vos»</h3><p>«Va a contramano, Rosalía» entró en el feed de gente que nunca sigue a un municipio. Un cambio de tránsito llegó adonde no llega ningún comunicado.</p><blockquote>«Una gacetilla no entra nunca ahí. Rosalía sí entró.»</blockquote></div>
+    <div class="concepto"><span class="c-donde">Momento 4 · placa 15</span><h3>Conversión: de la vista al trámite</h3><p>Su comunicación no se mide en vistas sino en datos de gestión. Si comunica un trámite, el éxito es que la gente lo haga.</p><blockquote>«Cuánta gente pasa de mirar a hacer.»</blockquote></div>
   </div>
 </section>
 
@@ -540,7 +575,7 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
   <header class="mom">
     <svg class="red-box" viewBox="0 0 70 46" aria-hidden="true"><line x1="8" y1="10" x2="30" y2="6"/><line x1="30" y1="6" x2="52" y2="16"/><line x1="52" y1="16" x2="64" y2="34"/><line x1="30" y1="6" x2="38" y2="30"/><line x1="38" y1="30" x2="64" y2="34"/><circle cx="8" cy="10" r="1.2"/><circle cx="30" cy="6" r="1.5"/><circle class="a" cx="52" cy="16" r="1.6"/><circle cx="64" cy="34" r="1.2"/><circle cx="38" cy="30" r="1.4"/></svg>
     <span class="mom-n">1</span>
-    <div><span class="mom-t">03:00 – 09:00 · 6 minutos</span><h2>La autenticidad frente al algoritmo</h2><p>Las redes premian a quien construye un personaje capaz de captar atención. Rossana hace otro recorrido: suma las redes a una identidad y a una forma de trabajar que ya existían. Ser mujer y su trayectoria profesional son parte de esa identidad.</p></div>
+    <div><span class="mom-t">03:00 – 09:00 · 6 minutos</span><h2>La autenticidad frente al algoritmo</h2><p>Las redes premian a quien construye un personaje capaz de captar atención. Rossana hace otro recorrido: suma las redes a una identidad y a una forma de trabajar que ya existían. Ser mujer y su trayectoria profesional son parte de esa identidad.</p><span class="mom-c">Concepto: lo real · placa 06</span></div>
   </header>
 
   <article class="placa">
@@ -564,6 +599,7 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
       <p class="p-n">Placa 06</p><p class="p-ve">En un celular, 20 segundos de detrás de cámara de un día real de gestión. Al lado, su frase.</p></div>
     <div class="p-dice"><b class="etq"><svg class="ic"><use href="#i-comentario"/></svg>Dice</b>
       <p>«¿Saben de dónde salen los videos? Una vez lo dije así y lo sostengo: salimos, y de ahí salen esas perlitas. No hay estudio de grabación. Hay una recorrida, un vecino que se acerca, un problema que se resuelve en el momento. La cámara llega después. Primero está el trabajo.</p>
+      <p>Y esto va a valer cada vez más. Hoy una inteligencia artificial te fabrica un video de cualquiera diciendo cualquier cosa: contenido sintético, deepfakes. Cuando todo se puede fabricar, lo real se vuelve escaso. Lo que ven en mis videos pasó de verdad: esa calle existe, ese vecino existe, ese problema se resolvió.</p>
       <p><span class="espacio">Una anécdota propia de una recorrida que terminó en video.</span>»</p>
     </div>
   </article>
@@ -574,7 +610,7 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
   <header class="mom">
     <svg class="red-box" viewBox="0 0 70 46" aria-hidden="true"><line x1="8" y1="10" x2="30" y2="6"/><line x1="30" y1="6" x2="52" y2="16"/><line x1="52" y1="16" x2="64" y2="34"/><line x1="30" y1="6" x2="38" y2="30"/><line x1="38" y1="30" x2="64" y2="34"/><circle cx="8" cy="10" r="1.2"/><circle cx="30" cy="6" r="1.5"/><circle class="a" cx="52" cy="16" r="1.6"/><circle cx="64" cy="34" r="1.2"/><circle cx="38" cy="30" r="1.4"/></svg>
     <span class="mom-n">2</span>
-    <div><span class="mom-t">09:00 – 15:00 · 6 minutos</span><h2>Los dos caminos de la influencia</h2><p>Se puede construir popularidad digital y después llegar a un cargo, o llegar al gobierno y aprender a comunicar en las plataformas. Ningún recorrido garantiza por sí mismo una buena gestión. La diferencia está en cómo se ejerce la responsabilidad institucional.</p></div>
+    <div><span class="mom-t">09:00 – 15:00 · 6 minutos</span><h2>Los dos caminos de la influencia</h2><p>Se puede construir popularidad digital y después llegar a un cargo, o llegar al gobierno y aprender a comunicar en las plataformas. Ningún recorrido garantiza por sí mismo una buena gestión. La diferencia está en cómo se ejerce la responsabilidad institucional.</p><span class="mom-c">Concepto: legitimidad de ejercicio · placa 07</span></div>
   </header>
 
   <article class="placa">
@@ -582,7 +618,8 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
       <p class="p-n">Placa 07</p><p class="p-ve">Bifurcación animada: de las redes al gobierno, y del gobierno a las redes.</p></div>
     <div class="p-dice"><b class="etq"><svg class="ic"><use href="#i-comentario"/></svg>Dice</b>
       <p>«Hoy hay dos caminos para tener influencia pública. Uno: hacerte conocido en las redes y después saltar a la política. Otro: llegar a un cargo y después aprender a comunicar en las plataformas. Yo vengo por el segundo.</p>
-      <p>Pero ojo, porque ninguno de los dos garantiza nada. En el primero, el riesgo es creer que gobernar es seguir haciendo contenido. En el segundo, el riesgo es creer que comunicar es un trámite. Los dos errores terminan igual: la gente deja de creerte. Lo que define todo es qué hacés con la responsabilidad cuando te toca.»</p>
+      <p>Pero ojo, porque ninguno de los dos garantiza nada. En el primero, el riesgo es creer que gobernar es seguir haciendo contenido. En el segundo, el riesgo es creer que comunicar es un trámite. Los dos errores terminan igual: la gente deja de creerte. Lo que define todo es qué hacés con la responsabilidad cuando te toca.</p>
+      <p>Eso tiene nombre: legitimidad de ejercicio. No es la que te dan los votos el día de la elección, ni la que te dan los seguidores. Es la que te ganás gobernando, todos los días. Y es la que sostiene cualquier video: mis videos funcionan porque detrás hay gestión.»</p>
     </div>
   </article>
   <article class="placa">
@@ -608,7 +645,7 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
   <header class="mom">
     <svg class="red-box" viewBox="0 0 70 46" aria-hidden="true"><line x1="8" y1="10" x2="30" y2="6"/><line x1="30" y1="6" x2="52" y2="16"/><line x1="52" y1="16" x2="64" y2="34"/><line x1="30" y1="6" x2="38" y2="30"/><line x1="38" y1="30" x2="64" y2="34"/><circle cx="8" cy="10" r="1.2"/><circle cx="30" cy="6" r="1.5"/><circle class="a" cx="52" cy="16" r="1.6"/><circle cx="64" cy="34" r="1.2"/><circle cx="38" cy="30" r="1.4"/></svg>
     <span class="mom-n">3</span>
-    <div><span class="mom-t">15:00 – 23:00 · 8 minutos · Rosalía</span><h2>Comunicar también es gestionar</h2><p>Una decisión pública no termina cuando se adopta. Muchas veces necesita ser explicada, comprendida y acompañada por la ciudadanía para producir los efectos buscados. La historia de Rosalía y el cambio de sentido de las calles es el ejemplo perfecto.</p></div>
+    <div><span class="mom-t">15:00 – 23:00 · 8 minutos · Rosalía</span><h2>Comunicar también es gestionar</h2><p>Una decisión pública no termina cuando se adopta. Muchas veces necesita ser explicada, comprendida y acompañada por la ciudadanía para producir los efectos buscados. La historia de Rosalía y el cambio de sentido de las calles es el ejemplo perfecto.</p><span class="mom-c">Conceptos: romper la burbuja y ganarse el «Para vos» · placa 13</span></div>
   </header>
 
   <article class="placa">
@@ -635,11 +672,12 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
     </div>
   </article>
   <article class="placa">
-    <div><div class="sl"><div class="cel" style="left:14%"><div class="scr"><div class="barras"><i class="on"></i><i class="on"></i><i></i></div><div class="flechitas"><span>→</span><span class="contra">←</span><span>→</span></div><i class="play"></i><div class="mini-rail"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic am"><use href="#i-compartir"/></svg></div><div class="mini-pie"><b>@munismtucuman</b>♪ Conga · Fabián Show</div></div></div><div class="burbuja" style="right:6%;top:30%;width:48%"><span class="b-ic"><svg class="ic"><use href="#i-celular"/></svg></span><span><b>Llamada entrante</b>Una amiga, desde Córdoba</span></div></div>
-      <p class="p-n">Placa 13</p><p class="p-ve">El video completo, vertical, en un celular y con sonido. Después, la llamada desde Córdoba.</p></div>
+    <div><div class="sl"><div class="cel" style="left:14%"><div class="scr"><div class="pv"><span>Siguiendo</span><b>Para vos</b></div><div class="flechitas"><span>→</span><span class="contra">←</span><span>→</span></div><i class="play"></i><div class="mini-rail"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic am"><use href="#i-compartir"/></svg></div><div class="mini-pie"><b>@munismtucuman</b>♪ Conga · Fabián Show</div></div></div><div class="burbuja" style="right:6%;top:30%;width:48%"><span class="b-ic"><svg class="ic"><use href="#i-celular"/></svg></span><span><b>Llamada entrante</b>Una amiga, desde Córdoba</span></div></div>
+      <p class="p-n">Placa 13</p><p class="p-ve">El video completo, vertical, en un celular y con sonido, como aparece en el «Para vos». Después, la llamada desde Córdoba.</p></div>
     <div class="p-dice"><b class="etq"><svg class="ic"><use href="#i-comentario"/></svg>Dice</b>
       <p class="acot">(Corre el video completo.)</p>
       <p>«La gente lo compartía, lo comentaba, se reía. Y mientras se reía, se enteraba de que la calle había cambiado de mano. Eso era lo único que me importaba.</p>
+      <p>Piensen en su "Para vos". El algoritmo les arma un feed con lo que ya les gusta: música, memes, sus amigos. Una gacetilla no entra nunca ahí. Rosalía sí entró: se ganó un lugar en ese feed y rompió la burbuja. Le llegó a gente que jamás seguiría la cuenta de un municipio.</p>
       <p>Al tiempo me llama una amiga desde Córdoba: "Rossana, ¿cambiaste el sentido de las calles?". Se habían enterado en Córdoba. Ahí supe que el mensaje había llegado. <span class="espacio">Si Comunicación confirma el alcance del video, va acá: «Lo vieron tantas personas».</span>»</p>
     </div>
   </article>
@@ -658,14 +696,15 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
   <header class="mom">
     <svg class="red-box" viewBox="0 0 70 46" aria-hidden="true"><line x1="8" y1="10" x2="30" y2="6"/><line x1="30" y1="6" x2="52" y2="16"/><line x1="52" y1="16" x2="64" y2="34"/><line x1="30" y1="6" x2="38" y2="30"/><line x1="38" y1="30" x2="64" y2="34"/><circle cx="8" cy="10" r="1.2"/><circle cx="30" cy="6" r="1.5"/><circle class="a" cx="52" cy="16" r="1.6"/><circle cx="64" cy="34" r="1.2"/><circle cx="38" cy="30" r="1.4"/></svg>
     <span class="mom-n">4</span>
-    <div><span class="mom-t">23:00 – 32:00 · 9 minutos · vitrina de gestión</span><h2>Romper el algoritmo gestionando</h2><p>El desafío no consiste simplemente en conseguir visualizaciones, sino en usar las herramientas de comunicación para que las decisiones públicas lleguen a las personas, se comprendan y faciliten su participación. Acá ella muestra lo que hizo.</p></div>
+    <div><span class="mom-t">23:00 – 32:00 · 9 minutos · vitrina de gestión</span><h2>Romper el algoritmo gestionando</h2><p>El desafío no consiste simplemente en conseguir visualizaciones, sino en usar las herramientas de comunicación para que las decisiones públicas lleguen a las personas, se comprendan y faciliten su participación. Acá ella muestra lo que hizo.</p><span class="mom-c">Concepto: conversión, de la vista al trámite · placa 15</span></div>
   </header>
 
   <article class="placa">
-    <div><div class="sl"><div class="metricas"><span class="a"><svg class="ic"><use href="#i-ojo"/></svg>Vistas</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Se enteraron</span><span class="a"><svg class="ic"><use href="#i-corazon"/></svg>Likes</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Entendieron</span><span class="a"><svg class="ic"><use href="#i-persona"/></svg>Seguidores</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Participaron</span></div></div>
-      <p class="p-n">Placa 15</p><p class="p-ve">Lo que mide el algoritmo, tachado; al lado, lo que necesita saber la gestión. Entra fila por fila.</p></div>
+    <div><div class="sl"><div class="metricas"><span class="a"><svg class="ic"><use href="#i-ojo"/></svg>Vistas</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Se enteraron</span><span class="a"><svg class="ic"><use href="#i-corazon"/></svg>Likes</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Entendieron</span><span class="a"><svg class="ic"><use href="#i-compartir"/></svg>Compartidos</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Hicieron el trámite</span><span class="a"><svg class="ic"><use href="#i-persona"/></svg>Seguidores</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Participaron</span></div><span class="sl-tag">Conversión</span></div>
+      <p class="p-n">Placa 15</p><p class="p-ve">Lo que mide el algoritmo, tachado; al lado, los datos de gestión. Entra fila por fila. Arriba, la palabra que lo resume: conversión.</p></div>
     <div class="p-dice"><b class="etq"><svg class="ic"><use href="#i-comentario"/></svg>Dice</b>
       <p>«El algoritmo te mide en vistas, likes y seguidores. Son números lindos, pero no me dicen lo que necesito saber. A mí me importa cuántos vecinos se enteraron, cuántos entendieron, cuántos hicieron el trámite, cuántos participaron. Esa es la cuenta que hago yo.</p>
+      <p>En el mundo digital eso tiene nombre: conversión. Cuánta gente pasa de mirar a hacer. Si comunico un trámite, el éxito no son las vistas del video: es que más vecinos hagan el trámite. <span class="espacio">Un trámite que se comunicó, con cuántos lo hacían antes y cuántos después.</span></p>
       <p>No digo que las vistas no importen. Sirven para llegar. Pero llegar es el principio.»</p>
     </div>
   </article>
@@ -719,7 +758,7 @@ body { font-family: "Pop", Arial, sans-serif; color: var(--ink); font-size: 10.3
     <div><div class="sl"><div class="cierre-sl"><span>No intento llegar al poder ni ejercerlo desde el <span class="ce">algoritmo</span>, sino que el algoritmo sea una herramienta para <span class="am">gobernar</span>.</span></div></div>
       <p class="p-n">Placa 20</p><p class="p-ve">La frase final, sola. Pensada para que la fotografíen.</p></div>
     <div class="p-dice"><b class="etq"><svg class="ic"><use href="#i-comentario"/></svg>Dice</b>
-      <p>«Hoy les conté cuatro cosas. Que lo auténtico le gana al personaje. Que no importa tanto por qué camino llegás, sino qué hacés cuando llegás. Que comunicar también es gestionar. Y que el algoritmo se rompe gestionando.</p>
+      <p>«Hoy les conté cuatro cosas. Que cuando todo se puede fabricar, lo real es lo que vale. Que la legitimidad no te la dan los seguidores: te la ganás gobernando. Que un video que le sirve a la gente se gana el "Para vos" y rompe la burbuja. Y que la cuenta que importa no son las vistas, sino cuánta gente hizo el trámite. Comunicar también es gestionar, y el algoritmo se rompe gestionando.</p>
       <p>La verdadera transformación de la comunicación política no pasa cuando un gobernante se convierte en influencer. Pasa cuando aprende a usar los nuevos lenguajes sin olvidarse de que está ahí para gobernar.</p>
       <p>Yo no busco llegar al poder ni ejercerlo desde el algoritmo. Quiero que el algoritmo sea una herramienta para gobernar.</p>
       <p class="acot">(Pausa.)</p>

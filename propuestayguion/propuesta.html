@@ -324,6 +324,22 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
 .principio { background: var(--surface); padding: 1.4rem 1.4rem 1.5rem; min-width: 0; }
 .principio h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.3; margin-bottom: .4rem; }
 .principio p { font-size: .94rem; color: var(--ink-2); line-height: 1.55; }
+
+/* Los conceptos que la legitiman */
+.con-sub { margin-top: .8rem; max-width: 62ch; color: var(--ink-2); line-height: 1.6; }
+.conceptos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: 2.2rem; }
+.concepto { display: flex; flex-direction: column; gap: .55rem; min-width: 0; padding: 1.3rem 1.3rem 1.5rem; border: 1px solid var(--line); border-top: 4px solid var(--amarillo); border-radius: 14px; background: var(--surface); color: inherit; text-decoration: none; transition: transform .2s, border-color .2s; }
+.concepto:hover { transform: translateY(-3px); border-color: var(--amarillo); }
+.c-donde { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.concepto h3 { font-size: 1.22rem; font-weight: 800; line-height: 1.2; }
+.concepto p { font-size: .94rem; line-height: 1.55; color: var(--ink-2); }
+.concepto blockquote { margin-top: auto; padding-top: .9rem; border-top: 1px solid var(--line); font-weight: 600; line-height: 1.45; }
+.concepto blockquote::before { content: "Dice ella"; display: block; margin-bottom: .35rem; font-family: var(--font-mono); font-size: .68rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.m-con { align-self: flex-start; margin-top: .7rem; padding: .4rem .65rem; border-radius: 6px; background: var(--amarillo); color: var(--amarillo-ink); font-family: var(--font-mono); font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; line-height: 1.4; text-decoration: none; }
+.tf-pv { position: absolute; top: 1.8cqw; left: 0; right: 0; display: flex; justify-content: center; gap: 1.4cqw; font-size: 1.7cqw; color: rgba(243, 241, 236, .6); }
+.tf-pv b { color: #fff; font-weight: 600; border-bottom: .25cqw solid #fff; padding-bottom: .3cqw; }
+@media (max-width: 1000px) { .conceptos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .conceptos { grid-template-columns: minmax(0, 1fr); } }
 .material { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 1.5rem 3rem; margin-top: 3.5rem; align-items: start; }
 .material h3 { font-size: 1.35rem; font-weight: 700; line-height: 1.2; }
 .material .ayuda { color: var(--muted); font-size: .92rem; margin-top: .5rem; }
@@ -574,6 +590,7 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
     </div>
     <nav class="saltos" aria-label="Secciones">
       <a href="#tesis">La idea</a>
+      <a href="#conceptos">Los conceptos</a>
       <a href="#minutos">Los 35 minutos</a>
       <a href="#guion">Guion de la intendenta</a>
       <a href="#m3">Rosalía</a>
@@ -643,16 +660,30 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
   </div>
 </section>
 
+<section id="conceptos" class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Los conceptos</p>
+    <h2>Cuatro conceptos que la legitiman, uno por momento</h2>
+    <p class="con-sub">Le hablan a los jóvenes en su idioma, el de las redes y la tecnología, y en la charla salen de su boca, cada uno en su placa.</p>
+    <div class="conceptos">
+      <a class="concepto" href="#m1"><span class="c-donde">Momento 1 · placa 06</span><h3>Lo real</h3><p>En tiempos de contenido sintético y deepfakes, lo real es lo escaso. Lo que muestra es lo que hace.</p><blockquote>«Cuando todo se puede fabricar, lo real se vuelve escaso. Lo que ven en mis videos pasó de verdad.»</blockquote></a>
+      <a class="concepto" href="#m2"><span class="c-donde">Momento 2 · placa 07</span><h3>Legitimidad de ejercicio</h3><p>No la dan los votos ni los seguidores: se gana gobernando. Sus videos funcionan porque detrás hay gestión.</p><blockquote>«Es la que te ganás gobernando, todos los días.»</blockquote></a>
+      <a class="concepto" href="#m3"><span class="c-donde">Momento 3 · placa 13</span><h3>Romper la burbuja y ganarse el «Para vos»</h3><p>«Va a contramano, Rosalía» entró en el feed de gente que nunca sigue a un municipio. Un cambio de tránsito llegó adonde no llega ningún comunicado.</p><blockquote>«Una gacetilla no entra nunca ahí. Rosalía sí entró.»</blockquote></a>
+      <a class="concepto" href="#m4"><span class="c-donde">Momento 4 · placa 15</span><h3>Conversión: de la vista al trámite</h3><p>Su comunicación no se mide en vistas sino en datos de gestión. Si comunica un trámite, el éxito es que la gente lo haga.</p><blockquote>«Cuánta gente pasa de mirar a hacer.»</blockquote></a>
+    </div>
+  </div>
+</section>
+
 <section id="minutos" class="sec">
   <div class="wrap">
     <p class="eyebrow">Los 35 minutos</p>
     <h2>Cuatro ideas, un video que abre y vuelve en el centro, y la gestión al final</h2>
     <ol class="mapa">
       <li class="borde" style="--min:3"><a href="#apertura"><span class="t">00:00</span><b>Apertura</b><small>El video, sin presentación</small><span class="dur">3 min</span></a></li>
-      <li style="--min:6"><a href="#m1"><span class="t">03:00</span><b>Autenticidad frente al algoritmo</b><small>Persona, no personaje</small><span class="dur">6 min</span></a></li>
-      <li style="--min:6"><a href="#m2"><span class="t">09:00</span><b>Los dos caminos de la influencia</b><small>De dónde venís y qué hacés al llegar</small><span class="dur">6 min</span></a></li>
-      <li class="nucleo" style="--min:8"><a href="#m3"><span class="t">15:00</span><b>Comunicar también es gestionar</b><small>La historia de Rosalía</small><span class="dur">8 min</span></a></li>
-      <li style="--min:9"><a href="#m4"><span class="t">23:00</span><b>Romper el algoritmo gestionando</b><small>Vistas o impacto, y la vitrina de gestión</small><span class="dur">9 min</span></a></li>
+      <li style="--min:6"><a href="#m1"><span class="t">03:00</span><b>Autenticidad frente al algoritmo</b><small>Lo real, en tiempos de contenido sintético</small><span class="dur">6 min</span></a></li>
+      <li style="--min:6"><a href="#m2"><span class="t">09:00</span><b>Los dos caminos de la influencia</b><small>Legitimidad de ejercicio</small><span class="dur">6 min</span></a></li>
+      <li class="nucleo" style="--min:8"><a href="#m3"><span class="t">15:00</span><b>Comunicar también es gestionar</b><small>Rosalía rompe la burbuja</small><span class="dur">8 min</span></a></li>
+      <li style="--min:9"><a href="#m4"><span class="t">23:00</span><b>Romper el algoritmo gestionando</b><small>Conversión: de la vista al trámite, y la vitrina</small><span class="dur">9 min</span></a></li>
       <li class="borde" style="--min:3"><a href="#cierre"><span class="t">32:00</span><b>Cierre</b><small>La frase para la foto</small><span class="dur">3 min</span></a></li>
     </ol>
     <p class="nota">Tiempos propuestos, para ajustar con ella. El último bloque es el más largo porque ahí ella muestra lo que hizo: es el momento de vender la gestión.</p>
@@ -720,6 +751,7 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
       <span class="m-t">03:00 – 09:00</span>
       <h2>La autenticidad frente al algoritmo</h2>
       <p class="m-idea">Las redes premian a quien construye un personaje capaz de captar atención. Rossana hace otro recorrido: suma las redes a una identidad y a una forma de trabajar que ya existían. Ser mujer y su trayectoria profesional son parte de esa identidad.</p>
+      <a class="m-con" href="#conceptos">Concepto: lo real · placa 06</a>
     </header>
     <div class="m-cuerpo">
       <article class="pl-row pl">
@@ -743,6 +775,7 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
           <figcaption><span class="n">06</span><span class="tx">En un celular, 20 segundos de detrás de cámara de un día real de gestión. Al lado, su frase: «Salimos, y de ahí salen esas perlitas».</span></figcaption></figure>
         <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
           <p>«¿Saben de dónde salen los videos? Una vez lo dije así y lo sostengo: salimos, y de ahí salen esas perlitas. No hay estudio de grabación. Hay una recorrida, un vecino que se acerca, un problema que se resuelve en el momento. La cámara llega después. Primero está el trabajo.</p>
+          <p>Y esto va a valer cada vez más. Hoy una inteligencia artificial te fabrica un video de cualquiera diciendo cualquier cosa: contenido sintético, deepfakes. Cuando todo se puede fabricar, lo real se vuelve escaso. Lo que ven en mis videos pasó de verdad: esa calle existe, ese vecino existe, ese problema se resolvió.</p>
           <p><span class="espacio">Una anécdota propia de una recorrida que terminó en video.</span>»</p>
         </div></div>
       </article>
@@ -757,6 +790,7 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
       <span class="m-t">09:00 – 15:00</span>
       <h2>Los dos caminos de la influencia</h2>
       <p class="m-idea">Se puede construir popularidad digital y después llegar a un cargo, o llegar al gobierno y aprender a comunicar en las plataformas. Ningún recorrido garantiza por sí mismo una buena gestión. La diferencia está en cómo se ejerce la responsabilidad institucional.</p>
+      <a class="m-con" href="#conceptos">Concepto: legitimidad de ejercicio · placa 07</a>
     </header>
     <div class="m-cuerpo">
       <article class="pl-row pl">
@@ -764,7 +798,8 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
           <figcaption><span class="n">07</span><span class="tx">Bifurcación animada: de las redes al gobierno, y del gobierno a las redes.</span></figcaption></figure>
         <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
           <p>«Hoy hay dos caminos para tener influencia pública. Uno: hacerte conocido en las redes y después saltar a la política. Otro: llegar a un cargo y después aprender a comunicar en las plataformas. Yo vengo por el segundo.</p>
-          <p>Pero ojo, porque ninguno de los dos garantiza nada. En el primero, el riesgo es creer que gobernar es seguir haciendo contenido. En el segundo, el riesgo es creer que comunicar es un trámite. Los dos errores terminan igual: la gente deja de creerte. Lo que define todo es qué hacés con la responsabilidad cuando te toca.»</p>
+          <p>Pero ojo, porque ninguno de los dos garantiza nada. En el primero, el riesgo es creer que gobernar es seguir haciendo contenido. En el segundo, el riesgo es creer que comunicar es un trámite. Los dos errores terminan igual: la gente deja de creerte. Lo que define todo es qué hacés con la responsabilidad cuando te toca.</p>
+          <p>Eso tiene nombre: legitimidad de ejercicio. No es la que te dan los votos el día de la elección, ni la que te dan los seguidores. Es la que te ganás gobernando, todos los días. Y es la que sostiene cualquier video: mis videos funcionan porque detrás hay gestión.»</p>
         </div></div>
       </article>
       <article class="pl-row pl">
@@ -794,6 +829,7 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
       <span class="m-t">15:00 – 23:00</span>
       <h2>Comunicar también es gestionar</h2>
       <p class="m-idea">Una decisión pública no termina cuando se adopta. Muchas veces necesita ser explicada, comprendida y acompañada por la ciudadanía para producir los efectos buscados. La historia de Rosalía y el cambio de sentido de las calles es el ejemplo perfecto.</p>
+      <a class="m-con" href="#conceptos">Conceptos: romper la burbuja y ganarse el «Para vos» · placa 13</a>
     </header>
     <div class="m-cuerpo">
       <p class="eyebrow historia-cab">La historia en un celular, como muestra</p>
@@ -866,11 +902,12 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
         </div></div>
       </article>
       <article class="pl-row pl">
-        <figure class="toma"><div class="mini"><div class="tf" style="left:13%"><div class="tf-scr"><div class="tf-barras"><i class="on"></i><i class="on"></i><i></i></div><div class="tf-flechas"><span>→</span><span class="contra">←</span><span>→</span></div><i class="tf-play"></i><div class="tf-rail"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic am"><use href="#i-compartir"/></svg></div><div class="tf-pie"><b>@munismtucuman</b>♪ Conga · Fabián Show</div></div></div><div class="k-burbuja" style="right:6%;top:32%;width:48%"><span class="kb-ic"><svg class="ic"><use href="#i-celular"/></svg></span><span><b>Llamada entrante</b>Una amiga, desde Córdoba</span></div></div>
-          <figcaption><span class="n">13</span><span class="tx">El video completo, vertical, en un celular y con sonido.</span></figcaption></figure>
+        <figure class="toma"><div class="mini"><div class="tf" style="left:13%"><div class="tf-scr"><div class="tf-pv"><span>Siguiendo</span><b>Para vos</b></div><div class="tf-flechas"><span>→</span><span class="contra">←</span><span>→</span></div><i class="tf-play"></i><div class="tf-rail"><svg class="ic"><use href="#i-corazon"/></svg><svg class="ic"><use href="#i-comentario"/></svg><svg class="ic am"><use href="#i-compartir"/></svg></div><div class="tf-pie"><b>@munismtucuman</b>♪ Conga · Fabián Show</div></div></div><div class="k-burbuja" style="right:6%;top:32%;width:48%"><span class="kb-ic"><svg class="ic"><use href="#i-celular"/></svg></span><span><b>Llamada entrante</b>Una amiga, desde Córdoba</span></div></div>
+          <figcaption><span class="n">13</span><span class="tx">El video completo, vertical, en un celular y con sonido, como aparece en el «Para vos».</span></figcaption></figure>
         <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
           <p><span class="acot">(Corre el video completo.)</span></p>
           <p>«La gente lo compartía, lo comentaba, se reía. Y mientras se reía, se enteraba de que la calle había cambiado de mano. Eso era lo único que me importaba.</p>
+          <p>Piensen en su "Para vos". El algoritmo les arma un feed con lo que ya les gusta: música, memes, sus amigos. Una gacetilla no entra nunca ahí. Rosalía sí entró: se ganó un lugar en ese feed y rompió la burbuja. Le llegó a gente que jamás seguiría la cuenta de un municipio.</p>
           <p>Al tiempo me llama una amiga desde Córdoba: "Rossana, ¿cambiaste el sentido de las calles?". Se habían enterado en Córdoba. Ahí supe que el mensaje había llegado. <span class="espacio">Si Comunicación confirma el alcance del video, va acá: «Lo vieron tantas personas».</span>»</p>
         </div></div>
       </article>
@@ -894,13 +931,15 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
         <span class="m-t">23:00 – 32:00</span>
         <h2>Romper el algoritmo gestionando</h2>
         <p class="m-idea">El desafío no consiste simplemente en conseguir visualizaciones, sino en usar las herramientas de comunicación para que las decisiones públicas lleguen a las personas, se comprendan y faciliten su participación. Acá ella muestra lo que hizo.</p>
+        <a class="m-con" href="#conceptos">Concepto: conversión, de la vista al trámite · placa 15</a>
       </header>
       <div class="m-cuerpo">
         <article class="pl-row pl">
-          <figure class="toma"><div class="mini"><div class="k-metricas"><span class="a"><svg class="ic"><use href="#i-ojo"/></svg>Vistas</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Se enteraron</span><span class="a"><svg class="ic"><use href="#i-corazon"/></svg>Likes</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Entendieron</span><span class="a"><svg class="ic"><use href="#i-persona"/></svg>Seguidores</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Participaron</span></div></div>
-            <figcaption><span class="n">15</span><span class="tx">Lo que mide el algoritmo tachado, y al lado lo que necesita saber la gestión, fila por fila.</span></figcaption></figure>
+          <figure class="toma"><div class="mini"><div class="k-metricas"><span class="a"><svg class="ic"><use href="#i-ojo"/></svg>Vistas</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Se enteraron</span><span class="a"><svg class="ic"><use href="#i-corazon"/></svg>Likes</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Entendieron</span><span class="a"><svg class="ic"><use href="#i-compartir"/></svg>Compartidos</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Hicieron el trámite</span><span class="a"><svg class="ic"><use href="#i-persona"/></svg>Seguidores</span><i>→</i><span class="g"><svg class="ic"><use href="#i-check"/></svg>Participaron</span></div><span class="k-tag">Conversión</span></div>
+            <figcaption><span class="n">15</span><span class="tx">Lo que mide el algoritmo tachado, y al lado los datos de gestión, fila por fila. Arriba, la palabra que lo resume: conversión.</span></figcaption></figure>
           <div class="dice"><span class="dice-tag">Dice</span><div class="dice-txt">
             <p>«El algoritmo te mide en vistas, likes y seguidores. Son números lindos, pero no me dicen lo que necesito saber. A mí me importa cuántos vecinos se enteraron, cuántos entendieron, cuántos hicieron el trámite, cuántos participaron. Esa es la cuenta que hago yo.</p>
+            <p>En el mundo digital eso tiene nombre: conversión. Cuánta gente pasa de mirar a hacer. Si comunico un trámite, el éxito no son las vistas del video: es que más vecinos hagan el trámite. <span class="espacio">Un trámite que se comunicó, con cuántos lo hacían antes y cuántos después.</span></p>
             <p>No digo que las vistas no importen. Sirven para llegar. Pero llegar es el principio.»</p>
           </div></div>
         </article>
@@ -955,7 +994,7 @@ mark { background: linear-gradient(transparent 58%, var(--resalte) 58%); color: 
     <blockquote class="ultima"><p>No intento llegar al poder ni ejercerlo desde el <span class="k-tik">algoritmo</span>, sino que el algoritmo sea una herramienta para <span class="k-int">gobernar</span>.</p></blockquote>
     <p class="toma-txt"><span class="n">20</span><span class="tx">La frase final, sola, sin logos ni datos. Pensada para que la fotografíen.</span></p>
     <div class="dice-cierre"><span class="dice-tag">Dice</span><div class="dice-txt">
-      <p>«Hoy les conté cuatro cosas. Que lo auténtico le gana al personaje. Que no importa tanto por qué camino llegás, sino qué hacés cuando llegás. Que comunicar también es gestionar. Y que el algoritmo se rompe gestionando.</p>
+      <p>«Hoy les conté cuatro cosas. Que cuando todo se puede fabricar, lo real es lo que vale. Que la legitimidad no te la dan los seguidores: te la ganás gobernando. Que un video que le sirve a la gente se gana el "Para vos" y rompe la burbuja. Y que la cuenta que importa no son las vistas, sino cuánta gente hizo el trámite. Comunicar también es gestionar, y el algoritmo se rompe gestionando.</p>
       <p>La verdadera transformación de la comunicación política no pasa cuando un gobernante se convierte en influencer. Pasa cuando aprende a usar los nuevos lenguajes sin olvidarse de que está ahí para gobernar.</p>
       <p>Yo no busco llegar al poder ni ejercerlo desde el algoritmo. Quiero que el algoritmo sea una herramienta para gobernar.</p>
       <p><span class="acot">(Pausa.)</span></p>
