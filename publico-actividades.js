@@ -20,11 +20,11 @@
       ayuda: 'Como si fueras vecino de Tucumán. Te contesta acá, en tu celular.', max: 1,
     },
     {
-      id: 'costo-estudia', tipo: 'encuesta', titulo: 'Adiviná el costo',
-      pregunta: '¿Cuánto creés que gastó en IA el piloto de EstudIA en 30 días?',
-      opciones: ['Menos de US$ 1', 'Unos US$ 20', 'Unos US$ 200', 'Más de US$ 1.000'],
-      correcta: 0,
-      revelacion: 'US$ 0,017 en 30 días: tope de usos por docente y el modelo justo para cada tarea.',
+      id: 'costo-migue', tipo: 'encuesta', titulo: 'Adiviná el costo',
+      pregunta: 'Migue atiende a más de 9.000 vecinos. ¿Cuánto creés que gasta en IA por mes?',
+      opciones: ['Unos US$ 12', 'Unos US$ 120', 'Unos US$ 1.200', 'Más de US$ 10.000'],
+      correcta: 1,
+      revelacion: 'US$ 118,54 en lo que va de noviembre: unos 3 centavos de dólar por consulta.',
     },
     {
       id: 'uso-ia', tipo: 'encuesta', titulo: '¿Usás IA en el trabajo?',

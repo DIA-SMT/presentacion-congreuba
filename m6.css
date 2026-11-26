@@ -552,3 +552,18 @@
 body.captura *, body.captura *::before, body.captura *::after { animation: none !important; transition: none !important; }
 body.captura .a { opacity: 1 !important; }
 body.captura #inicio, body.captura #cortina { display: none !important; }
+
+/* ---------- Pie de todas las placas: QR para sumarse y el Instagram de Marco ---------- */
+#pie { position: absolute; z-index: 3; right: calc(var(--extra) / 2 + 86px); bottom: 10px; display: flex; align-items: center; gap: 16px; padding: 7px 18px 7px 7px;
+  background: rgba(255,255,255,.94); border-radius: 16px; box-shadow: 0 8px 24px rgba(17,26,59,.12); transition: opacity .4s ease, transform .4s ease; transform-origin: 100% 100%; pointer-events: none; }
+.pie-item { display: flex; align-items: center; gap: 12px; }
+.pie-qr { width: 76px; height: 76px; flex: none; background: #fff; padding: 4px; border-radius: 8px; }
+.pie-qr svg { display: block; width: 100%; height: 100%; }
+.pie-txt b { display: flex; align-items: center; gap: 6px; font-size: 18px; line-height: 1.1; font-weight: 800; color: var(--azul); }
+.pie-txt span { display: block; margin-top: 3px; font-size: 14px; font-weight: 600; color: var(--gris); }
+#pie .pub-url { background: none; padding: 0; border-radius: 0; font-size: 14px; color: var(--gris); overflow-wrap: normal; }
+.pie-ig { width: 20px; height: 20px; flex: none; }
+.pie-sep { width: 1.5px; height: 56px; background: var(--borde); }
+#migue:not(.fuera):not(.oculto):not(.izq) ~ #pie { opacity: 0; transform: translateY(12px); }
+#stage.m6-en-portada #pie { bottom: 28px; transform: scale(1.4); }
+.m6-sep .m6-riel { bottom: 122px; }

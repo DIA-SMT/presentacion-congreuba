@@ -39,6 +39,12 @@
       try { const q = qrcode(0, 'M'); q.addData(link); q.make(); el.innerHTML = q.createSvgTag({ cellSize: 8, margin: 0, scalable: true }); } catch (e) { el.textContent = link; }
     });
     document.querySelectorAll('.pub-url').forEach(el => { el.textContent = link.replace(/^https?:\/\//, ''); });
+    // Otros QR fijos (el Instagram del pie): data-qr lleva el link.
+    document.querySelectorAll('[data-qr]').forEach((el) => {
+      if (el.dataset.hecho === el.dataset.qr) return;
+      el.dataset.hecho = el.dataset.qr;
+      try { const q = qrcode(0, 'M'); q.addData(el.dataset.qr); q.make(); el.innerHTML = q.createSvgTag({ cellSize: 8, margin: 0, scalable: true }); } catch (e) { el.textContent = el.dataset.qr; }
+    });
   }
   // Con INICIAR.bat (sin internet) los celulares entran por la IP de la compu, en el mismo wifi.
   if (window.Remoto && window.Remoto.modo === 'local') {

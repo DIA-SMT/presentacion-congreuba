@@ -71,15 +71,15 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
   const C = window.CONTENIDO, V = C.VIDEOS, S = C.SISTEMAS || [];
   const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   // Antes de los bloques, "Lo que ya funciona" (separador con data-bloque="0").
-  const PRIMERO = { t: 'Lo que ya funciona: los desarrollos, Migue y CIMBA en vivo', min: 26, desde: '0:10' };
+  const PRIMERO = { t: 'Apertura: Migue, el plan, la nube y el mapa de los diez desarrollos', min: 14, desde: '0:00' };
   const BLOQUES = [
-    { t: 'De la IA individual a la institucional', min: 10, desde: '0:36' },
-    { t: 'Las capas: licencias, gobernanza de datos, interoperar e IA soberana', min: 18, desde: '0:46' },
-    { t: 'Del piloto a la producción', min: 7, desde: '1:04' },
-    { t: 'La economía de los agentes', min: 11, desde: '1:11' },
-    { t: 'Gobernanza del agente', min: 14, desde: '1:22' },
-    { t: 'El costo que la factura no muestra', min: 7, desde: '1:36' },
-    { t: 'Hoja de ruta para Chaco', min: 10, desde: '1:43' },
+    { t: 'De la IA individual a la institucional: el Generador de Notas, la IA agéntica y Migue', min: 22, desde: '0:14' },
+    { t: 'Las capas: licencias (lo que contratamos), gobernanza de datos, interoperar (CIMBA) e IA soberana', min: 16, desde: '0:36' },
+    { t: 'Del piloto a la producción: CIMBA, un caso que escaló', min: 8, desde: '0:52' },
+    { t: 'La economía de los agentes: lo que cuesta Migue', min: 14, desde: '1:00' },
+    { t: 'Gobernanza del agente: el tablero de Migue y cómo se defiende', min: 18, desde: '1:14' },
+    { t: 'El costo que la factura no muestra', min: 7, desde: '1:32' },
+    { t: 'Hoja de ruta para Chaco', min: 10, desde: '1:39' },
   ];
   const html = await (await fetch('index.html', { cache: 'no-store' })).text();
   const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -108,17 +108,17 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     <div><span class="ceja">Botonera (tu celular, no se comparte)</span><b>https://presentacion.srv1915283.hstgr.cloud<wbr>/control</b></div></div></div>`;
 
   out += `<h2>El recorrido: 2 horas, ${placas.length} placas</h2><table><tr><th>Hora</th><th>Bloque</th><th>Min</th></tr>
-    <tr><td class="hora">0:00</td><td>Apertura con Migue, el plan, <b>Sumate</b> (nube de inicio) y cómo empezó</td><td>10</td></tr>
-    <tr><td class="hora">${PRIMERO.desde}</td><td><b>Primero</b> · ${esc(PRIMERO.t)}</td><td>${PRIMERO.min}</td></tr>
+    <tr><td class="hora">${PRIMERO.desde}</td><td>${esc(PRIMERO.t)}</td><td>${PRIMERO.min}</td></tr>
     ${BLOQUES.map((b, i) => `<tr><td class="hora">${b.desde}</td><td><b>Bloque ${i + 1}</b> · ${esc(b.t)}</td><td>${b.min}</td></tr>`).join('')}
-    <tr><td class="hora">1:53</td><td>Un caso (Migue), conclusión, nube de cierre, preguntas y gracias</td><td>resto</td></tr></table>
+    <tr><td class="hora">1:49</td><td>Conclusión, nube de cierre, gracias y preguntas</td><td>resto</td></tr></table>
     <p class="pie">Los minutos no aparecen en pantalla: son sólo para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.</p>`;
 
   out += `<h2>Antes de empezar</h2><ul class="lista">
     <li>Pantalla: abrí la presentación y tocá <b>COMENZAR</b> (así Migue tiene sonido). Botonera: todo en verde.</li>
     <li>Misma compu y mismo navegador para la prueba y para la charla (sin incógnito).</li>
     <li><b>No hay que iniciar sesión en nada.</b> Las demos (${placas.map((p, i) => p.dataset.bucle ? `placa ${i + 1}` : '').filter(Boolean).join(', ')}) corren solas, en loop: sirve cualquier compu con internet.</li>
-    <li>Abrí la presentación unos minutos antes: así se prepara la respuesta real de Migue que muestra el chat (placa ${placas.findIndex(p => p.dataset.bucle === 'migue-chat') + 1}).</li></ul>`;
+    <li>Abrí la presentación unos minutos antes: así se preparan las respuestas reales de Migue para las preguntas listas de la botonera (placa ${placas.findIndex(p => p.dataset.publico === 'migue') + 1}).</li>
+    <li>En todas las placas, abajo a la derecha, dos QR: <b>Sumate a la charla</b> y <b>Seguime en Instagram (@marquitorossi)</b>. En la portada y el gracias salen más grandes.</li></ul>`;
 
   const PUB = (window.PUBLICO && window.PUBLICO.ACTIVIDADES) || [];
   const placaDe = id => placas.findIndex(p => p.dataset.publico === id) + 1;
@@ -138,8 +138,8 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     ${V.map((v, i) => `<tr><td class="num">${i + 1}</td><td class="num">${dondeFrase[i + 1] || '—'}</td><td>${esc(v.sub || v.texto)}${v.archivo || (v.video && !/m6-/.test(v.video)) ? '' : ' <span class="ceja">· globo</span>'}</td></tr>`).join('')}</table>`;
 
   out += `<h2>Las demos, en loop</h2><ul class="lista">
-    <li>CIMBA, el chat de Migue, EstudIA y el tablero de Migue <b>corren solos dentro de su placa</b>, como un video que se repite: arriba se ven los capítulos y su avance. No hay que tocar nada; SIGUIENTE pasa de placa.</li>
-    <li>CIMBA: sus pantallas recreadas con los textos reales (Nueva orden de trabajo, Trabajo en campo) y fotos reales de antes y después del muro de Avance. EstudIA y el tablero: recorridos sobre sus capturas del 14/10/2026. Ninguna muestra datos de vecinos.</li>
+    <li>El Generador de Notas, CIMBA, el tablero de Migue y los intentos de engañarlo <b>corren solos dentro de su placa</b>, como un video que se repite: arriba se ven los capítulos y su avance. No hay que tocar nada; SIGUIENTE pasa de placa.</li>
+    <li>Generador y CIMBA: sus pantallas recreadas con los textos reales, y en CIMBA, fotos reales de antes y después. El tablero de Migue: recorrido sobre capturas del 26/11/2026, con los textos de los vecinos difuminados. Los intentos de prompt injection: conversaciones reales del tablero (9 y 11/10/2026), con el vecino enmascarado.</li>
     <li>El chat de Migue muestra la respuesta real que la presentación prepara al abrirse; si no llegó, Migue queda escribiendo y pasa la posta al público.</li>
     <li>Si igual querés abrir un sistema real, la botonera conserva "Sistemas en vivo" (${S.map(s => esc(s.nombre)).join(' · ')}): necesita sesión iniciada en esa compu.</li></ul>`;
 
@@ -150,7 +150,7 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     if (p.classList.contains('m6-sep')) {
       bloque = +p.dataset.bloque;
       const b = bloque ? BLOQUES[bloque - 1] : PRIMERO;
-      out += `<div class="bloque"><span class="ceja">${bloque ? `Bloque ${bloque} de 7` : 'Primero, antes de los bloques'} · desde ${b.desde} · ${b.min} min</span><h2>${esc(b.t)}</h2><p>${esc((p.querySelector('.m6-sep-txt p') || {}).textContent || '')}</p></div>`;
+      out += `<div class="bloque"><span class="ceja">${bloque ? `Bloque ${bloque} de 7` : 'Apertura'} · desde ${b.desde} · ${b.min} min</span><h2>${esc(b.t)}</h2><p>${esc((p.querySelector('.m6-sep-txt p') || {}).textContent || '')}</p></div>`;
     } else if (i === 0) {
       out += `<div class="salto"></div><h2>Placa por placa</h2>`;
     }
@@ -162,7 +162,7 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
       extra += fr.map(k => `<div class="migue"><b>Migue habla (${k})</b> · «${esc(migueLinea(k))}»</div>`).join('');
     }
     if (p.dataset.bucle) {
-      const CAPS = { cimba: 'buscar el lugar → lo pendiente, ordenado → la orden → en la calle → antes y después', 'migue-chat': 'Ciudad Digital → una pregunta de todos los días', estudia: 'el docente elige → el Laboratorio IA → cuánto cuesta', 'migue-tablero': 'gobernanza → clima ciudadano' };
+      const CAPS = { generador: 'antes: cada uno a su manera → una herramienta para todos → la IA redacta → la persona firma', cimba: 'buscar el lugar → lo pendiente, ordenado → la orden → en la calle → antes y después', 'migue-tablero': 'el corazón → la historia clínica → el cerebro → lo que revisa una persona → el termómetro', 'migue-defensa': 'le piden sus reglas → le piden que las rompa → una que pasó → conectado y revisado' };
       extra += `<div class="vivo"><b>Demo en loop</b> · corre sola, no hay que tocar nada: ${esc(CAPS[p.dataset.bucle] || 'se repite hasta que pases de placa')}. SIGUIENTE avanza.</div>`;
     }
     if (p.dataset.web) {

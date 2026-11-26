@@ -135,6 +135,8 @@
     function placa(p) {
       // En los separadores Migue co-conduce desde la izquierda: su globo va arriba de él, sin tapar el título.
       document.getElementById('stage').classList.toggle('m6-en-sep', !!(p && p.classList.contains('m6-sep')));
+      // El pie con los QR (sumarse y el Instagram) va en todas; en la portada y el cierre, más grande.
+      document.getElementById('stage').classList.toggle('m6-en-portada', !!(p && p.classList.contains('portada')));
       if (abierto) cerrar();
       if (captura || !p) return;
       p._webVisto = false;
