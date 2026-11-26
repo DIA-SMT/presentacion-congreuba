@@ -226,7 +226,7 @@ module.exports = function publico({ datos }) {
   // Reacciones con emojis (desde el 26/11/2026): la botonera las prende y las apaga
   // (s.emojis); mientras están prendidas, cada celular tiene una barra de emojis y la
   // pantalla los hace volar. No se guardan: viven en memoria, los últimos 200 por sala.
-  const EMOJIS = ['👏', '❤️', '🔥', '😮', '😂', '🤔'];
+  const EMOJIS = ['👏', '❤️', '🔥', '💡'];
   const EMO = new Map(), ultEmoji = new Map();
   const RUTAS = {
     'POST emoji': (s, b, nombre) => {
@@ -314,7 +314,7 @@ module.exports = function publico({ datos }) {
     },
     'POST migue': (s, b) => {
       const p = persona(s, b.yo); if (!p) return [401, { error: 'Volvé a entrar con tu nombre.' }];
-      if (!s.migueVisto && s.act !== 'migue') return [409, { error: 'Todavía no abrimos las preguntas a Migue.' }];
+      if (s.act !== 'migue') return [409, { error: 'Las preguntas a Migue están cerradas: se abren cuando lo indique el expositor.' }];
       const q = limpiar(b.texto, 300);
       if (q.length < 4) return [400, { error: 'Escribí tu pregunta.' }];
       const max = ACT.migue ? ACT.migue.max : MIGUE_MAX;

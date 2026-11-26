@@ -129,7 +129,7 @@ body.con-emojis { padding-bottom: 96px; }
 </main>
 <a class="material" id="material" href="/material-modulo6.pdf" download hidden>📄 Descargá el material del módulo<span>Resumen y glosario · PDF</span></a>
 <p class="pie">IALAB UBA · Gobierno del Chaco · Municipalidad de San Miguel de Tucumán</p>
-<nav id="emojis" hidden><small>Reaccioná: sale en la pantalla</small><button type="button">👏</button><button type="button">❤️</button><button type="button">🔥</button><button type="button">😮</button><button type="button">😂</button><button type="button">🤔</button></nav>
+<nav id="emojis" hidden><small>Reaccioná: sale en la pantalla</small><button type="button">👏</button><button type="button">❤️</button><button type="button">🔥</button><button type="button">💡</button></nav>
 
 <script>
 (function () {
@@ -305,7 +305,9 @@ body.con-emojis { padding-bottom: 96px; }
   function pintarMigue(e) {
     const m = e.migue, enActividad = e.act && e.act.tipo === 'migue';
     const aparte = $('migueAparte');
-    if (!m) { aparte.innerHTML = ''; firmaMigue = ''; return; }
+    // Se pregunta sólo mientras el expositor tiene abiertas las preguntas a Migue; después,
+    // quien ya preguntó sigue viendo su respuesta, y quien no, no ve nada.
+    if (!m || (!enActividad && !(m.preguntas || []).length)) { aparte.innerHTML = ''; firmaMigue = ''; return; }
     let destino = enActividad ? $('actividad').querySelector('.migue-aca') : null;
     if (!enActividad) {
       if (!aparte.querySelector('details')) {
@@ -345,7 +347,8 @@ body.con-emojis { padding-bottom: 96px; }
           : `<div class="r espera-migue">En la fila${p.antes ? ': hay ' + p.antes + (p.antes === 1 ? ' pregunta' : ' preguntas') + ' antes que la tuya' + espera(p.antes, m.porMinuto) : ''} <span class="puntos"><i></i><i></i><i></i></span><small>La respuesta te llega acá: podés seguir mirando la charla.</small></div>`)).join('');
     }
     const f = destino.querySelector('form');
-    f.querySelector('textarea').hidden = !quedan; f.querySelector('.boton').hidden = !quedan;
+    const puede = quedan && enActividad;
+    f.querySelector('textarea').hidden = !puede; f.querySelector('.boton').hidden = !puede;
     f.querySelector('.quedan').textContent = quedan ? (pregs.length ? 'Te quedan ' + quedan + (quedan === 1 ? ' pregunta.' : ' preguntas.') : m.max === 1 ? 'Tenés una pregunta: aprovechala.' : 'Podés hacerle hasta ' + m.max + ' preguntas.') : '¡Gracias por probar a Migue!';
     const det = aparte.querySelector('details');
     if (det) det.querySelector('summary span').textContent = det.open ? 'Cerrar' : (quedan ? (pregs.length ? 'Te quedan ' + quedan : 'Abrir') : 'Ver respuestas');
