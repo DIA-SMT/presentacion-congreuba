@@ -117,8 +117,8 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
   out += `<h2>Antes de empezar</h2><ul class="lista">
     <li>Pantalla: abrí la presentación y tocá <b>COMENZAR</b> (así Migue tiene sonido). Botonera: todo en verde.</li>
     <li>Misma compu y mismo navegador para la prueba y para la charla (sin incógnito).</li>
-    <li><b>Iniciá sesión una vez desde la presentación</b> en CIMBA (placa ${placas.findIndex(p => p.dataset.web === 'cimba') + 1}) y EstudIA (placa ${placas.findIndex(p => p.dataset.web === 'estudia') + 1}) al llegar. <b>El tablero de Migue, en la pausa o justo antes del bloque 5</b>: su sesión vence y no se renueva sola.</li>
-    <li>Antes de proyectar una demo, que no quede abierta ninguna pantalla con nombres, teléfonos o direcciones de vecinos.</li></ul>`;
+    <li><b>No hay que iniciar sesión en nada.</b> Las demos (${placas.map((p, i) => p.dataset.bucle ? `placa ${i + 1}` : '').filter(Boolean).join(', ')}) corren solas, en loop: sirve cualquier compu con internet.</li>
+    <li>Abrí la presentación unos minutos antes: así se prepara la respuesta real de Migue que muestra el chat (placa ${placas.findIndex(p => p.dataset.bucle === 'migue-chat') + 1}).</li></ul>`;
 
   const PUB = (window.PUBLICO && window.PUBLICO.ACTIVIDADES) || [];
   const placaDe = id => placas.findIndex(p => p.dataset.publico === id) + 1;
@@ -137,11 +137,11 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     <table><tr><th>N.º</th><th>Placa</th><th>Migue dice</th></tr>
     ${V.map((v, i) => `<tr><td class="num">${i + 1}</td><td class="num">${dondeFrase[i + 1] || '—'}</td><td>${esc(v.sub || v.texto)}${v.archivo || (v.video && !/m6-/.test(v.video)) ? '' : ' <span class="ceja">· globo</span>'}</td></tr>`).join('')}</table>`;
 
-  out += `<h2>Sistemas en vivo, dentro de la presentación</h2><ul class="lista">
-    <li>En las placas <b>EN VIVO</b>, el primer SIGUIENTE abre el sistema real; otro SIGUIENTE lo cierra y avanza; ANTERIOR, ✕ o Esc lo cierra.</li>
-    <li>Adentro se navega con el <b>mouse</b>. Mientras el cursor está adentro, el teclado y el clicker le hablan al sistema: para seguir, el celular o el ✕.</li>
-    <li>La botonera tiene "Sistemas en vivo" para abrir cualquiera en cualquier momento: ${S.map(s => esc(s.nombre)).join(' · ')}.</li>
-    <li>Si uno no carga: ↻ (o Recargar en la botonera), o ↗ para abrirlo en una ventana; si no, la vitrina de ese sistema tiene las capturas.</li></ul>`;
+  out += `<h2>Las demos, en loop</h2><ul class="lista">
+    <li>CIMBA, el chat de Migue, EstudIA y el tablero de Migue <b>corren solos dentro de su placa</b>, como un video que se repite: arriba se ven los capítulos y su avance. No hay que tocar nada; SIGUIENTE pasa de placa.</li>
+    <li>CIMBA: sus pantallas recreadas con los textos reales (Nueva orden de trabajo, Trabajo en campo) y fotos reales de antes y después del muro de Avance. EstudIA y el tablero: recorridos sobre sus capturas del 14/10/2026. Ninguna muestra datos de vecinos.</li>
+    <li>El chat de Migue muestra la respuesta real que la presentación prepara al abrirse; si no llegó, Migue queda escribiendo y pasa la posta al público.</li>
+    <li>Si igual querés abrir un sistema real, la botonera conserva "Sistemas en vivo" (${S.map(s => esc(s.nombre)).join(' · ')}): necesita sesión iniciada en esa compu.</li></ul>`;
 
   // ---------------- Placa por placa
   let bloque = 0;
@@ -160,6 +160,10 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
       extra += `<div class="dialogo">${fr.map(k => `<div><span class="m">Migue (${k}): «${esc(migueLinea(k))}»</span><br><span class="v">Vos: ${esc((V[k - 1] || {}).marco || '')}</span></div>`).join('')}</div>`;
     } else if (fr.length) {
       extra += fr.map(k => `<div class="migue"><b>Migue habla (${k})</b> · «${esc(migueLinea(k))}»</div>`).join('');
+    }
+    if (p.dataset.bucle) {
+      const CAPS = { cimba: 'buscar el lugar → lo pendiente, ordenado → la orden → en la calle → antes y después', 'migue-chat': 'Ciudad Digital → una pregunta de todos los días', estudia: 'el docente elige → el Laboratorio IA → cuánto cuesta', 'migue-tablero': 'gobernanza → clima ciudadano' };
+      extra += `<div class="vivo"><b>Demo en loop</b> · corre sola, no hay que tocar nada: ${esc(CAPS[p.dataset.bucle] || 'se repite hasta que pases de placa')}. SIGUIENTE avanza.</div>`;
     }
     if (p.dataset.web) {
       const s = S.find(x => x.id === p.dataset.web) || {};

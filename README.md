@@ -19,16 +19,16 @@ Publicada el 25/11/2026 en el VPS del municipio (195.35.42.168): carpeta `/var/w
 
 El link de la botonera no se comparte: quien lo abra maneja la presentación. La técnica abre el de la pantalla y toca **Comenzar** (un clic: habilita el sonido de Migue y la pantalla completa). Todo lo demás, desde el celular.
 
-Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La botonera entra por la IP de la compu que muestra la ventana (mismo wifi). "Preguntale a Migue", las demos en vivo y el público necesitan internet igual (con INICIAR.bat el público entra por la IP de la compu, en el mismo wifi).
+Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La botonera entra por la IP de la compu que muestra la ventana (mismo wifi). "Preguntale a Migue", la respuesta del chat en loop y el público necesitan internet igual (con INICIAR.bat el público entra por la IP de la compu, en el mismo wifi).
 
 ## Qué hay
 
-- 55 placas (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan y cómo empezó. Después, **Primero · Lo que ya funciona** (separador `data-bloque="0"`): el mapa de los diez desarrollos (`.m6-mapa`) y sus vitrinas, con **Migue y CIMBA en vivo** y EstudIA opcional, para que cuando se hable de capas, datos y costos el público ya sepa de qué sistema se habla (desde el 25/11/2026; la versión anterior quedó en la etiqueta `chaco-antes-de-desarrollos`). Después, por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
+- 55 placas (`index.html`), con los componentes nuevos en `m6.css` y `m6.js` (prefijo `m6-`): portada con el diálogo de Migue, el plan y cómo empezó. Después, **Primero · Lo que ya funciona** (separador `data-bloque="0"`): el mapa de los diez desarrollos (`.m6-mapa`) y sus vitrinas, con **Migue y CIMBA funcionando en loop** y EstudIA opcional, para que cuando se hable de capas, datos y costos el público ya sepa de qué sistema se habla (desde el 25/11/2026; la versión anterior quedó en la etiqueta `chaco-antes-de-desarrollos`). Después, por bloque un **separador** (número grande y riel de avance) seguido de sus placas:
   1. De la IA individual a la institucional: pregunta a la sala, cuatro niveles, chat frente a agente.
   2. Las capas: cinco capas, ocho condiciones de una licencia, detrás de escena de CIMBA y de Migue (datos conectados), IA soberana (matriz 2×2).
   3. Del piloto a la producción: embudo y seis causas, el camino, checklist.
   4. La economía de los agentes: tokens, el multiplicador del agente, costo efectivo, cinco reglas para presupuestar (con EstudIA).
-  5. Gobernanza del agente: decreto 0596, semáforo de permisos, trazabilidad (CIMBA real), el tablero de Migue y el tablero en vivo.
+  5. Gobernanza del agente: decreto 0596, semáforo de permisos, trazabilidad (CIMBA real), el tablero de Migue y su recorrido en loop.
   6. El costo que la factura no muestra: sedentarismo cognitivo y cuatro prácticas.
   7. Hoja de ruta para Chaco: cinco fases con criterio de paso, y qué hace la provincia y qué cada municipio.
   Cierre: conclusión, preguntas (QR de Migue) y gracias.
@@ -36,7 +36,8 @@ Sin internet en la sala: doble clic en `INICIAR.bat` (necesita Node.js). La boto
 - **Migue**: dice sólo frases con video grabado (la apertura, sus dos videos en la vitrina y la despedida; desde el 25/11/2026 no hay frases con globo ni videos por grabar). En cada separador está parado, sin hablar, y la placa 51 recorre los siete bloques en su caso.
 - **Gobernanza de datos** (placa 25, bloque 2): seis reglas con su ejemplo en SMT, entre Licencias y las dos placas de **Interoperar** (CIMBA y Migue por dentro). Así cada punto del programa del módulo tiene su placa.
 - **Guion imprimible**: `guion.html` arma el guion placa por placa leyendo la presentación (miniatura, línea de la botonera, notas, frases de Migue y demos). `.\herramientas\guion-pdf.ps1` lo imprime a `guion-modulo6.pdf` (A4) con Edge.
-- **Sistemas en vivo, dentro de la presentación** (`#web`, en `m6.js`): un navegador con pestañas que muestra el sistema real. En las placas "EN VIVO" (`data-web="cimba|estudia|migue"`) el primer SIGUIENTE lo abre y el siguiente lo cierra y avanza; la botonera tiene un botón por sistema (lista `SISTEMAS` en `contenido.js`). Se precarga una placa antes y conserva la sesión.
+- **Demos en loop** (`bucle.js`, `bucle.css`; desde el 25/11/2026): las placas 9 (chat de Migue), 12 (CIMBA), 15 (EstudIA) y 44 (tablero de Migue) corren solas, como un video que se repite (`data-bucle="migue-chat|cimba|estudia|migue-tablero"`), para no depender de la compu del expositor ni de una sesión iniciada. CIMBA recrea sus pantallas con los textos reales (Nueva orden de trabajo en el barrio Congreso, Trabajo en campo) y muestra fotos reales de antes y después del muro de Avance (`img/capturas/cimba/antes-despues/`, bajadas el 25/11/2026 de las fotos públicas de CIMBA, sin personas reconocibles). El chat de Migue usa la respuesta real que `vivo.js` precarga; EstudIA y el tablero se recorren con zoom sobre sus capturas. Arranca al entrar a la placa y se detiene al salir; en el modo captura empieza en `data-bucle-captura`.
+- **Sistemas en vivo, dentro de la presentación** (`#web`, en `m6.js`): un navegador con pestañas que muestra el sistema real. Ya ninguna placa lo abre sola (las demos pasaron a loop); la botonera tiene un botón por sistema (lista `SISTEMAS` en `contenido.js`). Se precarga una placa antes y conserva la sesión.
 - Capturas reales en las placas de trazabilidad (CIMBA, control de lo cargado), presupuesto (EstudIA, Laboratorio IA) y el tablero de Migue.
 - Logo del Gobierno del Chaco: si existe `img/logos/gobierno-chaco.png` (o `.svg`), reemplaza solo a la marca de texto en portada y cierre.
 - Cronómetro de la botonera: ámbar a la 1:45, rojo a las 2:00.

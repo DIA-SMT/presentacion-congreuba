@@ -5,18 +5,18 @@ El guion completo, placa por placa y con miniaturas, está en guion-modulo6.pdf
 (se regenera con .\herramientas\guion-pdf.ps1). Esto es el resumen.
 
 Tiempo: 2 horas. 55 placas. Primero LO QUE YA FUNCIONA (los diez desarrollos, qué
-resuelve cada uno, Migue y CIMBA en vivo) y después los 7 bloques, cada uno con un
+resuelve cada uno, Migue y CIMBA funcionando en loop) y después los 7 bloques, cada uno con un
 separador. La presentación te lleva sola por los sistemas y por las preguntas al
 público: la botonera es para volver o adelantar. Los minutos NO aparecen en pantalla:
 son sólo para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:00.
 
   0:00  Apertura con Migue + el plan + Sumate (nube de inicio) + cómo empezó .. 10 min
-  0:10  Primero · Lo que ya funciona (Migue y CIMBA en vivo; EstudIA opcional)  26 min
+  0:10  Primero · Lo que ya funciona (Migue y CIMBA en loop; EstudIA opcional)  26 min
   0:36  Bloque 1 · De la IA individual a la institucional .................. 10 min
   0:46  Bloque 2 · Las capas (gobernanza de datos, votación IA soberana) ... 18 min
   1:04  Bloque 3 · Del piloto a la producción ..............................  7 min
   1:11  Bloque 4 · La economía de los agentes .............................. 11 min
-  1:22  Bloque 5 · Gobernanza del agente (tablero de Migue en vivo) ........ 14 min
+  1:22  Bloque 5 · Gobernanza del agente (recorrido del tablero de Migue) .. 14 min
   1:36  Bloque 6 · El costo que la factura no muestra ......................  7 min
   1:43  Bloque 7 · Hoja de ruta para Chaco ................................. 10 min
   1:53  Un caso (Migue), conclusión, nube de cierre, preguntas y gracias ... resto
@@ -43,18 +43,21 @@ EL PÚBLICO, DESDE EL CELULAR
     panel). Para probar sin tocarla: /?canal=prueba y /control?canal=prueba.
   - Sin señal en la sala: las votaciones también van a mano alzada.
 
-SISTEMAS EN VIVO, DENTRO DE LA PRESENTACIÓN
-  - Placas "EN VIVO": 9 chat con Migue (Ciudad Digital), 12 CIMBA, 15 EstudIA (opcional),
-    44 tablero de Migue. SIGUIENTE abre el sistema real dentro de la presentación; otro
-    SIGUIENTE lo cierra y avanza; ANTERIOR (o ✕, o Esc) lo cierra y te quedás en la placa.
-  - Adentro se navega con el MOUSE. Mientras el cursor está adentro, el teclado y el
-    clicker le hablan al sistema: para seguir usá el celular o el ✕.
-  - La botonera tiene "Sistemas en vivo": cualquier sistema, en cualquier momento.
-  - Chat con Migue: en Ciudad Digital (ciudaddigital.smt.gob.ar), botón de abajo a la
-    derecha, ya en la portada: sin iniciar sesión. Mostrá el contador (casi 170.000
-    ciudadanos registrados). Preguntas probadas: bache en mi cuadra, corte de tránsito,
-    licencia de conducir, habilitar un negocio. Después, en el tablero (placa 44), esa
-    consulta y las del público deberían verse en el Corazón.
+LAS DEMOS, EN LOOP (no dependen de tu compu ni de una sesión iniciada)
+  - Placas 9 chat con Migue, 12 CIMBA, 15 EstudIA (opcional) y 44 tablero de Migue:
+    corren solas dentro de la placa, como un video que se repite. Arriba se ven los
+    capítulos y su avance. No hay que tocar nada: SIGUIENTE pasa de placa.
+  - CIMBA (1 min 15 s): buscar el barrio → lo pendiente de todos los canales, con
+    puntaje (el sumidero va a la SAT) → por contrato le toca UOCRA y CIMBA calcula
+    turnos, toneladas y días → en la calle, foto de antes y de después → seis
+    arreglos reales con su antes y después. Pantallas recreadas con los textos reales
+    de CIMBA y fotos reales del muro de Avance; sin datos de vecinos.
+  - Chat con Migue: Ciudad Digital, el botón de Migue y «Hay un bache enorme en mi
+    cuadra, ¿dónde lo reclamo?». La respuesta es la real de Migue, que la presentación
+    prepara al abrirse; si no llegó, queda escribiendo y pasa la posta a la placa 10.
+  - EstudIA y el tablero de Migue: recorridos con zoom sobre sus capturas del 14/10.
+  - Si igual querés abrir un sistema real: la botonera conserva "Sistemas en vivo"
+    (necesita sesión iniciada en esa compu).
 
 ANTES DE EMPEZAR
   - Direcciones. Pantalla: https://presentacion.195-35-42-168.sslip.io (ahí los sistemas
@@ -63,18 +66,16 @@ ANTES DE EMPEZAR
   - Si la compu de la sala no abre la de sslip.io ("No se puede acceder… ERR_NAME_NOT_RESOLVED"):
     en Chrome o Edge, Configuración → Privacidad → Usar DNS seguro → Google. Si no se puede
     tocar esa compu, abrí la pantalla en presentacion.srv1915283.hstgr.cloud: anda todo,
-    también el público, el chat con Migue y su tablero; CIMBA, EstudIA, FerIA y CIMT en
-    vivo no (seguí con sus vitrinas).
+    también el público y las demos en loop.
   - Pantalla: abrí la presentación y tocá COMENZAR (así Migue tiene sonido).
   - Botonera: todo en verde. Si aparece "Hay 2 pantallas abiertas", cerrá la otra.
   - Botonera, "El público": que diga 0 personas (si no, Empezar de cero).
   - Misma compu y mismo navegador para la prueba y para la charla (sin incógnito).
-  - Iniciá sesión una vez desde la presentación en CIMBA (12) y EstudIA (15) al llegar.
-    El tablero de Migue (44), en la pausa o justo antes del bloque 5: su sesión vence y
-    no se renueva sola.
+  - No hay que iniciar sesión en nada: las demos corren solas. Abrí la presentación
+    unos minutos antes, así se prepara la respuesta real de Migue para el chat (placa 9).
   - Que no quede abierta ninguna pantalla con nombres, teléfonos o direcciones de vecinos.
   - Respaldo sin internet para la presentación: doble clic en INICIAR.bat (necesita
-    Node.js en esa compu). Los sistemas en vivo y el público necesitan internet igual.
+    Node.js en esa compu). La respuesta de Migue y el público necesitan internet igual.
 
 APERTURA (placa 1) · DIÁLOGO CON MIGUE
     1 ¡Marco! ¡Marquito! No te veo. ¿Ya llegaste?
@@ -104,15 +105,14 @@ le toca). En los separadores está parado, sin hablar.
 PRIMERO · LO QUE YA FUNCIONA (placas 5–17)
   5  Separador: lo que ya funciona.
   6  El mapa: diez desarrollos, dos puertas adentro y ocho para el vecino. Nombrá cada
-     uno con el problema que resuelve; los tres EN VIVO los abrimos ahora.
+     uno con el problema que resuelve; los tres marcados DEMO los vemos funcionando.
   7  Vitrina Herramientas internas: Generador de Notas y Tableros.
-  8  Vitrina Migue (MIGUE 7 y 8).   9  EN VIVO · Chateale a Migue en Ciudad Digital.
+  8  Vitrina Migue (MIGUE 7 y 8).   9  Migue en loop: el chat en Ciudad Digital.
   10 Ahora ustedes: le preguntan a Migue desde el celular (▶ en la botonera para
      mostrar una en grande).
-  11 Vitrina CIMBA.   12 EN VIVO · CIMBA.
+  11 Vitrina CIMBA.   12 CIMBA en loop: de la orden de trabajo al antes y después.
   13 Adiviná el costo de EstudIA (SIGUIENTE revela).   14 Vitrina EstudIA.
-  15 EN VIVO · EstudIA (opcional; si vas justo de tiempo, SIGUIENTE dos veces: abre y
-     cierra).
+  15 EstudIA en loop (opcional; si vas justo de tiempo, SIGUIENTE y seguís).
   16 Vitrina UrbanIA + Presupuesto Participativo.   17 Applaza, Bus Turístico y FerIA.
 
 BLOQUE 1 · DE LA IA INDIVIDUAL A LA INSTITUCIONAL (placas 18–21)
@@ -142,8 +142,8 @@ BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES (placas 34–38)
 
 BLOQUE 5 · GOBERNANZA DEL AGENTE (placas 39–44)
   40 Las reglas.   41 Semáforo de permisos.   42 Trazabilidad (CIMBA real).
-  43 El tablero de Migue.   44 EN VIVO · Tablero de Migue (buscá las consultas del chat
-     y del público).
+  43 El tablero de Migue.   44 Recorrido del tablero en loop: gobernanza y clima
+     ciudadano.
 
 BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA (placas 45–47)
   46 IA que piensa por vos / IA que te hace pensar.   47 Cuatro prácticas.
@@ -161,8 +161,8 @@ CIERRE (placas 51–55)
 SI ALGO FALLA
   - Una frase de Migue de más: ↶ deshacer. Migue no responde en vivo: a los ~40 s sale
     una respuesta de cortesía.
-  - Un sistema en vivo no carga: ↻ (o "Recargar" en la botonera), o ↗ para abrirlo en
-    una ventana; si no hay caso, seguí con la vitrina de ese sistema.
+  - Una demo en loop no se mueve: ANTERIOR y SIGUIENTE (salir y volver a la placa) la
+    hace arrancar de nuevo.
   - El público no ve la pregunta: que recarguen la página del celular. Sin señal: a mano
     alzada, y seguí.
   - Se cae el servidor: doble clic en INICIAR.bat y abrí http://localhost:8080 (la
