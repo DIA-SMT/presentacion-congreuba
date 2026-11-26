@@ -278,3 +278,43 @@
   // La placa en la que arranca (normalmente la portada) y el modo captura.
   try { const p = placaActual(); if (p && p.dataset.publico) placa(p); } catch (e) { }
 })();
+
+// =====================================================================
+// REACCIONES CON EMOJIS (desde el 26/11/2026): mientras la botonera las tiene
+// prendidas, lo que tocan en el celular vuela por el costado derecho de la pantalla.
+// =====================================================================
+(function () {
+  const CFG = window.UBA_CONFIG || {};
+  if (new URLSearchParams(location.search).has('captura')) return;
+  const SALA = (window.Remoto && window.Remoto.sala) || CFG.sala || 'sala';
+  const stage = document.getElementById('stage'); if (!stage) return;
+  const capa = document.createElement('div'); capa.id = 'vuelo'; capa.setAttribute('aria-hidden', 'true');
+  stage.appendChild(capa);
+  let desde = -1, on = false, enVuelo = 0;
+  function volar(e, k) {
+    if (enVuelo > 45) return;
+    enVuelo++;
+    const s = document.createElement('span');
+    s.textContent = e;
+    s.style.setProperty('--x', (Math.random() * 300 - 150).toFixed(0) + 'px');
+    s.style.setProperty('--g', (Math.random() * 40 - 20).toFixed(0) + 'deg');
+    s.style.left = (1540 + Math.random() * 260).toFixed(0) + 'px';
+    s.style.animationDelay = (k * 90) + 'ms';
+    s.style.fontSize = (54 + Math.random() * 30).toFixed(0) + 'px';
+    capa.appendChild(s);
+    setTimeout(() => { s.remove(); enVuelo--; }, 4200 + k * 90);
+  }
+  async function mirar() {
+    try {
+      const r = await fetch('api/publico/emojis?sala=' + encodeURIComponent(SALA) + '&desde=' + desde + '&_=' + Date.now(), { cache: 'no-store' });
+      if (r.ok) {
+        const j = await r.json();
+        on = !!j.on; capa.classList.toggle('on', on);
+        if (on && desde >= 0) (j.nuevos || []).slice(-30).forEach((e, k) => volar(e, k));
+        desde = j.seq;
+      }
+    } catch (e) { }
+    setTimeout(mirar, on ? 1000 : 4000);
+  }
+  mirar();
+})();

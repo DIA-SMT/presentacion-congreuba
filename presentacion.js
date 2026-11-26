@@ -43,7 +43,7 @@ function ajustar() {
 
 // Encabezado del congreso y logo de la ciudad en las placas de contenido y en
 // el cajón (la portada y el cierre traen la franja de logos de la organización).
-const ENCAB = '<p class="encab">Gobernar con IA · Módulo 6 · Dr. Marco Rossi</p><img class="logo-sup" src="img/logos/logo-horizontal-color.png" alt="">';
+const ENCAB = '<p class="encab">Gobernar con IA · Módulo 6 · Dr. Marco Rossi</p><img class="logo-sup logo-ialab" src="assets/template/logos/uba-ialab.png" alt="UBA · IALAB"><img class="logo-sup" src="img/logos/logo-horizontal-color.png" alt="">';
 document.querySelectorAll('.slide:not(.portada)').forEach((p) => p.insertAdjacentHTML('afterbegin', ENCAB));
 document.getElementById('cajon').insertAdjacentHTML('afterbegin', ENCAB);
 

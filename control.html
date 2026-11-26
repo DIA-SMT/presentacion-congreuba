@@ -146,6 +146,9 @@ h2 { font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: u
 .pub-item button { flex: none; height: 40px; min-width: 46px; padding: 0 10px; background: var(--azul3); font-size: 14px; border-radius: 12px; }
 .pub-item button.pant { background: var(--verde); color: #0d2419; }
 .pub-item em { flex: none; font-style: normal; font-size: 11px; color: #aab3cc; }
+#pubEmojis { width: 100%; min-height: 70px; margin-top: 10px; gap: 4px; border: 2px solid var(--azul3); background: rgba(255,255,255,.06); color: #fff; font-size: 17px; }
+#pubEmojis.activa { border-color: var(--verde); background: rgba(47,158,110,.18); }
+#pubEmojis.activa b { color: var(--verde); }
 #pubCero { height: 44px; background: transparent; border: 2px dashed var(--azul3); font-size: 13px; font-weight: 600; color: #aab3cc; }
 
 /* Chequeo antes de empezar. */
@@ -270,6 +273,7 @@ html { -webkit-text-size-adjust: 100%; }
 <div class="cajones pub-acts" id="pubActs"></div>
 <button id="pubRevelar">Revelar la respuesta</button>
 <div class="web-acciones"><button id="pubSacar">Sacar de la pantalla</button><button id="pubCerrar">Cerrar la pregunta en los celulares</button></div>
+<button id="pubEmojis">😀 Reacciones con emojis: <b>apagadas</b><small>Tocá para prenderlas: el público reacciona desde el celular y vuela en la pantalla</small></button>
 <details class="pub-mod" id="pubMod"><summary>Moderar <span id="pubModRes"></span></summary><div id="pubItems"></div></details>
 <button id="pubCero">Empezar de cero · borra todo lo del público…</button>
 
@@ -412,6 +416,7 @@ async function pubBoton(b, ruta, cuerpo) {
   sondearPub();
 }
 $('pubCerrar').addEventListener('click', () => pubBoton($('pubCerrar'), 'activar', { act: null }));
+$('pubEmojis').addEventListener('click', () => pubBoton($('pubEmojis'), 'emojis', { on: !(pubDatos && pubDatos.emojis) }));
 $('pubCero').addEventListener('click', () => {
   if (!confirm('¿Borrar todo lo del público: personas, palabras, votos y preguntas a Migue? No se puede deshacer.')) return;
   pubBoton($('pubCero'), 'reiniciar', {});
@@ -435,6 +440,9 @@ function pintarPub() {
   const abierta = PUB.find(a => a.id === d.act);
   $('pubEst').innerHTML = `<b>${d.gente}</b> ${d.gente === 1 ? 'persona' : 'personas'} · <b>${d.municipios}</b> ${d.municipios === 1 ? 'municipio' : 'municipios'}<br>`
     + (abierta ? 'En los celulares: <i>● ' + escP(abierta.titulo) + '</i>' : 'En los celulares: nada abierto');
+  $('pubEmojis').classList.toggle('activa', !!d.emojis);
+  $('pubEmojis').querySelector('b').textContent = d.emojis ? 'PRENDIDAS' : 'apagadas';
+  $('pubEmojis').querySelector('small').textContent = d.emojis ? 'Tocá para apagarlas' : 'Tocá para prenderlas: el público reacciona desde el celular y vuela en la pantalla';
   $('pubActs').querySelectorAll('button').forEach((b) => {
     const x = d.actividades.find(a => a.id === b.dataset.id) || { n: 0 };
     b.classList.toggle('activa', d.act === b.dataset.id);

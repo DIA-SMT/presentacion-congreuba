@@ -223,7 +223,33 @@ module.exports = function publico({ datos }) {
     res.end(JSON.stringify(obj));
   }
 
+  // Reacciones con emojis (desde el 26/11/2026): la botonera las prende y las apaga
+  // (s.emojis); mientras están prendidas, cada celular tiene una barra de emojis y la
+  // pantalla los hace volar. No se guardan: viven en memoria, los últimos 200 por sala.
+  const EMOJIS = ['👏', '❤️', '🔥', '😮', '😂', '🤔'];
+  const EMO = new Map(), ultEmoji = new Map();
   const RUTAS = {
+    'POST emoji': (s, b, nombre) => {
+      if (!persona(s, b.yo)) return [401, { error: 'Volvé a entrar con tu nombre.' }];
+      if (!s.emojis) return [409, { error: 'Las reacciones están cerradas.' }];
+      const e = String(b.e || ''); if (!EMOJIS.includes(e)) return [400, { error: 'Ese no.' }];
+      const ahora = Date.now(); if (ahora - (ultEmoji.get(b.yo) || 0) < 500) return [429, { error: '…' }];
+      ultEmoji.set(b.yo, ahora); if (ultEmoji.size > 20000) ultEmoji.clear();
+      const r = EMO.get(nombre) || { seq: 0, lista: [] }; EMO.set(nombre, r);
+      r.lista.push({ i: ++r.seq, e }); if (r.lista.length > 200) r.lista.splice(0, r.lista.length - 200);
+      return [200, { ok: true }];
+    },
+    'GET emojis': (s, q, nombre) => {
+      const r = EMO.get(nombre) || { seq: 0, lista: [] }, desde = Number(q.get('desde'));
+      // desde < 0 (recién abierta) o mayor que seq (se reinició el servidor): sólo el número, sin repetir viejos.
+      const nuevos = !(desde >= 0) || desde > r.seq ? [] : r.lista.filter(x => x.i > desde).slice(-60).map(x => x.e);
+      return [200, { on: !!s.emojis, seq: r.seq, nuevos }];
+    },
+    'POST emojis': (s, b) => {
+      const on = b.on !== false;
+      if (!!s.emojis !== on) { s.emojis = on; cambio(s); }
+      return [200, { ok: true, on }];
+    },
     // ---- celular del público
     'POST entrar': (s, b) => {
       const n = limpiar(b.nombre, 40), mTxt = limpiar(b.municipio, 60);
@@ -243,7 +269,7 @@ module.exports = function publico({ datos }) {
     },
     'GET estado': (s, q) => {
       const yo = q.get('yo'), p = persona(s, yo), id = s.act, a = ACT[id];
-      const r = { v: s.v, conocido: !!p, gente: Object.values(s.gente).filter(x => !x.x).length, act: a ? actPublica(s, id) : null };
+      const r = { v: s.v, conocido: !!p, gente: Object.values(s.gente).filter(x => !x.x).length, act: a ? actPublica(s, id) : null, emojis: !!s.emojis };
       if (p && a) {
         const mias = (s.resp[id] || []).filter(x => x.yo === yo);
         if (a.tipo === 'nube') r.mio = { palabras: mias.map(x => x.v) };
@@ -320,7 +346,7 @@ module.exports = function publico({ datos }) {
       const items = [];
       if (a && a.tipo === 'nube') (s.resp[id] || []).forEach((r, i) => items.push({ k: 'r:' + id + ':' + i, quien: quien(r.yo), texto: r.v, x: !!r.x, xp: !!(s.gente[r.yo] || {}).x, t: r.t }));
       return [200, {
-        v: s.v, act: id, gente: g.gente, municipios: g.municipios,
+        v: s.v, act: id, gente: g.gente, municipios: g.municipios, emojis: !!s.emojis,
         actividades: ACTIVIDADES.map(x => ({ id: x.id, titulo: x.titulo, tipo: x.tipo, n: x.tipo === 'migue' ? s.migue.length : (s.resp[x.id] || []).length, revelada: !!s.revel[x.id], correcta: x.correcta != null })),
         items: items.sort((x, y) => y.t - x.t).slice(0, 30),
         migue: s.migue.slice(-30).reverse().map(m => ({ k: 'm:' + m.id, quien: quien(m.yo), texto: m.q, e: m.e, r: m.e === 'ok' ? m.r : null, x: !!m.x, xp: !!(s.gente[m.yo] || {}).x })),
@@ -340,7 +366,7 @@ module.exports = function publico({ datos }) {
     },
     'POST reiniciar': (s, b, nombre) => {
       for (let i = cola.length - 1; i >= 0; i--) if (cola[i][0] === s) cola.splice(i, 1);
-      salas.delete(nombre); sucio = true; guardar();
+      salas.delete(nombre); EMO.delete(nombre); sucio = true; guardar();
       return [200, { ok: true }];
     },
   };

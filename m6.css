@@ -567,3 +567,17 @@ body.captura #inicio, body.captura #cortina { display: none !important; }
 #migue:not(.fuera):not(.oculto):not(.izq) ~ #pie { opacity: 0; transform: translateY(12px); }
 #stage.m6-en-portada #pie { bottom: 28px; transform: scale(1.4); }
 .m6-sep .m6-riel { bottom: 122px; }
+
+/* ---------- Reacciones con emojis: vuelan por el costado derecho ---------- */
+#vuelo { position: absolute; inset: 0; z-index: 7; pointer-events: none; overflow: hidden; margin-left: calc(var(--extra) / 2); }
+#vuelo span { position: absolute; bottom: -90px; line-height: 1; opacity: 0; animation: vuelo 4s cubic-bezier(.2,.6,.35,1) forwards; filter: drop-shadow(0 6px 12px rgba(17,26,59,.25)); }
+@keyframes vuelo {
+  0% { opacity: 0; transform: translate(0, 0) scale(.6) rotate(0); }
+  12% { opacity: 1; transform: translate(calc(var(--x) * .2), -120px) scale(1.1) rotate(calc(var(--g) * .3)); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--x), -760px) scale(1) rotate(var(--g)); }
+}
+
+/* Logo de IALAB en todas las placas, a la izquierda del de la Municipalidad. */
+.logo-sup.logo-ialab { right: 306px; top: 43px; height: 44px; }
+
