@@ -74,6 +74,7 @@ button { font: inherit; cursor: pointer; border: 0; }
 .hilo .r { align-self: flex-start; max-width: 94%; background: #f1f0ec; border-radius: 18px 18px 18px 4px; padding: 12px 14px; font-size: 15.5px; line-height: 1.5; overflow-wrap: anywhere; }
 .hilo .r a { color: var(--acento); }
 .hilo .r.espera-migue { color: var(--suave); font-style: italic; }
+.hilo .r.espera-migue small { display: block; margin-top: 4px; font-style: normal; font-size: 12.5px; }
 .puntos i { display: inline-block; width: 7px; height: 7px; margin: 0 2px; border-radius: 50%; background: var(--gris); animation: p 1.2s infinite; }
 .puntos i:nth-child(2) { animation-delay: .2s; } .puntos i:nth-child(3) { animation-delay: .4s; }
 @keyframes p { 50% { opacity: .2; transform: translateY(-3px); } }
@@ -305,13 +306,15 @@ details.migue-mas summary span { flex: none; font-size: 13px; font-weight: 600; 
       });
     }
     const pregs = m.preguntas || [], quedan = Math.max(0, m.max - pregs.length);
+    // Cuánto falta, a ojo: Migue contesta unas porMinuto preguntas por minuto.
+    const espera = (antes, porMin) => { if (!porMin || antes < porMin / 2) return ''; const min = Math.ceil(antes / porMin); return ` (unos ${min} min)`; };
     const nuevaFirma = JSON.stringify(pregs);
     if (nuevaFirma !== firmaMigue) {
       firmaMigue = nuevaFirma;
       destino.querySelector('.hilo').innerHTML = pregs.map(p => `<div class="q">${esc(p.q)}</div>` + (
         p.e === 'ok' || p.e === 'error' ? `<div class="r">${formatear(p.r || '')}</div>`
           : p.e === 'pensando' ? `<div class="r espera-migue">Migue está escribiendo <span class="puntos"><i></i><i></i><i></i></span></div>`
-          : `<div class="r espera-migue">En la fila${p.antes ? ': hay ' + p.antes + (p.antes === 1 ? ' pregunta' : ' preguntas') + ' antes que la tuya' : ''} <span class="puntos"><i></i><i></i><i></i></span></div>`)).join('');
+          : `<div class="r espera-migue">En la fila${p.antes ? ': hay ' + p.antes + (p.antes === 1 ? ' pregunta' : ' preguntas') + ' antes que la tuya' + espera(p.antes, m.porMinuto) : ''} <span class="puntos"><i></i><i></i><i></i></span><small>La respuesta te llega acá: podés seguir mirando la charla.</small></div>`)).join('');
     }
     const f = destino.querySelector('form');
     f.querySelector('textarea').hidden = !quedan; f.querySelector('.boton').hidden = !quedan;

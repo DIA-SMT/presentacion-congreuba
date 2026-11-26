@@ -127,7 +127,7 @@ ul.lista { padding-left: 16px; } ul.lista li { margin: 3px 0; }
     <ul class="lista">
     <li>Entran con su nombre y su municipio (queda guardado en el celular) y responden lo que esté abierto. Cada placa de participación lo abre sola al llegar y lo deja abierto hasta la próxima.</li>
     <li>${PUB.map(a => `<b>${esc(a.titulo)}</b> (placa ${placaDe(a.id) || '—'})`).join(' · ')}.</li>
-    <li>Migue: desde la placa ${placaDe('migue')} cada uno le puede hacer hasta 3 preguntas; la respuesta real le llega al celular y en la pantalla se ven las preguntas. Una buena: botonera, <b>El público → Moderar → ▶</b> la muestra en grande con su respuesta.</li>
+    <li>Migue: desde la placa ${placaDe('migue')} cada uno le puede hacer hasta 2 preguntas; la respuesta real le llega al celular y en la pantalla se ven las preguntas. Migue contesta unas 14 por minuto (su límite): con mucha gente, las respuestas van llegando durante la charla y el celular avisa cuánto falta. Una buena: botonera, <b>El público → Moderar → ▶</b> la muestra en grande con su respuesta.</li>
     <li>Botonera, <b>El público</b>: cuántos hay, qué está abierto, abrir cualquier actividad encima de cualquier placa (SIGUIENTE la saca), <b>Revelar</b>, <b>Cerrar la pregunta en los celulares</b> y <b>Moderar</b> (✕ saca de la pantalla una palabra, una pregunta o a una persona; las malas palabras ya llegan ocultas).</li>
     <li>Antes de la charla: si probaste en la sala real, <b>Empezar de cero</b> (al final del panel). Para probar sin tocarla: <code>/?canal=prueba</code>, <code>/control?canal=prueba</code> y el QR de esa pantalla.</li>
     <li>Sin celulares o sin señal: las votaciones también se hacen a mano alzada; la presentación sigue igual.</li></ul>`;

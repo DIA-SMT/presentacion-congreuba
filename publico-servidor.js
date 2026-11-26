@@ -16,6 +16,9 @@
 //
 // Preguntas a Migue: van al chat real (el mismo puente que /api/preguntar), en
 // fila, de a dos y espaciadas, para no pasar el límite por minuto del chat.
+// El chat web de Migue acepta 15 mensajes por minuto por IP (CHAT_LIMITE_POR_MINUTO,
+// default 15) y todas las preguntas del público salen de la IP de este servidor:
+// una cada 4,2 s son ~14 por minuto. Si Migue sube su límite, bajar MIGUE_ESPACIO_MS.
 // =====================================================================
 const fs = require('fs');
 const path = require('path');
@@ -24,7 +27,9 @@ const { ACTIVIDADES, MUNICIPIOS, OTROS } = require('./publico-actividades.js');
 
 const ACT = Object.fromEntries(ACTIVIDADES.map(a => [a.id, a]));
 const MIGUE_CHAT = process.env.MIGUE_CHAT || 'https://migue.smt.gob.ar/api/chat';
-const MIGUE_A_LA_VEZ = 2, MIGUE_ESPACIO_MS = 1500;
+const MIGUE_A_LA_VEZ = 2, MIGUE_ESPACIO_MS = +process.env.MIGUE_ESPACIO_MS || 4200;
+const MIGUE_POR_MINUTO = Math.max(1, Math.floor(60000 / MIGUE_ESPACIO_MS));
+const MIGUE_MAX = 2; // preguntas por persona si la actividad no dice otra cosa
 const CORTESIA = 'Uy, justo ahora no puedo ir a buscar ese dato. Probá en un ratito desde Ciudad Digital (ciudaddigital.smt.gob.ar) y te respondo.';
 const TOPE = { salas: 40, personas: 3000, respuestas: 6000, migue: 600 };
 // La sala de la charla (config.js) siempre tiene lugar; las demás, sólo de prueba (?canal=…).
@@ -181,7 +186,9 @@ module.exports = function publico({ datos }) {
   const dormir = ms => new Promise(ok => setTimeout(ok, ms));
   async function consultarMigue(s, m) {
     m.e = 'pensando'; cambio(s);
-    for (let intento = 0; intento < 3; intento++) {
+    // 429 (límite por minuto de Migue): se espera a que se libere y se reintenta hasta 5 veces.
+    for (let intento = 0, limite = 0; intento < 3 + limite; intento++) {
+      let espera = 6000 + intento * 6000;
       try {
         const r = await fetch(MIGUE_CHAT, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -190,9 +197,10 @@ module.exports = function publico({ datos }) {
         });
         const j = await r.json().catch(() => ({}));
         if (r.ok && j.respuesta) { m.r = String(j.respuesta).slice(0, 4000); m.e = 'ok'; cambio(s); return; }
-        if (r.status !== 429 && r.status < 500) break;
+        if (r.status === 429) { if (limite < 2) limite++; espera = 20000; }
+        else if (r.status < 500) break;
       } catch (e) { }
-      await dormir(6000 + intento * 6000);
+      await dormir(espera);
     }
     m.r = CORTESIA; m.e = 'error'; cambio(s);
   }
@@ -244,7 +252,7 @@ module.exports = function publico({ datos }) {
       if (p && (s.migueVisto || s.act === 'migue')) {
         const mias = s.migue.filter(m => m.yo === yo);
         r.migue = {
-          max: ACT.migue ? ACT.migue.max : 3,
+          max: ACT.migue ? ACT.migue.max : MIGUE_MAX, porMinuto: MIGUE_POR_MINUTO,
           preguntas: mias.map(m => {
             const delante = m.e === 'cola' ? cola.findIndex(([, x]) => x === m) : -1;
             return { q: m.q, e: m.e, r: m.r || null, antes: delante >= 0 ? delante : 0 };
@@ -283,7 +291,7 @@ module.exports = function publico({ datos }) {
       if (!s.migueVisto && s.act !== 'migue') return [409, { error: 'Todavía no abrimos las preguntas a Migue.' }];
       const q = limpiar(b.texto, 300);
       if (q.length < 4) return [400, { error: 'Escribí tu pregunta.' }];
-      const max = ACT.migue ? ACT.migue.max : 3;
+      const max = ACT.migue ? ACT.migue.max : MIGUE_MAX;
       if (s.migue.filter(m => m.yo === b.yo).length >= max) return [409, { error: 'Ya le hiciste ' + max + ' preguntas a Migue. ¡Gracias!' }];
       if (s.migue.length >= TOPE.migue) return [429, { error: 'Migue tiene muchas preguntas: probá desde Ciudad Digital.' }];
       if (apurado(b.yo)) return [429, { error: 'Un segundo…' }];
