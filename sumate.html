@@ -127,7 +127,7 @@ body.con-emojis { padding-bottom: 96px; }
     <div id="migueAparte" style="margin-top:14px"></div>
   </section>
 </main>
-<a class="material" href="/material-modulo6.pdf" download>📄 Descargá el material del módulo<span>Resumen y glosario · PDF</span></a>
+<a class="material" id="material" href="/material-modulo6.pdf" download hidden>📄 Descargá el material del módulo<span>Resumen y glosario · PDF</span></a>
 <p class="pie">IALAB UBA · Gobierno del Chaco · Municipalidad de San Miguel de Tucumán</p>
 <nav id="emojis" hidden><small>Reaccioná: sale en la pantalla</small><button type="button">👏</button><button type="button">❤️</button><button type="button">🔥</button><button type="button">😮</button><button type="button">😂</button><button type="button">🤔</button></nav>
 
@@ -195,6 +195,9 @@ body.con-emojis { padding-bottom: 96px; }
     $('entrar').hidden = true; $('adentro').hidden = false;
   }
   $('cambiar').addEventListener('click', mostrarEntrar);
+
+  // El link al material aparece sólo si el PDF ya está publicado.
+  fetch('/material-modulo6.pdf', { method: 'HEAD', cache: 'no-store' }).then(r => { if (r.ok) $('material').hidden = false; }).catch(() => { });
 
   // ------------------------------------------------------------ reacciones
   let ultimoEmoji = 0;
