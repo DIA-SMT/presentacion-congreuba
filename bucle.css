@@ -332,10 +332,10 @@ tr.tilde .cb-ck::after { content: ''; position: absolute; left: 3.5px; top: .5px
 .gd-pie em { font-style: normal; color: #64748b; }
 .gd-redactar { margin-left: auto; background: #a7c1f2; color: #fff; border-radius: 10px; padding: 12px 20px; font-size: 16px; font-weight: 800; transition: background .3s; }
 .gd-redactar.lista { background: #1463ff; }
-.gd-hoja { position: absolute; left: 150px; right: 150px; top: 140px; display: grid; grid-template-columns: 1fr 290px; gap: 24px; opacity: 0; transform: translateY(30px); transition: opacity .6s, transform .6s; pointer-events: none; }
+.gd-hoja { position: absolute; left: 110px; right: 110px; top: 120px; display: grid; grid-template-columns: 1fr 290px; gap: 24px; opacity: 0; transform: translateY(30px); transition: opacity .6s, transform .6s; pointer-events: none; }
 .gd.redactada .gd-main { opacity: 0; }
 .gd.redactada .gd-hoja { opacity: 1; transform: none; }
-.gd-papel { background: #fff; border-radius: 6px; box-shadow: 0 18px 50px rgba(15,23,42,.18); padding: 40px 50px 34px; font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.55; color: #111827; }
+.gd-papel { background: #fff; border-radius: 6px; box-shadow: 0 18px 50px rgba(15,23,42,.18); padding: 36px 56px 30px; font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.55; text-align: justify; color: #111827; }
 .gd-papel header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5e7eb; padding-bottom: 14px; margin-bottom: 20px; font-family: Inter, system-ui, sans-serif; }
 .gd-papel header img { height: 40px; }
 .gd-papel header span { font-size: 14px; font-weight: 800; letter-spacing: .5px; color: #1f2937; }
@@ -404,3 +404,6 @@ tr.tilde .cb-ck::after { content: ''; position: absolute; left: 3.5px; top: .5px
 .md-cols i { display: block; font-style: normal; font-size: 46px; margin-bottom: 12px; }
 .md-cols b { display: block; font-size: 28px; font-weight: 800; color: var(--azul); margin-bottom: 10px; }
 .md-cols p { font-size: 23px; line-height: 1.35; color: var(--azul2); }
+
+.gd-fecha { text-align: right; font-style: italic; }
+.gd-ref { text-decoration: underline; }

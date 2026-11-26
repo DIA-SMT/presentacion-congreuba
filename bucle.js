@@ -451,7 +451,19 @@
     </div>`;
   }
   function gnPantalla() {
-    const n = GN.nota || {};
+    // La nota que redacta la IA: formal y completa, frente al dictado corto y coloquial.
+    const n = {
+      numero: 'NOTA N.º 214/DIA/2026',
+      fecha: 'San Miguel de Tucumán, 26 de noviembre de 2026',
+      ref: 'Ref.: Solicitud de reparación de luminaria · Plaza Belgrano',
+      destino: ['Al Señor Secretario de Obras Públicas', 'de la Municipalidad de San Miguel de Tucumán', 'S / D'],
+      cuerpo: [
+        'Tengo el agrado de dirigirme a usted, en el marco de las competencias asignadas a esta Dirección, a fin de solicitarle tenga a bien disponer la reparación de la luminaria ubicada en la Plaza Belgrano de esta ciudad.',
+        'Motiva el presente pedido la información recibida de vecinos del sector, quienes refieren que el espacio público permanece sin iluminación durante el horario nocturno, situación que compromete la seguridad de quienes transitan por el lugar y el normal uso del espacio verde.',
+        'En virtud de lo expuesto, se solicita la intervención de una cuadrilla técnica a la mayor brevedad posible y que, una vez realizada la inspección, se informe a esta Dirección la fecha prevista para la ejecución de los trabajos.',
+      ],
+      cierre: 'Sin otro particular, saludo a usted con atenta consideración.',
+    };
     return `<div class="gd">
       <header class="gd-cab"><span class="gd-logo"><i></i><b><small>CIUDAD</small>SMT</b></span><div class="gd-tit"><b>Generador de Notas</b><small>Redacción administrativa asistida por IA</small></div><span class="gd-dia"><small>DIRECCIÓN</small>DE IA</span></header>
       <div class="gd-pasos"><span class="p1 on"><b>1</b>Datos de la nota</span><i></i><span class="p2"><b>2</b>Nota redactada</span></div>
@@ -471,6 +483,7 @@
       </main>
       <div class="gd-hoja">
         <article class="gd-papel"><header><img src="img/logos/logo-horizontal-color.png" alt=""><span>${esc(n.numero || 'NOTA N.º 214/DIA/2026')}</span></header>
+          <p class="gd-l gd-fecha">${esc(n.fecha)}</p>
           <p class="gd-l gd-ref">${esc(n.ref || '')}</p>
           <p class="gd-l gd-a">${(n.destino || []).map(esc).join('<br>')}</p>
           ${(n.cuerpo || []).map(c => `<p class="gd-l">${esc(c)}</p>`).join('')}
@@ -503,7 +516,7 @@
       await x.w(3000);
     } },
     { t: 'Una herramienta para todos', d: 16500, correr: async (x, capa) => {
-      const L = x.L = lienzo(x, capa, 1300, 980, gnPantalla(), 'Generador de Notas · Dirección de IA');
+      const L = x.L = lienzo(x, capa, 1300, 1180, gnPantalla(), 'Generador de Notas · Dirección de IA');
       L.camara({ x: 0, y: 0, w: 1300, h: 560 }, null, 0, 0);
       x.sub('La primera herramienta institucional: para todas las áreas');
       await x.w(2200);
@@ -512,7 +525,7 @@
       await L.clic(L.q('.gd-dictar'));
       L.q('.gd-dicta').classList.add('dictando');
       x.sub('Contás con tus palabras lo que necesitás, o lo dictás');
-      await tipear(x, L.q('.gd-dictado'), GN.dictado || '', 32);
+      await tipear(x, L.q('.gd-dictado'), 'Necesito pedirle a Obras que arreglen la luz de la plaza Belgrano, los vecinos dicen que de noche queda todo a oscuras.', 32);
       L.q('.gd-dicta').classList.remove('dictando');
       await x.w(600);
       L.cursor(false);
@@ -539,7 +552,7 @@
       await L.clic(L.q('.gd-redactar'));
       await x.w(300);
     } },
-    { t: 'La IA redacta', d: 12000, sigue: true, correr: async (x) => {
+    { t: 'La IA redacta', d: 14500, sigue: true, correr: async (x) => {
       const L = x.L;
       L.cursor(false);
       L.q('.gd').classList.add('redactada');
@@ -549,9 +562,11 @@
       x.sub('La IA redacta la nota en lenguaje claro');
       await x.w(900);
       const lineas = L.qa('.gd-l');
+      const alto = Math.round(p.h * .5);
       for (let i = 0; i < lineas.length; i++) {
-        if (i === 3) L.camara({ x: p.x, y: p.y + Math.round(p.h * .42), w: p.w, h: Math.round(p.h * .58) }, null, 1400, 18);
-        lineas[i].classList.add('ver'); await x.w(750);
+        // La cámara baja con el texto: cada párrafo nuevo queda a la vista.
+        if (i >= 3) { const l = L.pos(lineas[i]); const y = Math.max(p.y, Math.min(p.y + p.h - alto, l.y - Math.round(alto * .3))); L.camara({ x: p.x, y, w: p.w, h: alto }, null, 1100, 18); }
+        lineas[i].classList.add('ver'); await x.w(i >= 3 ? 1500 : 650);
       }
       await x.w(700);
       L.camara(p, null, 1200, 24);
