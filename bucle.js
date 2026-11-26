@@ -428,7 +428,166 @@
     } },
   ];
 
+  // ------------------------------------------------------------------ Generador de Notas: de uno a todos
+  // Antes, cada uno con su chat; después, la herramienta de todos. La pantalla
+  // está recreada con los textos reales del Generador (captura del formulario en
+  // img/capturas/generador) y la nota de ejemplo de la vitrina (contenido.js).
+  const GN = (() => {
+    const p = ((window.CONTENIDO || {}).PROYECTOS || []).find(x => x.id === 'notas') || {};
+    return (p.recursos || []).find(r => r.tipo === 'nota') || {};
+  })();
+  const GN_TIPOS = ['Intimación', 'Pedido', 'Notificación', 'Pase', 'Informe', 'Derivación', 'Dictamen básico', 'Solicitud', 'Respuesta', 'Circular'];
+  const GN_QUE = 'Pedir la reparación de la luminaria de la plaza Belgrano: de noche queda a oscuras.';
+  function gnAntes() {
+    const chats = [
+      ['Chat personal', 'redactame una nota para obras por la luz de la plaza', 'Estimados: por la presente les escribo para comentarles que la luz de la plaza no anda y sería bueno que la arreglen cuando puedan. Saludos cordiales y quedo atento…'],
+      ['Otra cuenta, otra área', 'nota formal a obras publicas luminaria', 'SR. SECRETARIO — TENGO EL AGRADO DE DIRIGIRME A UD. A FIN DE SOLICITARLE TENGA A BIEN DISPONER LO NECESARIO PARA LA REPARACIÓN DEL ARTEFACTO LUMÍNICO SITO EN…'],
+      ['Y otra más', 'hola necesito una nota rápida', '¡Claro! Acá tenés un borrador: «Hola, ¿cómo andan? Les escribo por el tema de la luminaria…» ¿Querés que lo haga más formal o más corto?'],
+    ];
+    return `<div class="gd-antes">
+      <div class="gd-antes-txt"><span class="ceja">Al principio</span><h3>Cada uno, con su chat</h3><ul><li>👤<span>Cada uno con su cuenta personal</span></li><li>✍️<span>Cada área, su formato</span></li><li>🗂️<span>Los datos del municipio, en cuentas de nadie</span></li></ul></div>
+      <div class="gd-chats">${chats.map(([t, q, r], i) => `<div class="gd-chat" style="--i:${i}"><header><i></i>${esc(t)}<small>cuenta personal</small></header>
+        <div class="gd-chat-hilo"><p class="q">${esc(q)}</p><p class="r" data-r="${esc(r)}"></p></div></div>`).join('')}</div>
+    </div>`;
+  }
+  function gnPantalla() {
+    const n = GN.nota || {};
+    return `<div class="gd">
+      <header class="gd-cab"><span class="gd-logo"><i></i><b><small>CIUDAD</small>SMT</b></span><div class="gd-tit"><b>Generador de Notas</b><small>Redacción administrativa asistida por IA</small></div><span class="gd-dia"><small>DIRECCIÓN</small>DE IA</span></header>
+      <div class="gd-pasos"><span class="p1 on"><b>1</b>Datos de la nota</span><i></i><span class="p2"><b>2</b>Nota redactada</span></div>
+      <main class="gd-main">
+        <section class="gd-card gd-dicta"><i class="gd-mic">🎙</i><div><b>Contalo con tus palabras</b><small>Dictá o escribí de corrido y la IA completa el formulario</small><p class="gd-dictado"></p></div><span class="gd-dictar">🎙 Dictar</span></section>
+        <section class="gd-card gd-tipo"><h4><i>📄</i>Tipo de nota</h4><div class="gd-tipos">${GN_TIPOS.map(t => `<span data-t="${esc(t)}">${esc(t)}</span>`).join('')}</div>
+          <p class="gd-desc">Requiere bienes, servicios, información o una tarea concreta a otra área.</p></section>
+        <div class="gd-dos">
+          <section class="gd-card gd-dest"><h4><i>👤</i>Destinatario</h4><div class="gd-seg"><span class="on">Área municipal</span><span>Vecino o externo</span></div>
+            <label>Nombre <em>· buscá en el padrón por nombre, cargo o área</em></label><div class="gd-campo gd-nombre">Escribí un nombre, un cargo o un área</div>
+            <div class="gd-fila"><div><label>Cargo</label><div class="gd-campo gd-cargo">—</div></div><div><label>Área</label><div class="gd-campo gd-area">—</div></div></div></section>
+          <section class="gd-card gd-firma"><h4><i>✍️</i>Quién firma</h4><small class="gd-rec">Se recuerda en este navegador</small>
+            <div class="gd-fila"><div><label>Cargo</label><div class="gd-campo lleno">Directora</div></div><div><label>Área</label><div class="gd-campo lleno">Dirección de Inteligencia Artificial</div></div></div></section>
+        </div>
+        <section class="gd-card gd-que"><h4><i>💬</i>Qué necesitás comunicar</h4><div class="gd-campo gd-texto"></div></section>
+        <div class="gd-pie"><span>⌫ Limpiar</span><em>Contá qué necesitás comunicar para poder redactar.</em><b class="gd-redactar">✨ Redactar nota →</b></div>
+      </main>
+      <div class="gd-hoja">
+        <article class="gd-papel"><header><img src="img/logos/logo-horizontal-color.png" alt=""><span>${esc(n.numero || 'NOTA N.º 214/DIA/2026')}</span></header>
+          <p class="gd-l gd-ref">${esc(n.ref || '')}</p>
+          <p class="gd-l gd-a">${(n.destino || []).map(esc).join('<br>')}</p>
+          ${(n.cuerpo || []).map(c => `<p class="gd-l">${esc(c)}</p>`).join('')}
+          <p class="gd-l">${esc(n.cierre || '')}</p>
+          <div class="gd-firma-lugar"><i></i><b>Directora</b><small>Dirección de Inteligencia Artificial</small><span class="gd-sello">✓ Revisada y firmada por una persona</span></div>
+        </article>
+        <aside class="gd-acciones"><span class="ceja">La IA redactó</span><b>La persona decide</b>
+          <label class="gd-check"><i></i>Leí la nota y la revisé</label><span class="gd-firmar">Descargar para firmar</span>
+          <small>Mismo criterio para todas las áreas · 10 tipos de nota</small></aside>
+      </div>
+    </div>`;
+  }
+  const GENERADOR = [
+    { t: 'Antes: cada uno a su manera', d: 11000, correr: async (x, capa) => {
+      capa.innerHTML = gnAntes();
+      const chats = [...capa.querySelectorAll('.gd-chat')], lis = [...capa.querySelectorAll('.gd-antes-txt li')];
+      x.sub('Al principio, cada uno usaba la IA con su chat y su cuenta');
+      await x.w(700);
+      for (let i = 0; i < chats.length; i++) {
+        chats[i].classList.add('ver');
+        await x.w(450);
+        const r = chats[i].querySelector('.r');
+        const txt = r.dataset.r;
+        for (let j = 0; j <= txt.length; j += 6) { r.textContent = txt.slice(0, j); await x.w(16); }
+        r.textContent = txt;
+        lis[i].classList.add('on');
+        await x.w(500);
+      }
+      x.sub('Cada área escribía distinto, y sin ninguna regla');
+      await x.w(3000);
+    } },
+    { t: 'Una herramienta para todos', d: 16500, correr: async (x, capa) => {
+      const L = x.L = lienzo(x, capa, 1300, 980, gnPantalla(), 'Generador de Notas · Dirección de IA');
+      L.camara({ x: 0, y: 0, w: 1300, h: 560 }, null, 0, 0);
+      x.sub('La primera herramienta institucional: para todas las áreas');
+      await x.w(2200);
+      L.cursor(true);
+      L.camara(L.q('.gd-dicta'), null, 1000, 30);
+      await L.clic(L.q('.gd-dictar'));
+      L.q('.gd-dicta').classList.add('dictando');
+      x.sub('Contás con tus palabras lo que necesitás, o lo dictás');
+      await tipear(x, L.q('.gd-dictado'), GN.dictado || '', 32);
+      L.q('.gd-dicta').classList.remove('dictando');
+      await x.w(600);
+      L.cursor(false);
+      x.sub('La IA completa el formulario con el padrón de áreas y cargos');
+      const t = L.pos(L.q('.gd-tipo')), dd = L.pos(L.q('.gd-dest'));
+      L.camara({ x: t.x, y: t.y, w: t.w, h: dd.y + dd.h - t.y }, null, 1100, 20);
+      await x.w(900);
+      L.q('.gd-tipos [data-t="Pedido"]').classList.add('on'); L.q('.gd-desc').classList.add('ver');
+      await x.w(700);
+      L.q('.gd-nombre').textContent = 'Secretaría de Obras Públicas'; L.q('.gd-nombre').classList.add('lleno');
+      await x.w(350);
+      L.q('.gd-cargo').textContent = 'Secretario'; L.q('.gd-cargo').classList.add('lleno');
+      await x.w(350);
+      L.q('.gd-area').textContent = 'Secretaría de Obras Públicas'; L.q('.gd-area').classList.add('lleno');
+      L.marcar(L.q('.gd-dest'), 8);
+      await x.w(1600);
+      L.marcar(null);
+      const qe = L.pos(L.q('.gd-que'));
+      L.camara({ x: qe.x, y: qe.y, w: qe.w, h: 980 - qe.y }, null, 1000, 20);
+      L.q('.gd-texto').textContent = GN_QUE; L.q('.gd-texto').classList.add('lleno');
+      L.q('.gd-pie em').textContent = 'Todo listo para redactar.'; L.q('.gd-redactar').classList.add('lista');
+      await x.w(1100);
+      L.cursor(true);
+      await L.clic(L.q('.gd-redactar'));
+      await x.w(300);
+    } },
+    { t: 'La IA redacta', d: 12000, sigue: true, correr: async (x) => {
+      const L = x.L;
+      L.cursor(false);
+      L.q('.gd').classList.add('redactada');
+      L.q('.gd-pasos .p1').classList.remove('on'); L.q('.gd-pasos .p2').classList.add('on');
+      const p = L.pos(L.q('.gd-papel'));
+      L.camara({ x: p.x, y: p.y, w: p.w, h: Math.round(p.h * .55) }, null, 1100, 18);
+      x.sub('La IA redacta la nota en lenguaje claro');
+      await x.w(900);
+      const lineas = L.qa('.gd-l');
+      for (let i = 0; i < lineas.length; i++) {
+        if (i === 3) L.camara({ x: p.x, y: p.y + Math.round(p.h * .42), w: p.w, h: Math.round(p.h * .58) }, null, 1400, 18);
+        lineas[i].classList.add('ver'); await x.w(750);
+      }
+      await x.w(700);
+      L.camara(p, null, 1200, 24);
+      x.sub('Con el mismo criterio para todas las áreas: diez tipos de nota');
+      await x.w(3600);
+    } },
+    { t: 'La persona firma', d: 13000, sigue: true, correr: async (x, capa) => {
+      const L = x.L;
+      const h = L.pos(L.q('.gd-hoja'));
+      L.camara({ x: h.x, y: h.y + h.h - 400, w: h.w, h: 400 }, null, 1000, 16);
+      x.sub('Y la persona la lee, la revisa y la firma');
+      await x.w(1200);
+      L.cursor(true);
+      await L.clic(L.q('.gd-check'));
+      L.q('.gd-check').classList.add('on');
+      await x.w(500);
+      await L.clic(L.q('.gd-firmar'));
+      L.q('.gd-firma-lugar').classList.add('firmada');
+      L.cursor(false);
+      x.sub('La IA redacta; la persona firma');
+      await x.w(2600);
+      x.sub('');
+      capa.insertAdjacentHTML('beforeend', `<div class="gd-final"><span class="ceja">De uno a todos</span><b>La misma IA, con reglas</b>
+        <ul><li><i>🏛️</i>Una herramienta para todas las áreas</li><li><i>📇</i>Con el padrón de áreas y cargos del municipio</li><li><i>✍️</i>La IA redacta, la persona firma</li></ul>
+        <p><b>10</b> tipos de nota · <b>100 %</b> con firma humana</p></div>`);
+      const fin = capa.querySelector('.gd-final');
+      requestAnimationFrame(() => requestAnimationFrame(() => fin.classList.add('ver')));
+      capa.classList.add('atenua');
+      await x.w(6500);
+      fin.classList.remove('ver'); capa.classList.remove('atenua');
+      await x.w(500);
+    } },
+  ];
+
   const DEMOS = {
+    generador: GENERADOR,
     cimba: CIMBA,
     'migue-chat': MIGUE,
     estudia: [
