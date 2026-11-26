@@ -211,10 +211,12 @@
     clearTimeout(timer); finAuto = 0;
     // En loop: después del último vuelve al primero, hasta que pases de placa. La tarjeta
     // 'vivo' también pasa (15 s); mientras Migue responde en pantalla, la vitrina espera.
-    if (modo !== 'vitrina' || pausado || congelado || lista.length < 2) return;
+    // Desde el 26/11/2026 también el cajón abierto desde la botonera pasa solo, en loop
+    // (el mapa de los diez desarrollos: tocás uno y se muestra el sistema).
+    if (!modo || pausado || congelado || lista.length < 2) return;
     let d = dur || durDe(lista[idx].r); if (!isFinite(d)) d = 15000;
     finAuto = Date.now() + d;
-    timer = setTimeout(() => { if (modo === 'vitrina' && !pausado && !congelado) mostrar((idx + 1) % lista.length); }, d);
+    timer = setTimeout(() => { if (modo && !pausado && !congelado) mostrar((idx + 1) % lista.length); }, d);
   }
   function congelar(on) {
     if (on && !congelado) { congelado = true; resto = finAuto ? Math.max(2000, finAuto - Date.now()) : 0; clearTimeout(timer); finAuto = 0; }
@@ -234,7 +236,7 @@
     if (r.tipo === 'avance' && window.avance) {
       recEl._salir = window.avance.montar(recEl.querySelector('.avance-host'));
       // En la vitrina el avance arranca solo; en el cajón espera "Reproducir".
-      if (modo === 'vitrina') { const esta = recEl; setTimeout(() => { if (recEl === esta) window.avance.reproducir(); }, 1400); }
+      { const esta = recEl; setTimeout(() => { if (recEl === esta) window.avance.reproducir(); }, 1400); }
     }
     const nuevo = recEl;
     requestAnimationFrame(() => requestAnimationFrame(() => nuevo.classList.add('on')));
