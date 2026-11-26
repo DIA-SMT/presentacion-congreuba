@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 6 · Gobernar la IA agéntica en el Estado · Material</title>
+<style>
+@font-face { font-family: 'Poppins'; font-weight: 400; src: url(fonts/Poppins-Regular.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 600; src: url(fonts/Poppins-SemiBold.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 700; src: url(fonts/Poppins-Bold.ttf); }
+@font-face { font-family: 'Poppins'; font-weight: 800; src: url(fonts/Poppins-ExtraBold.ttf); }
+@page { size: A4; margin: 16mm 16mm 18mm; }
+:root { --azul: #111a3b; --azul2: #3a4366; --gris: #6b7280; --borde: #dcd7ce; --hueso: #f4f1eb; --verde: #2f9e6e; --ambar: #c98a00; --rojo: #d6453d; --celeste: #0066ff; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', Arial, sans-serif; color: var(--azul); font-size: 10.4pt; line-height: 1.5; background: #fff; }
+main { max-width: 178mm; margin: 0 auto; }
+.tapa { text-align: center; padding: 6mm 0 8mm; border-bottom: 2px solid var(--azul); margin-bottom: 7mm; }
+.tapa .ialab { height: 22mm; margin-bottom: 6mm; }
+.tapa .ceja { display: block; font-size: 8.5pt; letter-spacing: .18em; text-transform: uppercase; color: var(--gris); font-weight: 700; }
+.tapa h1 { font-size: 21pt; line-height: 1.12; font-weight: 800; margin: 3mm 0 2mm; letter-spacing: -.01em; }
+.tapa .sub { font-size: 12pt; font-weight: 600; color: var(--azul2); }
+.tapa .quien { margin-top: 4mm; font-size: 9pt; color: var(--gris); }
+.tapa .logos { display: flex; align-items: center; justify-content: center; gap: 8mm; margin-top: 5mm; }
+.tapa .logos img { height: 10mm; }
+.tapa .logos b { font-size: 9pt; letter-spacing: .1em; }
+.intro { background: var(--hueso); border-radius: 3mm; padding: 4mm 5mm; margin-bottom: 6mm; font-size: 10pt; }
+h2 { font-size: 13.5pt; font-weight: 800; margin: 7mm 0 2.5mm; padding-top: 2mm; border-top: 1px solid var(--borde); break-after: avoid; display: flex; gap: 3mm; align-items: baseline; }
+h2 span { font-size: 9pt; font-weight: 800; color: #fff; background: var(--azul); border-radius: 50%; width: 6.5mm; height: 6.5mm; display: inline-grid; place-items: center; flex: none; }
+h3 { font-size: 10.6pt; font-weight: 700; margin: 3.5mm 0 1.5mm; break-after: avoid; }
+p { margin-bottom: 2mm; }
+ul, ol { margin: 0 0 2.5mm 5mm; }
+li { margin-bottom: 1mm; }
+.idea { border-left: 3px solid var(--celeste); padding: 1.5mm 0 1.5mm 4mm; margin: 2.5mm 0 3mm; font-weight: 600; }
+.smt { background: #eef4ff; border-radius: 2.5mm; padding: 2.5mm 4mm; margin: 2.5mm 0 3mm; font-size: 9.6pt; break-inside: avoid; }
+.smt b:first-child { display: block; font-size: 8pt; letter-spacing: .12em; text-transform: uppercase; color: var(--celeste); margin-bottom: .5mm; }
+table { width: 100%; border-collapse: collapse; margin: 2mm 0 3mm; font-size: 9.2pt; break-inside: avoid; }
+th, td { border: 1px solid var(--borde); padding: 1.6mm 2.2mm; text-align: left; vertical-align: top; }
+th { background: var(--hueso); font-weight: 700; }
+.sem td:first-child { font-weight: 800; white-space: nowrap; }
+.v { color: var(--verde); } .a { color: var(--ambar); } .r { color: var(--rojo); }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.caja { border: 1px solid var(--borde); border-radius: 2.5mm; padding: 3mm 4mm; break-inside: avoid; }
+.caja h3 { margin-top: 0; }
+.glosario { columns: 2; column-gap: 7mm; font-size: 9.2pt; }
+.glosario div { break-inside: avoid; margin-bottom: 2.2mm; }
+.glosario b { display: block; font-size: 9.6pt; }
+.salto { break-before: page; }
+footer { margin-top: 8mm; padding-top: 3mm; border-top: 1px solid var(--borde); font-size: 8.4pt; color: var(--gris); text-align: center; }
+@media screen { body { padding: 8mm 4mm; } }
+</style>
+</head>
+<body>
+<main>
+
+<div class="tapa">
+  <img class="ialab" src="assets/template/logos/uba-ialab.png" alt="UBA · IALAB">
+  <span class="ceja">IA para Gobiernos Locales · IALAB UBA · Módulo 6</span>
+  <h1>Gobernar la IA agéntica en el Estado</h1>
+  <p class="sub">De la IA individual a la IA institucional</p>
+  <p class="quien">Dr. Marco Rossi · Director de Inteligencia Artificial, Municipalidad de San Miguel de Tucumán<br>
+  «Gobernar con IA» · capacitación para los 70 municipios del Chaco · Presidencia Roque Sáenz Peña · noviembre de 2026</p>
+  <div class="logos"><b>GOBIERNO DEL CHACO</b><img src="img/logos/logo-horizontal-color.png" alt="San Miguel de Tucumán"></div>
+</div>
+
+<div class="intro">
+  <b>De qué trata.</b> Cómo gobernar cada capa de la IA institucional: qué licencias contratar y con qué condiciones, cómo interoperar con los sistemas existentes y cuándo conviene la IA soberana. Del piloto a la producción: por qué tantos proyectos institucionales no escalan. La economía del ecosistema agéntico: tokens, agentes como multiplicador de costos y la distancia entre precio publicado y costo efectivo. Gobernanza: supervisión humana, permisos, trazabilidad y responsabilidad por lo que ejecuta un agente. El costo que la factura no muestra: sedentarismo cognitivo y capacidades del personal. Y una hoja de ruta de adopción para la provincia. Cada tema, con un ejemplo real de San Miguel de Tucumán.
+</div>
+
+<h2><span>1</span>De la IA individual a la institucional</h2>
+<p>La IA entra a la gestión de a uno: cada persona con su chat y su cuenta. Es útil, pero no tiene reglas, no deja registro y los datos del municipio quedan en cuentas personales. Gobernarla es subir de escalón.</p>
+<table>
+  <tr><th>Nivel</th><th>Qué es</th><th>Quién paga</th><th>Dónde quedan los datos</th><th>Quién responde</th></tr>
+  <tr><td><b>1 · Individual</b></td><td>Cada uno con su herramienta y su cuenta</td><td>Cada uno, o nadie</td><td>En cuentas personales</td><td>No está claro</td></tr>
+  <tr><td><b>2 · De equipo</b></td><td>Un área elige un servicio para su tarea</td><td>El área, sin contrato marco</td><td>En un proveedor, con condiciones estándar</td><td>El jefe del área</td></tr>
+  <tr><td><b>3 · Institucional</b></td><td>La gestión fija reglas, contrata y conecta la IA con sus sistemas</td><td>El municipio, con contrato</td><td>Con condiciones escritas</td><td>Quien firma</td></tr>
+  <tr><td><b>4 · Agéntica</b></td><td>Un agente consulta, redacta y registra en los sistemas, con permisos</td><td>Por uso: cada paso consume tokens</td><td>El agente los lee y los escribe</td><td>Quien autorizó el permiso</td></tr>
+</table>
+<h3>Chat o agente</h3>
+<p>Un <b>chat responde</b>: una llamada al modelo; si se equivoca, lo ves y lo descartás. Un <b>agente actúa</b>: recibe un objetivo, planifica, usa herramientas (consulta un sistema, redacta, registra), revisa y repite hasta terminar. Si se equivoca, el error ya está hecho.</p>
+<p class="idea">La IA interpreta, los sistemas ejecutan con reglas fijas y las personas deciden.</p>
+<div class="smt"><b>En San Miguel de Tucumán</b>El <b>Generador de Notas</b> fue la primera herramienta institucional, para todas las áreas: contás o dictás lo que necesitás, la IA completa el formulario con el padrón de áreas y cargos, redacta con el mismo criterio (diez tipos de nota) y la persona revisa y firma. <b>Migue</b>, el asistente de la ciudad, es el agente: atiende las 24 horas en Ciudad Digital, Telegram y WhatsApp (24.357 consultas, 92 % resueltas).</div>
+
+<h2><span>2</span>Las capas de la IA institucional</h2>
+<p>La IA institucional no es una cosa sola: son capas, y cada una se gobierna distinto. De abajo hacia arriba: <b>modelos</b> (licencias, condiciones y costo por uso), <b>datos</b> (calidad, propiedad y privacidad), <b>integración</b> (interoperar con los sistemas que ya existen), <b>agentes</b> (permisos y registro de cada acción) y <b>personas</b> (supervisión, firma y capacidades).</p>
+<h3>Licencias: ocho condiciones antes de firmar</h3>
+<ol>
+  <li><b>Datos que no entrenan:</b> lo que cargamos no se usa para entrenar modelos.</li>
+  <li><b>Dónde quedan los datos:</b> jurisdicción, retención y borrado, por escrito. Novedad: la <b>Resolución 188/2026 de la AAIP</b> (Boletín Oficial, 25/11/2026) aprueba cláusulas modelo para cuando los datos personales salen del país.</li>
+  <li><b>Cuentas institucionales:</b> usuarios del municipio, con alta y baja centralizadas.</li>
+  <li><b>Registro de uso:</b> quién usó qué y cuándo, exportable para auditar.</li>
+  <li><b>Precio por uso, con tope:</b> tarifa por token, topes y alertas de consumo.</li>
+  <li><b>Salida sin rehenes:</b> exportar datos y configuraciones si cambiamos de proveedor.</li>
+  <li><b>Acceso por API:</b> para integrarlo con los sistemas propios, no solo por chat.</li>
+  <li><b>Continuidad y soporte:</b> aviso de cambios de modelo, disponibilidad y soporte.</li>
+</ol>
+<p class="idea">Contratar IA no es una compra más: es una decisión de gobierno.</p>
+<h3>Gobernanza de datos: seis reglas</h3>
+<ul>
+  <li><b>Cada dato, con dueño:</b> un área responde por que esté completo y al día.</li>
+  <li><b>Una sola fuente:</b> una base que usan todos, no una planilla por área.</li>
+  <li><b>Calidad a la vista:</b> medir lo que falta, no esconderlo.</li>
+  <li><b>Clasificar antes de enviar:</b> público, interno o personal define qué modelo puede tocarlo (Ley 25.326 de Protección de Datos Personales).</li>
+  <li><b>Conectar, no copiar:</b> el agente consulta la fuente oficial, no una copia que envejece.</li>
+  <li><b>Registro de lo que entra y sale:</b> qué preguntó el vecino, qué respondió el agente y quién lo revisó.</li>
+</ul>
+<p class="idea">Un agente con datos malos se equivoca más rápido, y a escala.</p>
+<h3>Interoperar con los sistemas existentes</h3>
+<p>Lo difícil casi nunca es la IA: es ponerse de acuerdo entre áreas y empresas para trabajar sobre los mismos datos. Un sistema que no se integra con lo que ya existe, se abandona.</p>
+<div class="smt"><b>En San Miguel de Tucumán</b><b>CIMBA</b> juntó en una sola bandeja los reclamos de baches que llegaban por seis canales (147, Concejo, S.A.T., secretarías, redes y Ciudad Digital). La IA detecta duplicados y clasifica; el sistema se conecta con las 12 empresas que trabajan por contrato, que ven la orden en el celular y cargan la foto de antes y después. Sin las dos fotos no se cierra: más de dos mil arreglos con foto.</div>
+<h3>¿Cuándo conviene la IA soberana?</h3>
+<p>IA soberana es un modelo propio o en infraestructura propia. Depende de dos variables: qué tan sensibles son los datos y cuánto se usa.</p>
+<table>
+  <tr><th></th><th>Uso bajo</th><th>Uso alto o masivo</th></tr>
+  <tr><td><b>Datos no sensibles</b></td><td>Servicio comercial con licencia institucional</td><td>Servicio comercial por API, con topes</td></tr>
+  <tr><td><b>Datos sensibles</b></td><td>Cláusulas fuertes o anonimizar antes de enviar</td><td>Empieza a convenir la soberana</td></tr>
+</table>
+<p>La soberana exige equipo técnico y presupuesto todos los meses. Para 70 municipios, la pregunta no es si cada uno tiene la suya, sino si conviene una infraestructura provincial compartida.</p>
+
+<h2><span>3</span>Del piloto a la producción</h2>
+<p>Todos los municipios tienen ideas de IA; algunas llegan a piloto; muy pocas terminan usándose todos los días. Casi nunca es la tecnología. Son seis causas: <b>no tiene dueño</b> en el área; <b>los datos</b> están en planillas sueltas; <b>no se integra</b> con los sistemas que ya existen; <b>no hay reglas</b> sobre qué se puede hacer y qué no; <b>se pagó la prueba</b> pero no el uso de todos los meses; y <b>nadie capacitó</b> a la gente.</p>
+<h3>Checklist: seis preguntas antes de lanzar un piloto</h3>
+<div class="dos">
+  <div class="caja"><b>¿Quién es el dueño?</b> Un área que lo pide y lo va a usar todos los días.</div>
+  <div class="caja"><b>¿De dónde salen los datos?</b> Si están en planillas sueltas, ese es el primer trabajo.</div>
+  <div class="caja"><b>¿Con qué sistema se conecta?</b> Lo que no se integra, se abandona.</div>
+  <div class="caja"><b>¿Qué regla lo cubre?</b> Qué puede hacer la IA, qué no, y quién firma.</div>
+  <div class="caja"><b>¿Quién paga el uso?</b> No el piloto: el consumo de todos los meses.</div>
+  <div class="caja"><b>¿Quién capacita?</b> La capacitación va con la herramienta, no después.</div>
+</div>
+<p class="idea">Si alguna respuesta es «no sabemos», todavía no es momento de lanzar.</p>
+
+<h2 class="salto"><span>4</span>La economía de los agentes</h2>
+<h3>El token, la unidad de cobro</h3>
+<p>Los modelos no cobran por consulta: cobran por <b>tokens</b>, pedazos de texto. Se cobra lo que entra y lo que sale, y todo lo que el modelo lee cuenta: la pregunta, las instrucciones, los documentos y la conversación anterior.</p>
+<h3>El agente, un multiplicador de costos</h3>
+<p>Un chat es una llamada: por ejemplo, 1.500 tokens. Un agente que resuelve una tarea en seis pasos hace seis llamadas, y en cada una relee las instrucciones y todo lo anterior: unos 21.000 tokens para una sola tarea, alrededor de 14 veces un chat. Cada reintento suma otra llamada. (Números ilustrativos: la forma es siempre esa.)</p>
+<h3>Precio publicado y costo efectivo</h3>
+<p>El precio por token es el piso, no la factura. Encima se apilan el contexto que se relee, los pasos del agente, los reintentos y errores, las herramientas y búsquedas, y lo que no son tokens: la integración con los sistemas, el soporte y las horas de las personas que supervisan.</p>
+<p class="idea">La pregunta útil no es cuánto cuesta el token, sino cuánto cuesta cada trámite resuelto.</p>
+<div class="smt"><b>En San Miguel de Tucumán</b><b>Migue</b> muestra su consumo de IA en su propio tablero: US$ 118,54 en lo que va de noviembre de 2026 y US$ 723,90 desde que arrancó, para 24.357 consultas: unos 3 centavos de dólar por consulta. A eso se suman las personas que validan las consultas pendientes (2.022 al 26/11/2026).</div>
+<h3>Cinco reglas para presupuestar</h3>
+<ol>
+  <li><b>Tope por usuario y por sistema</b> (Migue acepta 15 consultas por minuto por conexión, a propósito).</li>
+  <li><b>El modelo justo para cada tarea:</b> uno grande para conversar, uno liviano para resumir.</li>
+  <li><b>Costo a la vista,</b> en un tablero, no en la factura de fin de mes.</li>
+  <li><b>Costo por tarea resuelta,</b> no por token.</li>
+  <li><b>Alertas antes del límite,</b> para que no se corte el servicio ni sorprenda la factura.</li>
+</ol>
+
+<h2><span>5</span>Gobernanza del agente</h2>
+<p>La gobernanza empieza antes que la herramienta. En San Miguel de Tucumán, el <b>Decreto 0596/INT/2025</b> aprobó una Guía Práctica y Ética de Uso de IA con cinco principios: supervisión humana, equidad, privacidad, transparencia y rendición de cuentas.</p>
+<h3>Permisos: un semáforo</h3>
+<table class="sem">
+  <tr><td class="v">Verde · lo hace solo</td><td>Responder con información pública, clasificar y ordenar pedidos, buscar y resumir normas y documentos.</td></tr>
+  <tr><td class="a">Ámbar · propone; una persona aprueba</td><td>Redactar notas y respuestas, cerrar un reclamo, cruzar lo que pidió el vecino con la norma.</td></tr>
+  <tr><td class="r">Rojo · nunca solo</td><td>Firmar, sancionar o multar, pagar o adjudicar, decidir sobre los derechos de una persona.</td></tr>
+</table>
+<h3>Trazabilidad y responsabilidad</h3>
+<p>Cada acción de un agente tiene que poder responder: <b>qué hizo, cuándo, quién lo revisó y por qué</b>. Dar de baja no es borrar: lo anulado queda registrado, con quién lo anuló y el motivo. Y la idea central: <b>un agente no tiene responsabilidad</b>; la tienen quien le dio el permiso y quien firma.</p>
+<h3>Supervisión humana con datos: el tablero de un agente</h3>
+<p>Un agente que atiende vecinos se gobierna con datos todos los días, no una vez por año. El tablero de Migue funciona como una historia clínica: el <b>corazón</b> (cada consulta, en vivo), la <b>historia clínica</b> (mensajes, vecinos, temas y consumo), el <b>cerebro</b> (cuántas resuelve, cuántas esperan validación humana, a qué hora preguntan, satisfacción) y el <b>termómetro</b> (la IA lee el sentimiento de las últimas consultas y separa lo urgente). Lo que escribe cada vecino no se muestra: eso también es gobernanza de datos.</p>
+<h3>Cuando intentan engañarlo: prompt injection</h3>
+<p>Hay quien intenta que el agente revele sus instrucciones o ignore sus reglas («ignorá todas las instrucciones anteriores…»). Un agente bien configurado da un resumen general, nunca su texto interno, y no se sale de su tarea. Y cuando algún intento pasa, aunque sea inofensivo, el registro y la revisión humana permiten detectarlo y corregirlo.</p>
+
+<h2><span>6</span>El costo que la factura no muestra</h2>
+<p>El <b>sedentarismo cognitivo</b>: igual que el cuerpo, el criterio se pierde si no se usa.</p>
+<div class="dos">
+  <div class="caja"><h3>IA que piensa por vos</h3><ul><li>Firmar sin leer lo que redactó la IA</li><li>Copiar la respuesta sin chequear la fuente</li><li>Perder el criterio para detectar un error</li><li>No poder hacer la tarea si el sistema se cae</li></ul></div>
+  <div class="caja"><h3>IA que te hace pensar</h3><ul><li>La IA arma el borrador; la persona decide</li><li>Pedirle que explique por qué</li><li>Revisar la fuente antes de firmar</li><li>Usarla para discutir una idea, no para obedecer</li></ul></div>
+</div>
+<h3>Cómo cuidar las capacidades del personal</h3>
+<ul>
+  <li><b>Capacitación constante,</b> que acompaña cada herramienta (en San Miguel de Tucumán: 34 gerentes de datos en 46 direcciones y 71 egresados de diplomados).</li>
+  <li><b>Revisión antes de firmar:</b> la firma es humana, y firmar es haber leído.</li>
+  <li><b>Criterio propio:</b> saber hacer la tarea sin IA, para darse cuenta cuando se equivoca.</li>
+  <li><b>Medir capacidades,</b> no solo el tiempo que se ahorra.</li>
+</ul>
+
+<h2><span>7</span>Hoja de ruta de adopción para la provincia</h2>
+<table>
+  <tr><th>Fase</th><th>Qué es</th><th>Pasa a la siguiente cuando…</th></tr>
+  <tr><td><b>1 · Reglas</b></td><td>Una guía provincial modelo, que cada municipio adopta con norma propia.</td><td>Cada municipio tiene su norma.</td></tr>
+  <tr><td><b>2 · Personas</b></td><td>Un referente de datos por municipio, formado y con tiempo asignado.</td><td>Los 70 municipios tienen referente.</td></tr>
+  <tr><td><b>3 · Puertas adentro</b></td><td>Una herramienta transversal que use todo el personal.</td><td>Se usa todos los días, con firma humana.</td></tr>
+  <tr><td><b>4 · Servicios compartidos</b></td><td>Licencias negociadas por la provincia, datos conectados y un asistente común.</td><td>Hay costo por tarea medido y registro de cada acción.</td></tr>
+  <tr><td><b>5 · Para el vecino</b></td><td>Atención, reclamos y trámites con agentes, con permisos y firma humana.</td><td>El vecino lo usa y la gestión rinde cuentas.</td></tr>
+</table>
+<div class="dos">
+  <div class="caja"><h3>La provincia, una vez para los 70</h3><ul><li>Negociar licencias y precios por volumen</li><li>Una guía y un modelo de norma</li><li>Infraestructura y datos compartidos</li><li>Formar a los referentes</li><li>Un tablero de uso y costos</li></ul></div>
+  <div class="caja"><h3>Cada municipio</h3><ul><li>Adoptar la norma</li><li>Designar a su referente</li><li>Elegir su primer problema, no su primera herramienta</li><li>Medir y rendir cuentas</li><li>Escuchar al vecino</li></ul></div>
+</div>
+<p class="idea">Lo que se compra una vez para 70 sale más barato y se gobierna mejor.</p>
+
+<h3>Para llevarse</h3>
+<p>Gobernar la IA agéntica es decidir quién puede hacer qué, con qué datos, con qué permisos, a qué costo y con qué firma. Reglas antes que herramientas. Conectar antes que acumular sistemas. Medir el costo por tarea resuelta. Y la IA interpreta, las personas deciden.</p>
+
+<h2 class="salto"><span>G</span>Glosario</h2>
+<div class="glosario">
+  <div><b>Agente (IA agéntica)</b>Sistema de IA que recibe un objetivo y actúa para cumplirlo: planifica, usa herramientas (consulta sistemas, redacta, registra) y repite pasos hasta terminar.</div>
+  <div><b>Alucinación</b>Respuesta falsa dicha con seguridad: el modelo completa con algo verosímil lo que no sabe. Se previene conectando el agente a fuentes oficiales y revisando.</div>
+  <div><b>API</b>Puerta técnica para que un sistema use un modelo de IA (o a otro sistema) sin pasar por la pantalla de chat. Es lo que permite integrar la IA con los sistemas propios.</div>
+  <div><b>Capas de la IA institucional</b>Modelos, datos, integración, agentes y personas: cada una se gobierna distinto.</div>
+  <div><b>Cláusulas modelo (transferencia internacional)</b>Textos aprobados por la autoridad de protección de datos para contratar cuando los datos personales salen del país (en Argentina, Res. AAIP 188/2026).</div>
+  <div><b>Contexto</b>Todo lo que el modelo lee en cada llamada: instrucciones, documentos, historial y la pregunta. Cuanto más contexto, más tokens.</div>
+  <div><b>Costo efectivo</b>Lo que realmente cuesta una tarea: tokens de todos los pasos, reintentos, herramientas, integración, soporte y horas de supervisión. El precio publicado es solo el piso.</div>
+  <div><b>Costo por tarea resuelta</b>La medida útil para presupuestar: cuánto cuesta cada trámite, reclamo o consulta resuelta, no cada token.</div>
+  <div><b>Datos personales</b>Información sobre una persona identificada o identificable. En Argentina los protege la Ley 25.326.</div>
+  <div><b>Derivación humana</b>Cuando el agente no puede resolver, pasa la consulta a una persona.</div>
+  <div><b>FAQ</b>Preguntas frecuentes: la base de respuestas validadas que el agente usa; se amplía con lo que la revisión humana detecta.</div>
+  <div><b>Firma humana</b>Principio por el cual la decisión final, la firma y la responsabilidad son siempre de una persona.</div>
+  <div><b>Gobernanza de datos</b>Reglas sobre quién es dueño de cada dato, su calidad, su clasificación, cómo se conecta y qué registro queda de lo que entra y sale.</div>
+  <div><b>IA generativa</b>IA que produce texto, imágenes o audio a partir de instrucciones. Los modelos de lenguaje son el caso más común.</div>
+  <div><b>IA institucional</b>IA que la gestión adopta con reglas, contrato, datos propios conectados y responsables definidos.</div>
+  <div><b>IA soberana</b>Modelo propio o en infraestructura propia, bajo control del Estado. Conviene con datos sensibles y uso masivo; exige equipo y presupuesto permanente.</div>
+  <div><b>Interoperabilidad</b>Capacidad de los sistemas de intercambiar datos y trabajar juntos: conectar, no copiar.</div>
+  <div><b>Licencia institucional (o empresarial)</b>Contrato del organismo con un proveedor de IA, con condiciones escritas sobre datos, cuentas, registro, precio y continuidad.</div>
+  <div><b>Modelo de lenguaje (LLM)</b>El «motor» de la IA generativa: predice texto a partir de lo que lee. Hay grandes y livianos, con costos distintos.</div>
+  <div><b>Multiplicador del agente</b>Un agente hace muchas llamadas por tarea y relee todo en cada paso: puede costar decenas de veces lo que un chat.</div>
+  <div><b>Permisos (semáforo)</b>Qué puede hacer un agente solo (verde), qué propone para que una persona apruebe (ámbar) y qué nunca hace solo (rojo).</div>
+  <div><b>Piloto</b>Prueba acotada de una herramienta. Pasa a <b>producción</b> cuando se usa todos los días, con datos reales, dueño, presupuesto de uso y reglas.</div>
+  <div><b>Prompt</b>La instrucción o pregunta que se le da al modelo. Las <b>instrucciones de sistema</b> son las reglas fijas que el agente recibe siempre.</div>
+  <div><b>Prompt injection</b>Intento de engañar a un agente con mensajes que buscan que ignore sus reglas o revele sus instrucciones.</div>
+  <div><b>Referente de datos</b>Persona de cada área o municipio formada para cuidar los datos y acompañar la adopción de la IA.</div>
+  <div><b>Sedentarismo cognitivo</b>Pérdida de criterio y capacidades por delegar en la IA el pensar, no solo el hacer.</div>
+  <div><b>Supervisión humana</b>Una persona revisa, valida y puede corregir lo que hace la IA.</div>
+  <div><b>Tablero (de un agente)</b>Vista con los datos de funcionamiento: consultas, resolución, pendientes, satisfacción, sentimiento y costo.</div>
+  <div><b>Token</b>Pedazo de texto (una palabra o parte) que usan los modelos para leer, escribir y cobrar.</div>
+  <div><b>Tope de uso</b>Límite de consultas o de gasto (por persona, por sistema o por mes), con alertas antes de llegar.</div>
+  <div><b>Trazabilidad</b>Registro de cada acción: qué se hizo, cuándo, quién lo revisó y por qué. Nada se borra: lo anulado queda registrado.</div>
+  <div><b>Validación humana</b>Revisión de una persona sobre respuestas o acciones del agente antes de darlas por buenas.</div>
+</div>
+
+<footer>Material de apoyo del Módulo 6 · IA para Gobiernos Locales · IALAB UBA · «Gobernar con IA», Gobierno del Chaco, noviembre de 2026.<br>Dr. Marco Rossi · Dirección de Inteligencia Artificial, Municipalidad de San Miguel de Tucumán · Instagram @marquitorossi</footer>
+</main>
+</body>
+</html>
