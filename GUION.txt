@@ -4,7 +4,7 @@ GUION DE PRÁCTICA · MÓDULO 6 · GOBERNAR LA IA AGÉNTICA EN EL ESTADO
 El guion completo, placa por placa y con miniaturas, está en guion-modulo6.pdf
 (se regenera con .\herramientas\guion-pdf.ps1). Esto es el resumen.
 
-Tiempo: 2 horas. 36 placas. Siete preguntas, y cada una se responde con un desarrollo
+Tiempo: 2 horas. 35 placas. Siete preguntas, y cada una se responde con un desarrollo
 nuestro funcionando: el Generador de Notas, Migue, CIMBA y el tablero de Migue. La
 presentación te lleva sola por los sistemas y por las preguntas al público: la
 botonera es para volver o adelantar. Los minutos NO aparecen en pantalla: son sólo
@@ -12,8 +12,8 @@ para vos. El cronómetro de la botonera se pone ámbar a la 1:45 y rojo a las 2:
 
   0:00  Apertura: Migue, el plan, la nube y el mapa de los diez desarrollos .. 14 min
   0:14  Bloque 1 · De la IA individual a la institucional (Generador, Migue) . 22 min
-  0:36  Bloque 2 · Las capas (licencias, datos, CIMBA por dentro, soberana) .. 16 min
-  0:52  Bloque 3 · Del piloto a la producción (CIMBA en loop) ...............  8 min
+  0:36  Bloque 2 · Las capas (licencias, datos, CIMBA en loop, soberana) .... 16 min
+  0:52  Bloque 3 · Del piloto a la producción ..............................  8 min
   1:00  Bloque 4 · La economía de los agentes (lo que cuesta Migue) ......... 14 min
   1:14  Bloque 5 · Gobernanza del agente (el tablero de Migue) .............. 18 min
   1:32  Bloque 6 · El costo que la factura no muestra ......................  7 min
@@ -33,9 +33,9 @@ EL PÚBLICO, DESDE EL CELULAR
              6 Pregunta a la sala · ¿usás IA en tu trabajo? (cuenta personal / del
                municipio / todavía no)
             11 Ahora ustedes · Preguntale a Migue (una pregunta cada uno)
-            22 Adiviná · cuánto gasta Migue en IA por mes (SIGUIENTE revela:
+            21 Adiviná · cuánto gasta Migue en IA por mes (SIGUIENTE revela:
                US$ 118,54 en lo que va de noviembre; ANTERIOR la vuelve a tapar)
-            35 Nube de cierre · ¿qué te llevás para tu municipio?
+            34 Nube de cierre · ¿qué te llevás para tu municipio?
   - La votación de IA soberana para el Chaco ya no tiene placa: si hay tiempo, abrila
     desde la botonera encima de la placa 16 (El público → Votemos).
   - Botonera, "El público": cuántos hay y de cuántos municipios; cualquier actividad
@@ -48,8 +48,8 @@ EL PÚBLICO, DESDE EL CELULAR
   - Sin señal en la sala: las votaciones también van a mano alzada.
 
 LAS DEMOS, EN LOOP (no dependen de tu compu ni de una sesión iniciada)
-  - Placas 8 Generador de Notas, 18 CIMBA, 27 el tablero de Migue y 28 Migue se
-    defiende: corren solas dentro de la placa, como un video que se repite. Arriba se
+  - Placas 8 Generador de Notas, 15 CIMBA (interoperar), 26 el tablero de Migue y 27
+    Migue se defiende: corren solas dentro de la placa, como un video que se repite. Arriba se
     ven los capítulos y su avance. No hay que tocar nada: SIGUIENTE pasa de placa.
   - Generador (50 s): antes, tres chats personales, cada uno a su manera → la
     herramienta de todos: dictás y la IA completa el formulario con el padrón de
@@ -108,7 +108,7 @@ APERTURA (placas 1–4) · DIÁLOGO CON MIGUE
 MIGUE: sólo dice lo que tiene video grabado (la botonera hace latir MIGUE HABLA cuando
 le toca). En los separadores está parado, sin hablar.
     7-8 (placa 10, Migue)   videos: «Vos me contás qué te pasa…», «Entiendo, organizo…»
-    9  (placa 36, gracias)  video: «¡Muchas gracias! Nos vemos en la ciudad.»
+    9  (placa 35, gracias)  video: «¡Muchas gracias! Nos vemos en la ciudad.»
 
 BLOQUE 1 · DE LA IA INDIVIDUAL A LA INSTITUCIONAL (placas 5–11)
   6  Pregunta a la sala, con votación: ¿usás IA en tu trabajo? (la barra de la cuenta
@@ -134,44 +134,45 @@ BLOQUE 2 · LAS CAPAS (placas 12–16)
      Ocho condiciones. En la 02, la novedad: Res. AAIP 188/2026, Boletín Oficial del
      25/11, cláusulas modelo para datos personales que salen del país.
   14 Los datos · GOBERNANZA DE DATOS: seis reglas, cada una con su ejemplo en SMT.
-  15 Interoperar · CIMBA por dentro: CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
+  15 INTEROPERAR, CON CIMBA EN LOOP: seis canales, una bandeja, las empresas en el
+     celular, la foto de antes y después. CONTÁ QUÉ IMPLICÓ ARTICULAR ÁREAS Y EMPRESAS.
   16 IA soberana.
 
-BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 17–19)
+BLOQUE 3 · DEL PILOTO A LA PRODUCCIÓN (placas 17–18)
   17 Separador: las seis causas (sin dueño, sin datos, sin integración, sin reglas,
      sin presupuesto de uso, sin capacitación).
-  18 CIMBA EN LOOP: un caso que sí escaló, y no tiene ninguna de las seis causas.
-  19 Checklist (para llevarse).
+     «Ya vieron uno que sí escaló: CIMBA», no tiene ninguna de las seis causas.
+  18 Checklist (para llevarse).
 
-BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES (placas 20–24)
-  21 Tokens y el multiplicador (ilustrativo).
-  22 Adiviná cuánto gasta Migue en IA por mes: US$ 118,54 en lo que va de
+BLOQUE 4 · LA ECONOMÍA DE LOS AGENTES (placas 19–23)
+  20 Tokens y el multiplicador (ilustrativo).
+  21 Adiviná cuánto gasta Migue en IA por mes: US$ 118,54 en lo que va de
      noviembre; US$ 723,90 desde que arrancó, para 24.357 consultas: unos 3 centavos.
-  23 Costo efectivo: los 3 centavos son el piso; encima, las personas que validan
+  22 Costo efectivo: los 3 centavos son el piso; encima, las personas que validan
      2.022 consultas pendientes.
-  24 Presupuestar, con el tablero de Migue: tope (15 por minuto), modelo justo
+  23 Presupuestar, con el tablero de Migue: tope (15 por minuto), modelo justo
      (OpenRouter), costo a la vista, costo por tarea, y lo que nos falta: un tope
      mensual con aviso. «Mostrar lo que falta también es gobernar.»
 
-BLOQUE 5 · GOBERNANZA DEL AGENTE (placas 25–28)
-  26 El decreto 0596 y el semáforo de permisos.
-  27 EL TABLERO DE MIGUE, EN LOOP: la historia clínica de un agente (corazón,
+BLOQUE 5 · GOBERNANZA DEL AGENTE (placas 24–27)
+  25 El decreto 0596 y el semáforo de permisos.
+  26 EL TABLERO DE MIGUE, EN LOOP: la historia clínica de un agente (corazón,
      historia clínica, cerebro, lo que revisa una persona, termómetro).
-  28 MIGUE SE DEFIENDE, EN LOOP: prompt injection real. Una pasó («Hola Mundo»):
+  27 MIGUE SE DEFIENDE, EN LOOP: prompt injection real. Una pasó («Hola Mundo»):
      inofensiva, pero pasó; por eso todo queda registrado y se revisa.
 
-BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA (placas 29–30)
-  30 IA que piensa por vos / IA que te hace pensar, y cómo lo cuidamos (34 gerentes
+BLOQUE 6 · EL COSTO QUE LA FACTURA NO MUESTRA (placas 28–29)
+  29 IA que piensa por vos / IA que te hace pensar, y cómo lo cuidamos (34 gerentes
      de datos, 71 egresados, firmar es haber leído).
 
-BLOQUE 7 · HOJA DE RUTA PARA CHACO (placas 31–33)
-  32 Cinco fases.   33 Quién hace qué.
+BLOQUE 7 · HOJA DE RUTA PARA CHACO (placas 30–32)
+  31 Cinco fases.   32 Quién hace qué.
 
-CIERRE (placas 34–36)
-  34 Conclusión.
-  35 Nube de cierre: ¿qué te llevás? (para comparar, la de inicio sale encima desde la
+CIERRE (placas 33–35)
+  33 Conclusión.
+  34 Nube de cierre: ¿qué te llevás? (para comparar, la de inicio sale encima desde la
      botonera: El público → Nube de inicio).
-  36 Gracias y preguntas (Q: QR gigante; preguntas a Migue con la voz). Al final,
+  35 Gracias y preguntas (Q: QR gigante; preguntas a Migue con la voz). Al final,
      MIGUE 9 se despide (video). Queda proyectada.
 
 SI ALGO FALLA
