@@ -28,7 +28,7 @@ EN TODAS LAS PLACAS
 EL PÚBLICO, DESDE EL CELULAR
   - Entran por el QR (presentacion.srv1915283.hstgr.cloud/sumate) con su nombre y su
     municipio, y responden lo que esté abierto. Cada placa de participación lo abre
-    sola al llegar; queda abierto hasta la próxima.
+    sola al llegar y lo cierra al pasar de placa.
   - Placas:  3 Sumate · nube de inicio («cuando pensás en IA en tu municipio…»)
              6 Pregunta a la sala · ¿usás IA en tu trabajo? (cuenta personal / del
                municipio / todavía no)

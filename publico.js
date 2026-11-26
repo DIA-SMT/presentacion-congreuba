@@ -221,17 +221,23 @@
   }
 
   // ------------------------------------------------------------ placas y botonera
+  // Desde el 26/11/2026 la pregunta está abierta en los celulares sólo mientras su placa
+  // (o la botonera) la muestra: al pasar a una placa sin participación, se cierra.
+  let abiertaEnServidor = 'al-arrancar'; // al abrir la pantalla, cierra lo que haya quedado abierto de antes
   function mostrarEn(c, id, abrirEnServidor) {
     cont = c; actId = id;
     preparar(c, id);
-    if (abrirEnServidor) mandar('activar', { act: id });
+    if (abrirEnServidor) { mandar('activar', { act: id }); abiertaEnServidor = id; }
     traer();
   }
   function placa(p) {
     if (abierta) cerrarFlota();
     clearTimeout(timer);
     if (p && p.dataset.publico && ACT[p.dataset.publico]) mostrarEn(p.querySelector('.pub'), p.dataset.publico, true);
-    else { cont = null; actId = null; }
+    else {
+      cont = null; actId = null;
+      if (abiertaEnServidor) { mandar('activar', { act: null }); abiertaEnServidor = null; }
+    }
   }
   // Desde la botonera, sobre cualquier placa.
   function abrir(id) {
@@ -276,7 +282,7 @@
     estado: () => ({ act: actId, flota: abierta, revelable: puedeRevelar(), revelada: revelada(), link }),
   };
   // La placa en la que arranca (normalmente la portada) y el modo captura.
-  try { const p = placaActual(); if (p && p.dataset.publico) placa(p); } catch (e) { }
+  try { placa(placaActual()); } catch (e) { }
 })();
 
 // =====================================================================
