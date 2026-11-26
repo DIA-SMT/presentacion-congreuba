@@ -29,7 +29,7 @@ const ACT = Object.fromEntries(ACTIVIDADES.map(a => [a.id, a]));
 const MIGUE_CHAT = process.env.MIGUE_CHAT || 'https://migue.smt.gob.ar/api/chat';
 const MIGUE_A_LA_VEZ = 2, MIGUE_ESPACIO_MS = +process.env.MIGUE_ESPACIO_MS || 4200;
 const MIGUE_POR_MINUTO = Math.max(1, Math.floor(60000 / MIGUE_ESPACIO_MS));
-const MIGUE_MAX = 2; // preguntas por persona si la actividad no dice otra cosa
+const MIGUE_MAX = 1; // preguntas por persona si la actividad no dice otra cosa
 const CORTESIA = 'Uy, justo ahora no puedo ir a buscar ese dato. Probá en un ratito desde Ciudad Digital (ciudaddigital.smt.gob.ar) y te respondo.';
 const TOPE = { salas: 40, personas: 3000, respuestas: 6000, migue: 600 };
 // La sala de la charla (config.js) siempre tiene lugar; las demás, sólo de prueba (?canal=…).
@@ -292,7 +292,7 @@ module.exports = function publico({ datos }) {
       const q = limpiar(b.texto, 300);
       if (q.length < 4) return [400, { error: 'Escribí tu pregunta.' }];
       const max = ACT.migue ? ACT.migue.max : MIGUE_MAX;
-      if (s.migue.filter(m => m.yo === b.yo).length >= max) return [409, { error: 'Ya le hiciste ' + max + ' preguntas a Migue. ¡Gracias!' }];
+      if (s.migue.filter(m => m.yo === b.yo).length >= max) return [409, { error: max === 1 ? 'Ya le hiciste tu pregunta a Migue. ¡Gracias!' : 'Ya le hiciste ' + max + ' preguntas a Migue. ¡Gracias!' }];
       if (s.migue.length >= TOPE.migue) return [429, { error: 'Migue tiene muchas preguntas: probá desde Ciudad Digital.' }];
       if (apurado(b.yo)) return [429, { error: 'Un segundo…' }];
       const m = { id: crypto.randomBytes(5).toString('hex'), yo: b.yo, q, t: Date.now(), e: 'cola', x: esMala(q) || undefined };

@@ -26,7 +26,7 @@ EL PÚBLICO, DESDE EL CELULAR
     nombre y su municipio, y responden lo que esté abierto. Cada placa de participación
     lo abre sola al llegar; queda abierto hasta la próxima.
   - Placas:  3 Sumate · nube de inicio («cuando pensás en IA en tu municipio…»)
-            10 Ahora ustedes · Preguntale a Migue (hasta 2 preguntas cada uno; la
+            10 Ahora ustedes · Preguntale a Migue (una pregunta cada uno; la
                respuesta real les llega al celular, acá se ven las preguntas)
             13 Adiviná · cuánto gastó en IA EstudIA en 30 días (SIGUIENTE revela:
                US$ 0,017; otro SIGUIENTE avanza; ANTERIOR la vuelve a tapar)

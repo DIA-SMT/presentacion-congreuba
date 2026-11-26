@@ -17,7 +17,7 @@
     {
       id: 'migue', tipo: 'migue', titulo: 'Preguntale a Migue',
       pregunta: 'Preguntale a Migue algo de trámites o servicios de San Miguel de Tucumán',
-      ayuda: 'Como si fueras vecino de Tucumán. Te contesta acá, en tu celular.', max: 2,
+      ayuda: 'Como si fueras vecino de Tucumán. Te contesta acá, en tu celular.', max: 1,
     },
     {
       id: 'costo-estudia', tipo: 'encuesta', titulo: 'Adiviná el costo',

@@ -318,7 +318,7 @@ details.migue-mas summary span { flex: none; font-size: 13px; font-weight: 600; 
     }
     const f = destino.querySelector('form');
     f.querySelector('textarea').hidden = !quedan; f.querySelector('.boton').hidden = !quedan;
-    f.querySelector('.quedan').textContent = quedan ? (pregs.length ? 'Te quedan ' + quedan + (quedan === 1 ? ' pregunta.' : ' preguntas.') : 'Podés hacerle hasta ' + m.max + ' preguntas.') : '¡Gracias por probar a Migue!';
+    f.querySelector('.quedan').textContent = quedan ? (pregs.length ? 'Te quedan ' + quedan + (quedan === 1 ? ' pregunta.' : ' preguntas.') : m.max === 1 ? 'Tenés una pregunta: aprovechala.' : 'Podés hacerle hasta ' + m.max + ' preguntas.') : '¡Gracias por probar a Migue!';
     const det = aparte.querySelector('details');
     if (det) det.querySelector('summary span').textContent = det.open ? 'Cerrar' : (quedan ? (pregs.length ? 'Te quedan ' + quedan : 'Abrir') : 'Ver respuestas');
   }
