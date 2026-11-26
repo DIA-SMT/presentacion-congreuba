@@ -108,8 +108,14 @@ PRIMERO · LO QUE YA FUNCIONA (placas 5–17)
      uno con el problema que resuelve; los tres marcados DEMO los vemos funcionando.
   7  Vitrina Herramientas internas: Generador de Notas y Tableros.
   8  Vitrina Migue (MIGUE 7 y 8).   9  Migue en loop: el chat en Ciudad Digital.
-  10 Ahora ustedes: le preguntan a Migue desde el celular (▶ en la botonera para
-     mostrar una en grande).
+  10 Ahora ustedes. Primero vos, desde la botonera: una o dos de las preguntas
+     listas (salen al instante; no escribas una nueva mientras el público
+     pregunta) y Cerrar la respuesta. Después ellos, desde el celular, una cada
+     uno (▶ en la botonera para mostrar una en grande). Si hacen fila, es el tope
+     de Migue, puesto a propósito: 15 consultas por minuto por conexión, para
+     cuidar el costo y que nadie lo sature. Todos salen por el mismo servidor;
+     un vecino desde su casa no espera. «Cuando contraten un agente, eso es lo
+     que hay que decidir: cuánto puede gastar y a qué velocidad.»
   11 Vitrina CIMBA.   12 CIMBA en loop: de la orden de trabajo al antes y después.
   13 Adiviná el costo de EstudIA (SIGUIENTE revela).   14 Vitrina EstudIA.
   15 EstudIA en loop (opcional; si vas justo de tiempo, SIGUIENTE y seguís).
