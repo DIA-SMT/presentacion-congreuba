@@ -581,3 +581,9 @@ body.captura #inicio, body.captura #cortina { display: none !important; }
 /* Logo de IALAB en todas las placas, a la izquierda del de la Municipalidad. */
 .logo-sup.logo-ialab { right: 306px; top: 43px; height: 44px; }
 
+
+/* QR gigante (Q): el de sumarse, generado en vivo, y el de Instagram. */
+#qrs .qr .qr-grande { width: 380px; height: 380px; background: #fff; }
+#qrs .qr .qr-grande svg { display: block; width: 100%; height: 100%; }
+#qrs .qr .pub-url { background: none; padding: 0; color: var(--suave); font-size: 20px; overflow-wrap: anywhere; text-align: center; }
+
